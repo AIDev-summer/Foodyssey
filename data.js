@@ -1,6 +1,7 @@
 // 푸디세이 메뉴 데이터. 매주 이 파일만 고치면 페이지가 바뀌어요.
 // - newItems: 새로 나와서 계속 파는 메뉴 (업종별)
 // - limited: 기간이 끝나면 사라지는 메뉴·이벤트. end(YYYY-MM-DD)가 있으면 D-day를 자동 계산하고, 지나면 자동으로 숨겨요.
+//   pop(검색 배수)이 있으면 인기순에서 큰 순서로 앞에 나와요. 없는 건 인기순에서 마감순으로 뒤에 붙어요.
 // - price가 없으면 가격을 표시하지 않아요.
 window.FOODYSSEY = {
   updated: "2026-10-28",
@@ -110,17 +111,17 @@ window.FOODYSSEY = {
   ],
 
   limited: [
-    { kind: "이벤트", brand: "bhc", title: "알싹킹 앱 쿠폰 이벤트", end: "2026-10-31", period: "~ 10.31(토)",
+    { kind: "이벤트", brand: "bhc", title: "알싹킹 앱 쿠폰 이벤트", end: "2026-10-31", pop: 2.5, period: "~ 10.31(토)",
       desc: "bhc 앱 이벤트 페이지에 들어가면 다음 달에 쓸 알싹킹 2,000원 쿠폰을 줘요. 추첨으로 모바일 상품권도 있어요.",
       src: { label: "비즈트리뷴", url: "https://www.biztribune.co.kr/news/articleView.html?idxno=361110" } },
     { kind: "이벤트", brand: "쉐이크쉑", title: "세트 업그레이드 쿠폰", end: "2026-10-31", period: "~ 10.31(토)",
       desc: "카카오톡 채널에서 세트 업그레이드 쿠폰을 받을 수 있어요.",
       src: { label: "식품투데이", url: "https://www.foodtoday.or.kr/news/article.html?no=208450" } },
-    { kind: "메뉴", brand: "맥도날드", title: "빅아치", price: "12,400원", end: "2026-11-19", endLate: "2026-12-03",
+    { kind: "메뉴", brand: "맥도날드", title: "빅아치", price: "12,400원", end: "2026-11-19", pop: 5.2, endLate: "2026-12-03",
       period: "10.22 출시 · 11.19~12.3 사이 종료 예상",
       desc: "4~6주 한정이라 종료일이 정확히 나오지 않았어요. 빠르면 11월 19일에 끝날 수 있어요.",
       src: { label: "재경일보", url: "https://news.jkn.co.kr/post/1039964" } },
-    { kind: "이벤트", brand: "스타벅스", title: "겨울 e-프리퀀시", end: "2026-12-31", period: "10.22(목) ~ 12.31(목)",
+    { kind: "이벤트", brand: "스타벅스", title: "겨울 e-프리퀀시", end: "2026-12-31", pop: 5.8, period: "10.22(목) ~ 12.31(목)",
       cups: { total: 17, mission: 3 },
       desc: "미션음료 3잔을 포함해 17잔이면 증정품 1개를 예약할 수 있어요. 렉슨 스피커, 몰스킨 플래너, 코듀로이 백팩, 캔버스 토트 중에서 골라요.",
       src: { label: "데일리환경", url: "https://www.dailyt.co.kr/newsView/dlt202610150013" } },
