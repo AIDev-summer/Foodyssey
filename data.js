@@ -97,9 +97,6 @@ window.FOODYSSEY = {
     { cat: "cafe", brand: "투썸플레이스", when: "10월 · 가을 시즌",
       items: [{ name: "블랙 치즈폼 라떼", tag: "음료" }, { name: "딸기 요거트 프라페", tag: "음료" }],
       src: { label: "프라임경제", url: "https://www.newsprime.co.kr/news/article/?no=749669" } },
-    { cat: "cafe", brand: "컴포즈커피", when: "9.15 출시",
-      items: [{ name: "밤 티라미수", tag: "디저트" }],
-      src: { label: "뉴스웨이", url: "https://www.newsway.co.kr/news/view?ud=2026100211184474917" } },
     { cat: "cafe", brand: "메가MGC커피", when: "9월 출시",
       items: [
         { name: "하우스밀크 라떼", tag: "음료" },
