@@ -188,9 +188,13 @@ footer p { margin: 0; }
 
     <div class="panel" id="panel-limited" data-view="limited" hidden>
       <section class="hot is-limited" id="hot-limited" aria-label="이번 주 화제 한정 메뉴"></section>
-      <section class="sec" aria-labelledby="lim-title">
-        <div class="sec-head"><h2 id="lim-title">곧 사라져요</h2><small>마감 가까운 순 · 날짜 없는 건 맨 뒤</small></div>
-        <ol class="clock" id="clock"></ol>
+      <section class="sec" aria-labelledby="lim-item-title">
+        <div class="sec-head"><h2 id="lim-item-title">곧 사라지는 한정 상품</h2><small>마감 가까운 순 · 날짜 없는 건 맨 뒤</small></div>
+        <ol class="clock" id="clock-item"></ol>
+      </section>
+      <section class="sec" aria-labelledby="lim-event-title">
+        <div class="sec-head"><h2 id="lim-event-title">놓치면 아쉬운 이벤트</h2><small>마감 가까운 순</small></div>
+        <ol class="clock" id="clock-event"></ol>
       </section>
     </div>
 
@@ -309,8 +313,10 @@ footer p { margin: 0; }
     if (b.d === null) return -1;
     return a.d - b.d;
   });
-  var clock = document.getElementById('clock');
+  var clockItem = document.getElementById('clock-item');
+  var clockEvent = document.getElementById('clock-event');
   lims.forEach(function (o) {
+    var clock = o.x.kind === '이벤트' ? clockEvent : clockItem;
     var x = o.x, label;
     if (o.d === null) label = el('span', { cls: 'dday open', text: x.open || '기간 미정' });
     else if (o.d < 0) label = el('span', { cls: 'dday', text: '곧 종료' });
@@ -333,7 +339,8 @@ footer p { margin: 0; }
     body.appendChild(src(x.src));
     clock.appendChild(el('li', { cls: 'lim' }, [el('div', { cls: 'left' }, [label, el('span', { cls: 'kind', text: x.kind })]), body]));
   });
-  if (!lims.length) clock.appendChild(el('li', { cls: 'empty', text: '지금 진행 중인 한정 메뉴가 없어요.' }));
+  if (!clockItem.children.length) clockItem.appendChild(el('li', { cls: 'empty', text: '지금 판매 중인 한정 상품이 없어요.' }));
+  if (!clockEvent.children.length) clockEvent.appendChild(el('li', { cls: 'empty', text: '지금 진행 중인 이벤트가 없어요.' }));
   document.getElementById('count-limited').textContent = lims.length;
 
   // 검색 흐름
