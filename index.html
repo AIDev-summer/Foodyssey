@@ -157,6 +157,7 @@ footer p { margin: 0; }
 .lim .lines .leader { flex: 1; border-bottom: 1.5px dotted var(--line); transform: translateY(-4px); min-width: 12px; }
 .lim .lines .price { white-space: nowrap; }
 .menu .price { font-family: var(--f-mono); font-size: 13px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.lim .pop { font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
 .empty { color: var(--muted); font-size: 14px; padding: 16px; border: 1.5px dashed var(--line); border-radius: 6px; }
 </style>
 
@@ -188,16 +189,16 @@ footer p { margin: 0; }
 
     <div class="panel" id="panel-limited" data-view="limited" hidden>
       <section class="hot is-limited" id="hot-limited" aria-label="이번 주 화제 한정 메뉴"></section>
-      <div class="chips" id="lim-sort" role="group" aria-label="정렬 순서">
-        <button class="chip" data-sort="end" aria-pressed="true">마감순</button>
-        <button class="chip" data-sort="pop" aria-pressed="false">인기순</button>
+      <div class="chips sortbar" role="group" aria-label="정렬">
+        <button class="chip" id="sort-deadline" data-sort="deadline" aria-pressed="true">마감순</button>
+        <button class="chip" id="sort-popular" data-sort="popular" aria-pressed="false">인기순</button>
       </div>
       <section class="sec" aria-labelledby="lim-item-title">
-        <div class="sec-head"><h2 id="lim-item-title">곧 사라지는 한정 상품</h2><small id="lim-item-note"></small></div>
+        <div class="sec-head"><h2 id="lim-item-title">곧 사라지는 한정 상품</h2><small id="lim-item-sub">마감 가까운 순 · 날짜 없는 건 맨 뒤</small></div>
         <ol class="clock" id="clock-item"></ol>
       </section>
       <section class="sec" aria-labelledby="lim-event-title">
-        <div class="sec-head"><h2 id="lim-event-title">놓치면 아쉬운 이벤트</h2><small id="lim-event-note"></small></div>
+        <div class="sec-head"><h2 id="lim-event-title">놓치면 아쉬운 이벤트</h2><small id="lim-event-sub">마감 가까운 순</small></div>
         <ol class="clock" id="clock-event"></ol>
       </section>
     </div>
@@ -306,65 +307,65 @@ footer p { margin: 0; }
     });
   });
 
-  // 한정: 지난 건 숨기고, 마감순(가까운 순 → 날짜 없는 것) 또는 인기순(검색 배수 큰 순 → 나머지는 마감순)
+  // 한정: 지난 건 숨기고, 마감순 또는 인기순으로 정렬
   var lims = D.limited.map(function (x) {
     var lastDay = x.endLate || x.end;
     return { x: x, d: x.end ? days(x.end) : null, last: lastDay ? days(lastDay) : null };
   }).filter(function (o) { return o.last === null || o.last >= 0; });
-  function byEnd(a, b) {
+  function byDeadline(a, b) {
     if (a.d === null && b.d === null) return 0;
     if (a.d === null) return 1;
     if (b.d === null) return -1;
     return a.d - b.d;
   }
-  function byPop(a, b) { return (b.x.pop || 0) - (a.x.pop || 0) || byEnd(a, b); }
+  function byPopular(a, b) {
+    var pa = a.x.pop || 0, pb = b.x.pop || 0;
+    return pa !== pb ? pb - pa : byDeadline(a, b);
+  }
   var clockItem = document.getElementById('clock-item');
   var clockEvent = document.getElementById('clock-event');
-  lims.forEach(function (o) {
-    o.clock = o.x.kind === '이벤트' ? clockEvent : clockItem;
-    var x = o.x, label;
-    if (o.d === null) label = el('span', { cls: 'dday open', text: x.open || '기간 미정' });
-    else if (o.d < 0) label = el('span', { cls: 'dday', text: '곧 종료' });
-    else label = el('span', { cls: 'dday', text: o.d === 0 ? 'D-DAY' : 'D-' + o.d });
-    var body = el('div', { cls: 'body' }, [
-      el('h3', null, [el('span', { cls: 'brand', text: x.brand }), x.title, x.price ? ' ' : null, x.price ? el('span', { cls: 'price', text: x.price }) : null]),
-      el('div', { cls: 'period', text: x.period + (x.pop ? ' · 검색 ' + x.pop + '배' : '') })
-    ]);
-    if (x.cups) {
-      var cups = el('div', { cls: 'cups', 'aria-label': x.cups.total + '잔 중 미션음료 ' + x.cups.mission + '잔' });
-      for (var i = 0; i < x.cups.total; i++) cups.appendChild(el('span', { cls: 'cup' + (i < x.cups.mission ? ' mission' : '') }));
-      body.appendChild(cups);
-    }
-    if (x.lines) {
-      body.appendChild(el('ul', { cls: 'lines' }, x.lines.map(function (l) {
-        return el('li', null, [el('span', { text: l[0] }), el('span', { cls: 'leader' }), el('span', { cls: 'price', text: l[1] })]);
-      })));
-    }
-    if (x.desc) body.appendChild(el('p', { text: x.desc }));
-    body.appendChild(src(x.src));
-    o.li = el('li', { cls: 'lim' }, [el('div', { cls: 'left' }, [label, el('span', { cls: 'kind', text: x.kind })]), body]);
-  });
-  var sortNotes = {
-    end: ['마감 가까운 순 · 날짜 없는 건 맨 뒤', '마감 가까운 순'],
-    pop: ['검색 많은 순 · 검색 기록 없는 건 마감순', '검색 많은 순 · 검색 기록 없는 건 마감순']
-  };
-  function renderLims(order) {
-    clockItem.textContent = '';
-    clockEvent.textContent = '';
-    lims.slice().sort(order === 'pop' ? byPop : byEnd).forEach(function (o) { o.clock.appendChild(o.li); });
+  function renderLimited(mode) {
+    clockItem.innerHTML = '';
+    clockEvent.innerHTML = '';
+    lims.slice().sort(mode === 'popular' ? byPopular : byDeadline).forEach(function (o) {
+      var clock = o.x.kind === '이벤트' ? clockEvent : clockItem;
+      var x = o.x, label;
+      if (o.d === null) label = el('span', { cls: 'dday open', text: x.open || '기간 미정' });
+      else if (o.d < 0) label = el('span', { cls: 'dday', text: '곧 종료' });
+      else label = el('span', { cls: 'dday', text: o.d === 0 ? 'D-DAY' : 'D-' + o.d });
+      var body = el('div', { cls: 'body' }, [
+        el('h3', null, [el('span', { cls: 'brand', text: x.brand }), x.title, x.price ? ' ' : null, x.price ? el('span', { cls: 'price', text: x.price }) : null]),
+        el('div', { cls: 'period', text: x.period })
+      ]);
+      if (x.cups) {
+        var cups = el('div', { cls: 'cups', 'aria-label': x.cups.total + '잔 중 미션음료 ' + x.cups.mission + '잔' });
+        for (var i = 0; i < x.cups.total; i++) cups.appendChild(el('span', { cls: 'cup' + (i < x.cups.mission ? ' mission' : '') }));
+        body.appendChild(cups);
+      }
+      if (x.lines) {
+        body.appendChild(el('ul', { cls: 'lines' }, x.lines.map(function (l) {
+          return el('li', null, [el('span', { text: l[0] }), el('span', { cls: 'leader' }), el('span', { cls: 'price', text: l[1] })]);
+        })));
+      }
+      if (x.desc) body.appendChild(el('p', { text: x.desc }));
+      body.appendChild(src(x.src));
+      var left = el('div', { cls: 'left' }, [label, el('span', { cls: 'kind', text: x.kind }), x.pop ? el('span', { cls: 'pop', text: '검색 ' + x.pop + '배' }) : null]);
+      clock.appendChild(el('li', { cls: 'lim' }, [left, body]));
+    });
     if (!clockItem.children.length) clockItem.appendChild(el('li', { cls: 'empty', text: '지금 판매 중인 한정 상품이 없어요.' }));
     if (!clockEvent.children.length) clockEvent.appendChild(el('li', { cls: 'empty', text: '지금 진행 중인 이벤트가 없어요.' }));
-    document.getElementById('lim-item-note').textContent = sortNotes[order][0];
-    document.getElementById('lim-event-note').textContent = sortNotes[order][1];
+    var sub = mode === 'popular' ? '검색 많은 순 · 검색 데이터 없는 건 마감순' : '마감 가까운 순 · 날짜 없는 건 맨 뒤';
+    document.getElementById('lim-item-sub').textContent = sub;
+    document.getElementById('lim-event-sub').textContent = sub;
   }
-  var sortChips = document.querySelectorAll('#lim-sort .chip');
-  sortChips.forEach(function (chip) {
-    chip.addEventListener('click', function () {
-      sortChips.forEach(function (c) { c.setAttribute('aria-pressed', c === chip ? 'true' : 'false'); });
-      renderLims(chip.dataset.sort);
+  renderLimited('deadline');
+  var sortBtns = document.querySelectorAll('.sortbar .chip');
+  sortBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      sortBtns.forEach(function (b) { b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'); });
+      renderLimited(btn.dataset.sort);
     });
   });
-  renderLims('end');
   document.getElementById('count-limited').textContent = lims.length;
 
   // 검색 흐름
