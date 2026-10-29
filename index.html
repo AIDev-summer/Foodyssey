@@ -2,6 +2,29 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>푸디세이</title>
+<script>
+// GA4 방문 집계. GA_ID에 측정 ID(G-로 시작)를 넣으면 켜져요.
+// 내 접속 빼기: 한 번 ?me=1 로 열면 그 브라우저는 집계하지 않아요. ?me=0 으로 열면 다시 집계해요.
+(function () {
+  var GA_ID = 'G-LN6SS7QZSR';
+  var KEY = 'fd_me', me = false;
+  try {
+    var q = location.search;
+    if (/[?&]me=0(&|$)/.test(q)) localStorage.removeItem(KEY);
+    else if (/[?&]me=1(&|$)/.test(q)) localStorage.setItem(KEY, '1');
+    me = !!localStorage.getItem(KEY);
+  } catch (e) {}
+  if (!GA_ID || me || !/foodyssey\.co\.kr$/.test(location.hostname)) return;
+  var s = document.createElement('script');
+  s.async = true;
+  s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+  document.head.appendChild(s);
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () { dataLayer.push(arguments); };
+  gtag('js', new Date());
+  gtag('config', GA_ID);
+})();
+</script>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
