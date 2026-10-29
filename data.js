@@ -4,8 +4,8 @@
 // - price가 없으면 가격을 표시하지 않아요.
 // - pop: 검색량 배수(최근 3일 / 지난 4주). 한정 탭 인기순 정렬에 써요. 없으면 마감순으로 뒤에 놓여요.
 window.FOODYSSEY = {
-  updated: "2026-10-28",
-  weekLabel: "2026년 10월 넷째 주",
+  updated: "2026-10-29",
+  weekLabel: "2026년 10월 다섯째 주",
 
   cats: [
     { id: "burger", name: "버거" },
@@ -40,6 +40,10 @@ window.FOODYSSEY = {
       items: [{ name: "베이컨치폴레싸이버거", tag: "신메뉴" }],
       src: { label: "마이데일리", url: "https://www.mydaily.co.kr/page/view/2026101514360760582" },
       note: "스매시버거 매장 약 1,000곳에서 판매" },
+    { cat: "burger", brand: "맥도날드", when: "10.29 출시",
+      items: [{ name: "게살 크림 크로켓 머핀", tag: "맥모닝" }],
+      src: { label: "데일리안", url: "https://www.dailian.co.kr/news/view/1707077/%EB%A7%A5%EB%8F%84%EB%82%A0%EB%93%9C-%EA%B2%8C%EC%82%B4-%ED%81%AC%EB%A6%BC-%ED%81%AC%EB%A1%9C%EC%BC%93-%EB%A8%B8%ED%95%80-%EB%A7%A5%EB%AA%A8-2026" },
+      note: "오전 4시부터 10시 30분까지 팔아요" },
     { cat: "burger", brand: "노브랜드버거", when: "10.15 출시",
       items: [{ name: "NBB 훅", tag: "신메뉴" }, { name: "NBB 펀치", tag: "신메뉴" }],
       src: { label: "파이낸셜뉴스", url: "https://www.fnnews.com/news/202610141826190444" },
@@ -90,10 +94,6 @@ window.FOODYSSEY = {
     { cat: "snack", brand: "삼첩분식", when: "10.16 출시",
       items: [{ name: "떠먹는피자떡볶이", tag: "신메뉴" }],
       src: { label: "더쎈뉴스", url: "https://www.mhns.co.kr/news/articleView.html?idxno=764579" } },
-    { cat: "snack", brand: "동대문엽기떡볶이", when: "9.16 출시",
-      items: [{ name: "더착한맛", tag: "새 맵기 단계" }],
-      src: { label: "디지털타임스", url: "https://www.dt.co.kr/article/12084490" },
-      note: "착한맛보다 덜 매운 단계" },
 
     { cat: "cafe", brand: "이디야커피", when: "10.22 출시 · 푸드 9종",
       items: [
@@ -124,6 +124,9 @@ window.FOODYSSEY = {
     { kind: "이벤트", brand: "bhc", title: "알싹킹 앱 쿠폰 이벤트", pop: 2.5, end: "2026-10-31", period: "~ 10.31(토)",
       desc: "bhc 앱 이벤트 페이지에 들어가면 다음 달에 쓸 알싹킹 2,000원 쿠폰을 줘요. 추첨으로 모바일 상품권도 있어요.",
       src: { label: "비즈트리뷴", url: "https://www.biztribune.co.kr/news/articleView.html?idxno=361110" } },
+    { kind: "이벤트", brand: "교촌치킨", title: "허니페스타", end: "2026-10-31", period: "~ 10.31(토)",
+      desc: "교촌 주문 앱에서 매일 오후 5시에 선착순 5,000원 할인쿠폰을 줘요. 허니 메뉴 7종에 쓸 수 있어요.",
+      src: { label: "맥스무비", url: "https://www.maxmovie.com/news/articleView.html?idxno=502586" } },
     { kind: "이벤트", brand: "쉐이크쉑", title: "세트 업그레이드 쿠폰", end: "2026-10-31", period: "~ 10.31(토)",
       desc: "카카오톡 채널에서 세트 업그레이드 쿠폰을 받을 수 있어요.",
       src: { label: "식품투데이", url: "https://www.foodtoday.or.kr/news/article.html?no=208450" } },
