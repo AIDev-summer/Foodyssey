@@ -31,35 +31,35 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700;900&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
 /* Layout: 밝은 머리말 → 화면 위에 붙는 신상/한정 탭 → 화제 한 장 → 목록(신상=업종별 메뉴판, 한정=D-day 우선 카드) → 검색 흐름.
-   색: 바탕은 녹색 기운의 옅은 회색, 강조는 신상=세이지 녹색 / 한정=꿀색. 빨강은 3일 안에 끝나는 것에만 써요. */
+   색: 바탕은 밝은 흰색, 로고는 토마토, 신상=바질 녹색 / 한정=귤색. 빨강은 3일 안에 끝나는 것에만 써요. */
 :root {
-  --bg: #f3f5f2;
+  --bg: #fbfaf6;
   --paper: #ffffff;
-  --ink: #1f2622;
-  --muted: #6a736d;
-  --line: #e0e5e0;
-  --line-strong: #c9d1ca;
-  --brand: #2f5d46;
-  --new: #3b7556;
-  --new-soft: #e4efe8;
-  --lim: #9a6a1c;
-  --lim-soft: #f4ebd9;
-  --urgent: #a9503a;
-  --urgent-soft: #f5e4de;
+  --ink: #23201c;
+  --muted: #6f6a62;
+  --line: #ece7df;
+  --line-strong: #dcd5ca;
+  --brand: #e2572f;
+  --new: #2f8a57;
+  --new-soft: #e3f3e8;
+  --lim: #d9761c;
+  --lim-soft: #fdeedb;
+  --urgent: #d23c2e;
+  --urgent-soft: #fde3df;
   --f-display: "Black Han Sans", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   --f-body: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #151a17; --paper: #1c231f; --ink: #e5eae6; --muted: #9aa49d; --line: #2c3530; --line-strong: #3a453e;
-    --brand: #9cc7ae; --new: #7fbf9a; --new-soft: #213229; --lim: #d9ac5f; --lim-soft: #362c1a; --urgent: #e08b74; --urgent-soft: #3a231d;
+    --bg: #17150f; --paper: #211e18; --ink: #f1ece4; --muted: #a8a196; --line: #2f2b24; --line-strong: #403a31;
+    --brand: #f2835f; --new: #6fcf95; --new-soft: #1d3326; --lim: #f2a55a; --lim-soft: #3a2b18; --urgent: #f07a6c; --urgent-soft: #3d201c;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #151a17; --paper: #1c231f; --ink: #e5eae6; --muted: #9aa49d; --line: #2c3530; --line-strong: #3a453e;
-  --brand: #9cc7ae; --new: #7fbf9a; --new-soft: #213229; --lim: #d9ac5f; --lim-soft: #362c1a; --urgent: #e08b74; --urgent-soft: #3a231d;
+  --bg: #17150f; --paper: #211e18; --ink: #f1ece4; --muted: #a8a196; --line: #2f2b24; --line-strong: #403a31;
+  --brand: #f2835f; --new: #6fcf95; --new-soft: #1d3326; --lim: #f2a55a; --lim-soft: #3a2b18; --urgent: #f07a6c; --urgent-soft: #3d201c;
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
@@ -75,7 +75,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--brand); outline
 .eyebrow { font-size: 12px; color: var(--muted); letter-spacing: .04em; font-variant-numeric: tabular-nums; }
 .brandrow { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; }
 h1 { font-family: var(--f-display); font-weight: 400; font-size: clamp(38px, 8vw, 54px); line-height: 1; margin: 0; color: var(--brand); }
-h1 span { color: var(--lim); }
+h1 span { color: var(--new); }
 .tagline { margin: 0; font-weight: 700; font-size: clamp(15px, 3.4vw, 18px); color: var(--ink); }
 .lede { margin: 0; color: var(--muted); font-size: 14px; }
 @media (min-width: 720px) { .lede { white-space: nowrap; } }
