@@ -31,24 +31,24 @@ gtag('config', 'G-LN6SS7QZSR');
 /* Layout: 숫자로 말하는 머리말 → 마감 임박 띠(가로 스크롤) → 이번 주 화제 두 장 → 고정 탭 → 신상(업종 색 타일, 두 단) / 한정(D-day 줄) → 검색 흐름.
    색: 흰 바탕에 업종마다 맑은 색(귤, 레몬, 토마토, 베리, 하늘, 민트)을 연하게. D-day는 3일 안 빨강, 2주 안 귤색, 그 밖은 민트. 음식 사이트라 항상 밝게. */
 :root {
-  --bg: #f4f9f5;
+  --bg: #f5f7f4;
   --card: #ffffff;
-  --surface: #e9f3ed;
+  --surface: #ebf0ec;
   --ink: #15191a;
   --muted: #677170;
   --line: #e4ebe8;
-  --hot: #f24a2b;
-  --hot-soft: #ffece6;
-  --fresh: #0ca678;
-  --fresh-soft: #dcf5ea;
-  --warm: #e8650a;
-  --warm-soft: #ffeedd;
-  --c-burger: #e8650a;  --c-burger-soft: #fff1e4;
-  --c-chicken: #b58700; --c-chicken-soft: #fff8d9;
-  --c-pizza: #e03131;   --c-pizza-soft: #ffeded;
-  --c-bakery: #d6336c;  --c-bakery-soft: #ffeef4;
-  --c-snack: #1c7ed6;   --c-snack-soft: #e9f3ff;
-  --c-cafe: #0ca678;    --c-cafe-soft: #e3f9f1;
+  --hot: #c95440;
+  --hot-soft: #f8e8e3;
+  --fresh: #2f7f68;
+  --fresh-soft: #e2efe9;
+  --warm: #b8712f;
+  --warm-soft: #f6ecdf;
+  --c-burger: #b8622a;  --c-burger-soft: #f7ede4;
+  --c-chicken: #94741c; --c-chicken-soft: #f6f1df;
+  --c-pizza: #b94a42;   --c-pizza-soft: #f6e9e7;
+  --c-bakery: #a8506e;  --c-bakery-soft: #f5eaee;
+  --c-snack: #3f6f9c;   --c-snack-soft: #e8eef4;
+  --c-cafe: #2f7f68;    --c-cafe-soft: #e5f0eb;
   --f-display: "Hahmlet", "Nanum Myeongjo", "AppleMyungjo", serif;
   --f-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
@@ -99,8 +99,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 .hot .label { justify-self: start; padding: 3px 10px; border-radius: 999px; letter-spacing: .02em; }
 #hot-new .label { background: var(--fresh-soft); color: var(--fresh); }
 #hot-limited .label { background: var(--hot-soft); color: var(--hot); }
-#hot-new h2 { color: var(--fresh); }
-#hot-limited h2 { color: var(--hot); }
 .hot .label b { color: inherit; }
 .hot h2 { margin: 0; font-family: var(--f-display); font-weight: 700; font-size: 30px; line-height: 1.15; letter-spacing: -.03em; }
 .hot .meta { font-size: 13px; color: var(--muted); }
@@ -113,7 +111,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 
 /* 고정 탭 */
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
-.tabs { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: rgba(244,249,245,.94); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); margin-top: 20px; }
+.tabs { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: rgba(245,247,244,.94); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); margin-top: 20px; }
 .tabs .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
 .seg { display: inline-flex; padding: 3px; background: var(--surface); border-radius: 999px; }
 .seg a[data-view="new"][aria-current="page"] { color: var(--fresh); }
