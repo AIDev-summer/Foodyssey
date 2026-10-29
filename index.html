@@ -2,9 +2,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>푸디세이</title>
+<meta name="description" content="버거, 치킨, 피자, 빵, 분식, 커피 프랜차이즈의 새 메뉴와 곧 사라질 한정 메뉴를 매일 정리해요.">
 <script>
-// GA4 방문 집계. GA_ID에 측정 ID(G-로 시작)를 넣으면 켜져요.
-// 내 접속 빼기: 한 번 ?me=1 로 열면 그 브라우저는 집계하지 않아요. ?me=0 으로 열면 다시 집계해요.
+// GA4 방문 집계. 내 접속 빼기: 한 번 ?me=1 로 열면 그 브라우저는 집계하지 않아요. ?me=0 으로 열면 다시 집계해요.
 (function () {
   var GA_ID = 'G-LN6SS7QZSR';
   var KEY = 'fd_me', me = false;
@@ -28,223 +28,244 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700;900&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500;700;800&family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
-/* Layout: 밝은 머리말 → 화면 위에 붙는 신상/한정 탭 → 화제 한 장 → 목록(신상=업종별 메뉴판, 한정=D-day 우선 카드) → 검색 흐름.
-   색: 바탕은 밝은 흰색, 로고는 토마토, 신상=바질 녹색 / 한정=귤색. 빨강은 3일 안에 끝나는 것에만 써요. */
+/* Layout: 숫자로 말하는 머리말 → 마감 임박 띠(가로 스크롤) → 이번 주 화제 두 장 → 고정 탭 → 신상(업종 색 타일, 두 단) / 한정(D-day 줄) → 검색 흐름.
+   색: 흰 바탕에 업종마다 재료 색(빵 껍질, 튀김, 토마토, 밀가루, 떡, 커피)을 연하게. 빨강은 마감 임박에만. 음식 사이트라 항상 밝게. */
 :root {
-  --bg: #fbfaf6;
-  --paper: #ffffff;
-  --ink: #23201c;
-  --muted: #6f6a62;
-  --line: #ece7df;
-  --line-strong: #dcd5ca;
-  --brand: #e2572f;
-  --new: #2f8a57;
-  --new-soft: #e3f3e8;
-  --lim: #d9761c;
-  --lim-soft: #fdeedb;
-  --urgent: #d23c2e;
-  --urgent-soft: #fde3df;
-  --head: #fff1e8;
-  color-scheme: light;
-  --f-display: "Black Han Sans", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
-  --f-body: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --bg: #ffffff;
+  --surface: #f6f6f3;
+  --ink: #161714;
+  --muted: #6d6f69;
+  --line: #e8e8e3;
+  --hot: #e2462c;
+  --hot-soft: #fdebe7;
+  --c-burger: #b2561f;  --c-burger-soft: #fbeee4;
+  --c-chicken: #9a6b00; --c-chicken-soft: #fbf2da;
+  --c-pizza: #c0392b;   --c-pizza-soft: #fcebe8;
+  --c-bakery: #8a5a2b;  --c-bakery-soft: #f6efe5;
+  --c-snack: #b23a6a;   --c-snack-soft: #fbeaf1;
+  --c-cafe: #5b6e3c;    --c-cafe-soft: #eef2e6;
+  --f-display: "Hahmlet", "Nanum Myeongjo", "AppleMyungjo", serif;
+  --f-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  color-scheme: light;
 }
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
-body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; word-break: keep-all; overflow-wrap: anywhere; }
 a { color: inherit; }
-a:focus-visible, button:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
-.wrap { max-width: 760px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
-.num { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; border-radius: 4px; }
+.wrap { max-width: 1040px; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+.mono { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
 
-/* 머리말: 밝게, 짧게. 음식 사이트라 다크 모드 없이 항상 밝게 보여요 */
-.masthead { background: var(--head); }
-.masthead .wrap { padding-block: 28px 16px; display: grid; gap: 6px; }
-.eyebrow { font-size: 12px; color: var(--muted); letter-spacing: .04em; font-variant-numeric: tabular-nums; }
-.brandrow { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; }
-h1 { font-family: var(--f-display); font-weight: 400; font-size: clamp(38px, 8vw, 54px); line-height: 1; margin: 0; color: var(--brand); }
-h1 span { color: var(--new); }
-.tagline { margin: 0; font-weight: 700; font-size: clamp(15px, 3.4vw, 18px); color: var(--ink); }
-.lede { margin: 0; color: var(--muted); font-size: 14px; }
-@media (min-width: 720px) { .lede { white-space: nowrap; } }
+/* 맨 위 줄 */
+.topbar .wrap { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-block: 18px; }
+.logo { font-family: var(--f-display); font-weight: 800; font-size: 22px; letter-spacing: -.02em; text-decoration: none; }
+.logo small { font-family: var(--f-body); font-weight: 500; font-size: 13px; color: var(--muted); margin-left: 10px; letter-spacing: 0; }
+.updated { font-size: 12px; color: var(--muted); white-space: nowrap; }
+.updated b { color: var(--ink); font-weight: 600; }
 
-/* 신상/한정 탭: 스크롤해도 위에 붙어 있어요 */
+/* 머리말 */
+.intro .wrap { padding-block: 28px 8px; display: grid; gap: 14px; }
+.intro h1 { margin: 0; font-family: var(--f-display); font-weight: 700; font-size: clamp(30px, 5.6vw, 54px); line-height: 1.18; letter-spacing: -.035em; text-wrap: balance; max-width: 18em; }
+.intro h1 a { text-decoration: none; background-image: linear-gradient(currentColor, currentColor); background-size: 100% 2px; background-repeat: no-repeat; background-position: 0 92%; }
+.intro h1 .n-new { color: var(--c-cafe); }
+.intro h1 .n-lim { color: var(--hot); }
+.intro p { margin: 0; color: var(--muted); max-width: 46em; }
+
+/* 마감 임박 띠 */
+.soon { padding-block: 26px 6px; }
+.soon-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+.label { font-size: 12px; font-weight: 600; letter-spacing: .08em; color: var(--muted); }
+.soon-head a { font-size: 13px; color: var(--muted); }
+.soon-row { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(220px, 1fr); gap: 10px; overflow-x: auto; padding-bottom: 6px; scroll-snap-type: x mandatory; }
+.soon-card { scroll-snap-align: start; display: grid; gap: 6px; align-content: start; padding: 16px; border-radius: 14px; background: var(--surface); text-decoration: none; min-width: 0; }
+.soon-card .d { font-family: var(--f-display); font-weight: 800; font-size: 34px; line-height: 1; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+.soon-card.urgent { background: var(--hot-soft); }
+.soon-card.urgent .d { color: var(--hot); }
+.soon-card .b { font-size: 12px; color: var(--muted); }
+.soon-card .t { font-weight: 600; line-height: 1.4; }
+.soon-card .k { font-size: 11px; color: var(--muted); }
+
+/* 이번 주 화제 두 장 */
+.hots { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding-block: 22px 10px; }
+.hot { display: grid; gap: 10px; align-content: start; padding: 22px; border: 1px solid var(--line); border-radius: 16px; min-width: 0; }
+.hot .label b { color: var(--ink); }
+.hot h2 { margin: 0; font-family: var(--f-display); font-weight: 700; font-size: 30px; line-height: 1.15; letter-spacing: -.03em; }
+.hot .meta { font-size: 13px; color: var(--muted); }
+.hot .price { font-family: var(--f-mono); font-size: 20px; font-variant-numeric: tabular-nums; }
+.hot .price small { font-family: var(--f-body); font-size: 12px; color: var(--muted); margin-left: 8px; }
+.hot p { margin: 0; font-size: 14px; color: var(--muted); }
+.specs { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.specs li { font-size: 12px; padding: 3px 10px; border-radius: 999px; background: var(--surface); }
+.specs li b { font-family: var(--f-mono); font-weight: 500; margin-left: 4px; }
+
+/* 고정 탭 */
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
-.masthead + .tabs { box-shadow: none; }
-.tabs { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); }
-.split { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding-block: 8px; }
-.split a { display: grid; gap: 0; text-decoration: none; padding: 10px 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); }
-.split a .big { font-weight: 900; font-size: 19px; line-height: 1.25; display: flex; align-items: baseline; gap: 6px; }
-.split a .big b { font-family: var(--f-mono); font-weight: 500; font-size: 13px; color: var(--muted); }
-.split a .sub { font-size: 12px; color: var(--muted); }
-.split a[data-view="new"][aria-current="page"] { background: var(--new-soft); border-color: var(--new); }
-.split a[data-view="new"][aria-current="page"] .big { color: var(--new); }
-.split a[data-view="limited"][aria-current="page"] { background: var(--lim-soft); border-color: var(--lim); }
-.split a[data-view="limited"][aria-current="page"] .big { color: var(--lim); }
-.split a .sub b { font-weight: 700; color: var(--urgent); }
+.tabs { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: rgba(255,255,255,.94); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); margin-top: 20px; }
+.tabs .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.seg { display: inline-flex; padding: 3px; background: var(--surface); border-radius: 999px; }
+.seg a { text-decoration: none; padding: 7px 18px; border-radius: 999px; font-weight: 600; font-size: 15px; color: var(--muted); white-space: nowrap; }
+.seg a b { font-family: var(--f-mono); font-weight: 500; font-size: 12px; margin-left: 6px; }
+.seg a[aria-current="page"] { background: var(--bg); color: var(--ink); box-shadow: 0 1px 3px rgba(22,23,20,.12); }
+.tools { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
 
-main .wrap { padding-block: 20px 48px; display: grid; gap: 32px; }
-.panel { display: grid; gap: 28px; }
-h2 { font-weight: 900; font-size: 20px; letter-spacing: -.01em; margin: 0; text-wrap: balance; }
-.sec { display: grid; gap: 12px; }
-.sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 4px 12px; flex-wrap: wrap; }
-.sec-head small { color: var(--muted); font-size: 12px; }
-.src { font-size: 11.5px; color: var(--muted); text-decoration-color: var(--line-strong); text-underline-offset: 2px; }
-
-/* 화제 한 장 */
-.hot { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; display: grid; gap: 12px; }
-.hot-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
-.hot-top > div { min-width: 0; display: grid; gap: 2px; }
-.hot .kicker { justify-self: start; font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 999px; }
-.hot.is-new .kicker { color: var(--new); background: var(--new-soft); }
-.hot.is-limited .kicker { color: var(--lim); background: var(--lim-soft); }
-.hot h3 { margin: 4px 0 0; font-weight: 900; font-size: 26px; letter-spacing: -.02em; line-height: 1.2; }
-.hot .brandline { color: var(--muted); font-size: 14px; }
-.price-big { font-family: var(--f-mono); font-size: 22px; line-height: 1; white-space: nowrap; font-variant-numeric: tabular-nums; text-align: right; }
-.price-big small { display: block; font-family: var(--f-body); font-size: 12px; color: var(--muted); margin-top: 6px; }
-.specs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 0; }
-.specs div { background: var(--bg); border-radius: 8px; padding: 8px 12px; min-width: 0; }
-.specs dt { font-size: 11px; color: var(--muted); }
-.specs dd { margin: 0; font-family: var(--f-mono); font-size: 15px; font-variant-numeric: tabular-nums; }
-.hot p { margin: 0; font-size: 14px; color: var(--muted); max-width: 62ch; }
-
-/* 정렬 버튼 */
-.chips { display: flex; gap: 6px; flex-wrap: wrap; }
-.chip { font: inherit; font-size: 14px; padding: 5px 13px; border-radius: 999px; border: 1px solid var(--line-strong); background: var(--paper); color: var(--ink); cursor: pointer; }
+.chip { font: inherit; font-size: 13px; padding: 5px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
 .chip:hover { border-color: var(--muted); }
-.chip .n { font-family: var(--f-mono); font-size: 11px; color: var(--muted); margin-left: 4px; }
+.chip .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--dot, var(--ink)); }
+.chip .n { font-family: var(--f-mono); font-size: 11px; color: var(--muted); }
 .chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
 .chip[aria-pressed="true"] .n { color: var(--bg); opacity: .7; }
 
-/* 한정: D-day를 먼저 읽게 */
-.clock { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
-.lim { display: grid; grid-template-columns: 5.4em 1fr; gap: 14px; align-items: start; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
-.lim .left { display: grid; gap: 6px; justify-items: start; }
-.lim .dday { font-family: var(--f-mono); font-weight: 500; font-size: 17px; line-height: 1; padding: 6px 8px; border-radius: 8px; white-space: nowrap; font-variant-numeric: tabular-nums; color: var(--lim); background: var(--lim-soft); }
-.lim .dday.urgent { color: var(--urgent); background: var(--urgent-soft); }
-.lim .dday.open { font-family: var(--f-body); font-weight: 700; font-size: 12px; line-height: 1.3; white-space: normal; color: var(--muted); background: var(--bg); }
-.lim .kind { font-size: 11px; color: var(--muted); }
-.lim .pop { font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
-.lim .body { min-width: 0; display: grid; gap: 3px; }
-.lim .brand { font-size: 13px; color: var(--muted); }
-.lim .title-row { display: flex; justify-content: space-between; align-items: baseline; gap: 4px 12px; flex-wrap: wrap; }
-.lim h3 { margin: 0; font-size: 17px; line-height: 1.35; font-weight: 700; min-width: 0; }
-.lim .title-row .price { font-family: var(--f-mono); font-size: 15px; white-space: nowrap; font-variant-numeric: tabular-nums; }
-.lim .period { font-size: 12.5px; color: var(--ink); font-variant-numeric: tabular-nums; }
-.lim p { margin: 2px 0 0; font-size: 13px; color: var(--muted); }
-.lim .lines { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 2px; font-size: 13px; }
-.lim .lines li { display: flex; gap: 8px; align-items: baseline; }
-.lim .lines .leader { flex: 1; border-bottom: 1px dotted var(--line-strong); transform: translateY(-4px); min-width: 12px; }
-.lim .lines .price { font-family: var(--f-mono); white-space: nowrap; font-variant-numeric: tabular-nums; }
-.cups { display: grid; grid-template-columns: repeat(17, 1fr); gap: 3px; max-width: 320px; margin-top: 4px; }
-.cup { aspect-ratio: 1; max-width: 100%; border-radius: 50%; border: 1.5px solid var(--line-strong); }
-.cup.mission { border-color: var(--lim); background: var(--lim-soft); }
+main .wrap { padding-block: 24px 56px; display: grid; gap: 40px; }
+.panel { display: grid; gap: 36px; }
+.sec { display: grid; gap: 14px; }
+.sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 4px 12px; flex-wrap: wrap; }
+.sec-head h2 { margin: 0; font-family: var(--f-display); font-weight: 700; font-size: 24px; letter-spacing: -.02em; }
+.sec-head small { color: var(--muted); font-size: 12px; }
+.src { font-size: 11.5px; color: var(--muted); text-underline-offset: 2px; text-decoration-color: var(--line); }
 
-/* 신상: 메뉴판 */
-.cat { display: grid; gap: 14px; }
-.cat > h3 { margin: 0; font-weight: 700; font-size: 13px; color: var(--muted); letter-spacing: .06em; padding-top: 6px; }
-.brand-block { display: grid; gap: 2px; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px 10px; }
-.brand-head { display: flex; justify-content: space-between; align-items: baseline; gap: 4px 12px; flex-wrap: wrap; padding-bottom: 4px; }
-.brand-head h4 { margin: 0; font-weight: 900; font-size: 17px; }
-.brand-head .when, .brand-block .when.sub { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
-.brand-block .when.sub { display: block; margin-top: 8px; }
-.menu { list-style: none; margin: 0; padding: 0; }
-.menu li { display: flex; align-items: baseline; gap: 8px; padding-block: 7px; border-top: 1px solid var(--line); }
-.menu .name { min-width: 0; font-weight: 500; }
-.menu .leader { flex: 1; min-width: 12px; }
-.menu .tag { font-size: 11px; font-weight: 700; padding: 1px 7px; border-radius: 999px; white-space: nowrap; color: var(--new); background: var(--new-soft); }
-.menu .tag.plain { color: var(--muted); background: var(--bg); }
-.menu .price { font-family: var(--f-mono); font-size: 14px; white-space: nowrap; font-variant-numeric: tabular-nums; min-width: 5.5em; text-align: right; }
-.brand-block > .src { margin-top: 2px; }
+/* 신상: 업종 색 타일, 두 단 */
+.filter { display: flex; gap: 6px; flex-wrap: wrap; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 14px; align-items: start; }
+.tile { display: grid; gap: 10px; padding: 18px 18px 14px; border-radius: 16px; background: var(--soft); }
+.tile-head { display: flex; justify-content: space-between; align-items: baseline; gap: 4px 12px; flex-wrap: wrap; }
+.tile .cat { font-size: 11px; font-weight: 700; letter-spacing: .06em; color: var(--tone); }
+.tile h3 { margin: 0; font-family: var(--f-display); font-weight: 700; font-size: 21px; letter-spacing: -.02em; line-height: 1.2; }
+.tile .when { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tile .note { font-size: 13px; color: var(--ink); opacity: .8; margin: 0; }
+.items { list-style: none; margin: 0; padding: 0; display: grid; }
+.items li { display: flex; align-items: baseline; gap: 10px; padding-block: 7px; border-top: 1px solid rgba(22,23,20,.08); }
+.items .name { flex: 1; min-width: 0; font-weight: 500; }
+.items .tag { font-size: 11px; font-weight: 600; color: var(--tone); white-space: nowrap; }
+.items .tag.plain { color: var(--muted); }
+.items .price { font-family: var(--f-mono); font-size: 13px; white-space: nowrap; }
+.tile .sub-when { font-size: 12px; color: var(--muted); margin-top: 4px; }
+.cat-burger { --tone: var(--c-burger); --soft: var(--c-burger-soft); }
+.cat-chicken { --tone: var(--c-chicken); --soft: var(--c-chicken-soft); }
+.cat-pizza { --tone: var(--c-pizza); --soft: var(--c-pizza-soft); }
+.cat-bakery { --tone: var(--c-bakery); --soft: var(--c-bakery-soft); }
+.cat-snack { --tone: var(--c-snack); --soft: var(--c-snack-soft); }
+.cat-cafe { --tone: var(--c-cafe); --soft: var(--c-cafe-soft); }
+
+/* 한정: D-day 줄 */
+.rows { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ink); }
+.row { display: grid; grid-template-columns: 6.5em 1fr auto; gap: 6px 20px; align-items: start; padding-block: 18px; border-bottom: 1px solid var(--line); }
+.row .d { font-family: var(--f-display); font-weight: 800; font-size: 30px; line-height: 1; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+.row .d.urgent { color: var(--hot); }
+.row .d.open { font-family: var(--f-body); font-weight: 600; font-size: 13px; line-height: 1.35; letter-spacing: 0; color: var(--muted); padding-top: 4px; }
+.row .main { min-width: 0; display: grid; gap: 4px; }
+.row .b { font-size: 13px; color: var(--muted); }
+.row .b .pop { margin-left: 8px; color: var(--hot); font-weight: 600; }
+.row h3 { margin: 0; font-size: 18px; font-weight: 700; line-height: 1.35; }
+.row .period { font-size: 13px; font-variant-numeric: tabular-nums; }
+.row p { margin: 2px 0 0; font-size: 13.5px; color: var(--muted); max-width: 60ch; }
+.row .price { font-family: var(--f-mono); font-size: 16px; white-space: nowrap; text-align: right; padding-top: 4px; }
+.lines { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 2px; font-size: 13.5px; max-width: 26em; }
+.lines li { display: flex; gap: 8px; align-items: baseline; }
+.lines .leader { flex: 1; border-bottom: 1px dotted var(--line); transform: translateY(-4px); min-width: 12px; }
+.lines .p { font-family: var(--f-mono); font-size: 13px; white-space: nowrap; }
+.cups { display: grid; grid-template-columns: repeat(17, 1fr); gap: 3px; max-width: 300px; margin-top: 6px; }
+.cup { aspect-ratio: 1; max-width: 100%; border-radius: 50%; border: 1.5px solid var(--line); }
+.cup.mission { border-color: var(--c-cafe); background: var(--c-cafe-soft); }
 
 /* 검색 흐름 */
-.trend { display: grid; gap: 8px; }
-.bar-row { display: grid; grid-template-columns: 9.5em 1fr 3.2em; align-items: center; gap: 10px; font-size: 14px; }
-.bar-row .label { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.bar { height: 8px; background: var(--line); border-radius: 999px; overflow: hidden; }
-.bar i { display: block; height: 100%; border-radius: 999px; }
-.bar i.n { background: var(--new); }
-.bar i.l { background: var(--lim); }
-.bar-row .x { font-family: var(--f-mono); font-size: 13px; text-align: right; font-variant-numeric: tabular-nums; }
-.legend { display: flex; gap: 14px; font-size: 12px; color: var(--muted); }
-.legend span::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 5px; vertical-align: 1px; }
-.legend .n::before { background: var(--new); }
-.legend .l::before { background: var(--lim); }
+.trend { display: grid; gap: 10px; max-width: 640px; }
+.bar-row { display: grid; grid-template-columns: 10em 1fr 3.4em; align-items: center; gap: 12px; font-size: 14px; }
+.bar-row .label2 { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bar { height: 6px; background: var(--surface); border-radius: 999px; overflow: hidden; }
+.bar i { display: block; height: 100%; border-radius: 999px; background: var(--ink); }
+.bar i.l { background: var(--hot); }
+.bar-row .x { font-family: var(--f-mono); font-size: 13px; text-align: right; }
 
-.empty { color: var(--muted); font-size: 14px; padding: 16px; border: 1.5px dashed var(--line-strong); border-radius: 12px; }
-footer { color: var(--muted); font-size: 12px; border-top: 1px solid var(--line); padding-top: 14px; display: grid; gap: 4px; }
+.empty { color: var(--muted); font-size: 14px; padding: 18px; background: var(--surface); border-radius: 12px; list-style: none; }
+footer { color: var(--muted); font-size: 12px; border-top: 1px solid var(--line); padding-top: 16px; display: grid; gap: 4px; }
 footer p { margin: 0; }
-@media (prefers-reduced-motion: no-preference) { .chip, .split a { transition: background-color .15s, border-color .15s; } }
-@media (max-width: 440px) {
+@media (prefers-reduced-motion: no-preference) { .chip, .seg a { transition: background-color .15s, color .15s, border-color .15s; } }
+@media (max-width: 720px) {
+  .hots { grid-template-columns: 1fr; }
+  .tabs .wrap { flex-direction: column; align-items: stretch; }
+  .seg { align-self: flex-start; }
+  .tools { justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto; padding-bottom: 2px; }
+  .row { grid-template-columns: 4.6em 1fr; }
+  .row .price { grid-column: 2; text-align: left; padding-top: 0; }
+  .row .d { font-size: 24px; }
+  .logo small { display: none; }
   .bar-row { grid-template-columns: 7.5em 1fr 3em; font-size: 13px; }
-  .specs { grid-template-columns: 1fr 1fr; }
-  .specs div:last-child { grid-column: span 2; }
-  .lim { grid-template-columns: 4.6em 1fr; gap: 10px; padding: 12px 14px; }
-  .lim .dday { font-size: 15px; }
-  .price-big { text-align: left; }
-  .lim .dday.open { font-size: 11px; padding: 5px 6px; }
-  .split a .sub { font-size: 11px; }
 }
 </style>
 
-<header class="masthead">
+<header class="topbar">
   <div class="wrap">
-    <div class="eyebrow" id="eyebrow">FOODYSSEY</div>
-    <div class="brandrow">
-      <h1>푸디<span>세이</span></h1>
-      <p class="tagline">새 메뉴를 찾아 떠나는 여정</p>
-    </div>
-    <p class="lede">버거, 치킨, 피자, 빵, 분식, 커피까지. 새로 나온 메뉴와 곧 사라질 메뉴를 나눠서 보여 드려요.</p>
+    <a class="logo" href="#new">푸디세이<small>새 메뉴를 찾아 떠나는 여정</small></a>
+    <span class="updated" id="updated"></span>
   </div>
 </header>
+
+<section class="intro">
+  <div class="wrap">
+    <h1 id="headline">새로 나온 메뉴와 곧 사라질 메뉴</h1>
+    <p>버거, 치킨, 피자, 빵, 분식, 커피까지. 프랜차이즈 새 메뉴와 기간 한정 메뉴를 매일 아침 기사로 확인해 정리해요.</p>
+  </div>
+</section>
+
+<section class="soon" aria-labelledby="soon-title">
+  <div class="wrap">
+    <div class="soon-head"><span class="label" id="soon-title">마감이 가까운 순</span><a href="#limited">한정 전체 보기</a></div>
+    <div class="soon-row" id="soon-row"></div>
+  </div>
+</section>
+
+<section aria-label="이번 주 화제">
+  <div class="wrap hots">
+    <article class="hot" id="hot-new"></article>
+    <article class="hot" id="hot-limited"></article>
+  </div>
+</section>
+
 <div class="tabs">
   <div class="wrap">
-    <nav class="split" aria-label="신상과 한정">
-      <a href="#new" data-view="new" aria-current="page"><span class="big">신상 <b id="count-new"></b></span><span class="sub">새로 나와서 계속 파는 메뉴</span></a>
-      <a href="#limited" data-view="limited"><span class="big">한정 <b id="count-limited"></b></span><span class="sub" id="limited-sub">기간이 끝나면 사라지는 메뉴·이벤트</span></a>
+    <nav class="seg" aria-label="신상과 한정">
+      <a href="#new" data-view="new" aria-current="page">신상<b id="count-new"></b></a>
+      <a href="#limited" data-view="limited">한정<b id="count-limited"></b></a>
     </nav>
+    <div class="tools" id="tools-new" data-view="new" role="group" aria-label="업종 고르기"></div>
+    <div class="tools" id="tools-limited" data-view="limited" role="group" aria-label="정렬" hidden>
+      <button class="chip" id="sort-deadline" data-sort="deadline" aria-pressed="true">마감순</button>
+      <button class="chip" id="sort-popular" data-sort="popular" aria-pressed="false">인기순</button>
+    </div>
   </div>
 </div>
 
 <main>
   <div class="wrap">
     <div class="panel" id="panel-new" data-view="new">
-      <section class="hot is-new" id="hot-new" aria-label="이번 주 화제 신상"></section>
       <section class="sec" aria-labelledby="new-title">
-        <div class="sec-head"><h2 id="new-title">업종별 신상</h2><small>업종 안에서는 최근 출시 순</small></div>
-        <div class="chips" id="chips" role="group" aria-label="업종 고르기"></div>
-        <div id="cats" style="display:grid; gap:18px"></div>
+        <div class="sec-head"><h2 id="new-title">새로 나온 메뉴</h2><small>최근 출시 순</small></div>
+        <div class="tiles" id="tiles"></div>
       </section>
     </div>
 
     <div class="panel" id="panel-limited" data-view="limited" hidden>
-      <section class="hot is-limited" id="hot-limited" aria-label="이번 주 화제 한정 메뉴"></section>
-      <div class="chips sortbar" role="group" aria-label="정렬">
-        <button class="chip" id="sort-deadline" data-sort="deadline" aria-pressed="true">마감순</button>
-        <button class="chip" id="sort-popular" data-sort="popular" aria-pressed="false">인기순</button>
-      </div>
       <section class="sec" aria-labelledby="lim-item-title">
-        <div class="sec-head"><h2 id="lim-item-title">곧 사라지는 한정 상품</h2><small id="lim-item-sub">마감 가까운 순 · 날짜 없는 건 맨 뒤</small></div>
-        <ol class="clock" id="clock-item"></ol>
+        <div class="sec-head"><h2 id="lim-item-title">곧 사라지는 한정 메뉴</h2><small id="lim-item-sub"></small></div>
+        <ol class="rows" id="rows-item"></ol>
       </section>
       <section class="sec" aria-labelledby="lim-event-title">
-        <div class="sec-head"><h2 id="lim-event-title">놓치면 아쉬운 이벤트</h2><small id="lim-event-sub">마감 가까운 순</small></div>
-        <ol class="clock" id="clock-event"></ol>
+        <div class="sec-head"><h2 id="lim-event-title">놓치면 아쉬운 이벤트</h2><small id="lim-event-sub"></small></div>
+        <ol class="rows" id="rows-event"></ol>
       </section>
     </div>
 
     <section class="sec" aria-labelledby="trend-title">
       <div class="sec-head"><h2 id="trend-title">요즘 많이 찾는 검색어</h2><small>최근 3일 검색량, 지난 4주 평균 대비</small></div>
-      <div class="legend"><span class="n">신상</span><span class="l">한정</span></div>
       <div class="trend" id="trend"></div>
       <a class="src" id="trend-src" target="_blank" rel="noopener"></a>
     </section>
 
     <footer>
-      <p>푸디세이(Foodyssey)는 매일 아침 기사를 확인해 업데이트해요. 가격은 기사에 나온 것만 적었어요.</p>
+      <p>푸디세이(Foodyssey)는 매일 아침 기사를 확인해 업데이트해요. 가격과 기간은 기사에 나온 것만 적었어요.</p>
       <p>메뉴와 가격은 매장마다 다를 수 있어요.</p>
     </footer>
   </div>
@@ -275,82 +296,17 @@ footer p { margin: 0; }
   var parts = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
   var today = new Date(parts + 'T00:00:00Z');
   function days(s) { return Math.round((new Date(s + 'T00:00:00Z') - today) / 86400000); }
+  function dLabel(d) { return d === 0 ? 'D-DAY' : (d < 0 ? '곧 종료' : 'D-' + d); }
 
-  document.getElementById('eyebrow').textContent = 'FOODYSSEY · ' + D.weekLabel + ' · ' + D.updated.slice(5).replace('-', '.').replace(/^0/, '') + ' 기준';
+  var upd = D.updated.slice(5).replace('-', '.').replace(/^0/, '');
+  var u = document.getElementById('updated');
+  u.appendChild(el('b', { text: upd }));
+  u.appendChild(document.createTextNode(' 업데이트'));
 
-  // 화제 카드
-  function hot(box, h) {
-    var top = el('div', { cls: 'hot-top' }, [
-      el('div', null, [
-        el('div', { cls: 'kicker', text: h.kicker }),
-        el('h3', { text: h.name }),
-        el('div', { cls: 'brandline', text: h.brandline })
-      ]),
-      h.price ? el('div', { cls: 'price-big' }, [h.price, el('small', { text: h.priceNote || '' })]) : null
-    ]);
-    box.appendChild(top);
-    if (h.specs) {
-      box.appendChild(el('dl', { cls: 'specs' }, h.specs.map(function (s) {
-        return el('div', null, [el('dt', { text: s[0] }), el('dd', { text: s[1] })]);
-      })));
-    }
-    box.appendChild(el('p', { text: h.desc }));
-    box.appendChild(src(h.src));
-  }
-  hot(document.getElementById('hot-new'), D.hotNew);
-  hot(document.getElementById('hot-limited'), D.hotLimited);
+  var catName = {};
+  D.cats.forEach(function (c) { catName[c.id] = c.name; });
 
-  // 신상
-  var catsBox = document.getElementById('cats');
-  var chipsBox = document.getElementById('chips');
-  var total = 0;
-  var allChip = el('button', { cls: 'chip', 'data-cat': 'all', 'aria-pressed': 'true', id: 'chip-all', text: '전체' });
-  chipsBox.appendChild(allChip);
-  D.cats.forEach(function (c) {
-    var groups = D.newItems.filter(function (g) { return g.cat === c.id; });
-    if (!groups.length) return;
-    var count = groups.reduce(function (a, g) { return a + g.items.length; }, 0);
-    total += count;
-    chipsBox.appendChild(el('button', { cls: 'chip', 'data-cat': c.id, 'aria-pressed': 'false', id: 'chip-' + c.id }, [c.name, el('span', { cls: 'n', text: String(count) })]));
-    var sec = el('section', { cls: 'cat', 'data-cat': c.id }, [el('h3', { text: c.name })]);
-    // 최근 출시 순(date 내림차순). 같은 브랜드는 한 블록으로 묶고, 브랜드 순서는 가장 최근 출시 기준
-    var brands = [];
-    groups.slice().sort(function (a, b) { return (b.date || '').localeCompare(a.date || ''); }).forEach(function (g) {
-      var b = brands.filter(function (x) { return x.name === g.brand; })[0];
-      if (!b) { b = { name: g.brand, list: [] }; brands.push(b); }
-      b.list.push(g);
-    });
-    brands.forEach(function (b) {
-      var block = el('article', { cls: 'brand-block' }, [
-        el('div', { cls: 'brand-head' }, [el('h4', { text: b.name }), el('span', { cls: 'when', text: b.list[0].when })])
-      ]);
-      b.list.forEach(function (g, i) {
-        if (i) block.appendChild(el('span', { cls: 'when sub', text: g.when }));
-        block.appendChild(el('ul', { cls: 'menu' }, g.items.map(function (it) {
-          return el('li', null, [
-            el('span', { cls: 'name', text: it.name }),
-            el('span', { cls: 'leader' }),
-            el('span', { cls: 'tag' + (it.plain ? ' plain' : ''), text: it.tag }),
-            it.price ? el('span', { cls: 'price', text: it.price }) : null
-          ]);
-        })));
-        block.appendChild(src(g.src, g.note));
-      });
-      sec.appendChild(block);
-    });
-    catsBox.appendChild(sec);
-  });
-  document.getElementById('count-new').textContent = total;
-  var chips = chipsBox.querySelectorAll('.chip');
-  chips.forEach(function (chip) {
-    chip.addEventListener('click', function () {
-      var key = chip.dataset.cat;
-      chips.forEach(function (c) { c.setAttribute('aria-pressed', c === chip ? 'true' : 'false'); });
-      catsBox.querySelectorAll('section.cat').forEach(function (s) { s.hidden = key !== 'all' && s.dataset.cat !== key; });
-    });
-  });
-
-  // 한정: 지난 건 숨기고, 마감순 또는 인기순으로 정렬
+  // 한정 목록 준비: 지난 건 숨김
   var lims = D.limited.map(function (x) {
     var lastDay = x.endLate || x.end;
     return { x: x, d: x.end ? days(x.end) : null, last: lastDay ? days(lastDay) : null };
@@ -365,77 +321,156 @@ footer p { margin: 0; }
     var pa = a.x.pop || 0, pb = b.x.pop || 0;
     return pa !== pb ? pb - pa : byDeadline(a, b);
   }
-  var clockItem = document.getElementById('clock-item');
-  var clockEvent = document.getElementById('clock-event');
+
+  // 신상 개수
+  var newCount = D.newItems.reduce(function (a, g) { return a + g.items.length; }, 0);
+  document.getElementById('count-new').textContent = newCount;
+  document.getElementById('count-limited').textContent = lims.length;
+
+  // 머리말: 숫자로
+  var h = document.getElementById('headline');
+  h.textContent = '';
+  h.appendChild(document.createTextNode('새로 나온 메뉴 '));
+  h.appendChild(el('a', { href: '#new', cls: 'n-new', text: newCount + '개' }));
+  h.appendChild(document.createTextNode(', 곧 사라질 메뉴와 이벤트 '));
+  h.appendChild(el('a', { href: '#limited', cls: 'n-lim', text: lims.length + '개' }));
+  h.appendChild(document.createTextNode('.'));
+
+  // 마감 임박 띠: 날짜 있는 것만, 가까운 순
+  var soonRow = document.getElementById('soon-row');
+  lims.filter(function (o) { return o.d !== null; }).sort(byDeadline).slice(0, 6).forEach(function (o) {
+    soonRow.appendChild(el('a', { cls: 'soon-card' + (o.d <= 3 ? ' urgent' : ''), href: '#limited' }, [
+      el('span', { cls: 'd', text: dLabel(o.d) }),
+      el('span', { cls: 'b', text: o.x.brand }),
+      el('span', { cls: 't', text: o.x.title }),
+      el('span', { cls: 'k', text: o.x.kind + (o.x.price ? ' · ' + o.x.price : '') })
+    ]));
+  });
+
+  // 이번 주 화제
+  function hot(box, hd, labelText) {
+    box.appendChild(el('span', { cls: 'label' }, [labelText, ' · ', el('b', { text: (hd.kicker.split('·')[1] || '').trim() })]));
+    box.appendChild(el('h2', { text: hd.name }));
+    box.appendChild(el('span', { cls: 'meta', text: hd.brandline }));
+    if (hd.price) box.appendChild(el('span', { cls: 'price' }, [hd.price, hd.priceNote ? el('small', { text: hd.priceNote }) : null]));
+    if (hd.specs) box.appendChild(el('ul', { cls: 'specs' }, hd.specs.map(function (s) { return el('li', null, [s[0], el('b', { text: s[1] })]); })));
+    box.appendChild(el('p', { text: hd.desc }));
+    box.appendChild(src(hd.src));
+  }
+  hot(document.getElementById('hot-new'), D.hotNew, '이번 주 화제 신상');
+  hot(document.getElementById('hot-limited'), D.hotLimited, '이번 주 화제 한정');
+
+  // 신상: 같은 브랜드는 한 타일로, 최근 출시 순
+  var tilesBox = document.getElementById('tiles');
+  var tiles = [];
+  D.newItems.slice().sort(function (a, b) { return (b.date || '').localeCompare(a.date || ''); }).forEach(function (g) {
+    var t = tiles.filter(function (x) { return x.brand === g.brand && x.cat === g.cat; })[0];
+    if (!t) { t = { brand: g.brand, cat: g.cat, list: [] }; tiles.push(t); }
+    t.list.push(g);
+  });
+  tiles.forEach(function (t) {
+    var box = el('article', { cls: 'tile cat-' + t.cat, 'data-cat': t.cat }, [
+      el('div', { cls: 'tile-head' }, [
+        el('div', null, [el('div', { cls: 'cat', text: catName[t.cat] || '' }), el('h3', { text: t.brand })]),
+        el('span', { cls: 'when', text: t.list[0].when })
+      ])
+    ]);
+    t.list.forEach(function (g, i) {
+      if (i) box.appendChild(el('div', { cls: 'sub-when', text: g.when }));
+      box.appendChild(el('ul', { cls: 'items' }, g.items.map(function (it) {
+        return el('li', null, [
+          el('span', { cls: 'name', text: it.name }),
+          el('span', { cls: 'tag' + (it.plain ? ' plain' : ''), text: it.tag }),
+          it.price ? el('span', { cls: 'price', text: it.price }) : null
+        ]);
+      })));
+      if (g.note) box.appendChild(el('p', { cls: 'note', text: g.note }));
+      box.appendChild(src(g.src));
+    });
+    tilesBox.appendChild(box);
+  });
+
+  // 업종 필터
+  var tools = document.getElementById('tools-new');
+  var dotColor = { burger: 'var(--c-burger)', chicken: 'var(--c-chicken)', pizza: 'var(--c-pizza)', bakery: 'var(--c-bakery)', snack: 'var(--c-snack)', cafe: 'var(--c-cafe)' };
+  tools.appendChild(el('button', { cls: 'chip', 'data-cat': 'all', 'aria-pressed': 'true', id: 'chip-all', text: '전체' }));
+  D.cats.forEach(function (c) {
+    var n = D.newItems.filter(function (g) { return g.cat === c.id; }).reduce(function (a, g) { return a + g.items.length; }, 0);
+    if (!n) return;
+    tools.appendChild(el('button', { cls: 'chip', 'data-cat': c.id, 'aria-pressed': 'false', id: 'chip-' + c.id, style: '--dot:' + dotColor[c.id] }, [
+      el('span', { cls: 'dot' }), c.name, el('span', { cls: 'n', text: String(n) })
+    ]));
+  });
+  var chips = tools.querySelectorAll('.chip');
+  chips.forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      var key = chip.dataset.cat;
+      chips.forEach(function (c) { c.setAttribute('aria-pressed', c === chip ? 'true' : 'false'); });
+      tilesBox.querySelectorAll('.tile').forEach(function (s) { s.hidden = key !== 'all' && s.dataset.cat !== key; });
+    });
+  });
+
+  // 한정 목록
+  var rowsItem = document.getElementById('rows-item');
+  var rowsEvent = document.getElementById('rows-event');
   function renderLimited(mode) {
-    clockItem.innerHTML = '';
-    clockEvent.innerHTML = '';
+    rowsItem.innerHTML = '';
+    rowsEvent.innerHTML = '';
     lims.slice().sort(mode === 'popular' ? byPopular : byDeadline).forEach(function (o) {
-      var clock = o.x.kind === '이벤트' ? clockEvent : clockItem;
-      var x = o.x, label;
-      if (o.d === null) label = el('span', { cls: 'dday open', text: x.open || '기간 미정' });
-      else if (o.d < 0) label = el('span', { cls: 'dday', text: '곧 종료' });
-      else label = el('span', { cls: 'dday' + (o.d <= 3 ? ' urgent' : ''), text: o.d === 0 ? 'D-DAY' : 'D-' + o.d });
-      var body = el('div', { cls: 'body' }, [
-        el('div', { cls: 'brand', text: x.brand }),
-        el('div', { cls: 'title-row' }, [el('h3', { text: x.title }), x.price ? el('span', { cls: 'price', text: x.price }) : null]),
-        el('div', { cls: 'period', text: x.period })
+      var x = o.x;
+      var d = o.d === null
+        ? el('span', { cls: 'd open', text: x.open || '기간 미정' })
+        : el('span', { cls: 'd' + (o.d <= 3 ? ' urgent' : ''), text: dLabel(o.d) });
+      var main = el('div', { cls: 'main' }, [
+        el('span', { cls: 'b' }, [x.brand, x.pop ? el('span', { cls: 'pop', text: '검색 ' + x.pop + '배' }) : null]),
+        el('h3', { text: x.title }),
+        el('span', { cls: 'period', text: x.period })
       ]);
+      if (x.lines) main.appendChild(el('ul', { cls: 'lines' }, x.lines.map(function (l) {
+        return el('li', null, [el('span', { text: l[0] }), el('span', { cls: 'leader' }), el('span', { cls: 'p', text: l[1] })]);
+      })));
       if (x.cups) {
         var cups = el('div', { cls: 'cups', 'aria-label': x.cups.total + '잔 중 미션음료 ' + x.cups.mission + '잔' });
         for (var i = 0; i < x.cups.total; i++) cups.appendChild(el('span', { cls: 'cup' + (i < x.cups.mission ? ' mission' : '') }));
-        body.appendChild(cups);
+        main.appendChild(cups);
       }
-      if (x.lines) {
-        body.appendChild(el('ul', { cls: 'lines' }, x.lines.map(function (l) {
-          return el('li', null, [el('span', { text: l[0] }), el('span', { cls: 'leader' }), el('span', { cls: 'price', text: l[1] })]);
-        })));
-      }
-      if (x.desc) body.appendChild(el('p', { text: x.desc }));
-      body.appendChild(src(x.src));
-      var left = el('div', { cls: 'left' }, [label, el('span', { cls: 'kind', text: x.kind }), x.pop ? el('span', { cls: 'pop', text: '검색 ' + x.pop + '배' }) : null]);
-      clock.appendChild(el('li', { cls: 'lim' }, [left, body]));
+      if (x.desc) main.appendChild(el('p', { text: x.desc }));
+      main.appendChild(src(x.src));
+      (x.kind === '이벤트' ? rowsEvent : rowsItem).appendChild(el('li', { cls: 'row' }, [d, main, x.price ? el('span', { cls: 'price', text: x.price }) : null]));
     });
-    if (!clockItem.children.length) clockItem.appendChild(el('li', { cls: 'empty', text: '지금 판매 중인 한정 상품이 없어요.' }));
-    if (!clockEvent.children.length) clockEvent.appendChild(el('li', { cls: 'empty', text: '지금 진행 중인 이벤트가 없어요.' }));
+    if (!rowsItem.children.length) rowsItem.appendChild(el('li', { cls: 'empty', text: '지금 판매 중인 한정 메뉴가 없어요.' }));
+    if (!rowsEvent.children.length) rowsEvent.appendChild(el('li', { cls: 'empty', text: '지금 진행 중인 이벤트가 없어요.' }));
     var sub = mode === 'popular' ? '검색 많은 순 · 검색 데이터 없는 건 마감순' : '마감 가까운 순 · 날짜 없는 건 맨 뒤';
     document.getElementById('lim-item-sub').textContent = sub;
     document.getElementById('lim-event-sub').textContent = sub;
   }
   renderLimited('deadline');
-  var sortBtns = document.querySelectorAll('.sortbar .chip');
+  var sortBtns = document.querySelectorAll('#tools-limited .chip');
   sortBtns.forEach(function (btn) {
     btn.addEventListener('click', function () {
       sortBtns.forEach(function (b) { b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'); });
       renderLimited(btn.dataset.sort);
     });
   });
-  document.getElementById('count-limited').textContent = lims.length;
-  var soon = lims.filter(function (o) { return o.d !== null && o.d <= 3; }).length;
-  if (soon) {
-    var ls = document.getElementById('limited-sub');
-    ls.textContent = '';
-    ls.appendChild(el('b', { text: '3일 안에 끝나는 것 ' + soon + '개' }));
-  }
 
   // 검색 흐름
   var max = Math.max.apply(null, D.trends.rows.map(function (r) { return r[1]; }));
   var trend = document.getElementById('trend');
   D.trends.rows.forEach(function (r) {
     var bar = el('span', { cls: 'bar' }, [el('i', { cls: r[2] === 'limited' ? 'l' : 'n', style: 'width:' + (r[1] / max * 100).toFixed(1) + '%' })]);
-    trend.appendChild(el('div', { cls: 'bar-row' }, [el('span', { cls: 'label', text: r[0] }), bar, el('span', { cls: 'x', text: r[1] + '배' })]));
+    trend.appendChild(el('div', { cls: 'bar-row' }, [el('span', { cls: 'label2', text: r[0] }), bar, el('span', { cls: 'x', text: r[1] + '배' })]));
   });
   var ts = document.getElementById('trend-src');
   ts.href = D.trends.src.url;
   ts.textContent = '출처: ' + D.trends.src.label + ' (' + D.trends.asOf + ')';
 
   // 신상/한정 전환 (#new, #limited)
-  var tabs = document.querySelectorAll('.split a');
-  var panels = document.querySelectorAll('.panel');
+  var tabs = document.querySelectorAll('.seg a');
+  var views = document.querySelectorAll('.panel, .tools');
   function show() {
     var v = location.hash === '#limited' ? 'limited' : 'new';
     tabs.forEach(function (t) { if (t.dataset.view === v) t.setAttribute('aria-current', 'page'); else t.removeAttribute('aria-current'); });
-    panels.forEach(function (p) { p.hidden = p.dataset.view !== v; });
+    views.forEach(function (p) { p.hidden = p.dataset.view !== v; });
   }
   window.addEventListener('hashchange', show);
   show();
