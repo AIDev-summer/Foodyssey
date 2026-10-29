@@ -29,21 +29,22 @@ gtag('config', 'G-LN6SS7QZSR');
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500;700;800&family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
 /* Layout: 숫자로 말하는 머리말 → 마감 임박 띠(가로 스크롤) → 이번 주 화제 두 장 → 고정 탭 → 신상(업종 색 타일, 두 단) / 한정(D-day 줄) → 검색 흐름.
-   색: 흰 바탕에 업종마다 재료 색(빵 껍질, 튀김, 토마토, 밀가루, 떡, 커피)을 연하게. 빨강은 마감 임박에만. 음식 사이트라 항상 밝게. */
+   색: 흰 바탕에 업종마다 맑은 색(귤, 레몬, 토마토, 베리, 하늘, 민트)을 연하게. 빨강은 마감 임박에만. 음식 사이트라 항상 밝게. */
 :root {
   --bg: #ffffff;
-  --surface: #f6f6f3;
-  --ink: #161714;
-  --muted: #6d6f69;
-  --line: #e8e8e3;
-  --hot: #e2462c;
-  --hot-soft: #fdebe7;
-  --c-burger: #b2561f;  --c-burger-soft: #fbeee4;
-  --c-chicken: #9a6b00; --c-chicken-soft: #fbf2da;
-  --c-pizza: #c0392b;   --c-pizza-soft: #fcebe8;
-  --c-bakery: #8a5a2b;  --c-bakery-soft: #f6efe5;
-  --c-snack: #b23a6a;   --c-snack-soft: #fbeaf1;
-  --c-cafe: #5b6e3c;    --c-cafe-soft: #eef2e6;
+  --surface: #f3f7f5;
+  --ink: #15191a;
+  --muted: #677170;
+  --line: #e4ebe8;
+  --hot: #f24a2b;
+  --hot-soft: #ffece6;
+  --fresh: #0ca678;
+  --c-burger: #e8650a;  --c-burger-soft: #fff1e4;
+  --c-chicken: #b58700; --c-chicken-soft: #fff8d9;
+  --c-pizza: #e03131;   --c-pizza-soft: #ffeded;
+  --c-bakery: #d6336c;  --c-bakery-soft: #ffeef4;
+  --c-snack: #1c7ed6;   --c-snack-soft: #e9f3ff;
+  --c-cafe: #0ca678;    --c-cafe-soft: #e3f9f1;
   --f-display: "Hahmlet", "Nanum Myeongjo", "AppleMyungjo", serif;
   --f-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
@@ -68,7 +69,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 .intro .wrap { padding-block: 28px 8px; display: grid; gap: 14px; }
 .intro h1 { margin: 0; font-family: var(--f-display); font-weight: 700; font-size: clamp(30px, 5.6vw, 54px); line-height: 1.18; letter-spacing: -.035em; text-wrap: balance; max-width: 18em; }
 .intro h1 a { text-decoration: none; background-image: linear-gradient(currentColor, currentColor); background-size: 100% 2px; background-repeat: no-repeat; background-position: 0 92%; }
-.intro h1 .n-new { color: var(--c-cafe); }
+.intro h1 .n-new { color: var(--fresh); }
 .intro h1 .n-lim { color: var(--hot); }
 .intro p { margin: 0; color: var(--muted); max-width: 46em; }
 
@@ -106,7 +107,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .seg { display: inline-flex; padding: 3px; background: var(--surface); border-radius: 999px; }
 .seg a { text-decoration: none; padding: 7px 18px; border-radius: 999px; font-weight: 600; font-size: 15px; color: var(--muted); white-space: nowrap; }
 .seg a b { font-family: var(--f-mono); font-weight: 500; font-size: 12px; margin-left: 6px; }
-.seg a[aria-current="page"] { background: var(--bg); color: var(--ink); box-shadow: 0 1px 3px rgba(22,23,20,.12); }
+.seg a[aria-current="page"] { background: var(--bg); color: var(--ink); box-shadow: 0 1px 3px rgba(21,25,26,.12); }
 .tools { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
 
 .chip { font: inherit; font-size: 13px; padding: 5px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
