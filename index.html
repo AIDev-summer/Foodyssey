@@ -46,21 +46,11 @@
   --lim-soft: #fdeedb;
   --urgent: #d23c2e;
   --urgent-soft: #fde3df;
+  --head: #fff1e8;
+  color-scheme: light;
   --f-display: "Black Han Sans", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   --f-body: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #17150f; --paper: #211e18; --ink: #f1ece4; --muted: #a8a196; --line: #2f2b24; --line-strong: #403a31;
-    --brand: #f2835f; --new: #6fcf95; --new-soft: #1d3326; --lim: #f2a55a; --lim-soft: #3a2b18; --urgent: #f07a6c; --urgent-soft: #3d201c;
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #17150f; --paper: #211e18; --ink: #f1ece4; --muted: #a8a196; --line: #2f2b24; --line-strong: #403a31;
-  --brand: #f2835f; --new: #6fcf95; --new-soft: #1d3326; --lim: #f2a55a; --lim-soft: #3a2b18; --urgent: #f07a6c; --urgent-soft: #3d201c;
-  color-scheme: dark;
 }
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
@@ -70,7 +60,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--brand); outline
 .wrap { max-width: 760px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
 .num { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
 
-/* 머리말: 밝게, 짧게 */
+/* 머리말: 밝게, 짧게. 음식 사이트라 다크 모드 없이 항상 밝게 보여요 */
+.masthead { background: var(--head); }
 .masthead .wrap { padding-block: 28px 16px; display: grid; gap: 6px; }
 .eyebrow { font-size: 12px; color: var(--muted); letter-spacing: .04em; font-variant-numeric: tabular-nums; }
 .brandrow { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; }
@@ -82,6 +73,7 @@ h1 span { color: var(--new); }
 
 /* 신상/한정 탭: 스크롤해도 위에 붙어 있어요 */
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.masthead + .tabs { box-shadow: none; }
 .tabs { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); }
 .split { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding-block: 8px; }
 .split a { display: grid; gap: 0; text-decoration: none; padding: 10px 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); }
