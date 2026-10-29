@@ -1,3 +1,4 @@
+<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>푸디세이</title>
@@ -118,6 +119,7 @@ h2 { font-family: var(--f-head); font-weight: 900; font-size: 22px; letter-spaci
 .brand-block { display: grid; gap: 4px; }
 .brand-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; border-bottom: 2px solid var(--ink); padding-bottom: 6px; }
 .brand-head h4 { margin: 0; font-family: var(--f-head); font-weight: 900; font-size: 19px; letter-spacing: -.01em; }
+.brand-block .when.sub { display: block; margin-top: 10px; font-size: 12px; font-variant-numeric: tabular-nums; color: var(--muted); }
 .brand-head .when { font-family: var(--f-body); font-size: 12px; font-variant-numeric: tabular-nums; color: var(--muted); }
 .menu { list-style: none; margin: 0; padding: 0; }
 .menu li { display: flex; align-items: baseline; gap: 8px; padding-block: 8px; border-bottom: 1px solid var(--line); }
@@ -211,7 +213,7 @@ footer p { margin: 0; }
     </section>
 
     <footer>
-      <p>푸디세이(Foodyssey) 시안입니다. 가격은 기사에 나온 것만 적었어요.</p>
+      <p>푸디세이(Foodyssey)는 매일 아침 기사를 확인해 업데이트해요. 가격은 기사에 나온 것만 적었어요.</p>
       <p>메뉴와 가격은 매장마다 다를 수 있어요.</p>
     </footer>
   </div>
@@ -280,20 +282,30 @@ footer p { margin: 0; }
     total += count;
     chipsBox.appendChild(el('button', { cls: 'chip', 'data-cat': c.id, 'aria-pressed': 'false', id: 'chip-' + c.id }, [c.name, el('span', { cls: 'n', text: String(count) })]));
     var sec = el('section', { cls: 'cat', 'data-cat': c.id }, [el('h3', { text: c.name })]);
-    groups.forEach(function (g) {
-      var ul = el('ul', { cls: 'menu' }, g.items.map(function (it) {
-        return el('li', null, [
-          el('span', { cls: 'name', text: it.name }),
-          el('span', { cls: 'leader' }),
-          el('span', { cls: 'tag' + (it.plain ? ' plain' : ''), text: it.tag }),
-          it.price ? el('span', { cls: 'price', text: it.price }) : null
-        ]);
-      }));
-      sec.appendChild(el('article', { cls: 'brand-block' }, [
-        el('div', { cls: 'brand-head' }, [el('h4', { text: g.brand }), el('span', { cls: 'when', text: g.when })]),
-        ul,
-        src(g.src, g.note)
-      ]));
+    // 최근 출시 순(date 내림차순). 같은 브랜드는 한 블록으로 묶고, 브랜드 순서는 가장 최근 출시 기준
+    var brands = [];
+    groups.slice().sort(function (a, b) { return (b.date || '').localeCompare(a.date || ''); }).forEach(function (g) {
+      var b = brands.filter(function (x) { return x.name === g.brand; })[0];
+      if (!b) { b = { name: g.brand, list: [] }; brands.push(b); }
+      b.list.push(g);
+    });
+    brands.forEach(function (b) {
+      var block = el('article', { cls: 'brand-block' }, [
+        el('div', { cls: 'brand-head' }, [el('h4', { text: b.name }), el('span', { cls: 'when', text: b.list[0].when })])
+      ]);
+      b.list.forEach(function (g, i) {
+        if (i) block.appendChild(el('span', { cls: 'when sub', text: g.when }));
+        block.appendChild(el('ul', { cls: 'menu' }, g.items.map(function (it) {
+          return el('li', null, [
+            el('span', { cls: 'name', text: it.name }),
+            el('span', { cls: 'leader' }),
+            el('span', { cls: 'tag' + (it.plain ? ' plain' : ''), text: it.tag }),
+            it.price ? el('span', { cls: 'price', text: it.price }) : null
+          ]);
+        })));
+        block.appendChild(src(g.src, g.note));
+      });
+      sec.appendChild(block);
     });
     catsBox.appendChild(sec);
   });

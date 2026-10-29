@@ -1,5 +1,6 @@
-// 푸디세이 메뉴 데이터. 매주 이 파일만 고치면 페이지가 바뀌어요.
-// - newItems: 새로 나와서 계속 파는 메뉴 (업종별)
+// 푸디세이 메뉴 데이터. 이 파일만 고치면 페이지가 바뀌어요. 매일 아침 자동 조사가 PR로 고쳐요.
+// - newItems: 새로 나와서 계속 파는 메뉴 (업종별). date(YYYY-MM-DD, 출시·발표일)로 업종 안에서 최근 순으로 정렬해요.
+//   날짜가 "10월 출시"처럼 일까지 안 나오면 그 달 1일로 적어요. 같은 브랜드 블록은 화면에서 하나로 묶여요.
 // - limited: 기간이 끝나면 사라지는 메뉴·이벤트. end(YYYY-MM-DD)가 있으면 D-day를 자동 계산하고, 지나면 자동으로 숨겨요.
 // - price가 없으면 가격을 표시하지 않아요.
 // - pop: 검색량 배수(최근 3일 / 지난 4주). 한정 탭 인기순 정렬에 써요. 없으면 마감순으로 뒤에 놓여요.
@@ -36,33 +37,33 @@ window.FOODYSSEY = {
   },
 
   newItems: [
-    { cat: "burger", brand: "맘스터치", when: "10.15 발표",
+    { cat: "burger", brand: "맘스터치", when: "10.15 발표", date: "2026-10-15",
       items: [{ name: "베이컨치폴레싸이버거", tag: "신메뉴" }],
       src: { label: "마이데일리", url: "https://www.mydaily.co.kr/page/view/2026101514360760582" },
       note: "스매시버거 매장 약 1,000곳에서 판매" },
-    { cat: "burger", brand: "맥도날드", when: "10.29 출시",
+    { cat: "burger", brand: "맥도날드", when: "10.29 출시", date: "2026-10-29",
       items: [{ name: "게살 크림 크로켓 머핀", tag: "맥모닝" }],
       src: { label: "데일리안", url: "https://www.dailian.co.kr/news/view/1707077/%EB%A7%A5%EB%8F%84%EB%82%A0%EB%93%9C-%EA%B2%8C%EC%82%B4-%ED%81%AC%EB%A6%BC-%ED%81%AC%EB%A1%9C%EC%BC%93-%EB%A8%B8%ED%95%80-%EB%A7%A5%EB%AA%A8-2026" },
       note: "오전 4시부터 10시 30분까지 팔아요" },
-    { cat: "burger", brand: "노브랜드버거", when: "10.15 출시",
+    { cat: "burger", brand: "노브랜드버거", when: "10.15 출시", date: "2026-10-15",
       items: [{ name: "NBB 훅", tag: "신메뉴" }, { name: "NBB 펀치", tag: "신메뉴" }],
       src: { label: "파이낸셜뉴스", url: "https://www.fnnews.com/news/202610141826190444" },
       note: "단품 4,900원 · 세트 6,900원" },
-    { cat: "burger", brand: "노브랜드버거", when: "10.27 발표",
+    { cat: "burger", brand: "노브랜드버거", when: "10.27 발표", date: "2026-10-27",
       items: [{ name: "진짜 비빔밥 버거", tag: "신메뉴" }],
       src: { label: "머니투데이", url: "https://www.mt.co.kr/living/2026/10/27/2026102709110962425" },
       note: "튀긴 비빔밥 패티와 직화 패티가 들어가요" },
 
-    { cat: "pizza", brand: "피자헛", when: "10.8 출시",
+    { cat: "pizza", brand: "피자헛", when: "10.8 출시", date: "2026-10-08",
       items: [{ name: "피자설기", tag: "신메뉴" }],
       src: { label: "뉴스탭", url: "https://www.newstap.co.kr/news/articleView.html?idxno=335540" },
       note: "3,900원 · 떡 위에 소스, 치즈, 페페로니를 올린 컵 형태예요" },
 
-    { cat: "chicken", brand: "bhc", when: "10월 출시",
+    { cat: "chicken", brand: "bhc", when: "10월 출시", date: "2026-10-01",
       items: [{ name: "알싹킹", tag: "신메뉴" }, { name: "콰삭모짜킹", tag: "신메뉴" }],
       src: { label: "비즈트리뷴", url: "https://www.biztribune.co.kr/news/articleView.html?idxno=361110" },
       note: "콰삭모짜킹은 10월 초 출시 (후기 기준)" },
-    { cat: "chicken", brand: "교촌치킨", when: "10월 출시",
+    { cat: "chicken", brand: "교촌치킨", when: "10월 출시", date: "2026-10-01",
       items: [
         { name: "허니윙콤비", tag: "신메뉴" },
         { name: "허니옥수수윙콤비", tag: "신메뉴" },
@@ -72,7 +73,7 @@ window.FOODYSSEY = {
       ],
       src: { label: "비즈트리뷴, 프라임경제", url: "https://www.biztribune.co.kr/news/articleView.html?idxno=361110" } },
 
-    { cat: "bakery", brand: "파리바게뜨", when: "10.15 출시 · 치즈 5종",
+    { cat: "bakery", brand: "파리바게뜨", when: "10.15 출시 · 치즈 5종", date: "2026-10-15",
       items: [
         { name: "멕시칸 핫도그", tag: "신제품" },
         { name: "고다치즈 올리브식빵", tag: "신제품" },
@@ -81,7 +82,7 @@ window.FOODYSSEY = {
         { name: "모짜렐라 치즈봉", tag: "신제품" }
       ],
       src: { label: "싱글리스트", url: "https://www.slist.kr/news/articleView.html?idxno=773578" } },
-    { cat: "bakery", brand: "뚜레쥬르", when: "10.15 출시 · 가을 5종",
+    { cat: "bakery", brand: "뚜레쥬르", when: "10.15 출시 · 가을 5종", date: "2026-10-15",
       items: [
         { name: "사르르 호박 카스테라 크림빵", tag: "신제품" },
         { name: "꿀맛 고구마 생도넛", tag: "신제품" },
@@ -91,11 +92,11 @@ window.FOODYSSEY = {
       ],
       src: { label: "싱글리스트", url: "https://www.slist.kr/news/articleView.html?idxno=773578" } },
 
-    { cat: "snack", brand: "삼첩분식", when: "10.16 출시",
+    { cat: "snack", brand: "삼첩분식", when: "10.16 출시", date: "2026-10-16",
       items: [{ name: "떠먹는피자떡볶이", tag: "신메뉴" }],
       src: { label: "더쎈뉴스", url: "https://www.mhns.co.kr/news/articleView.html?idxno=764579" } },
 
-    { cat: "cafe", brand: "이디야커피", when: "10.22 출시 · 푸드 9종",
+    { cat: "cafe", brand: "이디야커피", when: "10.22 출시 · 푸드 9종", date: "2026-10-22",
       items: [
         { name: "와그작 생 초코파이", tag: "디저트" },
         { name: "딸기 쏙쏙 모찌떡", tag: "디저트" },
@@ -107,10 +108,10 @@ window.FOODYSSEY = {
         { name: "스틱 츄러스 · 브리오슈 소금빵", tag: "리뉴얼", plain: true }
       ],
       src: { label: "베타뉴스", url: "https://www.betanews.net/article/view/beta202610220164" } },
-    { cat: "cafe", brand: "투썸플레이스", when: "10월 · 가을 시즌",
+    { cat: "cafe", brand: "투썸플레이스", when: "10월 · 가을 시즌", date: "2026-10-01",
       items: [{ name: "블랙 치즈폼 라떼", tag: "음료" }, { name: "딸기 요거트 프라페", tag: "음료" }],
       src: { label: "프라임경제", url: "https://www.newsprime.co.kr/news/article/?no=749669" } },
-    { cat: "cafe", brand: "메가MGC커피", when: "9월 출시",
+    { cat: "cafe", brand: "메가MGC커피", when: "9월 출시", date: "2026-09-01",
       items: [
         { name: "하우스밀크 라떼", tag: "음료" },
         { name: "무카페인 오르조라떼", tag: "음료" },
