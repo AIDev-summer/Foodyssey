@@ -9,17 +9,20 @@
     if (meta) meta.content = t === 'dark' ? '#121816' : '#1f9370';
     if (btn) btn.setAttribute('aria-label', t === 'dark' ? '밝은 화면으로' : '다크모드 켜기');
   }
-  // 바꿀 때만 잠깐 모든 색이 같이 0.3초 동안 서서히 바뀌어요. 움직임 줄이기를 켠 기기에선 바로 바뀌어요.
+  // 바꿀 때만 화면 전체를 한 장처럼 0.3초 동안 서서히 바꿔요(View Transition).
+  // 요소마다 따로 색을 바꾸면 글자가 잠깐 바탕에 묻혀 깜빡여 보여서, 화면을 통째로 겹쳐 바꿔요.
+  // 지원하지 않는 브라우저와 움직임 줄이기를 켠 기기에선 바로 바뀌어요.
   var st = document.createElement('style');
-  st.textContent = '.theme-fade, .theme-fade *, .theme-fade *::before, .theme-fade *::after { transition: background-color .3s ease, color .3s ease, border-color .3s ease, text-decoration-color .3s ease, fill .3s ease, stroke .3s ease, box-shadow .3s ease !important; }';
+  st.textContent = '::view-transition-old(root), ::view-transition-new(root) { animation-duration: .3s; animation-timing-function: ease; }'
+    + '.theme-switching, .theme-switching * { transition: none !important; }';
   document.head.appendChild(st);
-  var reduce = matchMedia('(prefers-reduced-motion: reduce)'), timer;
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)');
   function fade(t) {
-    if (reduce.matches || root.dataset.theme === t) return apply(t);
-    clearTimeout(timer);
-    root.classList.add('theme-fade');
-    apply(t);
-    timer = setTimeout(function () { root.classList.remove('theme-fade'); }, 350);
+    if (reduce.matches || root.dataset.theme === t || !document.startViewTransition) return apply(t);
+    root.classList.add('theme-switching');
+    var vt = document.startViewTransition(function () { apply(t); });
+    vt.finished.then(done, done);
+    function done() { root.classList.remove('theme-switching'); }
   }
   function saved() { try { return localStorage.getItem('fd_theme'); } catch (e) { return null; } }
   apply(root.dataset.theme === 'dark' ? 'dark' : 'light');
