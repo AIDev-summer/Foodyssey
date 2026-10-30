@@ -94,19 +94,15 @@ window.FOODYSSEY = {
         { name: "스틱 츄러스 · 브리오슈 소금빵", tag: "리뉴얼", plain: true }
       ],
       src: { label: "베타뉴스", url: "https://www.betanews.net/article/view/beta202610220164" } },
+    { cat: "cafe", brand: "더벤티", when: "10.23 출시", date: "2026-10-23",
+      items: [{ name: "영암 고구마 라떼", tag: "음료" }],
+      src: { label: "내외일보", url: "https://www.naewoeilbo.com/news/articleView.html?idxno=2439706" },
+      note: "핫·아이스 모두 3,900원이에요" },
     { cat: "cafe", brand: "투썸플레이스", when: "10월 · 가을 시즌",
       items: [{ name: "블랙 치즈폼 라떼", tag: "음료" }, { name: "딸기 요거트 프라페", tag: "음료" }],
       src: { label: "프라임경제", url: "https://www.newsprime.co.kr/news/article/?no=749669" } },
     { cat: "cafe", brand: "컴포즈커피", when: "9.15 출시",
       items: [{ name: "밤 티라미수", tag: "디저트" }],
-      src: { label: "뉴스웨이", url: "https://www.newsway.co.kr/news/view?ud=2026100211184474917" } },
-    { cat: "cafe", brand: "메가MGC커피", when: "9월 출시",
-      items: [
-        { name: "하우스밀크 라떼", tag: "음료" },
-        { name: "무카페인 오르조라떼", tag: "음료" },
-        { name: "저당 골든애플 블랙티", tag: "음료" },
-        { name: "밤고구마단호박팥크림치즈빵", tag: "디저트" }
-      ],
       src: { label: "뉴스웨이", url: "https://www.newsway.co.kr/news/view?ud=2026100211184474917" } }
   ],
 
@@ -117,6 +113,9 @@ window.FOODYSSEY = {
     { kind: "이벤트", brand: "쉐이크쉑", title: "세트 업그레이드 쿠폰", end: "2026-10-31", period: "~ 10.31(토)",
       desc: "카카오톡 채널에서 세트 업그레이드 쿠폰을 받을 수 있어요.",
       src: { label: "식품투데이", url: "https://www.foodtoday.or.kr/news/article.html?no=208450" } },
+    { kind: "이벤트", brand: "버거킹", title: "인기 버거 4종 할인", end: "2026-11-08", period: "~ 11.8(일)",
+      desc: "와퍼주니어와 불고기와퍼주니어는 2,900원, 치즈와퍼주니어는 3,200원, 롱치킨버거는 3,500원에 팔아요.",
+      src: { label: "푸드투데이", url: "https://www.foodtoday.or.kr/news/article.html?no=209101" } },
     { kind: "메뉴", brand: "맥도날드", title: "빅아치", price: "12,400원", pop: 5.2, end: "2026-11-19", endLate: "2026-12-03",
       period: "10.22 출시 · 11.19~12.3 사이 종료 예상",
       desc: "4~6주 한정이라 종료일이 정확히 나오지 않았어요. 빠르면 11월 19일에 끝날 수 있어요.",
