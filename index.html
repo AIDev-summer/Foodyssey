@@ -31,13 +31,18 @@
 <script>
 // 내 접속 빼기: 한 번 ?me=1 로 열면 그 브라우저는 집계하지 않아요. ?me=0 으로 열면 다시 집계해요.
 // foodyssey.co.kr 밖(PC에서 파일로 열 때 등)에서도 집계하지 않아요.
+// 자동화·헤드리스 브라우저(Claude 확인 작업, Playwright, Lighthouse, 봇)도 집계하지 않아요.
 (function () {
   var GA_ID = 'G-LN6SS7QZSR', KEY = 'fd_me', me = false;
+  try {
+    var ua = navigator.userAgent || '';
+    if (navigator.webdriver || /Headless|Lighthouse|PageSpeed|Electron|Playwright|Puppeteer|bot|crawl|spider|slurp/i.test(ua)) me = true;
+  } catch (e) {}
   try {
     var q = location.search;
     if (/[?&]me=0(&|$)/.test(q)) localStorage.removeItem(KEY);
     else if (/[?&]me=1(&|$)/.test(q)) localStorage.setItem(KEY, '1');
-    me = !!localStorage.getItem(KEY);
+    me = me || !!localStorage.getItem(KEY);
   } catch (e) {}
   if (me || !/foodyssey\.co\.kr$/.test(location.hostname)) window['ga-disable-' + GA_ID] = true;
 })();
