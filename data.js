@@ -5,7 +5,7 @@
 // - price가 없으면 가격을 표시하지 않아요.
 // - pop: 검색량 배수(최근 3일 / 지난 4주). 한정 탭 인기순 정렬에 써요. 없으면 마감순으로 뒤에 놓여요.
 window.FOODYSSEY = {
-  updated: "2026-10-29",
+  updated: "2026-10-30",
   weekLabel: "2026년 10월 다섯째 주",
 
   cats: [
@@ -45,6 +45,10 @@ window.FOODYSSEY = {
       items: [{ name: "게살 크림 크로켓 머핀", tag: "맥모닝" }],
       src: { label: "데일리안", url: "https://www.dailian.co.kr/news/view/1707077/%EB%A7%A5%EB%8F%84%EB%82%A0%EB%93%9C-%EA%B2%8C%EC%82%B4-%ED%81%AC%EB%A6%BC-%ED%81%AC%EB%A1%9C%EC%BC%93-%EB%A8%B8%ED%95%80-%EB%A7%A5%EB%AA%A8-2026" },
       note: "오전 4시부터 10시 30분까지 팔아요" },
+    { cat: "burger", brand: "맘스터치", when: "10.22 출시", date: "2026-10-22",
+      items: [{ name: "후덕죽 쿵파오싸이버거", tag: "신메뉴" }, { name: "후덕죽 XO통모짜새우버거", tag: "신메뉴" }, { name: "후덕죽 XO쉬림프싸이플렉스버거", tag: "신메뉴" }, { name: "후덕죽 XO사천빅싸이순살", tag: "치킨" }],
+      src: { label: "한국경제", url: "https://www.hankyung.com/article/202610227724g" },
+      note: "후덕죽 셰프와 함께 만든 메뉴예요" },
     { cat: "burger", brand: "노브랜드버거", when: "10.15 출시", date: "2026-10-15",
       items: [{ name: "NBB 훅", tag: "신메뉴" }, { name: "NBB 펀치", tag: "신메뉴" }],
       src: { label: "파이낸셜뉴스", url: "https://www.fnnews.com/news/202610141826190444" },
@@ -108,17 +112,13 @@ window.FOODYSSEY = {
         { name: "스틱 츄러스 · 브리오슈 소금빵", tag: "리뉴얼", plain: true }
       ],
       src: { label: "베타뉴스", url: "https://www.betanews.net/article/view/beta202610220164" } },
+    { cat: "cafe", brand: "더벤티", when: "10.23 출시", date: "2026-10-23",
+      items: [{ name: "영암 고구마 라떼", tag: "음료" }],
+      src: { label: "내외일보", url: "https://www.naewoeilbo.com/news/articleView.html?idxno=2439706" },
+      note: "핫·아이스 모두 3,900원이에요" },
     { cat: "cafe", brand: "투썸플레이스", when: "10월 · 가을 시즌", date: "2026-10-01",
       items: [{ name: "블랙 치즈폼 라떼", tag: "음료" }, { name: "딸기 요거트 프라페", tag: "음료" }],
-      src: { label: "프라임경제", url: "https://www.newsprime.co.kr/news/article/?no=749669" } },
-    { cat: "cafe", brand: "메가MGC커피", when: "9월 출시", date: "2026-09-01",
-      items: [
-        { name: "하우스밀크 라떼", tag: "음료" },
-        { name: "무카페인 오르조라떼", tag: "음료" },
-        { name: "저당 골든애플 블랙티", tag: "음료" },
-        { name: "밤고구마단호박팥크림치즈빵", tag: "디저트" }
-      ],
-      src: { label: "뉴스웨이", url: "https://www.newsway.co.kr/news/view?ud=2026100211184474917" } }
+      src: { label: "프라임경제", url: "https://www.newsprime.co.kr/news/article/?no=749669" } }
   ],
 
   limited: [
@@ -131,6 +131,9 @@ window.FOODYSSEY = {
     { kind: "이벤트", brand: "쉐이크쉑", title: "세트 업그레이드 쿠폰", end: "2026-10-31", period: "~ 10.31(토)",
       desc: "카카오톡 채널에서 세트 업그레이드 쿠폰을 받을 수 있어요.",
       src: { label: "식품투데이", url: "https://www.foodtoday.or.kr/news/article.html?no=208450" } },
+    { kind: "이벤트", brand: "버거킹", title: "인기 버거 4종 할인", end: "2026-11-08", period: "~ 11.8(일)",
+      desc: "와퍼주니어와 불고기와퍼주니어는 2,900원, 치즈와퍼주니어는 3,200원, 롱치킨버거는 3,500원에 팔아요.",
+      src: { label: "푸드투데이", url: "https://www.foodtoday.or.kr/news/article.html?no=209101" } },
     { kind: "메뉴", brand: "맥도날드", title: "빅아치", price: "12,400원", pop: 5.2, end: "2026-11-19", endLate: "2026-12-03",
       period: "10.22 출시 · 11.19~12.3 사이 종료 예상",
       desc: "4~6주 한정이라 종료일이 정확히 나오지 않았어요. 빠르면 11월 19일에 끝날 수 있어요.",
