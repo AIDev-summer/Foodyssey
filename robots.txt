@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://foodyssey.co.kr/sitemap.xml
