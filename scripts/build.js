@@ -179,6 +179,7 @@ ${jsonld.map((j) => `<script type="application/ld+json">${JSON.stringify(j).repl
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@700;800&family=IBM+Plex+Sans+KR:wght@400;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="alternate" type="application/rss+xml" title="푸디세이" href="/rss.xml">
 <link rel="stylesheet" href="/pages.css">
 </head>
 <body>
@@ -378,6 +379,23 @@ function main() {
     + fixed.concat(urls).map((u) => `  <url><loc>${esc(SITE + href(u.loc))}</loc>${u.lastmod ? `<lastmod>${u.lastmod}</lastmod>` : ''}${u.freq ? `<changefreq>${u.freq}</changefreq>` : ''}<priority>${u.pri}</priority></url>`).join('\n')
     + '\n</urlset>\n';
   fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), sm);
+
+  // rss.xml: 새로 올라온 메뉴 순(최근 50개). 네이버 서치어드바이저 RSS 제출용.
+  const rfc = (d) => new Date(d + 'T09:00:00+09:00').toUTCString();
+  const feed = all.slice().sort((a, b) => (b.firstSeen + (b.date || '')).localeCompare(a.firstSeen + (a.date || ''))).slice(0, 50);
+  const rss = '<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">\n<channel>\n'
+    + `<title>푸디세이 · 프랜차이즈 새 메뉴와 한정 메뉴</title>\n<link>${SITE}/</link>\n<description>버거, 치킨, 피자, 빵, 분식, 커피 프랜차이즈의 새 메뉴와 기간 한정 메뉴를 매일 정리해요.</description>\n<language>ko</language>\n`
+    + `<atom:link href="${SITE}/rss.xml" rel="self" type="application/rss+xml"/>\n<lastBuildDate>${rfc(D.updated || today)}</lastBuildDate>\n`
+    + feed.map((r) => {
+      const st = status(r, today);
+      const bits = [r.tag, r.price, r.kind === 'new' ? r.when : r.period, st === 'on' ? '' : statusLabel(r, st)].filter(Boolean).join(' · ');
+      const d = [bits, r.desc || r.note].filter(Boolean).join(' — ');
+      const u = SITE + href(menuPath(r));
+      return `<item><title>${esc(r.brand + ' ' + r.name)}</title><link>${esc(u)}</link><guid isPermaLink="true">${esc(u)}</guid>`
+        + `<pubDate>${rfc(r.firstSeen > (r.date || '') ? r.firstSeen : r.date)}</pubDate>${r.catName ? `<category>${esc(r.catName)}</category>` : ''}<description>${esc(d)}</description></item>`;
+    }).join('\n')
+    + '\n</channel>\n</rss>\n';
+  fs.writeFileSync(path.join(ROOT, 'rss.xml'), rss);
 
   // index.html: 브랜드별 메뉴 목록(크롤러와 사람 모두 보는 링크)과 구조화 데이터
   const idxFile = path.join(ROOT, 'index.html');
