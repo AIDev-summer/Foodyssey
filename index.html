@@ -135,6 +135,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 .topbar .wrap { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-block: 18px; }
 .logo { font-family: var(--f-display); font-weight: 800; font-size: 22px; letter-spacing: -.02em; text-decoration: none; }
 .logo small { font-family: var(--f-body); font-weight: 500; font-size: 13px; color: var(--muted); margin-left: 10px; letter-spacing: 0; }
+.logo-en { font-family: var(--f-body); font-weight: 600; font-size: 12px; letter-spacing: .04em; color: var(--muted); margin-left: 8px; white-space: nowrap; }
 .updated { font-size: 12px; color: var(--muted); white-space: nowrap; }
 .updated b { color: var(--ink); font-weight: 600; }
 .top-r { display: flex; align-items: center; gap: 12px; }
@@ -319,7 +320,7 @@ footer .links a { margin-right: 14px; }
 <body>
 <header class="topbar">
   <div class="wrap">
-    <a class="logo" href="#new">푸디세이<small>새 메뉴를 찾아 떠나는 여정</small></a>
+    <a class="logo" href="#new">푸디세이<span class="logo-en" lang="en">Food odyssey</span><small>새 메뉴를 찾아 떠나는 여정</small></a>
     <div class="top-r">
       <span class="updated" id="updated"></span>
       <button class="theme-btn" id="theme-btn" type="button" aria-label="다크모드 켜기">
