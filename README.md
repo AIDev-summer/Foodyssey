@@ -37,3 +37,10 @@
 - 사진 주소에 한글이나 공백이 있으면 퍼센트 인코딩해서 넣어요(예: 공백 → `%20`).
 - 넣기 전에 주소가 실제 이미지(200, image/*)로 열리는지 확인해요. 사진이 안 열리면 팝업에 "사진을 불러오지 못했어요"가 나와요.
 - 지금 사진을 가져오는 곳: 맥도날드(mcdonalds.co.kr/upload), 교촌(kyochon.com/uploadFiles), 파리바게뜨(paris.co.kr 상품 페이지의 og:image), 이디야(ediya.com/files/menu), 메가MGC커피(img.mega-mgccoffee.com).
+
+## 메뉴·브랜드·업종 페이지 (검색 유입용)
+
+- `node scripts/build.js`가 `data.js`를 읽어 `menu/브랜드-메뉴.html`, `brand/브랜드.html`, `cat/업종.html`, `sitemap.xml`을 만들고, `index.html`의 "브랜드별로 보기" 목록과 구조화 데이터(JSON-LD)를 다시 채워요.
+- GitHub Actions(`.github/workflows/build-pages.yml`)가 `data.js`가 main에 합쳐질 때와 매일 0시 10분(한국 시간)에 자동으로 돌려 main에 커밋해요. 직접 돌릴 필요는 없어요.
+- `data/archive.json`은 한 번이라도 올라온 메뉴를 모두 기억해요. `data.js`에서 빠지거나 마감일이 지나도 메뉴 페이지는 지우지 않고 "판매 종료"로 남겨요(지난 메뉴 검색 유입용).
+- `menu/`, `brand/`, `cat/`, `sitemap.xml`은 자동으로 만들어지는 파일이라 손으로 고치지 않아요. 문구나 모양은 `scripts/build.js`와 `pages.css`에서 고쳐요.

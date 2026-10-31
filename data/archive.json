@@ -1,0 +1,1488 @@
+{
+ "bhc-알싹킹": {
+  "kind": "new",
+  "brand": "bhc",
+  "cat": "chicken",
+  "name": "알싹킹",
+  "tag": "신메뉴",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-10-01",
+  "when": "10월 출시",
+  "note": "콰삭모짜킹은 10월 초 출시 (후기 기준)",
+  "desc": "고추, 양파, 대파로 맛을 낸 매콤한 치킨이에요. 튀김옷이 얇고, 맵싸소스와 파싹소스가 같이 와요. 10월 31일까지 bhc 앱 이벤트에 참여하면 다음 달에 쓸 2,000원 쿠폰을 줘요.",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "알싹킹",
+   "콰삭모짜킹"
+  ],
+  "src": {
+   "label": "비즈트리뷴",
+   "url": "https://www.biztribune.co.kr/news/articleView.html?idxno=361110"
+  },
+  "slug": "bhc-알싹킹",
+  "catName": "치킨",
+  "firstSeen": "2026-10-31"
+ },
+ "bhc-알싹킹-앱-쿠폰-이벤트": {
+  "kind": "event",
+  "brand": "bhc",
+  "cat": "chicken",
+  "name": "알싹킹 앱 쿠폰 이벤트",
+  "tag": "이벤트",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "end": "2026-10-31",
+  "endLate": "",
+  "open": "",
+  "period": "~ 10.31(토)",
+  "desc": "bhc 앱 이벤트 페이지에 들어가면 다음 달에 쓸 알싹킹 2,000원 쿠폰을 줘요. 추첨으로 모바일 상품권도 있어요.",
+  "specs": null,
+  "priceNote": "",
+  "lines": null,
+  "cups": null,
+  "src": {
+   "label": "비즈트리뷴",
+   "url": "https://www.biztribune.co.kr/news/articleView.html?idxno=361110"
+  },
+  "slug": "bhc-알싹킹-앱-쿠폰-이벤트",
+  "catName": "치킨",
+  "firstSeen": "2026-10-31"
+ },
+ "bhc-콰삭모짜킹": {
+  "kind": "new",
+  "brand": "bhc",
+  "cat": "chicken",
+  "name": "콰삭모짜킹",
+  "tag": "신메뉴",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-10-01",
+  "when": "10월 출시",
+  "note": "콰삭모짜킹은 10월 초 출시 (후기 기준)",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "알싹킹",
+   "콰삭모짜킹"
+  ],
+  "src": {
+   "label": "비즈트리뷴",
+   "url": "https://www.biztribune.co.kr/news/articleView.html?idxno=361110"
+  },
+  "slug": "bhc-콰삭모짜킹",
+  "catName": "치킨",
+  "firstSeen": "2026-10-31"
+ },
+ "교촌치킨-웨지고구마-웨지반반": {
+  "kind": "new",
+  "brand": "교촌치킨",
+  "cat": "chicken",
+  "name": "웨지고구마 · 웨지반반",
+  "tag": "사이드",
+  "price": "4,500·8,000원",
+  "img": "https://www.kyochon.com/uploadFiles/TB_ITEM/list_Seasoned-Wedge-Potatoes.png",
+  "imgFrom": "",
+  "date": "2026-10-01",
+  "when": "10월 출시",
+  "note": "가격은 교촌 홈페이지 권장소비자가격이에요",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "허니윙콤비",
+   "허니옥수수윙콤비",
+   "허니옥수수윙박스 (16·20조각)",
+   "허니옥수수싱글윙",
+   "웨지고구마 · 웨지반반"
+  ],
+  "src": {
+   "label": "비즈트리뷴, 프라임경제",
+   "url": "https://www.biztribune.co.kr/news/articleView.html?idxno=361110"
+  },
+  "slug": "교촌치킨-웨지고구마-웨지반반",
+  "catName": "치킨",
+  "firstSeen": "2026-10-31"
+ },
+ "교촌치킨-허니옥수수싱글윙": {
+  "kind": "new",
+  "brand": "교촌치킨",
+  "cat": "chicken",
+  "name": "허니옥수수싱글윙",
+  "tag": "신메뉴",
+  "price": "8,500원",
+  "img": "https://www.kyochon.com/uploadFiles/TB_ITEM/list_Honey%20Corn%20Single.png",
+  "imgFrom": "",
+  "date": "2026-10-01",
+  "when": "10월 출시",
+  "note": "가격은 교촌 홈페이지 권장소비자가격이에요",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "허니윙콤비",
+   "허니옥수수윙콤비",
+   "허니옥수수윙박스 (16·20조각)",
+   "허니옥수수싱글윙",
+   "웨지고구마 · 웨지반반"
+  ],
+  "src": {
+   "label": "비즈트리뷴, 프라임경제",
+   "url": "https://www.biztribune.co.kr/news/articleView.html?idxno=361110"
+  },
+  "slug": "교촌치킨-허니옥수수싱글윙",
+  "catName": "치킨",
+  "firstSeen": "2026-10-31"
+ },
+ "교촌치킨-허니옥수수윙박스-16-20조각": {
+  "kind": "new",
+  "brand": "교촌치킨",
+  "cat": "chicken",
+  "name": "허니옥수수윙박스 (16·20조각)",
+  "tag": "신메뉴",
+  "price": "23,000·24,000원",
+  "img": "https://www.kyochon.com/uploadFiles/TB_ITEM/list_Honey%20Corn%20Wing%20Box_20pcs.png",
+  "imgFrom": "",
+  "date": "2026-10-01",
+  "when": "10월 출시",
+  "note": "가격은 교촌 홈페이지 권장소비자가격이에요",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "허니윙콤비",
+   "허니옥수수윙콤비",
+   "허니옥수수윙박스 (16·20조각)",
+   "허니옥수수싱글윙",
+   "웨지고구마 · 웨지반반"
+  ],
+  "src": {
+   "label": "비즈트리뷴, 프라임경제",
+   "url": "https://www.biztribune.co.kr/news/articleView.html?idxno=361110"
+  },
+  "slug": "교촌치킨-허니옥수수윙박스-16-20조각",
+  "catName": "치킨",
+  "firstSeen": "2026-10-31"
+ },
+ "교촌치킨-허니옥수수윙콤비": {
+  "kind": "new",
+  "brand": "교촌치킨",
+  "cat": "chicken",
+  "name": "허니옥수수윙콤비",
+  "tag": "신메뉴",
+  "price": "25,000원",
+  "img": "https://www.kyochon.com/uploadFiles/TB_ITEM/list_Honey%20Corn%20Wing%20Combo.png",
+  "imgFrom": "",
+  "date": "2026-10-01",
+  "when": "10월 출시",
+  "note": "가격은 교촌 홈페이지 권장소비자가격이에요",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "허니윙콤비",
+   "허니옥수수윙콤비",
+   "허니옥수수윙박스 (16·20조각)",
+   "허니옥수수싱글윙",
+   "웨지고구마 · 웨지반반"
+  ],
+  "src": {
+   "label": "비즈트리뷴, 프라임경제",
+   "url": "https://www.biztribune.co.kr/news/articleView.html?idxno=361110"
+  },
+  "slug": "교촌치킨-허니옥수수윙콤비",
+  "catName": "치킨",
+  "firstSeen": "2026-10-31"
+ },
+ "교촌치킨-허니윙콤비": {
+  "kind": "new",
+  "brand": "교촌치킨",
+  "cat": "chicken",
+  "name": "허니윙콤비",
+  "tag": "신메뉴",
+  "price": "24,000원",
+  "img": "https://www.kyochon.com/uploadFiles/TB_ITEM/list_Honey%20Wing%20Combo.png",
+  "imgFrom": "",
+  "date": "2026-10-01",
+  "when": "10월 출시",
+  "note": "가격은 교촌 홈페이지 권장소비자가격이에요",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "허니윙콤비",
+   "허니옥수수윙콤비",
+   "허니옥수수윙박스 (16·20조각)",
+   "허니옥수수싱글윙",
+   "웨지고구마 · 웨지반반"
+  ],
+  "src": {
+   "label": "비즈트리뷴, 프라임경제",
+   "url": "https://www.biztribune.co.kr/news/articleView.html?idxno=361110"
+  },
+  "slug": "교촌치킨-허니윙콤비",
+  "catName": "치킨",
+  "firstSeen": "2026-10-31"
+ },
+ "교촌치킨-허니페스타": {
+  "kind": "event",
+  "brand": "교촌치킨",
+  "cat": "chicken",
+  "name": "허니페스타",
+  "tag": "이벤트",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "end": "2026-10-31",
+  "endLate": "",
+  "open": "",
+  "period": "~ 10.31(토)",
+  "desc": "교촌 주문 앱에서 매일 오후 5시에 선착순 5,000원 할인쿠폰을 줘요. 허니 메뉴 7종에 쓸 수 있어요.",
+  "specs": null,
+  "priceNote": "",
+  "lines": null,
+  "cups": null,
+  "src": {
+   "label": "맥스무비",
+   "url": "https://www.maxmovie.com/news/articleView.html?idxno=502586"
+  },
+  "slug": "교촌치킨-허니페스타",
+  "catName": "치킨",
+  "firstSeen": "2026-10-31"
+ },
+ "노브랜드버거-nbb-펀치": {
+  "kind": "new",
+  "brand": "노브랜드버거",
+  "cat": "burger",
+  "name": "NBB 펀치",
+  "tag": "신메뉴",
+  "price": "4,900원",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-10-15",
+  "when": "10.15 출시",
+  "note": "단품 4,900원 · 세트 6,900원",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "NBB 훅",
+   "NBB 펀치"
+  ],
+  "src": {
+   "label": "파이낸셜뉴스",
+   "url": "https://www.fnnews.com/news/202610141826190444"
+  },
+  "slug": "노브랜드버거-nbb-펀치",
+  "catName": "버거",
+  "firstSeen": "2026-10-31"
+ },
+ "노브랜드버거-nbb-훅": {
+  "kind": "new",
+  "brand": "노브랜드버거",
+  "cat": "burger",
+  "name": "NBB 훅",
+  "tag": "신메뉴",
+  "price": "4,900원",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-10-15",
+  "when": "10.15 출시",
+  "note": "단품 4,900원 · 세트 6,900원",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "NBB 훅",
+   "NBB 펀치"
+  ],
+  "src": {
+   "label": "파이낸셜뉴스",
+   "url": "https://www.fnnews.com/news/202610141826190444"
+  },
+  "slug": "노브랜드버거-nbb-훅",
+  "catName": "버거",
+  "firstSeen": "2026-10-31"
+ },
+ "노브랜드버거-진짜-비빔밥-버거": {
+  "kind": "new",
+  "brand": "노브랜드버거",
+  "cat": "burger",
+  "name": "진짜 비빔밥 버거",
+  "tag": "신메뉴",
+  "price": "5,900원",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-10-27",
+  "when": "10.27 발표",
+  "note": "세트 7,900원 · 튀긴 비빔밥 패티와 직화 패티가 들어가요",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": null,
+  "src": {
+   "label": "머니투데이",
+   "url": "https://www.mt.co.kr/living/2026/10/27/2026102709110962425"
+  },
+  "slug": "노브랜드버거-진짜-비빔밥-버거",
+  "catName": "버거",
+  "firstSeen": "2026-10-31"
+ },
+ "도미노피자-레몬-버터-더블-살시챠-피자": {
+  "kind": "limited",
+  "brand": "도미노피자",
+  "cat": "pizza",
+  "name": "레몬 버터 더블 살시챠 피자",
+  "tag": "한정 메뉴",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "end": "2026-12-31",
+  "endLate": "",
+  "open": "",
+  "period": "연말까지 한정",
+  "desc": "자사 앱과 쿠팡이츠에서 주문할 수 있어요.",
+  "specs": null,
+  "priceNote": "",
+  "lines": null,
+  "cups": null,
+  "src": {
+   "label": "프라임경제",
+   "url": "https://www.newsprime.co.kr/news/article/?no=749669"
+  },
+  "slug": "도미노피자-레몬-버터-더블-살시챠-피자",
+  "catName": "피자",
+  "firstSeen": "2026-10-31"
+ },
+ "뚜레쥬르-꿀맛-고구마-생도넛": {
+  "kind": "new",
+  "brand": "뚜레쥬르",
+  "cat": "bakery",
+  "name": "꿀맛 고구마 생도넛",
+  "tag": "신제품",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-10-15",
+  "when": "10.15 출시 · 가을 5종",
+  "note": "",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "사르르 호박 카스테라 크림빵",
+   "꿀맛 고구마 생도넛",
+   "오리지널 퀴니아망",
+   "흑임자 퀴니아망",
+   "흑임자 가나슈 바게트"
+  ],
+  "src": {
+   "label": "싱글리스트",
+   "url": "https://www.slist.kr/news/articleView.html?idxno=773578"
+  },
+  "slug": "뚜레쥬르-꿀맛-고구마-생도넛",
+  "catName": "베이커리",
+  "firstSeen": "2026-10-31"
+ },
+ "뚜레쥬르-사르르-호박-카스테라-크림빵": {
+  "kind": "new",
+  "brand": "뚜레쥬르",
+  "cat": "bakery",
+  "name": "사르르 호박 카스테라 크림빵",
+  "tag": "신제품",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-10-15",
+  "when": "10.15 출시 · 가을 5종",
+  "note": "",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "사르르 호박 카스테라 크림빵",
+   "꿀맛 고구마 생도넛",
+   "오리지널 퀴니아망",
+   "흑임자 퀴니아망",
+   "흑임자 가나슈 바게트"
+  ],
+  "src": {
+   "label": "싱글리스트",
+   "url": "https://www.slist.kr/news/articleView.html?idxno=773578"
+  },
+  "slug": "뚜레쥬르-사르르-호박-카스테라-크림빵",
+  "catName": "베이커리",
+  "firstSeen": "2026-10-31"
+ },
+ "뚜레쥬르-오리지널-퀴니아망": {
+  "kind": "new",
+  "brand": "뚜레쥬르",
+  "cat": "bakery",
+  "name": "오리지널 퀴니아망",
+  "tag": "신제품",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-10-15",
+  "when": "10.15 출시 · 가을 5종",
+  "note": "",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "사르르 호박 카스테라 크림빵",
+   "꿀맛 고구마 생도넛",
+   "오리지널 퀴니아망",
+   "흑임자 퀴니아망",
+   "흑임자 가나슈 바게트"
+  ],
+  "src": {
+   "label": "싱글리스트",
+   "url": "https://www.slist.kr/news/articleView.html?idxno=773578"
+  },
+  "slug": "뚜레쥬르-오리지널-퀴니아망",
+  "catName": "베이커리",
+  "firstSeen": "2026-10-31"
+ },
+ "뚜레쥬르-흑임자-가나슈-바게트": {
+  "kind": "new",
+  "brand": "뚜레쥬르",
+  "cat": "bakery",
+  "name": "흑임자 가나슈 바게트",
+  "tag": "신제품",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-10-15",
+  "when": "10.15 출시 · 가을 5종",
+  "note": "",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "사르르 호박 카스테라 크림빵",
+   "꿀맛 고구마 생도넛",
+   "오리지널 퀴니아망",
+   "흑임자 퀴니아망",
+   "흑임자 가나슈 바게트"
+  ],
+  "src": {
+   "label": "싱글리스트",
+   "url": "https://www.slist.kr/news/articleView.html?idxno=773578"
+  },
+  "slug": "뚜레쥬르-흑임자-가나슈-바게트",
+  "catName": "베이커리",
+  "firstSeen": "2026-10-31"
+ },
+ "뚜레쥬르-흑임자-퀴니아망": {
+  "kind": "new",
+  "brand": "뚜레쥬르",
+  "cat": "bakery",
+  "name": "흑임자 퀴니아망",
+  "tag": "신제품",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-10-15",
+  "when": "10.15 출시 · 가을 5종",
+  "note": "",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "사르르 호박 카스테라 크림빵",
+   "꿀맛 고구마 생도넛",
+   "오리지널 퀴니아망",
+   "흑임자 퀴니아망",
+   "흑임자 가나슈 바게트"
+  ],
+  "src": {
+   "label": "싱글리스트",
+   "url": "https://www.slist.kr/news/articleView.html?idxno=773578"
+  },
+  "slug": "뚜레쥬르-흑임자-퀴니아망",
+  "catName": "베이커리",
+  "firstSeen": "2026-10-31"
+ },
+ "맘스터치-베이컨치폴레싸이버거": {
+  "kind": "new",
+  "brand": "맘스터치",
+  "cat": "burger",
+  "name": "베이컨치폴레싸이버거",
+  "tag": "신메뉴",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-10-15",
+  "when": "10.15 발표",
+  "note": "스매시버거 매장 약 1,000곳에서 판매",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": null,
+  "src": {
+   "label": "마이데일리",
+   "url": "https://www.mydaily.co.kr/page/view/2026101514360760582"
+  },
+  "slug": "맘스터치-베이컨치폴레싸이버거",
+  "catName": "버거",
+  "firstSeen": "2026-10-31"
+ },
+ "맘스터치-햄치즈휠렛버거": {
+  "kind": "limited",
+  "brand": "맘스터치",
+  "cat": "burger",
+  "name": "햄치즈휠렛버거",
+  "tag": "한정 메뉴",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "end": "",
+  "endLate": "",
+  "open": "소진 시 종료",
+  "period": "10.15 발표 · 한정 수량 재출시",
+  "desc": "온라인 투표로 다시 돌아온 추억의 버거예요. 전국 매장에서 수량이 다 팔리면 끝나요.",
+  "specs": null,
+  "priceNote": "",
+  "lines": null,
+  "cups": null,
+  "src": {
+   "label": "마이데일리",
+   "url": "https://www.mydaily.co.kr/page/view/2026101514360760582"
+  },
+  "slug": "맘스터치-햄치즈휠렛버거",
+  "catName": "버거",
+  "firstSeen": "2026-10-31"
+ },
+ "맥도날드-게살-크림-크로켓-머핀": {
+  "kind": "new",
+  "brand": "맥도날드",
+  "cat": "burger",
+  "name": "게살 크림 크로켓 머핀",
+  "tag": "맥모닝",
+  "price": "",
+  "img": "https://www.mcdonalds.co.kr/upload/2026/10/Corp_PC_VIEW_772x530_%EA%B2%8C%EC%82%B4%ED%81%AC%EB%A6%BC%ED%81%AC%EB%A1%9C%EC%BC%93%EB%A8%B8%ED%95%80_EVB.png",
+  "imgFrom": "맥도날드 공식 홈페이지 (세트 사진)",
+  "date": "2026-10-29",
+  "when": "10.29 출시",
+  "note": "오전 4시부터 10시 30분까지 팔아요",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": null,
+  "src": {
+   "label": "데일리안",
+   "url": "https://www.dailian.co.kr/news/view/1707077/%EB%A7%A5%EB%8F%84%EB%82%A0%EB%93%9C-%EA%B2%8C%EC%82%B4-%ED%81%AC%EB%A6%BC-%ED%81%AC%EB%A1%9C%EC%BC%93-%EB%A8%B8%ED%95%80-%EB%A7%A5%EB%AA%A8-2026"
+  },
+  "slug": "맥도날드-게살-크림-크로켓-머핀",
+  "catName": "버거",
+  "firstSeen": "2026-10-31"
+ },
+ "맥도날드-빅아치": {
+  "kind": "limited",
+  "brand": "맥도날드",
+  "cat": "burger",
+  "name": "빅아치",
+  "tag": "한정 메뉴",
+  "price": "12,400원",
+  "img": "https://www.mcdonalds.co.kr/upload/2026/10/Corp_PC_VIEW_772x530_%EB%B9%85%EC%95%84%EC%B9%98_EVM.png",
+  "imgFrom": "맥도날드 공식 홈페이지 (세트 사진)",
+  "end": "2026-11-19",
+  "endLate": "2026-12-03",
+  "open": "",
+  "period": "10.22 출시 · 11.19~12.3 사이 종료 예상",
+  "desc": "4~6주 한정이라 종료일이 정확히 나오지 않았어요. 빠르면 11월 19일에 끝날 수 있어요.",
+  "specs": [
+   [
+    "무게",
+    "374g"
+   ],
+   [
+    "빅맥 대비",
+    "+151g"
+   ],
+   [
+    "패티",
+    "113g × 2"
+   ]
+  ],
+  "priceNote": "세트 13,900원 · 맥런치 13,000원",
+  "lines": null,
+  "cups": null,
+  "src": {
+   "label": "재경일보",
+   "url": "https://news.jkn.co.kr/post/1039964"
+  },
+  "slug": "맥도날드-빅아치",
+  "catName": "버거",
+  "firstSeen": "2026-10-31"
+ },
+ "메가mgc커피-딥-초코-체리-프라페": {
+  "kind": "new",
+  "brand": "메가MGC커피",
+  "cat": "cafe",
+  "name": "딥 초코 체리 프라페",
+  "tag": "음료",
+  "price": "4,400원",
+  "img": "https://img.mega-mgccoffee.com/megahp/manager/upload/menu/20261021185329_1792576409658_TSL3J4XMIy.png",
+  "imgFrom": "",
+  "date": "2026-10-29",
+  "when": "10.29 출시 · 겨울 5종",
+  "note": "29일부터 18일간 신규 음료 3종을 6일씩 돌아가며 500원 할인해요",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "딥 초코 체리 프라페",
+   "쫀득 모찌 밀크티",
+   "매실 모과차",
+   "바삭허니 엠지씨네 컵치킨",
+   "엠지씨네 마라 떡볶이"
+  ],
+  "src": {
+   "label": "금강일보",
+   "url": "https://www.ggilbo.com/news/articleView.html?idxno=1189936"
+  },
+  "slug": "메가mgc커피-딥-초코-체리-프라페",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-10-31"
+ },
+ "메가mgc커피-매실-모과차": {
+  "kind": "new",
+  "brand": "메가MGC커피",
+  "cat": "cafe",
+  "name": "매실 모과차",
+  "tag": "음료",
+  "price": "3,500원",
+  "img": "https://img.mega-mgccoffee.com/megahp/manager/upload/menu/20261021185422_1792576462096_Ju7aC8KXEI.png",
+  "imgFrom": "",
+  "date": "2026-10-29",
+  "when": "10.29 출시 · 겨울 5종",
+  "note": "29일부터 18일간 신규 음료 3종을 6일씩 돌아가며 500원 할인해요",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "딥 초코 체리 프라페",
+   "쫀득 모찌 밀크티",
+   "매실 모과차",
+   "바삭허니 엠지씨네 컵치킨",
+   "엠지씨네 마라 떡볶이"
+  ],
+  "src": {
+   "label": "금강일보",
+   "url": "https://www.ggilbo.com/news/articleView.html?idxno=1189936"
+  },
+  "slug": "메가mgc커피-매실-모과차",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-10-31"
+ },
+ "메가mgc커피-바삭허니-엠지씨네-컵치킨": {
+  "kind": "new",
+  "brand": "메가MGC커피",
+  "cat": "cafe",
+  "name": "바삭허니 엠지씨네 컵치킨",
+  "tag": "푸드",
+  "price": "4,400원",
+  "img": "https://img.mega-mgccoffee.com/megahp/manager/upload/menu/20261021185720_1792576640171_6Y1WcMmn0X.png",
+  "imgFrom": "",
+  "date": "2026-10-29",
+  "when": "10.29 출시 · 겨울 5종",
+  "note": "29일부터 18일간 신규 음료 3종을 6일씩 돌아가며 500원 할인해요",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "딥 초코 체리 프라페",
+   "쫀득 모찌 밀크티",
+   "매실 모과차",
+   "바삭허니 엠지씨네 컵치킨",
+   "엠지씨네 마라 떡볶이"
+  ],
+  "src": {
+   "label": "금강일보",
+   "url": "https://www.ggilbo.com/news/articleView.html?idxno=1189936"
+  },
+  "slug": "메가mgc커피-바삭허니-엠지씨네-컵치킨",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-10-31"
+ },
+ "메가mgc커피-엠지씨네-마라-떡볶이": {
+  "kind": "new",
+  "brand": "메가MGC커피",
+  "cat": "cafe",
+  "name": "엠지씨네 마라 떡볶이",
+  "tag": "푸드",
+  "price": "4,400원",
+  "img": "https://img.mega-mgccoffee.com/megahp/manager/upload/menu/20261021185813_1792576693475_CPlWEhkpD0.png",
+  "imgFrom": "",
+  "date": "2026-10-29",
+  "when": "10.29 출시 · 겨울 5종",
+  "note": "29일부터 18일간 신규 음료 3종을 6일씩 돌아가며 500원 할인해요",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "딥 초코 체리 프라페",
+   "쫀득 모찌 밀크티",
+   "매실 모과차",
+   "바삭허니 엠지씨네 컵치킨",
+   "엠지씨네 마라 떡볶이"
+  ],
+  "src": {
+   "label": "금강일보",
+   "url": "https://www.ggilbo.com/news/articleView.html?idxno=1189936"
+  },
+  "slug": "메가mgc커피-엠지씨네-마라-떡볶이",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-10-31"
+ },
+ "메가mgc커피-쫀득-모찌-밀크티": {
+  "kind": "new",
+  "brand": "메가MGC커피",
+  "cat": "cafe",
+  "name": "쫀득 모찌 밀크티",
+  "tag": "음료",
+  "price": "3,800원",
+  "img": "https://img.mega-mgccoffee.com/megahp/manager/upload/menu/20261021185621_1792576581002_NyaJL6AVnt.png",
+  "imgFrom": "",
+  "date": "2026-10-29",
+  "when": "10.29 출시 · 겨울 5종",
+  "note": "29일부터 18일간 신규 음료 3종을 6일씩 돌아가며 500원 할인해요",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "딥 초코 체리 프라페",
+   "쫀득 모찌 밀크티",
+   "매실 모과차",
+   "바삭허니 엠지씨네 컵치킨",
+   "엠지씨네 마라 떡볶이"
+  ],
+  "src": {
+   "label": "금강일보",
+   "url": "https://www.ggilbo.com/news/articleView.html?idxno=1189936"
+  },
+  "slug": "메가mgc커피-쫀득-모찌-밀크티",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-10-31"
+ },
+ "버거킹-블랙-트러플치즈-버거": {
+  "kind": "limited",
+  "brand": "버거킹",
+  "cat": "burger",
+  "name": "블랙 트러플치즈 버거",
+  "tag": "한정 메뉴",
+  "price": "10,700원",
+  "img": "",
+  "imgFrom": "",
+  "end": "2027-01-05",
+  "endLate": "",
+  "open": "",
+  "period": "10.14 출시 · 2027.1.5까지",
+  "desc": "세트는 12,900원이에요. 트러플 풍미를 더한 치즈 버거예요.",
+  "specs": null,
+  "priceNote": "",
+  "lines": null,
+  "cups": null,
+  "src": {
+   "label": "헤럴드경제",
+   "url": "https://biz.heraldcorp.com/article/10900655"
+  },
+  "slug": "버거킹-블랙-트러플치즈-버거",
+  "catName": "버거",
+  "firstSeen": "2026-10-31"
+ },
+ "버거킹-트러플-머쉬룸-시즌-5종": {
+  "kind": "limited",
+  "brand": "버거킹",
+  "cat": "burger",
+  "name": "트러플 머쉬룸 시즌 5종",
+  "tag": "한정 메뉴",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "end": "",
+  "endLate": "",
+  "open": "가을 시즌",
+  "period": "9.16 출시 · 종료일 미정",
+  "desc": "버거 세트는 11,900원(메종은 12,700원)이에요. 매년 가을에만 돌아오는 메뉴예요.",
+  "specs": null,
+  "priceNote": "",
+  "lines": [
+   [
+    "트러플 머쉬룸 와퍼",
+    "9,700원"
+   ],
+   [
+    "핫 트러플 머쉬룸 와퍼",
+    "9,700원"
+   ],
+   [
+    "메종 트러플치즈 버거",
+    "10,500원"
+   ],
+   [
+    "딥 트러플 프라이",
+    "3,000원"
+   ],
+   [
+    "트러플 머쉬룸 파이로얄",
+    "2,700원"
+   ]
+  ],
+  "cups": null,
+  "src": {
+   "label": "아시아경제",
+   "url": "https://view.asiae.co.kr/article/2026091608122210585"
+  },
+  "slug": "버거킹-트러플-머쉬룸-시즌-5종",
+  "catName": "버거",
+  "firstSeen": "2026-10-31"
+ },
+ "삼첩분식-떠먹는피자떡볶이": {
+  "kind": "new",
+  "brand": "삼첩분식",
+  "cat": "snack",
+  "name": "떠먹는피자떡볶이",
+  "tag": "신메뉴",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-10-16",
+  "when": "10.16 출시",
+  "note": "",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": null,
+  "src": {
+   "label": "더쎈뉴스",
+   "url": "https://www.mhns.co.kr/news/articleView.html?idxno=764579"
+  },
+  "slug": "삼첩분식-떠먹는피자떡볶이",
+  "catName": "분식",
+  "firstSeen": "2026-10-31"
+ },
+ "성심당-알밤시루": {
+  "kind": "limited",
+  "brand": "성심당",
+  "cat": "bakery",
+  "name": "알밤시루",
+  "tag": "한정 메뉴",
+  "price": "4만 원대",
+  "img": "",
+  "imgFrom": "",
+  "end": "",
+  "endLate": "",
+  "open": "가을 시즌",
+  "period": "9.23 출시 · 종료일 미정 · 대전 매장만",
+  "desc": "알밤을 듬뿍 올린 가을 한정 케이크예요. 케익부띠끄 본점은 9월 23일부터, 롯데점과 DCC점은 9월 28일부터 팔아요.",
+  "specs": null,
+  "priceNote": "",
+  "lines": null,
+  "cups": null,
+  "src": {
+   "label": "국제뉴스",
+   "url": "https://www.gukjenews.com/news/articleView.html?idxno=3703754"
+  },
+  "slug": "성심당-알밤시루",
+  "catName": "베이커리",
+  "firstSeen": "2026-10-31"
+ },
+ "쉐이크쉑-세트-업그레이드-쿠폰": {
+  "kind": "event",
+  "brand": "쉐이크쉑",
+  "cat": "burger",
+  "name": "세트 업그레이드 쿠폰",
+  "tag": "이벤트",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "end": "2026-10-31",
+  "endLate": "",
+  "open": "",
+  "period": "~ 10.31(토)",
+  "desc": "카카오톡 채널에서 세트 업그레이드 쿠폰을 받을 수 있어요.",
+  "specs": null,
+  "priceNote": "",
+  "lines": null,
+  "cups": null,
+  "src": {
+   "label": "식품투데이",
+   "url": "https://www.foodtoday.or.kr/news/article.html?no=208450"
+  },
+  "slug": "쉐이크쉑-세트-업그레이드-쿠폰",
+  "catName": "버거",
+  "firstSeen": "2026-10-31"
+ },
+ "쉐이크쉑-쉑하우스-바비큐-4종": {
+  "kind": "limited",
+  "brand": "쉐이크쉑",
+  "cat": "burger",
+  "name": "쉑하우스 바비큐 4종",
+  "tag": "한정 메뉴",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "end": "",
+  "endLate": "",
+  "open": "가을 시즌",
+  "period": "10.1 출시 · 종료일 미정",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "lines": [
+   [
+    "쉑하우스 바비큐 버거",
+    "10,900원"
+   ],
+   [
+    "쉑하우스 바비큐 치킨",
+    "9,900원"
+   ],
+   [
+    "쉑하우스 바비큐 프라이",
+    "6,500원"
+   ],
+   [
+    "스모어 쉐이크",
+    "7,800원"
+   ]
+  ],
+  "cups": null,
+  "src": {
+   "label": "식품투데이",
+   "url": "https://www.foodtoday.or.kr/news/article.html?no=208450"
+  },
+  "slug": "쉐이크쉑-쉑하우스-바비큐-4종",
+  "catName": "버거",
+  "firstSeen": "2026-10-31"
+ },
+ "스타벅스-겨울-e-프리퀀시": {
+  "kind": "event",
+  "brand": "스타벅스",
+  "cat": "cafe",
+  "name": "겨울 e-프리퀀시",
+  "tag": "이벤트",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "end": "2026-12-31",
+  "endLate": "",
+  "open": "",
+  "period": "10.22(목) ~ 12.31(목)",
+  "desc": "미션음료 3잔을 포함해 17잔이면 증정품 1개를 예약할 수 있어요. 렉슨 스피커, 몰스킨 플래너, 코듀로이 백팩, 캔버스 토트 중에서 골라요.",
+  "specs": null,
+  "priceNote": "",
+  "lines": null,
+  "cups": {
+   "total": 17,
+   "mission": 3
+  },
+  "src": {
+   "label": "데일리환경",
+   "url": "https://www.dailyt.co.kr/newsView/dlt202610150013"
+  },
+  "slug": "스타벅스-겨울-e-프리퀀시",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-10-31"
+ },
+ "이디야커피-딸기-쏙쏙-모찌떡": {
+  "kind": "new",
+  "brand": "이디야커피",
+  "cat": "cafe",
+  "name": "딸기 쏙쏙 모찌떡",
+  "tag": "디저트",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-10-22",
+  "when": "10.22 출시 · 푸드 9종",
+  "note": "",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "와그작 생 초코파이",
+   "딸기 쏙쏙 모찌떡",
+   "말차초코 크림파운드",
+   "촉촉한 치즈 수플레",
+   "햄 치즈 스크램블 브리오슈",
+   "콘치즈 토스트",
+   "저당 콤비네이션 포켓피자",
+   "스틱 츄러스 · 브리오슈 소금빵"
+  ],
+  "src": {
+   "label": "베타뉴스",
+   "url": "https://www.betanews.net/article/view/beta202610220164"
+  },
+  "slug": "이디야커피-딸기-쏙쏙-모찌떡",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-10-31"
+ },
+ "이디야커피-말차초코-크림파운드": {
+  "kind": "new",
+  "brand": "이디야커피",
+  "cat": "cafe",
+  "name": "말차초코 크림파운드",
+  "tag": "디저트",
+  "price": "",
+  "img": "https://www.ediya.com/files/menu/IMG_1792465705645.png",
+  "imgFrom": "",
+  "date": "2026-10-22",
+  "when": "10.22 출시 · 푸드 9종",
+  "note": "",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "와그작 생 초코파이",
+   "딸기 쏙쏙 모찌떡",
+   "말차초코 크림파운드",
+   "촉촉한 치즈 수플레",
+   "햄 치즈 스크램블 브리오슈",
+   "콘치즈 토스트",
+   "저당 콤비네이션 포켓피자",
+   "스틱 츄러스 · 브리오슈 소금빵"
+  ],
+  "src": {
+   "label": "베타뉴스",
+   "url": "https://www.betanews.net/article/view/beta202610220164"
+  },
+  "slug": "이디야커피-말차초코-크림파운드",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-10-31"
+ },
+ "이디야커피-스틱-츄러스-브리오슈-소금빵": {
+  "kind": "new",
+  "brand": "이디야커피",
+  "cat": "cafe",
+  "name": "스틱 츄러스 · 브리오슈 소금빵",
+  "tag": "리뉴얼",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-10-22",
+  "when": "10.22 출시 · 푸드 9종",
+  "note": "",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "와그작 생 초코파이",
+   "딸기 쏙쏙 모찌떡",
+   "말차초코 크림파운드",
+   "촉촉한 치즈 수플레",
+   "햄 치즈 스크램블 브리오슈",
+   "콘치즈 토스트",
+   "저당 콤비네이션 포켓피자",
+   "스틱 츄러스 · 브리오슈 소금빵"
+  ],
+  "src": {
+   "label": "베타뉴스",
+   "url": "https://www.betanews.net/article/view/beta202610220164"
+  },
+  "slug": "이디야커피-스틱-츄러스-브리오슈-소금빵",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-10-31"
+ },
+ "이디야커피-와그작-생-초코파이": {
+  "kind": "new",
+  "brand": "이디야커피",
+  "cat": "cafe",
+  "name": "와그작 생 초코파이",
+  "tag": "디저트",
+  "price": "",
+  "img": "https://www.ediya.com/files/menu/IMG_1792465407166.png",
+  "imgFrom": "",
+  "date": "2026-10-22",
+  "when": "10.22 출시 · 푸드 9종",
+  "note": "",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "와그작 생 초코파이",
+   "딸기 쏙쏙 모찌떡",
+   "말차초코 크림파운드",
+   "촉촉한 치즈 수플레",
+   "햄 치즈 스크램블 브리오슈",
+   "콘치즈 토스트",
+   "저당 콤비네이션 포켓피자",
+   "스틱 츄러스 · 브리오슈 소금빵"
+  ],
+  "src": {
+   "label": "베타뉴스",
+   "url": "https://www.betanews.net/article/view/beta202610220164"
+  },
+  "slug": "이디야커피-와그작-생-초코파이",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-10-31"
+ },
+ "이디야커피-저당-콤비네이션-포켓피자": {
+  "kind": "new",
+  "brand": "이디야커피",
+  "cat": "cafe",
+  "name": "저당 콤비네이션 포켓피자",
+  "tag": "식사",
+  "price": "",
+  "img": "https://www.ediya.com/files/menu/IMG_1792466815753.png",
+  "imgFrom": "",
+  "date": "2026-10-22",
+  "when": "10.22 출시 · 푸드 9종",
+  "note": "",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "와그작 생 초코파이",
+   "딸기 쏙쏙 모찌떡",
+   "말차초코 크림파운드",
+   "촉촉한 치즈 수플레",
+   "햄 치즈 스크램블 브리오슈",
+   "콘치즈 토스트",
+   "저당 콤비네이션 포켓피자",
+   "스틱 츄러스 · 브리오슈 소금빵"
+  ],
+  "src": {
+   "label": "베타뉴스",
+   "url": "https://www.betanews.net/article/view/beta202610220164"
+  },
+  "slug": "이디야커피-저당-콤비네이션-포켓피자",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-10-31"
+ },
+ "이디야커피-촉촉한-치즈-수플레": {
+  "kind": "new",
+  "brand": "이디야커피",
+  "cat": "cafe",
+  "name": "촉촉한 치즈 수플레",
+  "tag": "디저트",
+  "price": "",
+  "img": "https://www.ediya.com/files/menu/IMG_1792466041370.png",
+  "imgFrom": "",
+  "date": "2026-10-22",
+  "when": "10.22 출시 · 푸드 9종",
+  "note": "",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "와그작 생 초코파이",
+   "딸기 쏙쏙 모찌떡",
+   "말차초코 크림파운드",
+   "촉촉한 치즈 수플레",
+   "햄 치즈 스크램블 브리오슈",
+   "콘치즈 토스트",
+   "저당 콤비네이션 포켓피자",
+   "스틱 츄러스 · 브리오슈 소금빵"
+  ],
+  "src": {
+   "label": "베타뉴스",
+   "url": "https://www.betanews.net/article/view/beta202610220164"
+  },
+  "slug": "이디야커피-촉촉한-치즈-수플레",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-10-31"
+ },
+ "이디야커피-콘치즈-토스트": {
+  "kind": "new",
+  "brand": "이디야커피",
+  "cat": "cafe",
+  "name": "콘치즈 토스트",
+  "tag": "식사",
+  "price": "",
+  "img": "https://www.ediya.com/files/menu/IMG_1792466629165.png",
+  "imgFrom": "",
+  "date": "2026-10-22",
+  "when": "10.22 출시 · 푸드 9종",
+  "note": "",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "와그작 생 초코파이",
+   "딸기 쏙쏙 모찌떡",
+   "말차초코 크림파운드",
+   "촉촉한 치즈 수플레",
+   "햄 치즈 스크램블 브리오슈",
+   "콘치즈 토스트",
+   "저당 콤비네이션 포켓피자",
+   "스틱 츄러스 · 브리오슈 소금빵"
+  ],
+  "src": {
+   "label": "베타뉴스",
+   "url": "https://www.betanews.net/article/view/beta202610220164"
+  },
+  "slug": "이디야커피-콘치즈-토스트",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-10-31"
+ },
+ "이디야커피-햄-치즈-스크램블-브리오슈": {
+  "kind": "new",
+  "brand": "이디야커피",
+  "cat": "cafe",
+  "name": "햄 치즈 스크램블 브리오슈",
+  "tag": "식사",
+  "price": "",
+  "img": "https://www.ediya.com/files/menu/IMG_1792466490538.png",
+  "imgFrom": "",
+  "date": "2026-10-22",
+  "when": "10.22 출시 · 푸드 9종",
+  "note": "",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "와그작 생 초코파이",
+   "딸기 쏙쏙 모찌떡",
+   "말차초코 크림파운드",
+   "촉촉한 치즈 수플레",
+   "햄 치즈 스크램블 브리오슈",
+   "콘치즈 토스트",
+   "저당 콤비네이션 포켓피자",
+   "스틱 츄러스 · 브리오슈 소금빵"
+  ],
+  "src": {
+   "label": "베타뉴스",
+   "url": "https://www.betanews.net/article/view/beta202610220164"
+  },
+  "slug": "이디야커피-햄-치즈-스크램블-브리오슈",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-10-31"
+ },
+ "투썸플레이스-딸기-요거트-프라페": {
+  "kind": "new",
+  "brand": "투썸플레이스",
+  "cat": "cafe",
+  "name": "딸기 요거트 프라페",
+  "tag": "음료",
+  "price": "6,500원",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-10-01",
+  "when": "10월 · 가을 시즌",
+  "note": "",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "블랙 치즈폼 라떼",
+   "딸기 요거트 프라페"
+  ],
+  "src": {
+   "label": "프라임경제",
+   "url": "https://www.newsprime.co.kr/news/article/?no=749669"
+  },
+  "slug": "투썸플레이스-딸기-요거트-프라페",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-10-31"
+ },
+ "투썸플레이스-블랙-치즈폼-라떼": {
+  "kind": "new",
+  "brand": "투썸플레이스",
+  "cat": "cafe",
+  "name": "블랙 치즈폼 라떼",
+  "tag": "음료",
+  "price": "6,300원",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-10-01",
+  "when": "10월 · 가을 시즌",
+  "note": "",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "블랙 치즈폼 라떼",
+   "딸기 요거트 프라페"
+  ],
+  "src": {
+   "label": "프라임경제",
+   "url": "https://www.newsprime.co.kr/news/article/?no=749669"
+  },
+  "slug": "투썸플레이스-블랙-치즈폼-라떼",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-10-31"
+ },
+ "파리바게뜨-고다치즈-올리브식빵": {
+  "kind": "new",
+  "brand": "파리바게뜨",
+  "cat": "bakery",
+  "name": "고다치즈 올리브식빵",
+  "tag": "신제품",
+  "price": "",
+  "img": "https://d2afncas1tel3t.cloudfront.net/wp-content/uploads/2026/09/%EA%B3%A0%EB%8B%A4%EC%B9%98%EC%A6%88-%EC%98%AC%EB%A6%AC%EB%B8%8C%EC%8B%9D%EB%B9%B5-Whole.png",
+  "imgFrom": "",
+  "date": "2026-10-15",
+  "when": "10.15 출시 · 치즈 5종",
+  "note": "",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "멕시칸 핫도그",
+   "고다치즈 올리브식빵",
+   "치즈 소보루빵",
+   "크림치즈말랑",
+   "모짜렐라 치즈봉"
+  ],
+  "src": {
+   "label": "싱글리스트",
+   "url": "https://www.slist.kr/news/articleView.html?idxno=773578"
+  },
+  "slug": "파리바게뜨-고다치즈-올리브식빵",
+  "catName": "베이커리",
+  "firstSeen": "2026-10-31"
+ },
+ "파리바게뜨-멕시칸-핫도그": {
+  "kind": "new",
+  "brand": "파리바게뜨",
+  "cat": "bakery",
+  "name": "멕시칸 핫도그",
+  "tag": "신제품",
+  "price": "",
+  "img": "https://d2afncas1tel3t.cloudfront.net/wp-content/uploads/2026/09/5000240-%EB%A9%95%EC%8B%9C%EC%B9%B8%ED%95%AB%EB%8F%84%EA%B7%B8.png",
+  "imgFrom": "",
+  "date": "2026-10-15",
+  "when": "10.15 출시 · 치즈 5종",
+  "note": "",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "멕시칸 핫도그",
+   "고다치즈 올리브식빵",
+   "치즈 소보루빵",
+   "크림치즈말랑",
+   "모짜렐라 치즈봉"
+  ],
+  "src": {
+   "label": "싱글리스트",
+   "url": "https://www.slist.kr/news/articleView.html?idxno=773578"
+  },
+  "slug": "파리바게뜨-멕시칸-핫도그",
+  "catName": "베이커리",
+  "firstSeen": "2026-10-31"
+ },
+ "파리바게뜨-모짜렐라-치즈봉": {
+  "kind": "new",
+  "brand": "파리바게뜨",
+  "cat": "bakery",
+  "name": "모짜렐라 치즈봉",
+  "tag": "신제품",
+  "price": "",
+  "img": "https://d2afncas1tel3t.cloudfront.net/wp-content/uploads/2026/09/%EB%B0%94%EC%82%AD%EB%AA%A8%EC%A7%9C%EB%A0%90%EB%9D%BC%EC%B9%98%EC%A6%88%EB%B4%89.png",
+  "imgFrom": "",
+  "date": "2026-10-15",
+  "when": "10.15 출시 · 치즈 5종",
+  "note": "",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "멕시칸 핫도그",
+   "고다치즈 올리브식빵",
+   "치즈 소보루빵",
+   "크림치즈말랑",
+   "모짜렐라 치즈봉"
+  ],
+  "src": {
+   "label": "싱글리스트",
+   "url": "https://www.slist.kr/news/articleView.html?idxno=773578"
+  },
+  "slug": "파리바게뜨-모짜렐라-치즈봉",
+  "catName": "베이커리",
+  "firstSeen": "2026-10-31"
+ },
+ "파리바게뜨-치즈-소보루빵": {
+  "kind": "new",
+  "brand": "파리바게뜨",
+  "cat": "bakery",
+  "name": "치즈 소보루빵",
+  "tag": "신제품",
+  "price": "",
+  "img": "https://d2afncas1tel3t.cloudfront.net/wp-content/uploads/2026/09/%EC%B9%98%EC%A6%88%EC%86%8C%EB%B3%B4%EB%A3%A8%EB%B9%B5.png",
+  "imgFrom": "",
+  "date": "2026-10-15",
+  "when": "10.15 출시 · 치즈 5종",
+  "note": "",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "멕시칸 핫도그",
+   "고다치즈 올리브식빵",
+   "치즈 소보루빵",
+   "크림치즈말랑",
+   "모짜렐라 치즈봉"
+  ],
+  "src": {
+   "label": "싱글리스트",
+   "url": "https://www.slist.kr/news/articleView.html?idxno=773578"
+  },
+  "slug": "파리바게뜨-치즈-소보루빵",
+  "catName": "베이커리",
+  "firstSeen": "2026-10-31"
+ },
+ "파리바게뜨-크림치즈말랑": {
+  "kind": "new",
+  "brand": "파리바게뜨",
+  "cat": "bakery",
+  "name": "크림치즈말랑",
+  "tag": "신제품",
+  "price": "",
+  "img": "https://d2afncas1tel3t.cloudfront.net/wp-content/uploads/2026/09/%ED%81%AC%EB%A6%BC%EC%B9%98%EC%A6%88%EB%A7%90%EB%9E%91.png",
+  "imgFrom": "",
+  "date": "2026-10-15",
+  "when": "10.15 출시 · 치즈 5종",
+  "note": "",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "멕시칸 핫도그",
+   "고다치즈 올리브식빵",
+   "치즈 소보루빵",
+   "크림치즈말랑",
+   "모짜렐라 치즈봉"
+  ],
+  "src": {
+   "label": "싱글리스트",
+   "url": "https://www.slist.kr/news/articleView.html?idxno=773578"
+  },
+  "slug": "파리바게뜨-크림치즈말랑",
+  "catName": "베이커리",
+  "firstSeen": "2026-10-31"
+ },
+ "피자헛-피자설기": {
+  "kind": "new",
+  "brand": "피자헛",
+  "cat": "pizza",
+  "name": "피자설기",
+  "tag": "신메뉴",
+  "price": "3,900원",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-10-08",
+  "when": "10.8 출시",
+  "note": "떡 위에 소스, 치즈, 페페로니를 올린 컵 형태예요",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": null,
+  "src": {
+   "label": "뉴스탭",
+   "url": "https://www.newstap.co.kr/news/articleView.html?idxno=335540"
+  },
+  "slug": "피자헛-피자설기",
+  "catName": "피자",
+  "firstSeen": "2026-10-31"
+ }
+}
