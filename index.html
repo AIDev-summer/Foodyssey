@@ -258,6 +258,24 @@ main .wrap { padding-block: 24px 56px; display: grid; gap: 40px; }
 .bar i.l { background: var(--hot); }
 .bar-row .x { font-family: var(--f-mono); font-size: 13px; text-align: right; }
 
+/* 사진 팝업: 사진이 있는 메뉴 이름은 버튼이 되고, 누르면 가운데에 사진이 떠요. 메뉴 사진은 대부분 흰 바탕이라 다크모드에서도 사진 칸만 흰색으로 둬요. */
+.pic { font: inherit; color: inherit; background: none; border: 0; padding: 0; margin: 0; text-align: left; cursor: zoom-in; text-decoration: underline dotted var(--muted); text-underline-offset: 4px; }
+.pic::after { content: ""; display: inline-block; width: .95em; height: .95em; margin-left: 6px; vertical-align: -.1em; background: var(--muted); -webkit-mask: var(--cam) center / contain no-repeat; mask: var(--cam) center / contain no-repeat; }
+.pic { --cam: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='3' width='18' height='18' rx='3'/%3E%3Ccircle cx='9' cy='9' r='2'/%3E%3Cpath d='m21 15-5-5L5 21'/%3E%3C/svg%3E"); }
+@media (hover: hover) { .pic:hover { text-decoration-color: currentColor; } }
+.photo { width: min(92vw, 520px); max-height: 92vh; padding: 0; border: 0; border-radius: 18px; background: var(--card); color: var(--ink); box-shadow: 0 12px 40px var(--shade); overflow: hidden; }
+.photo::backdrop { background: rgba(10,14,13,.6); }
+.photo figure { margin: 0; display: grid; }
+.photo .img-box { background: #fff; display: grid; place-items: center; min-height: 200px; }
+.photo img { display: block; width: 100%; max-height: 64vh; object-fit: contain; }
+.photo .img-box.fail::after { content: "사진을 불러오지 못했어요"; color: var(--muted); font-size: 13px; }
+.photo figcaption { display: grid; gap: 2px; padding: 14px 18px 16px; }
+.photo .p-brand { font-size: 12px; color: var(--muted); }
+.photo .p-name { font-weight: 700; font-size: 17px; line-height: 1.35; padding-right: 36px; }
+.photo .p-price { font-family: var(--f-mono); font-size: 14px; }
+.photo .p-from { font-size: 11.5px; color: var(--muted); margin-top: 4px; }
+.photo .close { position: absolute; top: 10px; right: 10px; width: 34px; height: 34px; border-radius: 50%; border: 0; background: var(--glass); color: var(--ink); font-size: 20px; line-height: 1; cursor: pointer; box-shadow: 0 1px 4px var(--shade); }
+
 .empty { color: var(--muted); font-size: 14px; padding: 18px; background: var(--card); border-radius: 12px; list-style: none; }
 footer { color: var(--muted); font-size: 12px; border-top: 1px solid var(--line); padding-top: 16px; display: grid; gap: 4px; }
 footer p { margin: 0; }
@@ -365,6 +383,19 @@ footer .links a { margin-right: 14px; }
   </div>
 </main>
 
+<dialog class="photo" id="photo" aria-labelledby="photo-name">
+  <figure>
+    <div class="img-box"><img id="photo-img" alt=""></div>
+    <figcaption>
+      <span class="p-brand" id="photo-brand"></span>
+      <span class="p-name" id="photo-name"></span>
+      <span class="p-price" id="photo-price"></span>
+      <span class="p-from" id="photo-from"></span>
+    </figcaption>
+  </figure>
+  <button class="close" id="photo-close" type="button" aria-label="닫기">×</button>
+</dialog>
+
 <script src="data.js"></script>
 <script>
 (function () {
@@ -384,6 +415,31 @@ footer .links a { margin-right: 14px; }
   function src(s, extra) {
     if (!s) return null;
     return el('a', { cls: 'src', href: s.url, target: '_blank', rel: 'noopener', text: '출처: ' + s.label + (extra ? ' · ' + extra : '') });
+  }
+
+  // 사진 팝업: img가 있는 메뉴는 이름을 버튼으로 만들고, 누르면 사진·가격을 띄워요.
+  var dlg = document.getElementById('photo'), pImg = document.getElementById('photo-img');
+  function openPhoto(o) {
+    pImg.parentNode.classList.remove('fail');
+    pImg.hidden = false;
+    pImg.src = o.img;
+    pImg.alt = o.brand + ' ' + o.name + ' 사진';
+    document.getElementById('photo-brand').textContent = o.brand;
+    document.getElementById('photo-name').textContent = o.name;
+    document.getElementById('photo-price').textContent = o.price || '';
+    document.getElementById('photo-from').textContent = '사진: ' + (o.imgFrom || o.brand + ' 공식 홈페이지');
+    if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', '');
+  }
+  pImg.addEventListener('error', function () { pImg.hidden = true; pImg.parentNode.classList.add('fail'); });
+  document.getElementById('photo-close').addEventListener('click', function () { dlg.close(); });
+  dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+  dlg.addEventListener('close', function () { pImg.removeAttribute('src'); });
+  function nameNode(tag, cls, o) {
+    var attrs = cls ? { cls: cls } : {};
+    if (!o.img) { attrs.text = o.name; return el(tag, attrs); }
+    var b = el('button', { cls: 'pic', type: 'button', 'aria-haspopup': 'dialog', text: o.name });
+    b.addEventListener('click', function () { openPhoto(o); });
+    return el(tag, attrs, [b]);
   }
 
   // 한국 시간 기준 오늘
@@ -444,7 +500,7 @@ footer .links a { margin-right: 14px; }
   // 이번 주 화제
   function hot(box, hd, labelText) {
     box.appendChild(el('span', { cls: 'label' }, [labelText, ' · ', el('b', { text: (hd.kicker.split('·')[1] || '').trim() })]));
-    box.appendChild(el('h2', { text: hd.name }));
+    box.appendChild(nameNode('h2', null, { name: hd.name, brand: hd.brandline.split('·')[0].trim(), price: hd.price, img: hd.img, imgFrom: hd.imgFrom }));
     box.appendChild(el('span', { cls: 'meta', text: hd.brandline }));
     if (hd.price) box.appendChild(el('span', { cls: 'price' }, [hd.price, hd.priceNote ? el('small', { text: hd.priceNote }) : null]));
     if (hd.specs) box.appendChild(el('ul', { cls: 'specs' }, hd.specs.map(function (s) { return el('li', null, [s[0], el('b', { text: s[1] })]); })));
@@ -473,7 +529,7 @@ footer .links a { margin-right: 14px; }
       if (i) box.appendChild(el('div', { cls: 'sub-when', text: g.when }));
       box.appendChild(el('ul', { cls: 'items' }, g.items.map(function (it) {
         return el('li', null, [
-          el('span', { cls: 'name', text: it.name }),
+          nameNode('span', 'name', { name: it.name, brand: t.brand, price: it.price, img: it.img, imgFrom: it.imgFrom }),
           el('span', { cls: 'tag' + (it.plain ? ' plain' : ''), text: it.tag }),
           it.price ? el('span', { cls: 'price', text: it.price }) : null
         ]);
@@ -517,11 +573,11 @@ footer .links a { margin-right: 14px; }
         : el('span', { cls: 'd' + (o.d <= 3 ? ' urgent' : (o.d <= 14 ? ' near' : '')), text: dLabel(o.d) });
       var main = el('div', { cls: 'main' }, [
         el('span', { cls: 'b' }, [x.brand, x.pop ? el('span', { cls: 'pop', text: '검색 ' + x.pop + '배' }) : null]),
-        el('h3', { text: x.title }),
+        nameNode('h3', null, { name: x.title, brand: x.brand, price: x.price, img: x.img, imgFrom: x.imgFrom }),
         el('span', { cls: 'period', text: x.period })
       ]);
       if (x.lines) main.appendChild(el('ul', { cls: 'lines' }, x.lines.map(function (l) {
-        return el('li', null, [el('span', { text: l[0] }), el('span', { cls: 'leader' }), el('span', { cls: 'p', text: l[1] })]);
+        return el('li', null, [nameNode('span', null, { name: l[0], brand: x.brand, price: l[1], img: l[2] }), el('span', { cls: 'leader' }), el('span', { cls: 'p', text: l[1] })]);
       })));
       if (x.cups) {
         var cups = el('div', { cls: 'cups', role: 'img', 'aria-label': x.cups.total + '잔 중 미션음료 ' + x.cups.mission + '잔' });
