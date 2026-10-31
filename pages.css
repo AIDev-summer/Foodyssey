@@ -1,0 +1,55 @@
+/* 메뉴·브랜드·업종 페이지 공통 스타일 (scripts/build.js가 만드는 페이지에서 써요) */
+:root { --bg: #f6faf7; --card: #ffffff; --ink: #15191a; --muted: #5f6968; --line: #e4ebe8; --fresh: #1a7f60; --soft: #e8f4ef; --warn: #c2412d;
+  --f-display: "Hahmlet", "Nanum Myeongjo", serif; --f-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; --f-mono: "IBM Plex Mono", ui-monospace, monospace; color-scheme: light; }
+:root[data-theme="dark"] { --bg: #121816; --card: #1a2220; --ink: #e6ece9; --muted: #a3afab; --line: #2c3633; --fresh: #52c49d; --soft: #1f2e29; --warn: #ff8a73; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.75; word-break: keep-all; overflow-wrap: anywhere; }
+.wrap { max-width: 760px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+header .wrap { display: flex; align-items: center; padding-block: 18px; }
+.logo { font-family: var(--f-display); font-weight: 800; font-size: 22px; text-decoration: none; color: var(--ink); }
+header nav { margin-left: auto; display: flex; align-items: center; }
+header nav a { font-size: 13px; color: var(--muted); margin-left: 14px; text-decoration: none; }
+.theme-btn { width: 32px; height: 32px; display: grid; place-items: center; padding: 0; margin-left: 14px; border: 1px solid var(--line); border-radius: 50%; background: var(--card); color: var(--ink); cursor: pointer; }
+.theme-btn svg { width: 16px; height: 16px; }
+.theme-btn .sun, [data-theme="dark"] .theme-btn .moon { display: none; }
+[data-theme="dark"] .theme-btn .sun { display: block; }
+main .wrap { padding-block: 8px 48px; }
+article { background: var(--card); border-radius: 16px; padding: clamp(18px, 5vw, 36px); }
+a { color: var(--fresh); }
+.crumbs { font-size: 12.5px; color: var(--muted); margin-bottom: 14px; }
+.crumbs a { color: var(--muted); text-decoration: none; }
+.crumbs .sep { margin: 0 6px; }
+.kicker { margin: 0; font-size: 13px; color: var(--muted); }
+h1 { font-family: var(--f-display); font-weight: 700; font-size: clamp(26px, 5vw, 36px); line-height: 1.25; letter-spacing: -.02em; margin: 2px 0 18px; }
+h2 { font-size: 17px; margin: 30px 0 10px; }
+p { max-width: 64ch; }
+.mono { font-family: var(--f-mono); }
+.notice { background: var(--soft); border-radius: 10px; padding: 10px 14px; font-size: 14px; }
+.shot { margin: 0 0 18px; }
+.shot img { display: block; width: 100%; max-height: 420px; object-fit: contain; background: var(--bg); border-radius: 12px; }
+.shot figcaption { font-size: 11.5px; color: var(--muted); margin-top: 4px; }
+.facts { display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; margin: 0 0 16px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; }
+.facts dt { color: var(--muted); font-size: 13.5px; }
+.facts dd { margin: 0; }
+.facts small { color: var(--muted); }
+.badge { display: inline-block; font-size: 12px; font-weight: 600; padding: 1px 8px; border-radius: 999px; }
+.badge.on { background: var(--soft); color: var(--fresh); }
+.badge.off { background: var(--line); color: var(--muted); }
+.dday { font-family: var(--f-mono); font-size: 12.5px; color: var(--fresh); margin-left: 4px; }
+.dday.soon { color: var(--warn); }
+.lines { border-collapse: collapse; width: 100%; }
+.lines th, .lines td { border-bottom: 1px solid var(--line); padding: 6px 0; text-align: left; font-weight: 400; }
+.lines td { text-align: right; white-space: nowrap; }
+.src { font-size: 13px; color: var(--muted); }
+.cards { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+.cards a { display: grid; gap: 1px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; text-decoration: none; color: var(--ink); height: 100%; }
+.cards .c-brand { font-size: 12px; color: var(--muted); }
+.cards .c-name { font-weight: 700; line-height: 1.4; }
+.cards .c-meta { font-size: 12.5px; color: var(--muted); }
+.cards .badge { justify-self: start; margin-top: 4px; }
+@media (hover: hover) { .cards a:hover { border-color: var(--fresh); } }
+.more { margin-top: 28px; font-weight: 600; }
+.more a { text-decoration: none; }
+footer { color: var(--muted); font-size: 12px; padding-block: 0 40px; }
+footer p { margin: 0 0 4px; max-width: none; }
+footer .links a { color: var(--muted); margin-right: 12px; }
