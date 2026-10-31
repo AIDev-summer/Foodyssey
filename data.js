@@ -5,7 +5,7 @@
 // - price가 없으면 가격을 표시하지 않아요.
 // - pop: 검색량 배수(최근 3일 / 지난 4주). 한정 탭 인기순 정렬에 써요. 없으면 마감순으로 뒤에 놓여요.
 window.FOODYSSEY = {
-  updated: "2026-10-29",
+  updated: "2026-10-31",
   weekLabel: "2026년 10월 다섯째 주",
 
   cats: [
@@ -111,14 +111,16 @@ window.FOODYSSEY = {
     { cat: "cafe", brand: "투썸플레이스", when: "10월 · 가을 시즌", date: "2026-10-01",
       items: [{ name: "블랙 치즈폼 라떼", tag: "음료" }, { name: "딸기 요거트 프라페", tag: "음료" }],
       src: { label: "프라임경제", url: "https://www.newsprime.co.kr/news/article/?no=749669" } },
-    { cat: "cafe", brand: "메가MGC커피", when: "9월 출시", date: "2026-09-01",
+    { cat: "cafe", brand: "메가MGC커피", when: "10.29 출시 · 겨울 5종", date: "2026-10-29",
       items: [
-        { name: "하우스밀크 라떼", tag: "음료" },
-        { name: "무카페인 오르조라떼", tag: "음료" },
-        { name: "저당 골든애플 블랙티", tag: "음료" },
-        { name: "밤고구마단호박팥크림치즈빵", tag: "디저트" }
+        { name: "딥 초코 체리 프라페", tag: "음료" },
+        { name: "쫀득 모찌 밀크티", tag: "음료" },
+        { name: "매실 모과차", tag: "음료" },
+        { name: "바삭허니 엠지씨네 컵치킨", tag: "푸드" },
+        { name: "엠지씨네 마라 떡볶이", tag: "푸드" }
       ],
-      src: { label: "뉴스웨이", url: "https://www.newsway.co.kr/news/view?ud=2026100211184474917" } }
+      src: { label: "리뷰타임스", url: "https://reviewtimes.co.kr/news/articleView.html?idxno=13201" },
+      note: "29일부터 18일간 신규 음료 3종을 6일씩 돌아가며 500원 할인해요" }
   ],
 
   limited: [
