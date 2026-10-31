@@ -320,7 +320,7 @@ footer .links a { margin-right: 14px; }
 <body>
 <header class="topbar">
   <div class="wrap">
-    <a class="logo" href="#new">푸디세이<span class="logo-en" lang="en">Food odyssey</span><small>새 메뉴를 찾아 떠나는 여정</small></a>
+    <a class="logo" href="#new">푸디세이<span class="logo-en" lang="en">Food Odyssey</span><small>새 메뉴를 찾아 떠나는 여정</small></a>
     <div class="top-r">
       <span class="updated" id="updated"></span>
       <button class="theme-btn" id="theme-btn" type="button" aria-label="다크모드 켜기">
@@ -333,7 +333,7 @@ footer .links a { margin-right: 14px; }
 
 <section class="intro">
   <div class="wrap">
-    <h1 id="headline">새로 나온 메뉴와 곧 사라질 메뉴</h1>
+    <h1 id="headline">새로 나온 메뉴와<br>곧 사라질 메뉴</h1>
     <p>버거, 치킨, 피자, 빵, 분식, 커피까지. 프랜차이즈 새 메뉴와 기간 한정 메뉴를 매일 아침 기사로 확인해 정리해요.</p>
   </div>
 </section>
@@ -511,7 +511,9 @@ footer .links a { margin-right: 14px; }
   h.textContent = '';
   h.appendChild(document.createTextNode('새로 나온 메뉴 '));
   h.appendChild(el('a', { href: '#new', cls: 'n-new', text: newCount + '개' }));
-  h.appendChild(document.createTextNode(', 곧 사라질 메뉴와 이벤트 '));
+  h.appendChild(document.createTextNode(','));
+  h.appendChild(document.createElement('br'));
+  h.appendChild(document.createTextNode('곧 사라질 메뉴와 이벤트 '));
   h.appendChild(el('a', { href: '#limited', cls: 'n-lim', text: lims.length + '개' }));
   h.appendChild(document.createTextNode('.'));
 
