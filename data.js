@@ -24,7 +24,7 @@ window.FOODYSSEY = {
     kicker: "이번 주 가장 많이 찾은 신상 · 검색 2.5배",
     name: "알싹킹",
     brandline: "bhc · 10월 출시",
-    desc: "고추, 양파, 대파로 맛을 낸 매콤한 치킨이에요. 튀김옷이 얇고, 맵싸소스와 파싹소스가 같이 와요. 10월 31일까지 bhc 앱 이벤트에 참여하면 다음 달에 쓸 2,000원 쿠폰을 줘요.",
+    desc: "고추, 양파, 대파로 맛을 낸 매콤한 치킨이에요. 튀김옷이 얇고, 맵싸소스와 파싹소스가 같이 와요.",
     src: { label: "비즈트리뷴", url: "https://www.biztribune.co.kr/news/articleView.html?idxno=361110" }
   },
 
@@ -34,7 +34,7 @@ window.FOODYSSEY = {
     brandline: "맥도날드 · 10.22 출시 · 4~6주 한정",
     price: "12,400원",
     img: "https://www.mcdonalds.co.kr/upload/2026/10/Corp_PC_VIEW_772x530_%EB%B9%85%EC%95%84%EC%B9%98_EVM.png",
-    priceNote: "세트 13,900원 · 맥런치 13,000원",
+    priceNote: "세트 13,900원 · 맥런치 세트 13,000원",
     specs: [["무게", "374g"], ["빅맥 대비", "+151g"], ["패티", "113g × 2"]],
     desc: "국내 맥도날드 버거 중 단품 가격이 가장 비싸요. 화이트 체다 3장에 크리스피 어니언이 들어가요. 반응을 보고 정규 메뉴로 바꿀지 정한대요.",
     src: { label: "재경일보", url: "https://news.jkn.co.kr/post/1039964" }
@@ -64,19 +64,28 @@ window.FOODYSSEY = {
       note: "떡 위에 소스, 치즈, 페페로니를 올린 컵 형태예요" },
 
     { cat: "chicken", brand: "bhc", when: "10월 출시", date: "2026-10-01",
-      items: [{ name: "알싹킹", tag: "신메뉴" }, { name: "콰삭모짜킹", tag: "신메뉴" }],
+      items: [{ name: "알싹킹", tag: "신메뉴" }],
       src: { label: "비즈트리뷴", url: "https://www.biztribune.co.kr/news/articleView.html?idxno=361110" },
-      note: "콰삭모짜킹은 10월 초 출시 (후기 기준)" },
-    { cat: "chicken", brand: "교촌치킨", when: "10월 출시", date: "2026-10-01",
+      note: "얇은 튀김옷에 맵싸소스·파싹소스가 같이 와요" },
+    { cat: "chicken", brand: "bhc", when: "10.22 매장 판매 확대", date: "2026-10-22",
+      items: [{ name: "콰삭모짜킹", tag: "신메뉴" }],
+      src: { label: "비즈트리뷴", url: "https://www.biztribune.co.kr/news/articleView.html?idxno=361661" },
+      note: "9월 24일 앱·쿠팡이츠 전용으로 나왔다가 10월 22일부터 전국 매장에서도 팔아요" },
+    { cat: "chicken", brand: "교촌치킨", when: "10.22 출시", date: "2026-10-22",
       items: [
         { name: "허니윙콤비", tag: "신메뉴", price: "24,000원", img: "https://www.kyochon.com/uploadFiles/TB_ITEM/list_Honey%20Wing%20Combo.png" },
         { name: "허니옥수수윙콤비", tag: "신메뉴", price: "25,000원", img: "https://www.kyochon.com/uploadFiles/TB_ITEM/list_Honey%20Corn%20Wing%20Combo.png" },
         { name: "허니옥수수윙박스 (16·20조각)", tag: "신메뉴", price: "23,000·24,000원", img: "https://www.kyochon.com/uploadFiles/TB_ITEM/list_Honey%20Corn%20Wing%20Box_20pcs.png" },
-        { name: "허니옥수수싱글윙", tag: "신메뉴", price: "8,500원", img: "https://www.kyochon.com/uploadFiles/TB_ITEM/list_Honey%20Corn%20Single.png" },
+        { name: "허니옥수수싱글윙", tag: "신메뉴", price: "8,500원", img: "https://www.kyochon.com/uploadFiles/TB_ITEM/list_Honey%20Corn%20Single.png" }
+      ],
+      src: { label: "비즈트리뷴", url: "https://www.biztribune.co.kr/news/articleView.html?idxno=361110" },
+      note: "가격은 교촌 홈페이지 권장소비자가격이에요" },
+    { cat: "chicken", brand: "교촌치킨", when: "10.1 출시", date: "2026-10-01",
+      items: [
         { name: "웨지고구마 · 웨지반반", tag: "사이드", plain: true, price: "4,500·8,000원", img: "https://www.kyochon.com/uploadFiles/TB_ITEM/list_Seasoned-Wedge-Potatoes.png" }
       ],
-      src: { label: "비즈트리뷴, 프라임경제", url: "https://www.biztribune.co.kr/news/articleView.html?idxno=361110" },
-      note: "가격은 교촌 홈페이지 권장소비자가격이에요" },
+      src: { label: "프라임경제", url: "https://www.newsprime.co.kr/news/article/?no=749669" },
+      note: "웨지반반은 웨지고구마와 웨지감자를 반씩 담았어요 · 가격은 교촌 홈페이지 권장소비자가격" },
 
     { cat: "bakery", brand: "파리바게뜨", when: "10.15 출시 · 치즈 5종", date: "2026-10-15",
       items: [
@@ -130,7 +139,7 @@ window.FOODYSSEY = {
 
   limited: [
     { kind: "이벤트", brand: "bhc", title: "알싹킹 앱 쿠폰 이벤트", pop: 2.5, end: "2026-10-31", period: "~ 10.31(토)",
-      desc: "bhc 앱 이벤트 페이지에 들어가면 다음 달에 쓸 알싹킹 2,000원 쿠폰을 줘요. 추첨으로 모바일 상품권도 있어요.",
+      desc: "bhc 앱에서 알싹킹을 주문하고 이벤트 페이지에서 응모하면 다음 달에 쓸 알싹킹 2,000원 쿠폰을 줘요. 추첨으로 모바일 상품권도 있어요.",
       src: { label: "비즈트리뷴", url: "https://www.biztribune.co.kr/news/articleView.html?idxno=361110" } },
     { kind: "이벤트", brand: "교촌치킨", title: "허니페스타", end: "2026-10-31", period: "~ 10.31(토)",
       desc: "교촌 주문 앱에서 매일 오후 5시에 선착순 5,000원 할인쿠폰을 줘요. 허니 메뉴 7종에 쓸 수 있어요.",
@@ -152,8 +161,8 @@ window.FOODYSSEY = {
     { kind: "메뉴", brand: "버거킹", title: "블랙 트러플치즈 버거", price: "10,700원", end: "2027-01-05", period: "10.14 출시 · 2027.1.5까지",
       desc: "세트는 12,900원이에요. 트러플 풍미를 더한 치즈 버거예요.",
       src: { label: "헤럴드경제", url: "https://biz.heraldcorp.com/article/10900655" } },
-    { kind: "메뉴", brand: "맘스터치", title: "햄치즈휠렛버거", open: "소진 시 종료", period: "10.15 발표 · 한정 수량 재출시",
-      desc: "온라인 투표로 다시 돌아온 추억의 버거예요. 전국 매장에서 수량이 다 팔리면 끝나요.",
+    { kind: "메뉴", brand: "맘스터치", title: "햄치즈휠렛버거", open: "종료일 미정", period: "10.15 발표 · 전국 한정 판매",
+      desc: "온라인 투표로 다시 돌아온 추억의 버거예요. 전국 매장에서 한정으로 팔아요.",
       src: { label: "마이데일리", url: "https://www.mydaily.co.kr/page/view/2026101514360760582" } },
     { kind: "메뉴", brand: "쉐이크쉑", title: "쉑하우스 바비큐 4종", open: "가을 시즌", period: "10.1 출시 · 종료일 미정",
       lines: [["쉑하우스 바비큐 버거", "10,900원"], ["쉑하우스 바비큐 치킨", "9,900원"], ["쉑하우스 바비큐 프라이", "6,500원"], ["스모어 쉐이크", "7,800원"]],
@@ -162,7 +171,7 @@ window.FOODYSSEY = {
       desc: "알밤을 듬뿍 올린 가을 한정 케이크예요. 케익부띠끄 본점은 9월 23일부터, 롯데점과 DCC점은 9월 28일부터 팔아요.",
       src: { label: "국제뉴스", url: "https://www.gukjenews.com/news/articleView.html?idxno=3703754" } },
     { kind: "메뉴", brand: "버거킹", title: "트러플 머쉬룸 시즌 5종", open: "가을 시즌", period: "9.16 출시 · 종료일 미정",
-      lines: [["트러플 머쉬룸 와퍼", "9,700원"], ["핫 트러플 머쉬룸 와퍼", "9,700원"], ["메종 트러플치즈 버거", "10,500원"], ["딥 트러플 프라이", "3,000원"], ["트러플 머쉬룸 파이로얄", "2,700원"]],
+      lines: [["트러플 머쉬룸 와퍼", "9,700원"], ["핫 트러플 머쉬룸 와퍼", "9,700원"], ["메종 트러플 치즈 버거", "10,500원"], ["딥 트러플 프라이", "3,000원"], ["트러플 머쉬룸 파이로얄", "2,700원"]],
       desc: "버거 세트는 11,900원(메종은 12,700원)이에요. 매년 가을에만 돌아오는 메뉴예요.",
       src: { label: "아시아경제", url: "https://view.asiae.co.kr/article/2026091608122210585" } }
   ],

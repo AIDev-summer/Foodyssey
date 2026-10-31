@@ -46,6 +46,13 @@ const esc = (s) => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</
 const href = (p) => encodeURI(p);
 const fmtDate = (s) => { if (!s) return ''; const [y, m, d] = s.split('-').map(Number); return `${y}년 ${m}월 ${d}일`; };
 const short = (s) => { if (!s) return ''; const [, m, d] = s.split('-').map(Number); return `${m}.${d}`; };
+// 받침이 있으면 '과', 없으면 '와'. 한글이 아닌 글자로 끝나면 '와'로 써요.
+function josaWa(s) {
+  const c = String(s).trim().replace(/[)\]\s]+$/, '').slice(-1).charCodeAt(0);
+  if (c >= 0xac00 && c <= 0xd7a3) return (c - 0xac00) % 28 ? '과' : '와';
+  return '와';
+}
+
 function kstToday() {
   return new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
 }
@@ -255,7 +262,7 @@ function menuPage(r, all, today) {
   }
   if (r.group && r.group.length > 1) {
     const sibs = r.group.filter((n) => n !== r.name);
-    body += `<h2>같이 나온 메뉴</h2><p>${esc(r.brand)}에서 ${esc(r.name)}와 함께 ${esc(sibs.join(', '))}도 나왔어요.</p>`;
+    body += `<h2>같이 나온 메뉴</h2><p>${esc(r.brand)}에서 ${esc(r.name)}${josaWa(r.name)} 함께 ${esc(sibs.join(', '))}도 나왔어요.</p>`;
   }
   if (r.src) body += `<p class="src">출처: <a href="${esc(r.src.url)}" target="_blank" rel="noopener nofollow">${esc(r.src.label)}</a></p>`;
 
