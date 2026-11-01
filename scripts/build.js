@@ -352,12 +352,14 @@ function main() {
     urls.push({ loc: menuPath(r), lastmod: r.firstSeen, pri: status(r, today) === 'on' ? '0.7' : '0.4' });
   });
 
+  const [todayY, todayM] = today.split('-');
+  const ymLabel = `${todayY}년 ${Number(todayM)}월`;
   const brands = [...new Set(all.map((r) => r.brand))].sort((a, b) => a.localeCompare(b, 'ko'));
   brands.forEach((b) => {
     const list = all.filter((r) => r.brand === b);
     const cat = list.find((r) => r.cat);
     const page = listPage({
-      title: `${b} 신메뉴·한정 메뉴 모음 | 푸디세이`, h1: `${b} 신메뉴·한정 메뉴`, kicker: cat ? cat.catName : '브랜드',
+      title: `${b} 신메뉴 (${ymLabel}) · 한정 메뉴 모음 | 푸디세이`, h1: `${b} 신메뉴·한정 메뉴`, kicker: cat ? cat.catName : '브랜드',
       intro: `${b}에서 최근 새로 나온 메뉴와 기간 한정 메뉴, 이벤트를 모았어요. 매일 아침 기사를 확인해 업데이트해요.`,
       pathName: brandPath(b),
       crumbList: [{ name: '홈', path: '/' }].concat(cat ? [{ name: cat.catName, path: catPath(cat.cat) }] : []).concat([{ name: b, path: brandPath(b) }]),
