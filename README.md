@@ -24,3 +24,23 @@
 2. 새로 나온 메뉴는 `newItems`에 넣어요. `date: "YYYY-MM-DD"`(출시·발표일)로 업종 안에서 최근 순으로 정렬돼요. 일까지 모르면 그 달 1일로 적어요. 같은 브랜드는 화면에서 한 블록으로 묶여요.
 3. 기간 한정 메뉴는 `limited`에 `kind: "메뉴"`로, 이벤트는 `kind: "이벤트"`로 넣어요. `end: "YYYY-MM-DD"`를 넣으면 남은 날(D-day)이 자동으로 계산되고, 날짜가 지나면 자동으로 사라져요. 종료일을 모르면 `end` 대신 `open: "가을 시즌"`처럼 적어요.
 4. 가격을 모르면 `price`를 빼면 돼요. 화면에도 표시되지 않아요.
+
+## 가격·사진 필드 (자동 업데이트도 이 형식으로 써요)
+
+| 필드 | 넣는 곳 | 형식 | 설명 |
+|---|---|---|---|
+| `price` | `newItems[].items[]`, `limited[]`, `hotLimited` | `"4,900원"`, `"23,000·24,000원"` | 공식 홈페이지나 기사에서 확인한 가격만. 모르면 빼요. |
+| `img` | `newItems[].items[]`, `limited[]`, `hotNew`, `hotLimited` | `"https://..."` | 브랜드 **공식 홈페이지**의 메뉴 사진 주소만. 있으면 메뉴 이름에 사진 아이콘이 붙고, 누르면 사진·가격 팝업이 떠요. 못 찾으면 빼요. |
+| `imgFrom` | `img`와 같은 곳 | `"맥도날드 공식 홈페이지 (세트 사진)"` | 팝업 아래 사진 출처 문구. 없으면 "브랜드명 공식 홈페이지"로 나와요. |
+| `lines` 세 번째 칸 | `limited[].lines[]` | `["이름", "가격", "https://사진"]` | 여러 메뉴를 묶은 한정 항목에서 메뉴별 사진. |
+
+- 사진 주소에 한글이나 공백이 있으면 퍼센트 인코딩해서 넣어요(예: 공백 → `%20`).
+- 넣기 전에 주소가 실제 이미지(200, image/*)로 열리는지 확인해요. 사진이 안 열리면 팝업에 "사진을 불러오지 못했어요"가 나와요.
+- 지금 사진을 가져오는 곳: 맥도날드(mcdonalds.co.kr/upload), 교촌(kyochon.com/uploadFiles), 파리바게뜨(paris.co.kr 상품 페이지의 og:image), 이디야(ediya.com/files/menu), 메가MGC커피(img.mega-mgccoffee.com).
+
+## 메뉴·브랜드·업종 페이지 (검색 유입용)
+
+- `node scripts/build.js`가 `data.js`를 읽어 `menu/브랜드-메뉴.html`, `brand/브랜드.html`, `cat/업종.html`, `sitemap.xml`을 만들고, `index.html`의 "브랜드별로 보기" 목록과 구조화 데이터(JSON-LD)를 다시 채워요.
+- GitHub Actions(`.github/workflows/build-pages.yml`)가 `data.js`가 main에 합쳐질 때와 매일 0시 10분(한국 시간)에 자동으로 돌려 main에 커밋해요. 직접 돌릴 필요는 없어요.
+- `data/archive.json`은 한 번이라도 올라온 메뉴를 모두 기억해요. `data.js`에서 빠지거나 마감일이 지나도 메뉴 페이지는 지우지 않고 "판매 종료"로 남겨요(지난 메뉴 검색 유입용).
+- `menu/`, `brand/`, `cat/`, `sitemap.xml`은 자동으로 만들어지는 파일이라 손으로 고치지 않아요. 문구나 모양은 `scripts/build.js`와 `pages.css`에서 고쳐요.
