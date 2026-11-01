@@ -567,6 +567,32 @@
   "catName": "버거",
   "firstSeen": "2026-10-31"
  },
+ "맥도날드-배민-빅아치-3-000원-할인": {
+  "kind": "event",
+  "brand": "맥도날드",
+  "cat": "burger",
+  "name": "배민 빅아치 3,000원 할인",
+  "tag": "이벤트",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "end": "2026-11-01",
+  "endLate": "",
+  "open": "",
+  "period": "~ 11.1(일)",
+  "desc": "배달의민족에서 빅아치를 선착순 3,000원 할인해 줘요. 맥도날드 전 메뉴 5,000원 할인 쿠폰도 선착순으로 줘요.",
+  "specs": null,
+  "priceNote": "",
+  "lines": null,
+  "cups": null,
+  "src": {
+   "label": "신아일보",
+   "url": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5077387"
+  },
+  "slug": "맥도날드-배민-빅아치-3-000원-할인",
+  "catName": "버거",
+  "firstSeen": "2026-11-01"
+ },
  "맥도날드-빅아치": {
   "kind": "limited",
   "brand": "맥도날드",
@@ -1444,6 +1470,30 @@
   "slug": "파리바게뜨-크림치즈말랑",
   "catName": "베이커리",
   "firstSeen": "2026-10-31"
+ },
+ "푸라닭-홍고추마요": {
+  "kind": "new",
+  "brand": "푸라닭",
+  "cat": "chicken",
+  "name": "홍고추마요",
+  "tag": "신메뉴",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-10-21",
+  "when": "10.21 출시",
+  "note": "전국 푸라닭 가맹점에서 팔아요",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": null,
+  "src": {
+   "label": "세계일보",
+   "url": "https://www.segye.com/newsView/20261024502967"
+  },
+  "slug": "푸라닭-홍고추마요",
+  "catName": "치킨",
+  "firstSeen": "2026-11-01"
  },
  "피자헛-피자설기": {
   "kind": "new",
