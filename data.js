@@ -8,8 +8,8 @@
 //   lines 항목은 [이름, 가격, 사진 주소] 순서로 세 번째 칸에 사진을 넣을 수 있어요.
 // - pop: 검색량 배수(최근 3일 / 지난 4주). 한정 탭 인기순 정렬에 써요. 없으면 마감순으로 뒤에 놓여요.
 window.FOODYSSEY = {
-  updated: "2026-10-31",
-  weekLabel: "2026년 10월 다섯째 주",
+  updated: "2026-11-01",
+  weekLabel: "2026년 11월 첫째 주",
 
   cats: [
     { id: "burger", name: "버거" },
@@ -71,6 +71,10 @@ window.FOODYSSEY = {
       items: [{ name: "콰삭모짜킹", tag: "신메뉴" }],
       src: { label: "비즈트리뷴", url: "https://www.biztribune.co.kr/news/articleView.html?idxno=361661" },
       note: "9월 24일 앱·쿠팡이츠 전용으로 나왔다가 10월 22일부터 전국 매장에서도 팔아요" },
+    { cat: "chicken", brand: "푸라닭", when: "10.21 출시", date: "2026-10-21",
+      items: [{ name: "홍고추마요", tag: "신메뉴" }],
+      src: { label: "세계일보", url: "https://www.segye.com/newsView/20261024502967" },
+      note: "전국 푸라닭 가맹점에서 팔아요" },
     { cat: "chicken", brand: "교촌치킨", when: "10.22 출시", date: "2026-10-22",
       items: [
         { name: "허니윙콤비", tag: "신메뉴", price: "24,000원", img: "https://www.kyochon.com/uploadFiles/TB_ITEM/list_Honey%20Wing%20Combo.png" },
@@ -151,6 +155,9 @@ window.FOODYSSEY = {
       period: "10.22 출시 · 11.19~12.3 사이 종료 예상",
       desc: "4~6주 한정이라 종료일이 정확히 나오지 않았어요. 빠르면 11월 19일에 끝날 수 있어요.",
       src: { label: "재경일보", url: "https://news.jkn.co.kr/post/1039964" } },
+    { kind: "이벤트", brand: "맥도날드", title: "배민 빅아치 3,000원 할인", end: "2026-11-01", period: "~ 11.1(일)",
+      desc: "배달의민족에서 빅아치를 선착순 3,000원 할인해 줘요. 맥도날드 전 메뉴 5,000원 할인 쿠폰도 선착순으로 줘요.",
+      src: { label: "신아일보", url: "https://www.shinailbo.co.kr/news/articleView.html?idxno=5077387" } },
     { kind: "이벤트", brand: "스타벅스", title: "겨울 e-프리퀀시", pop: 5.8, end: "2026-12-31", period: "10.22(목) ~ 12.31(목)",
       cups: { total: 17, mission: 3 },
       desc: "미션음료 3잔을 포함해 17잔이면 증정품 1개를 예약할 수 있어요. 렉슨 스피커, 몰스킨 플래너, 코듀로이 백팩, 캔버스 토트 중에서 골라요.",
