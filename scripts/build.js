@@ -78,7 +78,7 @@ function collect(D) {
       out.push({
         kind: 'new', brand: g.brand, cat: g.cat, name: it.name, tag: it.tag || '신메뉴',
         price: it.price || (h && h.price) || '', img: it.img || (h && h.img) || '', imgFrom: it.imgFrom || '',
-        date: g.date || '', when: g.when || '', note: g.note || '',
+        date: g.date || '', when: g.when || '', note: g.note || '', season: g.season || '',
         desc: (h && h.desc) || '', specs: (h && h.specs) || null, priceNote: (h && h.priceNote) || '',
         group: g.items.length > 1 ? g.items.map((x) => x.name) : null,
         src: g.src || null
@@ -93,7 +93,7 @@ function collect(D) {
       price: x.price || '', img: x.img || (h && h.img) || '', imgFrom: x.imgFrom || '',
       end: x.end || '', endLate: x.endLate || '', open: x.open || '', period: x.period || '',
       desc: x.desc || (h && h.desc) || '', specs: (h && h.specs) || null, priceNote: (h && h.priceNote) || '',
-      lines: x.lines || null, cups: x.cups || null, src: x.src || null
+      lines: x.lines || null, cups: x.cups || null, src: x.src || null, season: x.season || ''
     });
   });
   out.forEach((r) => { r.slug = slug(r.brand + ' ' + r.name); r.catName = catName[r.cat] || ''; });
@@ -209,6 +209,12 @@ function crumbs(list) {
 const menuPath = (r) => '/menu/' + r.slug;
 const brandPath = (b) => '/brand/' + slug(b);
 const catPath = (c) => '/cat/' + c;
+const seasonPath = (s) => '/season/' + s;
+// 시즌 모음 페이지: data.js의 season 값이 같은 항목을 한 페이지로 모아요.
+const SEASONS = {
+  christmas: { name: '크리스마스·연말', title: (y) => `크리스마스 케이크·연말 한정 메뉴 (${y}년) | 푸디세이`, h1: '크리스마스·연말 메뉴',
+    intro: '프랜차이즈의 크리스마스 케이크와 시즌 음료, 연말 한정 메뉴·이벤트를 한곳에 모았어요. 예약 기간과 마감일은 기사에 나온 것만 적어요.' }
+};
 
 function card(r, st) {
   const meta = [r.tag, r.price, r.kind === 'new' ? r.when : r.period].filter(Boolean).join(' · ');
@@ -341,7 +347,7 @@ function main() {
   const { items, catName } = collect(D);
   const all = mergeArchive(items, today);
 
-  for (const dir of ['menu', 'brand', 'cat']) {
+  for (const dir of ['menu', 'brand', 'cat', 'season']) {
     const p = path.join(ROOT, dir);
     fs.rmSync(p, { recursive: true, force: true });
     fs.mkdirSync(p, { recursive: true });
@@ -357,7 +363,7 @@ function main() {
     const list = all.filter((r) => r.brand === b);
     const cat = list.find((r) => r.cat);
     const page = listPage({
-      title: `${b} 신메뉴·한정 메뉴 모음 | 푸디세이`, h1: `${b} 신메뉴·한정 메뉴`, kicker: cat ? cat.catName : '브랜드',
+      title: `${b} 신메뉴 (${today.slice(0, 4)}년 ${Number(today.slice(5, 7))}월) | 푸디세이`, h1: `${b} 신메뉴·한정 메뉴`, kicker: cat ? cat.catName : '브랜드',
       intro: `${b}에서 최근 새로 나온 메뉴와 기간 한정 메뉴, 이벤트를 모았어요. 매일 아침 기사를 확인해 업데이트해요.`,
       pathName: brandPath(b),
       crumbList: [{ name: '홈', path: '/' }].concat(cat ? [{ name: cat.catName, path: catPath(cat.cat) }] : []).concat([{ name: b, path: brandPath(b) }]),
@@ -378,6 +384,19 @@ function main() {
     });
     fs.writeFileSync(path.join(ROOT, 'cat', c.id + '.html'), page);
     urls.push({ loc: catPath(c.id), lastmod: list.map((r) => r.firstSeen).sort().pop(), pri: '0.6' });
+  });
+
+  Object.keys(SEASONS).forEach((sid) => {
+    const list = all.filter((r) => r.season === sid);
+    if (!list.length) return;
+    const S = SEASONS[sid];
+    const page = listPage({
+      title: S.title(today.slice(0, 4)), h1: S.h1, kicker: '시즌', intro: S.intro, pathName: seasonPath(sid),
+      crumbList: [{ name: '홈', path: '/' }, { name: S.name, path: seasonPath(sid) }],
+      groups: groupsFor(list, today)
+    });
+    fs.writeFileSync(path.join(ROOT, 'season', sid + '.html'), page);
+    urls.push({ loc: seasonPath(sid), lastmod: list.map((r) => r.firstSeen).sort().pop(), pri: '0.7' });
   });
 
   // sitemap.xml
@@ -408,14 +427,23 @@ function main() {
   const idxFile = path.join(ROOT, 'index.html');
   let idx = fs.readFileSync(idxFile, 'utf8');
   const liveItems = all.filter((r) => status(r, today) === 'on');
-  const dirHtml = D.cats.map((c) => {
+  const seasonHtml = Object.keys(SEASONS).map((sid) => {
+    const list = liveItems.filter((r) => r.season === sid);
+    if (!list.length) return '';
+    const bs = [...new Set(list.map((r) => r.brand))];
+    return `      <div class="dir-cat"><h3><a href="${href(seasonPath(sid))}">${esc(SEASONS[sid].name)}</a></h3>`
+      + bs.map((b) => `<p><a class="dir-brand" href="${href(brandPath(b))}">${esc(b)}</a> `
+        + list.filter((r) => r.brand === b).map((r) => `<a href="${href(menuPath(r))}">${esc(r.name)}</a>`).join(' · ') + '</p>').join('')
+      + '</div>';
+  }).filter(Boolean);
+  const dirHtml = seasonHtml.concat(D.cats.map((c) => {
     const bs = [...new Set(liveItems.filter((r) => r.cat === c.id).map((r) => r.brand))];
     if (!bs.length) return '';
     return `      <div class="dir-cat"><h3><a href="${href(catPath(c.id))}">${esc(c.name)}</a></h3>`
       + bs.map((b) => `<p><a class="dir-brand" href="${href(brandPath(b))}">${esc(b)}</a> `
         + liveItems.filter((r) => r.brand === b).map((r) => `<a href="${href(menuPath(r))}">${esc(r.name)}</a>`).join(' · ') + '</p>').join('')
       + '</div>';
-  }).filter(Boolean).join('\n');
+  })).filter(Boolean).join('\n');
   idx = replaceBlock(idx, 'directory', dirHtml);
   const idxLd = [
     { '@context': 'https://schema.org', '@type': 'WebSite', name: '푸디세이', alternateName: 'Foodyssey', url: SITE + '/' },

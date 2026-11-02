@@ -139,7 +139,7 @@ window.FOODYSSEY = {
       ],
       src: { label: "금강일보", url: "https://www.ggilbo.com/news/articleView.html?idxno=1189936" },
       note: "29일부터 18일간 신규 음료 3종을 6일씩 돌아가며 500원 할인해요" },
-    { cat: "cafe", brand: "스타벅스", when: "11.1 발표 · 홀케이크 4종", date: "2026-11-01",
+    { cat: "cafe", brand: "스타벅스", when: "11.1 발표 · 홀케이크 4종", date: "2026-11-01", season: "christmas",
       items: [
         { name: "모찌 품은 바스크 치즈 케이크", tag: "홀케이크" },
         { name: "보늬밤 몽블랑 치즈 케이크", tag: "홀케이크" },
@@ -148,7 +148,7 @@ window.FOODYSSEY = {
       ],
       src: { label: "연합뉴스", url: "https://www.yna.co.kr/view/AKR20261101021200030" },
       note: "스타벅스 앱에서 예약 주문한 뒤 지정한 날짜에 원하는 매장에서 받아요" },
-    { cat: "cafe", brand: "스타벅스", when: "10.22 출시 · 크리스마스 시즌", date: "2026-10-22",
+    { cat: "cafe", brand: "스타벅스", when: "10.22 출시 · 크리스마스 시즌", date: "2026-10-22", season: "christmas",
       items: [
         { name: "토피 넛 라떼", tag: "음료" },
         { name: "윈터 스카치 바닐라 라떼", tag: "음료" },
@@ -194,10 +194,33 @@ window.FOODYSSEY = {
         { name: "꿀떡꿀떡", tag: "디저트" }
       ],
       src: { label: "피앤피뉴스", url: "https://www.gosiweek.com/article/1065582564826094" },
-      note: "꿀떡컵떡볶이는 떡볶이와 꿀떡을 따로 담아서 줘요" }
+      note: "꿀떡컵떡볶이는 떡볶이와 꿀떡을 따로 담아서 줘요" },
+    { cat: "cafe", brand: "파스쿠찌", when: "10.29 발표 · 크리스마스 케이크 6종", date: "2026-10-29", season: "christmas",
+      items: [
+        { name: "크리스탈 스완", tag: "케이크 · 사전예약 한정" },
+        { name: "미라클 스노우 트리", tag: "케이크" },
+        { name: "메리 베리 레드", tag: "케이크" },
+        { name: "메리 베리 초코", tag: "케이크" },
+        { name: "리틀 스노우 산타", tag: "케이크" },
+        { name: "레드 루돌프", tag: "케이크" }
+      ],
+      src: { label: "전자신문", url: "https://www.etnews.com/20261029000139" },
+      note: "12월 17일까지 해피오더앱에서 사전예약해요. 크리스탈 스완은 카페 스와로브스키와 함께 만든 사전예약 한정 케이크예요" },
+    { cat: "cafe", brand: "파스쿠찌", when: "11.2 발표 · 크리스마스 시즌 음료 4종", date: "2026-11-02", season: "christmas",
+      items: [
+        { name: "메리 골든 뱅쇼", tag: "음료" },
+        { name: "체리 쇼콜라 라떼", tag: "음료" },
+        { name: "스노우 돌체 카페라떼", tag: "음료" },
+        { name: "포레스트 쇼콜라 라떼", tag: "음료" }
+      ],
+      src: { label: "푸드투데이", url: "https://www.foodtoday.or.kr/news/article.html?no=209327" } }
   ],
 
   limited: [
+    { kind: "이벤트", brand: "파스쿠찌", title: "크리스마스 케이크 사전예약 할인", season: "christmas", end: "2026-12-17", period: "~ 12.17(목)",
+      desc: "해피오더앱에서 사전예약하면 예약 시기에 따라 할인해 줘요. 11월 8일까지 최대 40%, 이후 30%, 일반 사전예약 기간에는 25%예요. 11월 9일부터 카카오 예약하기, 23일부터 땡겨요·배달의민족에서도 예약할 수 있어요.",
+      src: { label: "전자신문", url: "https://www.etnews.com/20261029000139" } },
+
     { kind: "이벤트", brand: "컴포즈커피", title: "클라우드 라떼 2종 할인", end: "2026-11-11", period: "~ 11.11(수)",
       desc: "슈 클라우드 라떼와 커피 클라우드 라떼를 할인해 줘요. 매장 포스, 키오스크, 앱오더에서 주문하면 돼요.",
       src: { label: "뉴스1", url: "https://www.news1.kr/industry/distribution/6335728" } },
@@ -227,7 +250,7 @@ window.FOODYSSEY = {
     { kind: "이벤트", brand: "맥도날드", title: "배민 빅아치 3,000원 할인", end: "2026-11-01", period: "~ 11.1(일)",
       desc: "배달의민족에서 빅아치를 선착순 3,000원 할인해 줘요. 맥도날드 전 메뉴 5,000원 할인 쿠폰도 선착순으로 줘요.",
       src: { label: "신아일보", url: "https://www.shinailbo.co.kr/news/articleView.html?idxno=5077387" } },
-    { kind: "이벤트", brand: "스타벅스", title: "겨울 e-프리퀀시", pop: 5.8, end: "2026-12-31", period: "10.22(목) ~ 12.31(목)",
+    { kind: "이벤트", brand: "스타벅스", title: "겨울 e-프리퀀시", season: "christmas", pop: 5.8, end: "2026-12-31", period: "10.22(목) ~ 12.31(목)",
       cups: { total: 17, mission: 3 },
       desc: "미션음료 3잔을 포함해 17잔이면 증정품 1개를 예약할 수 있어요. 렉슨 스피커, 몰스킨 플래너, 코듀로이 백팩, 캔버스 토트 중에서 골라요.",
       src: { label: "데일리환경", url: "https://www.dailyt.co.kr/newsView/dlt202610150013" } },
