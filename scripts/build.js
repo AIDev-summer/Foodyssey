@@ -287,7 +287,8 @@ function menuPage(r, all, today) {
   };
   if (r.img) product.image = r.img;
   if (n) product.offers = { '@type': 'Offer', price: n, priceCurrency: 'KRW', availability: st === 'on' ? 'https://schema.org/InStock' : 'https://schema.org/Discontinued', url: SITE + href(menuPath(r)) };
-  const jsonld = isEvent ? [cr.ld] : [cr.ld, product];
+  // 구글 제품 스니펫은 offers(가격)가 필수라서, 가격이 없는 메뉴는 Product 구조화 데이터를 넣지 않아요.
+  const jsonld = (isEvent || !n) ? [cr.ld] : [cr.ld, product];
 
   return head({ title, desc, canonical: SITE + href(menuPath(r)), image: r.img, jsonld })
     + `<main><div class="wrap"><article>${cr.html}<p class="kicker">${esc(r.brand)} · ${esc(r.tag)}</p><h1>${esc(r.name)}</h1>${body}</article></div></main>\n`
