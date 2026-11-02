@@ -8,7 +8,7 @@
 //   lines 항목은 [이름, 가격, 사진 주소] 순서로 세 번째 칸에 사진을 넣을 수 있어요.
 // - pop: 검색량 배수(최근 3일 / 지난 4주). 한정 탭 인기순 정렬에 써요. 없으면 마감순으로 뒤에 놓여요.
 window.FOODYSSEY = {
-  updated: "2026-11-01",
+  updated: "2026-11-02",
   weekLabel: "2026년 11월 첫째 주",
 
   cats: [
@@ -138,10 +138,79 @@ window.FOODYSSEY = {
         { name: "엠지씨네 마라 떡볶이", tag: "푸드", price: "4,400원", img: "https://img.mega-mgccoffee.com/megahp/manager/upload/menu/20261021185813_1792576693475_CPlWEhkpD0.png" }
       ],
       src: { label: "금강일보", url: "https://www.ggilbo.com/news/articleView.html?idxno=1189936" },
-      note: "29일부터 18일간 신규 음료 3종을 6일씩 돌아가며 500원 할인해요" }
+      note: "29일부터 18일간 신규 음료 3종을 6일씩 돌아가며 500원 할인해요" },
+    { cat: "cafe", brand: "스타벅스", when: "11.1 발표 · 홀케이크 4종", date: "2026-11-01",
+      items: [
+        { name: "모찌 품은 바스크 치즈 케이크", tag: "홀케이크" },
+        { name: "보늬밤 몽블랑 치즈 케이크", tag: "홀케이크" },
+        { name: "진한 얼 그레이 카라멜 넛츠 케이크", tag: "홀케이크" },
+        { name: "티라미수 크레이프 케이크", tag: "홀케이크" }
+      ],
+      src: { label: "연합뉴스", url: "https://www.yna.co.kr/view/AKR20261101021200030" },
+      note: "스타벅스 앱에서 예약 주문한 뒤 지정한 날짜에 원하는 매장에서 받아요" },
+    { cat: "cafe", brand: "스타벅스", when: "10.22 출시 · 크리스마스 시즌", date: "2026-10-22",
+      items: [
+        { name: "토피 넛 라떼", tag: "음료" },
+        { name: "윈터 스카치 바닐라 라떼", tag: "음료" },
+        { name: "클래식 뱅쇼 히비스커스 티", tag: "음료" },
+        { name: "누텔라 촉촉 생크림 케이크", tag: "디저트" },
+        { name: "루돌프 쿠키 치즈 케이크", tag: "디저트" },
+        { name: "비프 멜트 바게트 샌드위치", tag: "식사" }
+      ],
+      src: { label: "연합뉴스", url: "https://www.yna.co.kr/view/AKR20261021030500030" } },
+    { cat: "cafe", brand: "컴포즈커피", when: "10.20 출시 · 가을 8종", date: "2026-10-20",
+      items: [
+        { name: "슈 클라우드 라떼", tag: "음료" },
+        { name: "커피 클라우드 라떼", tag: "음료" },
+        { name: "클래식 딥라떼", tag: "음료" },
+        { name: "치즈 딥라떼", tag: "음료" },
+        { name: "PB&J 와플", tag: "와플" },
+        { name: "딸기잼크림 와플", tag: "와플" },
+        { name: "솔티크림 와플", tag: "와플" },
+        { name: "슈 클라우드 와플", tag: "와플 · 시즌 한정" }
+      ],
+      src: { label: "푸드투데이", url: "https://www.foodtoday.or.kr/news/article.html?no=208977" } },
+    { cat: "cafe", brand: "이디야커피", when: "10.29 출시", date: "2026-10-29",
+      items: [
+        { name: "피자설기", tag: "간식" },
+        { name: "콘치즈설기", tag: "간식" }
+      ],
+      src: { label: "뉴스투데이", url: "https://news2day.co.kr/article/20261029500086" },
+      note: "하인즈와 함께 만들었어요 · 이디야멤버스 앱과 배달앱에서도 주문할 수 있어요" },
+    { cat: "burger", brand: "맘스터치", when: "10.29 발표 · 스낵박스 3종", date: "2026-10-29",
+      items: [
+        { name: "스윗볼박스", tag: "스낵박스" },
+        { name: "트리플스낵박스", tag: "스낵박스" },
+        { name: "플래터스낵박스", tag: "스낵박스" },
+        { name: "빠삭어니언링", tag: "사이드" },
+        { name: "헤이즐넛초코볼", tag: "디저트" },
+        { name: "솔티카라멜볼", tag: "디저트" }
+      ],
+      src: { label: "뉴스투데이", url: "https://news2day.co.kr/article/20261029500086" },
+      note: "11월 25일까지 맘스터치 앱에서 스낵박스를 사면 추가 할인 쿠폰을 줘요 (수량이 소진되면 일찍 끝날 수 있어요)" },
+    { cat: "cafe", brand: "카페인중독", when: "10.29 발표", date: "2026-10-29",
+      items: [
+        { name: "꿀떡컵떡볶이", tag: "신메뉴" },
+        { name: "꿀떡꿀떡", tag: "디저트" }
+      ],
+      src: { label: "피앤피뉴스", url: "https://www.gosiweek.com/article/1065582564826094" },
+      note: "꿀떡컵떡볶이는 떡볶이와 꿀떡을 따로 담아서 줘요" }
   ],
 
   limited: [
+    { kind: "이벤트", brand: "컴포즈커피", title: "클라우드 라떼 2종 할인", end: "2026-11-11", period: "~ 11.11(수)",
+      desc: "슈 클라우드 라떼와 커피 클라우드 라떼를 할인해 줘요. 매장 포스, 키오스크, 앱오더에서 주문하면 돼요.",
+      src: { label: "뉴스1", url: "https://www.news1.kr/industry/distribution/6335728" } },
+    { kind: "이벤트", brand: "롯데리아", title: "리아 스낵 타임", end: "2026-11-30", period: "11.1 ~ 11.30 · 매일 14~18시",
+      desc: "오후 2시부터 6시까지 6개 메뉴를 할인해 줘요. 치킨버거 18%, 아메리카노 38%, 치즈스틱 24%, 토네이도(초코쿠키) 21%, 양념너겟 26%, 포테이토 19%예요.",
+      src: { label: "뷰어스", url: "https://theviewers.co.kr/View.aspx?No=4280225" } },
+    { kind: "메뉴", brand: "KFC", title: "닭껍질튀김", end: "2026-11-09", period: "10.13 발표 · ~ 11.9(월)",
+      desc: "양을 기존의 2배로 늘렸고, 소스는 살사 대신 스파이시 마요가 나와요. 가을 시즌 한정이에요.",
+      src: { label: "뉴스밸런스", url: "https://www.newsbalance.co.kr/news/view/1065609452679016" } },
+    { kind: "메뉴", brand: "배스킨라빈스", title: "11월 이달의 맛 '도우와줘요 호빵맨'", open: "11월 이달의 맛", period: "10.30 발표 · 종료일 미정",
+      desc: "호빵맨과 함께 만든 이달의 맛이에요. 호빵맨 캐릭터를 쓴 아이스크림 케이크 2종과 리유저블 컵 음료(아이스 아메리카노, 납작복숭아 아이스티)도 나와요.",
+      src: { label: "주간한국", url: "https://weekly.hankooki.com/news/articleView.html?idxno=7191453" } },
+
     { kind: "이벤트", brand: "bhc", title: "알싹킹 앱 쿠폰 이벤트", pop: 2.5, end: "2026-10-31", period: "~ 10.31(토)",
       desc: "bhc 앱에서 알싹킹을 주문하고 이벤트 페이지에서 응모하면 다음 달에 쓸 알싹킹 2,000원 쿠폰을 줘요. 추첨으로 모바일 상품권도 있어요.",
       src: { label: "비즈트리뷴", url: "https://www.biztribune.co.kr/news/articleView.html?idxno=361110" } },
