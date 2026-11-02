@@ -309,15 +309,37 @@ function ddayScript() {
 }
 
 // ---------- 목록 페이지(브랜드, 업종) ----------
-function listPage({ title, h1, kicker, intro, pathName, crumbList, groups }) {
+function listPage({ title, h1, kicker, intro, pathName, crumbList, groups, extraHtml }) {
   const cr = crumbs(crumbList);
   const flat = groups.flatMap((g) => g.items);
   const ld = { '@context': 'https://schema.org', '@type': 'ItemList', name: h1, itemListElement: flat.map((x, i) => ({ '@type': 'ListItem', position: i + 1, url: SITE + href(menuPath(x.r)), name: `${x.r.brand} ${x.r.name}` })) };
   const body = groups.filter((g) => g.items.length).map((g) => `<h2>${esc(g.title)}</h2><ul class="cards">${g.items.map((x) => card(x.r, x.st)).join('')}</ul>`).join('');
   const desc = `${intro} ${flat.filter((x) => x.st === 'on').slice(0, 6).map((x) => x.r.name).join(', ')}`.slice(0, 155);
   return head({ title, desc, canonical: SITE + href(pathName), jsonld: [cr.ld, ld] })
-    + `<main><div class="wrap"><article>${cr.html}<p class="kicker">${esc(kicker)}</p><h1>${esc(h1)}</h1><p>${esc(intro)}</p>${body}<p class="more"><a href="/">오늘의 새 메뉴·한정 메뉴 전체 보기 →</a></p></article></div></main>\n`
+    + `<main><div class="wrap"><article>${cr.html}<p class="kicker">${esc(kicker)}</p><h1>${esc(h1)}</h1><p>${esc(intro)}</p>${extraHtml || ''}${body}<p class="more"><a href="/">오늘의 새 메뉴·한정 메뉴 전체 보기 →</a></p></article></div></main>\n`
     + foot();
+}
+// 크리스마스 시즌 페이지용: 브랜드별 케이크 가격·사전예약 마감일 비교표.
+// 기사에서 확인한 값만 쓰고, 가격이 확인되지 않으면 추측하지 않고 "가격 미공개"로 적어요.
+function christmasCompareTable(list) {
+  const brands = [...new Set(list.map((r) => r.brand))];
+  const rows = brands.map((b) => {
+    const cakeItems = list.filter((r) => r.brand === b && r.kind === 'new' && /케이크/.test(r.tag || ''));
+    if (!cakeItems.length) return null;
+    const prices = [...new Set(cakeItems.filter((r) => r.price).map((r) => r.price))];
+    const events = list.filter((r) => r.brand === b && r.kind === 'event' && r.end && /케이크/.test(r.name || '')).sort((a, c) => a.end.localeCompare(c.end));
+    return {
+      brand: b, count: cakeItems.length,
+      price: prices.length ? prices.join(', ') : '가격 미공개',
+      deadline: events.length ? `${fmtDate(events[0].end)} (${short(events[0].end)})` : '-'
+    };
+  }).filter(Boolean);
+  if (!rows.length) return '';
+  return `<h2>브랜드별 케이크 가격·사전예약 마감일 비교</h2>`
+    + `<p class="table-note">가격·마감일은 기사나 브랜드 공식 홈페이지에서 확인한 것만 적었어요. 확인되지 않은 가격은 "가격 미공개"로 표시해요.</p>`
+    + `<table class="compare"><thead><tr><th>브랜드</th><th>케이크 종류</th><th>가격</th><th>사전예약 마감</th></tr></thead><tbody>`
+    + rows.map((r) => `<tr><td>${esc(r.brand)}</td><td>${r.count}종</td><td>${esc(r.price)}</td><td>${esc(r.deadline)}</td></tr>`).join('')
+    + `</tbody></table>`;
 }
 function sortRecent(a, b) {
   const ka = a.r.date || a.r.end || a.r.firstSeen || '', kb = b.r.date || b.r.end || b.r.firstSeen || '';
@@ -394,7 +416,8 @@ function main() {
     const page = listPage({
       title: S.title(today.slice(0, 4)), h1: S.h1, kicker: '시즌', intro: S.intro, pathName: seasonPath(sid),
       crumbList: [{ name: '홈', path: '/' }, { name: S.name, path: seasonPath(sid) }],
-      groups: groupsFor(list, today)
+      groups: groupsFor(list, today),
+      extraHtml: sid === 'christmas' ? christmasCompareTable(list) : ''
     });
     fs.writeFileSync(path.join(ROOT, 'season', sid + '.html'), page);
     urls.push({ loc: seasonPath(sid), lastmod: list.map((r) => r.firstSeen).sort().pop(), pri: '0.7' });

@@ -41,6 +41,10 @@ p { max-width: 64ch; }
 .lines { border-collapse: collapse; width: 100%; }
 .lines th, .lines td { border-bottom: 1px solid var(--line); padding: 6px 0; text-align: left; font-weight: 400; }
 .lines td { text-align: right; white-space: nowrap; }
+.table-note { font-size: 13px; color: var(--muted); }
+.compare { border-collapse: collapse; width: 100%; margin-bottom: 20px; font-size: 14.5px; }
+.compare th, .compare td { border-bottom: 1px solid var(--line); padding: 8px 6px; text-align: left; }
+.compare th { color: var(--muted); font-weight: 600; font-size: 13px; }
 .src { font-size: 13px; color: var(--muted); }
 .cards { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
 .cards a { display: grid; gap: 1px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; text-decoration: none; color: var(--ink); height: 100%; }

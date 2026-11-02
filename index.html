@@ -344,6 +344,13 @@ footer .links a { margin-right: 14px; }
   </div>
 </section>
 
+<section class="soon week" aria-labelledby="week-title" id="week-section" hidden>
+  <div class="wrap">
+    <div class="soon-head"><span class="label" id="week-title">이번 주 끝나는 한정 메뉴</span><a href="#limited">한정 전체 보기</a></div>
+    <div class="soon-row" id="week-row"></div>
+  </div>
+</section>
+
 <section aria-label="이번 주 화제">
   <div class="wrap hots">
     <article class="hot" id="hot-new"></article>
@@ -527,6 +534,22 @@ footer .links a { margin-right: 14px; }
       el('span', { cls: 'k', text: o.x.kind + (o.x.price ? ' · ' + o.x.price : '') })
     ]));
   });
+
+  // 이번 주(7일 안) 끝나는 한정 메뉴·이벤트
+  var weekSection = document.getElementById('week-section');
+  var weekRow = document.getElementById('week-row');
+  var weekItems = lims.filter(function (o) { return o.d !== null && o.d >= 0 && o.d <= 7; }).sort(byDeadline);
+  if (weekItems.length) {
+    weekSection.hidden = false;
+    weekItems.forEach(function (o) {
+      weekRow.appendChild(el('a', { cls: 'soon-card' + (o.d <= 3 ? ' urgent' : ' near'), href: '#limited' }, [
+        el('span', { cls: 'd', text: dLabel(o.d) }),
+        el('span', { cls: 'b', text: o.x.brand }),
+        el('span', { cls: 't', text: o.x.title }),
+        el('span', { cls: 'k', text: o.x.kind + (o.x.price ? ' · ' + o.x.price : '') })
+      ]));
+    });
+  }
 
   // 이번 주 화제
   function hot(box, hd, labelText) {
