@@ -8,7 +8,7 @@
 //   lines 항목은 [이름, 가격, 사진 주소] 순서로 세 번째 칸에 사진을 넣을 수 있어요.
 // - pop: 검색량 배수(최근 3일 / 지난 4주). 한정 탭 인기순 정렬에 써요. 없으면 마감순으로 뒤에 놓여요.
 window.FOODYSSEY = {
-  updated: "2026-11-01",
+  updated: "2026-11-02",
   weekLabel: "2026년 11월 첫째 주",
 
   cats: [
@@ -129,6 +129,17 @@ window.FOODYSSEY = {
     { cat: "cafe", brand: "투썸플레이스", when: "10월 · 가을 시즌", date: "2026-10-01",
       items: [{ name: "블랙 치즈폼 라떼", tag: "음료", price: "6,300원" }, { name: "딸기 요거트 프라페", tag: "음료", price: "6,500원" }],
       src: { label: "프라임경제", url: "https://www.newsprime.co.kr/news/article/?no=749669" } },
+    { cat: "cafe", brand: "스타벅스", when: "10.22 출시 · 겨울 시즌", date: "2026-10-22",
+      items: [
+        { name: "토피 넛 라떼", tag: "음료" },
+        { name: "윈터 스카치 바닐라 라떼", tag: "음료" },
+        { name: "클래식 뱅쇼 히비스커스 티", tag: "음료" },
+        { name: "누텔라 촉촉 생크림 케이크", tag: "디저트" },
+        { name: "루돌프 쿠키 치즈 케이크", tag: "디저트" },
+        { name: "비프 멜트 바게트 샌드위치", tag: "식사" }
+      ],
+      src: { label: "매일신문", url: "https://www.imaeil.com/page/view/2026102109525179938" },
+      note: "푸드 7종은 22~25일 20% 할인해요" },
     { cat: "cafe", brand: "메가MGC커피", when: "10.29 출시 · 겨울 5종", date: "2026-10-29",
       items: [
         { name: "딥 초코 체리 프라페", tag: "음료", price: "4,400원", img: "https://img.mega-mgccoffee.com/megahp/manager/upload/menu/20261021185329_1792576409658_TSL3J4XMIy.png" },
