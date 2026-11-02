@@ -207,7 +207,7 @@ window.FOODYSSEY = {
     { kind: "메뉴", brand: "KFC", title: "닭껍질튀김", end: "2026-11-09", period: "10.13 발표 · ~ 11.9(월)",
       desc: "양을 기존의 2배로 늘렸고, 소스는 살사 대신 스파이시 마요가 나와요. 가을 시즌 한정이에요.",
       src: { label: "뉴스밸런스", url: "https://www.newsbalance.co.kr/news/view/1065609452679016" } },
-    { kind: "메뉴", brand: "배스킨라빈스", title: "11월 이달의 맛 '도우와줘요 호빵맨'", open: "11월 이달의 맛", period: "10.30 발표 · 종료일 미정",
+    { kind: "메뉴", brand: "배스킨라빈스", title: "도우와줘요 호빵맨", open: "11월 이달의 맛", period: "10.30 발표 · 종료일 미정",
       desc: "호빵맨과 함께 만든 이달의 맛이에요. 호빵맨 캐릭터를 쓴 아이스크림 케이크 2종과 리유저블 컵 음료(아이스 아메리카노, 납작복숭아 아이스티)도 나와요.",
       src: { label: "주간한국", url: "https://weekly.hankooki.com/news/articleView.html?idxno=7191453" } },
 
