@@ -539,7 +539,7 @@ function main() {
       pathName: brandPath(b),
       crumbList: [{ name: '홈', path: '/' }].concat(cat ? [{ name: cat.catName, path: catPath(cat.cat) }] : []).concat([{ name: b, path: brandPath(b) }]),
       groups: groupsFor(list, today),
-      extraHtml: brandSummary(list, today, b) + dataTable(list, today, `${b} 메뉴 한눈에 보기`),
+      extraHtml: brandSummary(list, today, b) + dataTable(list, today, `${b} 메뉴 한눈에 보기`) + descList(list, today),
       extra: cat ? sameCatBrands(all, today, cat.cat, b, cat.catName) : '',
       robots
     });
