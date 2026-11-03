@@ -702,6 +702,17 @@ footer .links a { margin-right: 14px; }
     var y = mainEl.getBoundingClientRect().top + window.scrollY - bar.offsetHeight;
     if (Math.abs(window.scrollY - y) > 4) window.scrollTo({ top: y, behavior: still.matches ? 'auto' : 'smooth' });
   });
+  // 이미 #limited(또는 #new)인 상태에서 같은 링크를 다시 누르면 주소가 안 바뀌어 hashchange가 안 일어나요.
+  // 그때도 목록 머리로 내려가게 해요.
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href="#new"], a[href="#limited"]');
+    if (!a || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey) return;
+    if (location.hash !== a.getAttribute('href') && !(a.getAttribute('href') === '#new' && location.hash === '')) return;
+    e.preventDefault();
+    show();
+    var y = mainEl.getBoundingClientRect().top + window.scrollY - bar.offsetHeight;
+    window.scrollTo({ top: y, behavior: still.matches ? 'auto' : 'smooth' });
+  });
   show();
 })();
 </script>
