@@ -399,12 +399,6 @@ footer .links a { margin-right: 14px; }
       </section>
     </div>
 
-    <section class="sec" aria-labelledby="trend-title">
-      <div class="sec-head"><h2 id="trend-title">요즘 많이 찾는 검색어</h2><small>최근 3일 검색량, 지난 4주 평균 대비</small></div>
-      <div class="trend" id="trend"></div>
-      <a class="src" id="trend-src" target="_blank" rel="noopener"></a>
-    </section>
-
     <section class="sec dir" aria-labelledby="dir-title">
       <div class="sec-head"><h2 id="dir-title">브랜드별로 보기</h2><small>메뉴를 누르면 가격·기간을 자세히 볼 수 있어요</small></div>
 <!-- build:upcoming -->
@@ -578,7 +572,7 @@ footer .links a { margin-right: 14px; }
 
   // 이번 주 화제
   function hot(box, hd, labelText) {
-    box.appendChild(el('span', { cls: 'label' }, [labelText, ' · ', el('b', { text: (hd.kicker.split('·')[1] || '').trim() })]));
+    box.appendChild(el('span', { cls: 'label', text: labelText }));
     box.appendChild(nameNode('h2', null, { name: hd.name, brand: hd.brandline.split('·')[0].trim(), price: hd.price, img: hd.img, imgFrom: hd.imgFrom }));
     box.appendChild(el('span', { cls: 'meta', text: hd.brandline }));
     if (hd.price) box.appendChild(el('span', { cls: 'price' }, [hd.price, hd.priceNote ? el('small', { text: hd.priceNote }) : null]));
@@ -651,7 +645,7 @@ footer .links a { margin-right: 14px; }
         ? el('span', { cls: 'd open', text: x.open || '기간 미정' })
         : el('span', { cls: 'd' + (o.d <= 3 ? ' urgent' : (o.d <= 14 ? ' near' : '')), text: dLabel(o.d) });
       var main = el('div', { cls: 'main' }, [
-        el('span', { cls: 'b' }, [x.brand, x.pop ? el('span', { cls: 'pop', text: '검색 ' + x.pop + '배' }) : null]),
+        el('span', { cls: 'b' }, [x.brand]),
         nameNode('h3', null, { name: x.title, brand: x.brand, price: x.price, img: x.img, imgFrom: x.imgFrom }),
         el('span', { cls: 'period', text: x.period })
       ]);
@@ -681,17 +675,6 @@ footer .links a { margin-right: 14px; }
       renderLimited(btn.dataset.sort);
     });
   });
-
-  // 검색 흐름
-  var max = Math.max.apply(null, D.trends.rows.map(function (r) { return r[1]; }));
-  var trend = document.getElementById('trend');
-  D.trends.rows.forEach(function (r) {
-    var bar = el('span', { cls: 'bar' }, [el('i', { cls: r[2] === 'limited' ? 'l' : 'n', style: 'width:' + (r[1] / max * 100).toFixed(1) + '%' })]);
-    trend.appendChild(el('div', { cls: 'bar-row' }, [el('span', { cls: 'label2', text: r[0] }), bar, el('span', { cls: 'x', text: r[1] + '배' })]));
-  });
-  var ts = document.getElementById('trend-src');
-  ts.href = D.trends.src.url;
-  ts.textContent = '출처: ' + D.trends.src.label + ' (' + D.trends.asOf + ')';
 
   // 신상/한정 전환 (#new, #limited)
   var tabs = document.querySelectorAll('.seg a');

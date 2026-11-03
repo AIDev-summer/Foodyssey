@@ -21,7 +21,7 @@ window.FOODYSSEY = {
   ],
 
   hotNew: {
-    kicker: "이번 주 가장 많이 찾은 신상 · 검색 2.5배",
+    kicker: "이번 주 가장 많이 찾은 신상",
     name: "알싹킹",
     brandline: "bhc · 10월 출시",
     desc: "고추, 양파, 대파로 맛을 낸 매콤한 치킨이에요. 튀김옷이 얇고, 맵싸소스와 파싹소스가 같이 와요.",
@@ -29,11 +29,10 @@ window.FOODYSSEY = {
   },
 
   hotLimited: {
-    kicker: "이번 주 가장 많이 찾은 한정 메뉴 · 검색 5.2배",
+    kicker: "이번 주 가장 많이 찾은 한정 메뉴",
     name: "빅아치",
     brandline: "맥도날드 · 10.22 출시 · 4~6주 한정",
     price: "12,400원",
-    img: "https://www.mcdonalds.co.kr/upload/2026/10/Corp_PC_VIEW_772x530_%EB%B9%85%EC%95%84%EC%B9%98_EVM.png",
     priceNote: "세트 13,900원 · 맥런치 세트 13,000원",
     specs: [["무게", "374g"], ["빅맥 대비", "+151g"], ["패티", "113g × 2"]],
     desc: "국내 맥도날드 버거 중 단품 가격이 가장 비싸요. 화이트 체다 3장에 크리스피 어니언이 들어가요. 반응을 보고 정규 메뉴로 바꿀지 정한대요.",
@@ -46,7 +45,7 @@ window.FOODYSSEY = {
       src: { label: "마이데일리", url: "https://www.mydaily.co.kr/page/view/2026101514360760582" },
       note: "스매시버거 매장 약 1,000곳에서 판매" },
     { cat: "burger", brand: "맥도날드", when: "10.29 출시", date: "2026-10-29",
-      items: [{ name: "게살 크림 크로켓 머핀", tag: "맥모닝", img: "https://www.mcdonalds.co.kr/upload/2026/10/Corp_PC_VIEW_772x530_%EA%B2%8C%EC%82%B4%ED%81%AC%EB%A6%BC%ED%81%AC%EB%A1%9C%EC%BC%93%EB%A8%B8%ED%95%80_EVB.png", imgFrom: "맥도날드 공식 홈페이지 (세트 사진)", desc: "5월에 나온 '와사비 게살 크림 크로켓 버거'의 크로켓을 맥모닝으로 다시 만든 메뉴예요. 스위트 칠리 소스와 화이트 마요 소스, 토마토, 양상추를 갓 구운 잉글리시 머핀에 넣었어요. 일부 특수 매장은 판매에서 빠져요." }],
+      items: [{ name: "게살 크림 크로켓 머핀", tag: "맥모닝", desc: "5월에 나온 '와사비 게살 크림 크로켓 버거'의 크로켓을 맥모닝으로 다시 만든 메뉴예요. 스위트 칠리 소스와 화이트 마요 소스, 토마토, 양상추를 갓 구운 잉글리시 머핀에 넣었어요. 일부 특수 매장은 판매에서 빠져요." }],
       src: { label: "데일리안", url: "https://www.dailian.co.kr/news/view/1707077/%EB%A7%A5%EB%8F%84%EB%82%A0%EB%93%9C-%EA%B2%8C%EC%82%B4-%ED%81%AC%EB%A6%BC-%ED%81%AC%EB%A1%9C%EC%BC%93-%EB%A8%B8%ED%95%80-%EB%A7%A5%EB%AA%A8-2026" },
       note: "오전 4시부터 10시 30분까지 팔아요" },
     { cat: "burger", brand: "노브랜드버거", when: "10.15 출시", date: "2026-10-15",
@@ -77,27 +76,27 @@ window.FOODYSSEY = {
       note: "전국 푸라닭 가맹점에서 팔아요" },
     { cat: "chicken", brand: "교촌치킨", when: "10.22 출시", date: "2026-10-22",
       items: [
-        { name: "허니윙콤비", tag: "신메뉴", price: "24,000원", img: "https://www.kyochon.com/uploadFiles/TB_ITEM/list_Honey%20Wing%20Combo.png" },
-        { name: "허니옥수수윙콤비", tag: "신메뉴", price: "25,000원", img: "https://www.kyochon.com/uploadFiles/TB_ITEM/list_Honey%20Corn%20Wing%20Combo.png" },
-        { name: "허니옥수수윙박스 (16·20조각)", tag: "신메뉴", price: "23,000·24,000원", img: "https://www.kyochon.com/uploadFiles/TB_ITEM/list_Honey%20Corn%20Wing%20Box_20pcs.png", desc: "2024년 7월에 나온 허니옥수수 시리즈(옥수수를 활용한 단맛 치킨)를 날개 부위로 넓힌 메뉴예요. 기존 한 마리·순살 메뉴에 허니옥수수윙콤비, 윙박스 2종(20조각·16조각), 싱글윙이 더해졌어요. 교촌은 허니옥수수가 10~20대 소비자 비중이 높은 메뉴라고 설명했어요." },
-        { name: "허니옥수수싱글윙", tag: "신메뉴", price: "8,500원", img: "https://www.kyochon.com/uploadFiles/TB_ITEM/list_Honey%20Corn%20Single.png" }
+        { name: "허니윙콤비", tag: "신메뉴", price: "24,000원" },
+        { name: "허니옥수수윙콤비", tag: "신메뉴", price: "25,000원" },
+        { name: "허니옥수수윙박스 (16·20조각)", tag: "신메뉴", price: "23,000·24,000원", desc: "2024년 7월에 나온 허니옥수수 시리즈(옥수수를 활용한 단맛 치킨)를 날개 부위로 넓힌 메뉴예요. 기존 한 마리·순살 메뉴에 허니옥수수윙콤비, 윙박스 2종(20조각·16조각), 싱글윙이 더해졌어요. 교촌은 허니옥수수가 10~20대 소비자 비중이 높은 메뉴라고 설명했어요." },
+        { name: "허니옥수수싱글윙", tag: "신메뉴", price: "8,500원" }
       ],
       src: { label: "비즈트리뷴", url: "https://www.biztribune.co.kr/news/articleView.html?idxno=361110" },
       note: "가격은 교촌 홈페이지 권장소비자가격이에요" },
     { cat: "chicken", brand: "교촌치킨", when: "10.1 출시", date: "2026-10-01",
       items: [
-        { name: "웨지고구마 · 웨지반반", tag: "사이드", plain: true, price: "4,500·8,000원", img: "https://www.kyochon.com/uploadFiles/TB_ITEM/list_Seasoned-Wedge-Potatoes.png", desc: "웨지고구마는 속살이 노랗고 단맛이 나는 인도네시아산 고구마를 도톰한 웨지 모양으로 썰어 튀긴 사이드예요. 시나몬슈가가 함께 나와서 취향대로 뿌려 먹어요. 웨지반반은 웨지고구마와 기존 사이드인 웨지감자를 한 팩에 반씩 담아 두 가지 맛을 같이 먹게 한 구성이에요. 가격은 교촌 홈페이지 권장소비자가격이에요." }
+        { name: "웨지고구마 · 웨지반반", tag: "사이드", plain: true, price: "4,500·8,000원", desc: "웨지고구마는 속살이 노랗고 단맛이 나는 인도네시아산 고구마를 도톰한 웨지 모양으로 썰어 튀긴 사이드예요. 시나몬슈가가 함께 나와서 취향대로 뿌려 먹어요. 웨지반반은 웨지고구마와 기존 사이드인 웨지감자를 한 팩에 반씩 담아 두 가지 맛을 같이 먹게 한 구성이에요. 가격은 교촌 홈페이지 권장소비자가격이에요." }
       ],
       src: { label: "프라임경제", url: "https://www.newsprime.co.kr/news/article/?no=749669" },
       note: "웨지반반은 웨지고구마와 웨지감자를 반씩 담았어요 · 가격은 교촌 홈페이지 권장소비자가격" },
 
     { cat: "bakery", brand: "파리바게뜨", when: "10.15 출시 · 치즈 5종", date: "2026-10-15",
       items: [
-        { name: "멕시칸 핫도그", tag: "신제품", img: "https://d2afncas1tel3t.cloudfront.net/wp-content/uploads/2026/09/5000240-%EB%A9%95%EC%8B%9C%EC%B9%B8%ED%95%AB%EB%8F%84%EA%B7%B8.png", desc: "파마산 치즈와 뽀드득한 식감의 긴 소시지에 짭짤한 치즈와 매콤한 치폴레 소스를 조합한 소시지빵이에요." },
-        { name: "고다치즈 올리브식빵", tag: "신제품", img: "https://d2afncas1tel3t.cloudfront.net/wp-content/uploads/2026/09/%EA%B3%A0%EB%8B%A4%EC%B9%98%EC%A6%88-%EC%98%AC%EB%A6%AC%EB%B8%8C%EC%8B%9D%EB%B9%B5-Whole.png", desc: "고다치즈와 체다치즈에 블랙·그린 올리브를 더한 식빵이에요. 고다치즈의 고소함과 체다치즈의 진한 맛에 올리브의 씹는 맛을 살렸어요." },
-        { name: "치즈 소보루빵", tag: "신제품", img: "https://d2afncas1tel3t.cloudfront.net/wp-content/uploads/2026/09/%EC%B9%98%EC%A6%88%EC%86%8C%EB%B3%B4%EB%A3%A8%EB%B9%B5.png", desc: "바삭한 소보루 토핑에 고소하고 짭짤한 체다치즈를 더해 노릇하게 구운 빵이에요." },
-        { name: "크림치즈말랑", tag: "신제품", img: "https://d2afncas1tel3t.cloudfront.net/wp-content/uploads/2026/09/%ED%81%AC%EB%A6%BC%EC%B9%98%EC%A6%88%EB%A7%90%EB%9E%91.png", desc: "달콤하고 고소한 크림치즈에 짭조름한 치즈 토핑을 더해 단맛과 짠맛을 맞춘 간식이에요." },
-        { name: "모짜렐라 치즈봉", tag: "신제품", img: "https://d2afncas1tel3t.cloudfront.net/wp-content/uploads/2026/09/%EB%B0%94%EC%82%AD%EB%AA%A8%EC%A7%9C%EB%A0%90%EB%9D%BC%EC%B9%98%EC%A6%88%EB%B4%89.png", desc: "모짜렐라 치즈를 넣고 바삭하게 튀긴 간식이에요. 따뜻하게 데우면 겉은 바삭하고 속의 치즈가 길게 늘어나요." }
+        { name: "멕시칸 핫도그", tag: "신제품", desc: "파마산 치즈와 뽀드득한 식감의 긴 소시지에 짭짤한 치즈와 매콤한 치폴레 소스를 조합한 소시지빵이에요." },
+        { name: "고다치즈 올리브식빵", tag: "신제품", desc: "고다치즈와 체다치즈에 블랙·그린 올리브를 더한 식빵이에요. 고다치즈의 고소함과 체다치즈의 진한 맛에 올리브의 씹는 맛을 살렸어요." },
+        { name: "치즈 소보루빵", tag: "신제품", desc: "바삭한 소보루 토핑에 고소하고 짭짤한 체다치즈를 더해 노릇하게 구운 빵이에요." },
+        { name: "크림치즈말랑", tag: "신제품", desc: "달콤하고 고소한 크림치즈에 짭조름한 치즈 토핑을 더해 단맛과 짠맛을 맞춘 간식이에요." },
+        { name: "모짜렐라 치즈봉", tag: "신제품", desc: "모짜렐라 치즈를 넣고 바삭하게 튀긴 간식이에요. 따뜻하게 데우면 겉은 바삭하고 속의 치즈가 길게 늘어나요." }
       ],
       src: { label: "싱글리스트", url: "https://www.slist.kr/news/articleView.html?idxno=773578" } },
     { cat: "bakery", brand: "뚜레쥬르", when: "10.15 출시 · 가을 5종", date: "2026-10-15",
@@ -116,13 +115,13 @@ window.FOODYSSEY = {
 
     { cat: "cafe", brand: "이디야커피", when: "10.22 출시 · 푸드 9종", date: "2026-10-22",
       items: [
-        { name: "와그작 생 초코파이", tag: "디저트", img: "https://www.ediya.com/files/menu/IMG_1792465407166.png" },
+        { name: "와그작 생 초코파이", tag: "디저트" },
         { name: "딸기 쏙쏙 모찌떡", tag: "디저트" },
-        { name: "말차초코 크림파운드", tag: "디저트", img: "https://www.ediya.com/files/menu/IMG_1792465705645.png" },
-        { name: "촉촉한 치즈 수플레", tag: "디저트", img: "https://www.ediya.com/files/menu/IMG_1792466041370.png", desc: "달걀흰자 거품을 넣어 부풀려 구운 수플레 디저트예요. 이디야가 새로 개발한 디저트 4종 중 하나예요." },
-        { name: "햄 치즈 스크램블 브리오슈", tag: "식사", img: "https://www.ediya.com/files/menu/IMG_1792466490538.png", desc: "버터와 달걀을 많이 넣어 만든 프랑스 빵 브리오슈로 만든 식사 대용 메뉴예요. 새로 개발한 식사 대용 3종 중 하나예요." },
-        { name: "콘치즈 토스트", tag: "식사", img: "https://www.ediya.com/files/menu/IMG_1792466629165.png" },
-        { name: "저당 콤비네이션 포켓피자", tag: "식사", img: "https://www.ediya.com/files/menu/IMG_1792466815753.png" },
+        { name: "말차초코 크림파운드", tag: "디저트" },
+        { name: "촉촉한 치즈 수플레", tag: "디저트", desc: "달걀흰자 거품을 넣어 부풀려 구운 수플레 디저트예요. 이디야가 새로 개발한 디저트 4종 중 하나예요." },
+        { name: "햄 치즈 스크램블 브리오슈", tag: "식사", desc: "버터와 달걀을 많이 넣어 만든 프랑스 빵 브리오슈로 만든 식사 대용 메뉴예요. 새로 개발한 식사 대용 3종 중 하나예요." },
+        { name: "콘치즈 토스트", tag: "식사" },
+        { name: "저당 콤비네이션 포켓피자", tag: "식사" },
         { name: "스틱 츄러스 · 브리오슈 소금빵", tag: "리뉴얼", plain: true, desc: "기존에 팔던 메뉴의 맛과 상품성을 보완해 새로 내놓은 리뉴얼 메뉴예요." }
       ],
       src: { label: "베타뉴스", url: "https://www.betanews.net/article/view/beta202610220164" } },
@@ -131,11 +130,11 @@ window.FOODYSSEY = {
       src: { label: "프라임경제", url: "https://www.newsprime.co.kr/news/article/?no=749669" } },
     { cat: "cafe", brand: "메가MGC커피", when: "10.29 출시 · 겨울 5종", date: "2026-10-29",
       items: [
-        { name: "딥 초코 체리 프라페", tag: "음료", price: "4,400원", img: "https://img.mega-mgccoffee.com/megahp/manager/upload/menu/20261021185329_1792576409658_TSL3J4XMIy.png" },
-        { name: "쫀득 모찌 밀크티", tag: "음료", price: "3,800원", img: "https://img.mega-mgccoffee.com/megahp/manager/upload/menu/20261021185621_1792576581002_NyaJL6AVnt.png" },
-        { name: "매실 모과차", tag: "음료", price: "3,500원", img: "https://img.mega-mgccoffee.com/megahp/manager/upload/menu/20261021185422_1792576462096_Ju7aC8KXEI.png" },
-        { name: "바삭허니 엠지씨네 컵치킨", tag: "푸드", price: "4,400원", img: "https://img.mega-mgccoffee.com/megahp/manager/upload/menu/20261021185720_1792576640171_6Y1WcMmn0X.png" },
-        { name: "엠지씨네 마라 떡볶이", tag: "푸드", price: "4,400원", img: "https://img.mega-mgccoffee.com/megahp/manager/upload/menu/20261021185813_1792576693475_CPlWEhkpD0.png" }
+        { name: "딥 초코 체리 프라페", tag: "음료", price: "4,400원" },
+        { name: "쫀득 모찌 밀크티", tag: "음료", price: "3,800원" },
+        { name: "매실 모과차", tag: "음료", price: "3,500원" },
+        { name: "바삭허니 엠지씨네 컵치킨", tag: "푸드", price: "4,400원" },
+        { name: "엠지씨네 마라 떡볶이", tag: "푸드", price: "4,400원" }
       ],
       src: { label: "금강일보", url: "https://www.ggilbo.com/news/articleView.html?idxno=1189936" },
       note: "29일부터 18일간 신규 음료 3종을 6일씩 돌아가며 500원 할인해요" },
@@ -247,7 +246,7 @@ window.FOODYSSEY = {
     { kind: "이벤트", brand: "쉐이크쉑", title: "세트 업그레이드 쿠폰", end: "2026-10-31", period: "~ 10.31(토)",
       desc: "쉑하우스 바비큐 시리즈 출시를 기념한 쿠폰이에요. 쉐이크쉑 공식 카카오톡 채널에서 받아, 신제품 버거를 단품으로 살 때 세트로 올려 먹을 수 있었어요.",
       src: { label: "식품투데이", url: "https://www.foodtoday.or.kr/news/article.html?no=208450" } },
-    { kind: "메뉴", brand: "맥도날드", title: "빅아치", price: "12,400원", img: "https://www.mcdonalds.co.kr/upload/2026/10/Corp_PC_VIEW_772x530_%EB%B9%85%EC%95%84%EC%B9%98_EVM.png", imgFrom: "맥도날드 공식 홈페이지 (세트 사진)", pop: 5.2, end: "2026-11-19", endLate: "2026-12-03",
+    { kind: "메뉴", brand: "맥도날드", title: "빅아치", price: "12,400원", pop: 5.2, end: "2026-11-19", endLate: "2026-12-03",
       period: "10.22 출시 · 11.19~12.3 사이 종료 예상",
       desc: "4~6주 한정이라 종료일이 정확히 나오지 않았어요. 빠르면 11월 19일에 끝날 수 있어요.",
       src: { label: "재경일보", url: "https://news.jkn.co.kr/post/1039964" } },
@@ -278,18 +277,4 @@ window.FOODYSSEY = {
       desc: "트러플 머쉬룸 와퍼는 2017년 기간 한정으로 처음 나온 뒤 2023년에 다시 나왔고, 이후 4년 연속 가을마다 돌아온 버거킹의 대표 계절 메뉴예요. 트러플 크림소스와 4가지 버섯, 직화 패티가 들어가요. 핫 트러플 머쉬룸 와퍼는 매콤한 소스를 더해 2년 연속 팔고, 메종 트러플 치즈 버거는 브리오슈 번과 트러플 치즈를 쓴 올해 첫 메뉴예요. 딥 트러플 프라이와 트러플 머쉬룸 파이로얄(파이로얄에 트러플 소스)도 같이 나왔어요. 버거 세트는 11,900원(메종은 12,700원)이고, 일부 매장을 뺀 전국 매장에서 팔아요.",
       src: { label: "아시아경제", url: "https://view.asiae.co.kr/article/2026091608122210585" } }
   ],
-
-  trends: {
-    asOf: "10.28",
-    src: { label: "블로그 키워드 추천 집계", url: "https://github.com/kangeunseo04/blog-keywords/issues/55" },
-    rows: [
-      ["스타벅스 프리퀀시", 5.8, "limited"],
-      ["맥도날드 빅아치", 5.2, "limited"],
-      ["컴포즈 신메뉴", 2.9, "new"],
-      ["알싹킹", 2.5, "new"],
-      ["스타벅스 신메뉴", 1.9, "new"],
-      ["이디야 신메뉴", 1.8, "new"],
-      ["메가커피 신메뉴", 1.7, "new"]
-    ]
-  }
 };
