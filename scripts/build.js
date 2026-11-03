@@ -4,7 +4,7 @@
 // - menu/<브랜드-메뉴>.html, brand/<브랜드>.html, cat/<업종>.html 을 새로 써요.
 // - data/archive.json 에 한 번이라도 올라온 메뉴를 모두 기록해요. data.js에서 빠져도 페이지는 "판매 종료"로 남아요.
 // - index.html 안의 <!-- build:directory --> 사이(브랜드별 메뉴 목록)와 <!-- build:jsonld --> 사이(구조화 데이터)를 다시 채워요.
-// GitHub Actions(.github/workflows/build-pages.yml)가 data.js가 바뀔 때마다 자동으로 돌려요.
+// GitHub Actions(.github/workflows/build-pages.yml)가 data.js가 바뀔 때마다 자동으로 돌려요. updates.html(업데이트 내역)도 여기서 만들어요.
 'use strict';
 const fs = require('fs');
 const path = require('path');
