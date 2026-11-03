@@ -5,6 +5,10 @@
   <url><loc>https://foodyssey.co.kr/contact</loc><changefreq>monthly</changefreq><priority>0.3</priority></url>
   <url><loc>https://foodyssey.co.kr/terms</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
   <url><loc>https://foodyssey.co.kr/privacy</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
+  <url><loc>https://foodyssey.co.kr/guide</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://foodyssey.co.kr/guide/starbucks-frequency</loc><lastmod>2026-11-03</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://foodyssey.co.kr/guide/christmas-cake-preorder</loc><lastmod>2026-11-03</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://foodyssey.co.kr/guide/limited-menu-duration</loc><lastmod>2026-11-03</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://foodyssey.co.kr/menu/bhc-%EC%95%8C%EC%8B%B9%ED%82%B9</loc><lastmod>2026-10-31</lastmod><priority>0.7</priority></url>
   <url><loc>https://foodyssey.co.kr/menu/bhc-%EC%BD%B0%EC%82%AD%EB%AA%A8%EC%A7%9C%ED%82%B9</loc><lastmod>2026-10-31</lastmod><priority>0.7</priority></url>
   <url><loc>https://foodyssey.co.kr/menu/kfc-%EB%8B%AD%EA%BB%8D%EC%A7%88%ED%8A%80%EA%B9%80</loc><lastmod>2026-11-02</lastmod><priority>0.7</priority></url>
