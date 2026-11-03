@@ -244,7 +244,6 @@ main .wrap { padding-block: 24px 56px; display: grid; gap: 40px; }
 .row .d.open { font-family: var(--f-body); font-weight: 600; font-size: 13px; line-height: 1.35; letter-spacing: 0; color: var(--muted); padding-top: 4px; }
 .row .main { min-width: 0; display: grid; gap: 4px; }
 .row .b { font-size: 13px; color: var(--muted); }
-.row .b .pop { margin-left: 8px; color: var(--hot); font-weight: 600; }
 .row h3 { margin: 0; font-size: 18px; font-weight: 700; line-height: 1.35; }
 .row .period { font-size: 13px; font-variant-numeric: tabular-nums; }
 .row p { margin: 2px 0 0; font-size: 13.5px; color: var(--muted); max-width: 60ch; text-wrap: pretty; }
@@ -374,7 +373,6 @@ footer .links a { margin-right: 14px; }
     <div class="tools" id="tools-new" data-view="new" role="group" aria-label="업종 고르기"></div>
     <div class="tools" id="tools-limited" data-view="limited" role="group" aria-label="정렬" hidden>
       <button class="chip" id="sort-deadline" data-sort="deadline" aria-pressed="true">마감순</button>
-      <button class="chip" id="sort-popular" data-sort="popular" aria-pressed="false">인기순</button>
     </div>
   </div>
 </div>
@@ -522,10 +520,6 @@ footer .links a { margin-right: 14px; }
     if (b.d === null) return -1;
     return a.d - b.d;
   }
-  function byPopular(a, b) {
-    var pa = a.x.pop || 0, pb = b.x.pop || 0;
-    return pa !== pb ? pb - pa : byDeadline(a, b);
-  }
 
   // 신상 개수
   var newCount = D.newItems.reduce(function (a, g) { return a + g.items.length; }, 0);
@@ -648,7 +642,7 @@ footer .links a { margin-right: 14px; }
   function renderLimited(mode) {
     rowsItem.innerHTML = '';
     rowsEvent.innerHTML = '';
-    lims.slice().sort(mode === 'popular' ? byPopular : byDeadline).forEach(function (o) {
+    lims.slice().sort(byDeadline).forEach(function (o) {
       var x = o.x;
       var d = o.d === null
         ? el('span', { cls: 'd open', text: x.open || '기간 미정' })
@@ -672,7 +666,7 @@ footer .links a { margin-right: 14px; }
     });
     if (!rowsItem.children.length) rowsItem.appendChild(el('li', { cls: 'empty', text: '지금 판매 중인 한정 메뉴가 없어요.' }));
     if (!rowsEvent.children.length) rowsEvent.appendChild(el('li', { cls: 'empty', text: '지금 진행 중인 이벤트가 없어요.' }));
-    var sub = mode === 'popular' ? '참고용 관심도(10월 말 기준) 순 · 수치 없는 건 마감순' : '마감 가까운 순 · 날짜 없는 건 맨 뒤';
+    var sub = '마감 가까운 순 · 날짜 없는 건 맨 뒤';
     document.getElementById('lim-item-sub').textContent = sub;
     document.getElementById('lim-event-sub').textContent = sub;
   }
