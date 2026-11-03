@@ -25,6 +25,13 @@ const BRAND_CAT = {
   '스타벅스': 'cafe', '이디야커피': 'cafe', '투썸플레이스': 'cafe', '메가MGC커피': 'cafe', '컴포즈커피': 'cafe', '빽다방': 'cafe', '할리스': 'cafe', '폴바셋': 'cafe', '공차': 'cafe', '배스킨라빈스': 'cafe'
 };
 
+// 가이드(/guide) 글: data.js 근거로 손으로 쓴 고정 HTML이라 sitemap에만 메타를 등록해요.
+const GUIDES = [
+  { slug: 'starbucks-frequency', updated: '2026-11-03' },
+  { slug: 'christmas-cake-preorder', updated: '2026-11-03' },
+  { slug: 'limited-menu-duration', updated: '2026-11-03' }
+];
+
 // ---------- 데이터 읽기 ----------
 function loadData() {
   const code = fs.readFileSync(path.join(ROOT, 'data.js'), 'utf8');
@@ -217,11 +224,11 @@ ${jsonld.map((j) => `<script type="application/ld+json">${JSON.stringify(j).repl
 <link rel="stylesheet" href="/pages.css">
 </head>
 <body>
-<header><div class="wrap"><a class="logo" href="/">푸디세이<span class="logo-en" lang="en">Food Odyssey</span></a><nav><a href="/#new">신상</a><a href="/#limited">한정</a><a href="/season/christmas">연말</a><a href="/updates">업데이트</a><button class="theme-btn" id="theme-btn" type="button" aria-label="다크모드 켜기"><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button></nav></div></header>
+<header><div class="wrap"><a class="logo" href="/">푸디세이<span class="logo-en" lang="en">Food Odyssey</span></a><nav><a href="/#new">신상</a><a href="/#limited">한정</a><a href="/season/christmas">연말</a><a href="/guide">가이드</a><a href="/updates">업데이트</a><button class="theme-btn" id="theme-btn" type="button" aria-label="다크모드 켜기"><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button></nav></div></header>
 `;
 }
 function foot() {
-  return `<footer><div class="wrap"><p>메뉴와 가격은 매장마다 다를 수 있어요. 주문 전에 브랜드 공식 앱이나 매장에서 한 번 더 확인해 주세요. 푸디세이는 각 브랜드와 관계없는 독립 사이트예요.</p><p class="links"><a href="/">홈</a><a href="/about">소개</a><a href="/updates">업데이트 내역</a><a href="/terms">이용약관</a><a href="/privacy">개인정보처리방침</a><a href="/contact">문의</a></p></div></footer>
+  return `<footer><div class="wrap"><p>메뉴와 가격은 매장마다 다를 수 있어요. 주문 전에 브랜드 공식 앱이나 매장에서 한 번 더 확인해 주세요. 푸디세이는 각 브랜드와 관계없는 독립 사이트예요.</p><p class="links"><a href="/">홈</a><a href="/about">소개</a><a href="/guide">가이드</a><a href="/updates">업데이트 내역</a><a href="/terms">이용약관</a><a href="/privacy">개인정보처리방침</a><a href="/contact">문의</a></p></div></footer>
 <script src="/theme.js"></script>
 </body>
 </html>
@@ -395,11 +402,15 @@ function menuPage(r, all, today) {
   }
   if (r.src) body += `<p class="src">출처: <a href="${esc(r.src.url)}" target="_blank" rel="noopener nofollow">${esc(r.src.label)}</a></p>`;
 
-  const sameBrand = all.filter((x) => x.brand === r.brand && x.slug !== r.slug);
+  const sameBrand = all.filter((x) => x.brand === r.brand && x.kind === 'new' && x.slug !== r.slug);
   const sameCat = all.filter((x) => r.cat && x.cat === r.cat && x.brand !== r.brand && status(x, today) === 'on').slice(0, 8);
-  if (sameBrand.length) body += `<h2>${esc(r.brand)}의 다른 메뉴</h2><ul class="cards">${sameBrand.map((x) => card(x, status(x, today))).join('')}</ul>`;
+  const rPrice = priceNum(r.price);
+  // 가격이 비슷한(±15%, 최소 1,000원) 다른 브랜드 메뉴. 가격이 숫자로 확인된 것만 비교해요.
+  const similarPrice = rPrice ? all.filter((x) => x.brand !== r.brand && priceNum(x.price) && Math.abs(priceNum(x.price) - rPrice) <= Math.max(1000, rPrice * 0.15) && status(x, today) === 'on').slice(0, 8) : [];
+  if (sameBrand.length) body += `<h2>${esc(r.brand)}의 다른 신메뉴</h2><ul class="cards">${sameBrand.map((x) => card(x, status(x, today))).join('')}</ul>`;
   if (sameCat.length) body += `<h2>다른 브랜드 ${esc(r.catName)} 메뉴</h2><ul class="cards">${sameCat.map((x) => card(x, 'on')).join('')}</ul>`;
   body += compareHtml(r, all, today);
+  if (similarPrice.length) body += `<h2>비슷한 가격대 다른 브랜드</h2><ul class="cards">${similarPrice.map((x) => card(x, 'on')).join('')}</ul>`;
   if (r.firstSeen) body += `<p class="stamp">푸디세이 등록일 <time datetime="${esc(r.firstSeen)}">${esc(fmtDate(r.firstSeen))}</time> · 사이트 마지막 업데이트 <time datetime="${esc(UPDATED)}">${esc(fmtDate(UPDATED))}</time></p>`;
   body += exploreHtml(r.cat);
   body += `<p class="more"><a href="/">오늘의 새 메뉴·한정 메뉴 전체 보기 →</a></p>`;
@@ -587,7 +598,7 @@ function main() {
   }
 
   // sitemap.xml
-  const fixed = [{ loc: '/', lastmod: D.updated || today, pri: '1.0', freq: 'daily' }, { loc: '/about', pri: '0.3', freq: 'monthly' }, { loc: '/contact', pri: '0.3', freq: 'monthly' }, { loc: '/terms', pri: '0.2', freq: 'yearly' }, { loc: '/privacy', pri: '0.2', freq: 'yearly' }];
+  const fixed = [{ loc: '/', lastmod: D.updated || today, pri: '1.0', freq: 'daily' }, { loc: '/about', pri: '0.3', freq: 'monthly' }, { loc: '/contact', pri: '0.3', freq: 'monthly' }, { loc: '/terms', pri: '0.2', freq: 'yearly' }, { loc: '/privacy', pri: '0.2', freq: 'yearly' }, { loc: '/guide', pri: '0.5', freq: 'weekly' }].concat(GUIDES.map((g) => ({ loc: '/guide/' + g.slug, lastmod: g.updated, pri: '0.6', freq: 'monthly' })));
   const sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     + fixed.concat(urls).map((u) => `  <url><loc>${esc(SITE + href(u.loc))}</loc>${u.lastmod ? `<lastmod>${u.lastmod}</lastmod>` : ''}${u.freq ? `<changefreq>${u.freq}</changefreq>` : ''}<priority>${u.pri}</priority></url>`).join('\n')
     + '\n</urlset>\n';
