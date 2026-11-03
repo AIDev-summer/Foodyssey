@@ -44,3 +44,10 @@
 - GitHub Actions(`.github/workflows/build-pages.yml`)가 `data.js`가 main에 합쳐질 때와 매일 0시 10분(한국 시간)에 자동으로 돌려 main에 커밋해요. 직접 돌릴 필요는 없어요.
 - `data/archive.json`은 한 번이라도 올라온 메뉴를 모두 기억해요. `data.js`에서 빠지거나 마감일이 지나도 메뉴 페이지는 지우지 않고 "판매 종료"로 남겨요(지난 메뉴 검색 유입용).
 - `menu/`, `brand/`, `cat/`, `sitemap.xml`은 자동으로 만들어지는 파일이라 손으로 고치지 않아요. 문구나 모양은 `scripts/build.js`와 `pages.css`에서 고쳐요.
+
+## 메뉴 페이지 품질 규칙 (얇은 페이지 방지)
+
+- `newItems[].items[]`와 `limited[]`에 **`desc`**(그 메뉴만의 설명)를 넣어요. 기사 본문에 있는 사실만 쓰고, 묶음 공통 문구는 `note`에 적어요.
+- 가격·메뉴표(`lines`)가 없고 메뉴 자기 설명(`desc`)이 40자 미만이면 그 메뉴 페이지는 `noindex,follow`로 만들어지고 sitemap·RSS에서 빠져요(페이지는 남고 브랜드·업종·시즌 페이지에서 계속 연결돼요). 끝난 이벤트도 같아요.
+- 시즌 모음 페이지: 항목에 `season: "christmas"`를 달면 `/season/christmas`에 모여요.
+- 정적 페이지: `about.html`, `privacy.html`, `terms.html`(이용약관), `contact.html`(문의), `404.html`. 푸터에서 모두 이어져요.

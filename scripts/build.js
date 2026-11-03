@@ -79,7 +79,7 @@ function collect(D) {
         kind: 'new', brand: g.brand, cat: g.cat, name: it.name, tag: it.tag || '신메뉴',
         price: it.price || (h && h.price) || '', img: it.img || (h && h.img) || '', imgFrom: it.imgFrom || '',
         date: g.date || '', when: g.when || '', note: g.note || '', season: g.season || '',
-        desc: (h && h.desc) || '', specs: (h && h.specs) || null, priceNote: (h && h.priceNote) || '',
+        desc: it.desc || (h && h.desc) || '', specs: (h && h.specs) || null, priceNote: (h && h.priceNote) || '',
         group: g.items.length > 1 ? g.items.map((x) => x.name) : null,
         src: g.src || null
       });
@@ -133,8 +133,18 @@ function statusLabel(r, st) {
   return '지난 신메뉴';
 }
 
+// 검색에 노출하지 않을 페이지: 끝난 이벤트, 가격·메뉴표 없이 고유 설명이 짧은 메뉴.
+// (noindex,follow + sitemap·RSS 제외. 페이지는 지우지 않고 브랜드·업종·시즌 페이지에서 계속 연결해요.)
+function noindexReason(r, st) {
+  if (r.kind === 'event' && st !== 'on') return 'ended-event';
+  // 같은 묶음(group)의 메뉴는 묶음 공통 note가 아니라 메뉴 자기 설명(desc)만 고유 내용으로 쳐요.
+  const own = r.group ? (r.desc || '') : [r.desc, r.note].filter(Boolean).join(' ');
+  if (!r.price && !(r.lines && r.lines.length) && own.length < 40) return 'thin';
+  return '';
+}
+
 // ---------- 공통 틀 ----------
-function head({ title, desc, canonical, image, jsonld }) {
+function head({ title, desc, canonical, image, jsonld, robots }) {
   return `<!doctype html>
 <html lang="ko">
 <head>
@@ -143,7 +153,7 @@ function head({ title, desc, canonical, image, jsonld }) {
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(desc)}">
 <link rel="canonical" href="${esc(canonical)}">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+${robots ? `<meta name="robots" content="${robots}">\n` : ''}<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#1f9370">
@@ -194,7 +204,7 @@ ${jsonld.map((j) => `<script type="application/ld+json">${JSON.stringify(j).repl
 `;
 }
 function foot() {
-  return `<footer><div class="wrap"><p>메뉴와 가격은 매장마다 다를 수 있어요. 주문 전에 브랜드 공식 앱이나 매장에서 한 번 더 확인해 주세요. 푸디세이는 각 브랜드와 관계없는 독립 사이트예요.</p><p class="links"><a href="/">홈</a><a href="/about">소개</a><a href="/privacy">개인정보처리방침</a><a href="mailto:aidev.summer@gmail.com">문의</a></p></div></footer>
+  return `<footer><div class="wrap"><p>메뉴와 가격은 매장마다 다를 수 있어요. 주문 전에 브랜드 공식 앱이나 매장에서 한 번 더 확인해 주세요. 푸디세이는 각 브랜드와 관계없는 독립 사이트예요.</p><p class="links"><a href="/">홈</a><a href="/about">소개</a><a href="/terms">이용약관</a><a href="/privacy">개인정보처리방침</a><a href="/contact">문의</a></p></div></footer>
 <script src="/theme.js"></script>
 </body>
 </html>
@@ -290,7 +300,7 @@ function menuPage(r, all, today) {
   // 구글 제품 스니펫은 offers(가격)가 필수라서, 가격이 없는 메뉴는 Product 구조화 데이터를 넣지 않아요.
   const jsonld = (isEvent || !n) ? [cr.ld] : [cr.ld, product];
 
-  return head({ title, desc, canonical: SITE + href(menuPath(r)), image: r.img, jsonld })
+  return head({ title, desc, canonical: SITE + href(menuPath(r)), image: r.img, jsonld, robots: noindexReason(r, st) ? 'noindex,follow' : '' })
     + `<main><div class="wrap"><article>${cr.html}<p class="kicker">${esc(r.brand)} · ${esc(r.tag)}</p><h1>${esc(r.name)}</h1>${body}</article></div></main>\n`
     + ddayScript() + foot();
 }
@@ -376,8 +386,10 @@ function main() {
     fs.mkdirSync(p, { recursive: true });
   }
   const urls = [];
+  let noindexCount = 0;
   all.forEach((r) => {
     fs.writeFileSync(path.join(ROOT, 'menu', r.slug + '.html'), menuPage(r, all, today));
+    if (noindexReason(r, status(r, today))) { noindexCount++; return; }
     urls.push({ loc: menuPath(r), lastmod: r.firstSeen, pri: status(r, today) === 'on' ? '0.7' : '0.4' });
   });
 
@@ -424,7 +436,7 @@ function main() {
   });
 
   // sitemap.xml
-  const fixed = [{ loc: '/', lastmod: D.updated || today, pri: '1.0', freq: 'daily' }, { loc: '/about', pri: '0.3', freq: 'monthly' }, { loc: '/privacy', pri: '0.2', freq: 'yearly' }];
+  const fixed = [{ loc: '/', lastmod: D.updated || today, pri: '1.0', freq: 'daily' }, { loc: '/about', pri: '0.3', freq: 'monthly' }, { loc: '/contact', pri: '0.3', freq: 'monthly' }, { loc: '/terms', pri: '0.2', freq: 'yearly' }, { loc: '/privacy', pri: '0.2', freq: 'yearly' }];
   const sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     + fixed.concat(urls).map((u) => `  <url><loc>${esc(SITE + href(u.loc))}</loc>${u.lastmod ? `<lastmod>${u.lastmod}</lastmod>` : ''}${u.freq ? `<changefreq>${u.freq}</changefreq>` : ''}<priority>${u.pri}</priority></url>`).join('\n')
     + '\n</urlset>\n';
@@ -432,7 +444,7 @@ function main() {
 
   // rss.xml: 새로 올라온 메뉴 순(최근 50개). 네이버 서치어드바이저 RSS 제출용.
   const rfc = (d) => new Date(d + 'T09:00:00+09:00').toUTCString();
-  const feed = all.slice().sort((a, b) => (b.firstSeen + (b.date || '')).localeCompare(a.firstSeen + (a.date || ''))).slice(0, 50);
+  const feed = all.filter((r) => !noindexReason(r, status(r, today))).slice().sort((a, b) => (b.firstSeen + (b.date || '')).localeCompare(a.firstSeen + (a.date || ''))).slice(0, 50);
   const rss = '<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">\n<channel>\n'
     + `<title>푸디세이 · 프랜차이즈 새 메뉴와 한정 메뉴</title>\n<link>${SITE}/</link>\n<description>버거, 치킨, 피자, 빵, 분식, 커피 프랜차이즈의 새 메뉴와 기간 한정 메뉴를 매일 정리해요.</description>\n<language>ko</language>\n`
     + `<atom:link href="${SITE}/rss.xml" rel="self" type="application/rss+xml"/>\n<lastBuildDate>${rfc(D.updated || today)}</lastBuildDate>\n`
@@ -469,6 +481,11 @@ function main() {
       + '</div>';
   })).filter(Boolean).join('\n');
   idx = replaceBlock(idx, 'directory', dirHtml);
+  const lim = liveItems.filter((r) => r.kind !== 'new').sort((a, c) => (a.end || a.endLate || '9999').localeCompare(c.end || c.endLate || '9999'));
+  const limHtml = lim.length
+    ? '      <ul class="dir-lim">\n' + lim.map((r) => `        <li><a href="${href(menuPath(r))}"><b>${esc(r.brand)}</b> ${esc(r.name)}</a> <span>${esc([r.kind === 'event' ? '이벤트' : '한정 메뉴', r.period || r.open].filter(Boolean).join(' · '))}</span></li>`).join('\n') + '\n      </ul>'
+    : '';
+  idx = replaceBlock(idx, 'upcoming', limHtml);
   const idxLd = [
     { '@context': 'https://schema.org', '@type': 'WebSite', name: '푸디세이', alternateName: 'Foodyssey', url: SITE + '/' },
     { '@context': 'https://schema.org', '@type': 'ItemList', name: '프랜차이즈 새 메뉴와 한정 메뉴', itemListElement: liveItems.map((r, i) => ({ '@type': 'ListItem', position: i + 1, url: SITE + href(menuPath(r)), name: `${r.brand} ${r.name}` })) }
@@ -476,7 +493,7 @@ function main() {
   idx = replaceBlock(idx, 'jsonld', idxLd.map((j) => `<script type="application/ld+json">${JSON.stringify(j).replace(/</g, '\\u003c')}</script>`).join('\n'));
   fs.writeFileSync(idxFile, idx);
 
-  console.log(`메뉴 ${all.length}개(판매·진행 중 ${liveItems.length}), 브랜드 ${brands.length}개, 업종 ${D.cats.length}개 페이지를 만들었어요.`);
+  console.log(`메뉴 ${all.length}개(판매·진행 중 ${liveItems.length}, 검색 제외 noindex ${noindexCount}), 브랜드 ${brands.length}개, 업종 ${D.cats.length}개 페이지를 만들었어요.`);
 }
 
 main();
