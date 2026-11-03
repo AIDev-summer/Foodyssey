@@ -51,3 +51,4 @@
 - 가격·메뉴표(`lines`)가 없고 메뉴 자기 설명(`desc`)이 40자 미만이면 그 메뉴 페이지는 `noindex,follow`로 만들어지고 sitemap·RSS에서 빠져요(페이지는 남고 브랜드·업종·시즌 페이지에서 계속 연결돼요). 끝난 이벤트도 같아요.
 - 시즌 모음 페이지: 항목에 `season: "christmas"`를 달면 `/season/christmas`에 모여요.
 - 정적 페이지: `about.html`, `privacy.html`, `terms.html`(이용약관), `contact.html`(문의), `404.html`. 푸터에서 모두 이어져요.
+- `updates.html`(업데이트 내역)은 `scripts/build.js`가 `data/archive.json`의 등록일(firstSeen)로 만들어요. 홈·허브·메뉴 페이지의 "마지막 업데이트" 날짜는 `data.js`의 `updated` 값이에요(그래서 데이터를 고칠 때 `updated`를 꼭 바꿔요).

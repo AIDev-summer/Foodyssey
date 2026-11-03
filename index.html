@@ -291,6 +291,8 @@ main .wrap { padding-block: 24px 56px; display: grid; gap: 40px; }
 .dir p { margin: 0 0 4px; font-size: 13.5px; line-height: 1.7; color: var(--muted); }
 .dir p a { color: var(--muted); }
 .dir .dir-brand { color: var(--ink); font-weight: 600; text-decoration: none; margin-right: 4px; }
+.stamp { color: var(--muted); font-size: 12.5px; margin: 8px 0 0; }
+.stamp a { color: inherit; }
 .dir-lim { list-style: none; margin: 0 0 18px; padding: 0; display: grid; gap: 6px; font-size: 13.5px; }
 .dir-lim li span { color: var(--muted); margin-left: 6px; font-size: 12.5px; }
 footer { color: var(--muted); font-size: 12px; border-top: 1px solid var(--line); padding-top: 16px; display: grid; gap: 4px; }
@@ -336,6 +338,8 @@ footer .links a { margin-right: 14px; }
   <div class="wrap">
     <h1 id="headline">새로 나온 메뉴와<br>곧 사라질 메뉴</h1>
     <p>버거, 치킨, 피자, 빵, 분식, 커피까지. 프랜차이즈 새 메뉴와 기간 한정 메뉴를 매일 아침 기사로 확인해 정리해요.</p>
+      <p class="stamp"><!-- build:stamp -->
+<!-- /build:stamp --></p>
   </div>
 </section>
 
@@ -434,7 +438,7 @@ footer .links a { margin-right: 14px; }
     <footer>
       <p>푸디세이(Foodyssey)는 매일 아침 기사를 확인해 업데이트해요. 가격과 기간은 기사나 브랜드 공식 홈페이지에서 확인한 것만 적었어요.</p>
       <p>메뉴와 가격은 매장마다 다를 수 있어요. 푸디세이는 각 브랜드와 관계없는 독립 사이트예요.</p>
-      <p class="links"><a href="/about">소개</a><a href="/terms">이용약관</a><a href="/privacy">개인정보처리방침</a><a href="/contact">문의</a></p>
+      <p class="links"><a href="/about">소개</a><a href="/updates">업데이트 내역</a><a href="/terms">이용약관</a><a href="/privacy">개인정보처리방침</a><a href="/contact">문의</a></p>
     </footer>
   </div>
 </main>

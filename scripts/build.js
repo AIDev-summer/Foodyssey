@@ -143,6 +143,15 @@ function noindexReason(r, st) {
   return '';
 }
 
+let UPDATED = '';
+let CATS = [];
+const stampHtml = () => UPDATED ? `<p class="stamp">마지막 업데이트 <time datetime="${esc(UPDATED)}">${esc(fmtDate(UPDATED))}</time> · 매일 아침 기사를 확인해요 · <a href="/updates">업데이트 내역</a></p>` : '';
+// 다음 페이지로 이어지는 링크 모음(업종·시즌·업데이트 내역)
+function exploreHtml(exceptCat) {
+  const cats = CATS.filter((c) => c.id !== exceptCat).map((c) => `<a href="${href(catPath(c.id))}">${esc(c.name)}</a>`);
+  return `<h2>더 둘러보기</h2><p class="explore">${cats.concat([`<a href="${href(seasonPath('christmas'))}">크리스마스·연말 메뉴</a>`, '<a href="/updates">업데이트 내역</a>']).join(' · ')}</p>`;
+}
+
 // ---------- 공통 틀 ----------
 function head({ title, desc, canonical, image, jsonld, robots }) {
   return `<!doctype html>
@@ -200,11 +209,11 @@ ${jsonld.map((j) => `<script type="application/ld+json">${JSON.stringify(j).repl
 <link rel="stylesheet" href="/pages.css">
 </head>
 <body>
-<header><div class="wrap"><a class="logo" href="/">푸디세이<span class="logo-en" lang="en">Food Odyssey</span></a><nav><a href="/#new">신상</a><a href="/#limited">한정</a><button class="theme-btn" id="theme-btn" type="button" aria-label="다크모드 켜기"><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button></nav></div></header>
+<header><div class="wrap"><a class="logo" href="/">푸디세이<span class="logo-en" lang="en">Food Odyssey</span></a><nav><a href="/#new">신상</a><a href="/#limited">한정</a><a href="/season/christmas">연말</a><a href="/updates">업데이트</a><button class="theme-btn" id="theme-btn" type="button" aria-label="다크모드 켜기"><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button></nav></div></header>
 `;
 }
 function foot() {
-  return `<footer><div class="wrap"><p>메뉴와 가격은 매장마다 다를 수 있어요. 주문 전에 브랜드 공식 앱이나 매장에서 한 번 더 확인해 주세요. 푸디세이는 각 브랜드와 관계없는 독립 사이트예요.</p><p class="links"><a href="/">홈</a><a href="/about">소개</a><a href="/terms">이용약관</a><a href="/privacy">개인정보처리방침</a><a href="/contact">문의</a></p></div></footer>
+  return `<footer><div class="wrap"><p>메뉴와 가격은 매장마다 다를 수 있어요. 주문 전에 브랜드 공식 앱이나 매장에서 한 번 더 확인해 주세요. 푸디세이는 각 브랜드와 관계없는 독립 사이트예요.</p><p class="links"><a href="/">홈</a><a href="/about">소개</a><a href="/updates">업데이트 내역</a><a href="/terms">이용약관</a><a href="/privacy">개인정보처리방침</a><a href="/contact">문의</a></p></div></footer>
 <script src="/theme.js"></script>
 </body>
 </html>
@@ -251,6 +260,7 @@ function menuPage(r, all, today) {
   facts.push(['브랜드', `<a href="${href(brandPath(r.brand))}">${esc(r.brand)}</a>`]);
   if (r.catName) facts.push(['업종', `<a href="${href(catPath(r.cat))}">${esc(r.catName)}</a>`]);
   facts.push(['구분', esc(r.tag)]);
+  if (r.season && SEASONS[r.season]) facts.push(['모아보기', `<a href="${href(seasonPath(r.season))}">${esc(SEASONS[r.season].name)} 메뉴 전체</a>`]);
   if (r.price) facts.push(['가격', `<b class="mono">${esc(r.price)}</b>${r.priceNote ? ` <small>${esc(r.priceNote)}</small>` : ''}`]);
   if (r.kind === 'new' && r.date) facts.push([/발표/.test(r.when) ? '발표일' : '출시일', esc(fmtDate(r.date)) + (r.when && /[가-힣]/.test(r.when.replace(/출시|발표/g, '')) ? ` <small>(${esc(r.when)})</small>` : '')]);
   if (r.kind !== 'new') {
@@ -286,6 +296,8 @@ function menuPage(r, all, today) {
   const sameCat = all.filter((x) => r.cat && x.cat === r.cat && x.brand !== r.brand && status(x, today) === 'on').slice(0, 8);
   if (sameBrand.length) body += `<h2>${esc(r.brand)}의 다른 메뉴</h2><ul class="cards">${sameBrand.map((x) => card(x, status(x, today))).join('')}</ul>`;
   if (sameCat.length) body += `<h2>다른 브랜드 ${esc(r.catName)} 메뉴</h2><ul class="cards">${sameCat.map((x) => card(x, 'on')).join('')}</ul>`;
+  if (r.firstSeen) body += `<p class="stamp">푸디세이 등록일 <time datetime="${esc(r.firstSeen)}">${esc(fmtDate(r.firstSeen))}</time> · 사이트 마지막 업데이트 <time datetime="${esc(UPDATED)}">${esc(fmtDate(UPDATED))}</time></p>`;
+  body += exploreHtml(r.cat);
   body += `<p class="more"><a href="/">오늘의 새 메뉴·한정 메뉴 전체 보기 →</a></p>`;
 
   const cr = crumbs([{ name: '홈', path: '/' }, { name: r.brand, path: brandPath(r.brand) }, { name: r.name, path: menuPath(r) }]);
@@ -319,14 +331,14 @@ function ddayScript() {
 }
 
 // ---------- 목록 페이지(브랜드, 업종) ----------
-function listPage({ title, h1, kicker, intro, pathName, crumbList, groups, extraHtml }) {
+function listPage({ title, h1, kicker, intro, pathName, crumbList, groups, extraHtml, extra }) {
   const cr = crumbs(crumbList);
   const flat = groups.flatMap((g) => g.items);
   const ld = { '@context': 'https://schema.org', '@type': 'ItemList', name: h1, itemListElement: flat.map((x, i) => ({ '@type': 'ListItem', position: i + 1, url: SITE + href(menuPath(x.r)), name: `${x.r.brand} ${x.r.name}` })) };
   const body = groups.filter((g) => g.items.length).map((g) => `<h2>${esc(g.title)}</h2><ul class="cards">${g.items.map((x) => card(x.r, x.st)).join('')}</ul>`).join('');
   const desc = `${intro} ${flat.filter((x) => x.st === 'on').slice(0, 6).map((x) => x.r.name).join(', ')}`.slice(0, 155);
   return head({ title, desc, canonical: SITE + href(pathName), jsonld: [cr.ld, ld] })
-    + `<main><div class="wrap"><article>${cr.html}<p class="kicker">${esc(kicker)}</p><h1>${esc(h1)}</h1><p>${esc(intro)}</p>${extraHtml || ''}${body}<p class="more"><a href="/">오늘의 새 메뉴·한정 메뉴 전체 보기 →</a></p></article></div></main>\n`
+    + `<main><div class="wrap"><article>${cr.html}<p class="kicker">${esc(kicker)}</p><h1>${esc(h1)}</h1><p>${esc(intro)}</p>${stampHtml()}${extraHtml || ''}${body}${extra || ''}${exploreHtml(pathName.startsWith('/cat/') ? pathName.slice(5) : '')}<p class="more"><a href="/">오늘의 새 메뉴·한정 메뉴 전체 보기 →</a></p></article></div></main>\n`
     + foot();
 }
 // 크리스마스 시즌 페이지용: 브랜드별 케이크 가격·사전예약 마감일 비교표.
@@ -350,6 +362,10 @@ function christmasCompareTable(list) {
     + `<table class="compare"><thead><tr><th>브랜드</th><th>케이크 종류</th><th>가격</th><th>사전예약 마감</th></tr></thead><tbody>`
     + rows.map((r) => `<tr><td>${esc(r.brand)}</td><td>${r.count}종</td><td>${esc(r.price)}</td><td>${esc(r.deadline)}</td></tr>`).join('')
     + `</tbody></table>`;
+}
+function sameCatBrands(all, today, catId, brand, catName) {
+  const bs = [...new Set(all.filter((r) => r.cat === catId && r.brand !== brand && status(r, today) === 'on').map((r) => r.brand))];
+  return bs.length ? `<h2>다른 ${esc(catName)} 브랜드</h2><p class="explore">${bs.map((x) => `<a href="${href(brandPath(x))}">${esc(x)}</a>`).join(' · ')}</p>` : '';
 }
 function sortRecent(a, b) {
   const ka = a.r.date || a.r.end || a.r.firstSeen || '', kb = b.r.date || b.r.end || b.r.firstSeen || '';
@@ -377,6 +393,8 @@ function replaceBlock(html, name, inner) {
 function main() {
   const today = kstToday();
   const D = loadData();
+  UPDATED = D.updated || today;
+  CATS = D.cats;
   const { items, catName } = collect(D);
   const all = mergeArchive(items, today);
 
@@ -402,10 +420,11 @@ function main() {
       intro: `${b}에서 최근 새로 나온 메뉴와 기간 한정 메뉴, 이벤트를 모았어요. 매일 아침 기사를 확인해 업데이트해요.`,
       pathName: brandPath(b),
       crumbList: [{ name: '홈', path: '/' }].concat(cat ? [{ name: cat.catName, path: catPath(cat.cat) }] : []).concat([{ name: b, path: brandPath(b) }]),
-      groups: groupsFor(list, today)
+      groups: groupsFor(list, today),
+      extra: cat ? sameCatBrands(all, today, cat.cat, b, cat.catName) : ''
     });
     fs.writeFileSync(path.join(ROOT, 'brand', slug(b) + '.html'), page);
-    urls.push({ loc: brandPath(b), lastmod: list.map((r) => r.firstSeen).sort().pop(), pri: '0.6' });
+    urls.push({ loc: brandPath(b), lastmod: UPDATED, pri: '0.6' });
   });
 
   D.cats.forEach((c) => {
@@ -415,10 +434,11 @@ function main() {
       title: `${c.name} 프랜차이즈 신메뉴·한정 메뉴 | 푸디세이`, h1: `${c.name} 신메뉴·한정 메뉴`, kicker: '업종',
       intro: `${bs.join(', ')} 등 ${c.name} 프랜차이즈의 새 메뉴와 기간 한정 메뉴를 최근 순으로 모았어요.`,
       pathName: catPath(c.id), crumbList: [{ name: '홈', path: '/' }, { name: c.name, path: catPath(c.id) }],
-      groups: groupsFor(list, today)
+      groups: groupsFor(list, today),
+      extra: bs.length ? `<h2>${esc(c.name)} 브랜드</h2><p class="explore">${bs.map((x) => `<a href="${href(brandPath(x))}">${esc(x)}</a>`).join(' · ')}</p>` : ''
     });
     fs.writeFileSync(path.join(ROOT, 'cat', c.id + '.html'), page);
-    urls.push({ loc: catPath(c.id), lastmod: list.map((r) => r.firstSeen).sort().pop(), pri: '0.6' });
+    urls.push({ loc: catPath(c.id), lastmod: UPDATED, pri: '0.6' });
   });
 
   Object.keys(SEASONS).forEach((sid) => {
@@ -432,8 +452,20 @@ function main() {
       extraHtml: sid === 'christmas' ? christmasCompareTable(list) : ''
     });
     fs.writeFileSync(path.join(ROOT, 'season', sid + '.html'), page);
-    urls.push({ loc: seasonPath(sid), lastmod: list.map((r) => r.firstSeen).sort().pop(), pri: '0.7' });
+    urls.push({ loc: seasonPath(sid), lastmod: UPDATED, pri: '0.7' });
   });
+
+  // 업데이트 내역: 푸디세이에 등록된 날짜별 메뉴 목록(검색 노출 대상만)
+  {
+    const shown = all.filter((r) => !noindexReason(r, status(r, today)));
+    const days = [...new Set(shown.map((r) => r.firstSeen))].sort().reverse();
+    const upBody = days.map((d) => `<h2>${esc(fmtDate(d))} 등록</h2><ul class="cards">${shown.filter((r) => r.firstSeen === d).map((r) => card(r, status(r, today))).join('')}</ul>`).join('');
+    const upPage = head({ title: `업데이트 내역 (${UPDATED.slice(0, 4)}년 ${Number(UPDATED.slice(5, 7))}월) | 푸디세이`, desc: '푸디세이에 새로 올라온 프랜차이즈 신메뉴·한정 메뉴를 등록 날짜별로 모았어요. 매일 아침 기사를 확인해 업데이트해요.', canonical: SITE + '/updates', jsonld: [crumbs([{ name: '홈', path: '/' }, { name: '업데이트 내역', path: '/updates' }]).ld] })
+      + `<main><div class="wrap"><article>${crumbs([{ name: '홈', path: '/' }, { name: '업데이트 내역', path: '/updates' }]).html}<p class="kicker">업데이트</p><h1>업데이트 내역</h1><p>푸디세이에 올라온 새 메뉴와 한정 메뉴를 등록 날짜 순으로 모았어요. 매일 아침 기사 원문을 확인해서 바뀐 내용만 반영해요.</p>${stampHtml()}${upBody}${exploreHtml('')}<p class="more"><a href="/">오늘의 새 메뉴·한정 메뉴 전체 보기 →</a></p></article></div></main>\n`
+      + foot();
+    fs.writeFileSync(path.join(ROOT, 'updates.html'), upPage);
+    urls.push({ loc: '/updates', lastmod: UPDATED, pri: '0.6' });
+  }
 
   // sitemap.xml
   const fixed = [{ loc: '/', lastmod: D.updated || today, pri: '1.0', freq: 'daily' }, { loc: '/about', pri: '0.3', freq: 'monthly' }, { loc: '/contact', pri: '0.3', freq: 'monthly' }, { loc: '/terms', pri: '0.2', freq: 'yearly' }, { loc: '/privacy', pri: '0.2', freq: 'yearly' }];
@@ -486,6 +518,7 @@ function main() {
     ? '      <ul class="dir-lim">\n' + lim.map((r) => `        <li><a href="${href(menuPath(r))}"><b>${esc(r.brand)}</b> ${esc(r.name)}</a> <span>${esc([r.kind === 'event' ? '이벤트' : '한정 메뉴', r.period || r.open].filter(Boolean).join(' · '))}</span></li>`).join('\n') + '\n      </ul>'
     : '';
   idx = replaceBlock(idx, 'upcoming', limHtml);
+  idx = replaceBlock(idx, 'stamp', `마지막 업데이트 <time datetime="${esc(UPDATED)}">${esc(fmtDate(UPDATED))}</time> · 판매·진행 중 메뉴 ${liveItems.length}개 · <a href="/updates">업데이트 내역</a> · <a href="${href(seasonPath('christmas'))}">크리스마스·연말 메뉴</a>`);
   const idxLd = [
     { '@context': 'https://schema.org', '@type': 'WebSite', name: '푸디세이', alternateName: 'Foodyssey', url: SITE + '/' },
     { '@context': 'https://schema.org', '@type': 'ItemList', name: '프랜차이즈 새 메뉴와 한정 메뉴', itemListElement: liveItems.map((r, i) => ({ '@type': 'ListItem', position: i + 1, url: SITE + href(menuPath(r)), name: `${r.brand} ${r.name}` })) }

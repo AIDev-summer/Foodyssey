@@ -58,3 +58,6 @@ p { max-width: 64ch; }
 footer { color: var(--muted); font-size: 12px; padding-block: 0 40px; }
 footer p { margin: 0 0 4px; max-width: none; }
 footer .links a { color: var(--muted); margin-right: 12px; }
+.stamp { color: var(--muted); font-size: 12.5px; margin: 10px 0 0; }
+.stamp a { color: inherit; }
+.explore { line-height: 2; }
