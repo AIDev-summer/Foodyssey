@@ -561,6 +561,8 @@ footer .links a { margin-right: 14px; }
     ]));
   });
 
+  if (!soonRow.children.length) { var soonSec = soonRow.closest('section'); if (soonSec) soonSec.hidden = true; }
+
   // 이번 주(7일 안) 끝나는 한정 메뉴·이벤트
   var weekSection = document.getElementById('week-section');
   var weekRow = document.getElementById('week-row');
@@ -670,7 +672,7 @@ footer .links a { margin-right: 14px; }
     });
     if (!rowsItem.children.length) rowsItem.appendChild(el('li', { cls: 'empty', text: '지금 판매 중인 한정 메뉴가 없어요.' }));
     if (!rowsEvent.children.length) rowsEvent.appendChild(el('li', { cls: 'empty', text: '지금 진행 중인 이벤트가 없어요.' }));
-    var sub = mode === 'popular' ? '검색 많은 순 · 검색 데이터 없는 건 마감순' : '마감 가까운 순 · 날짜 없는 건 맨 뒤';
+    var sub = mode === 'popular' ? '참고용 관심도(10월 말 기준) 순 · 수치 없는 건 마감순' : '마감 가까운 순 · 날짜 없는 건 맨 뒤';
     document.getElementById('lim-item-sub').textContent = sub;
     document.getElementById('lim-event-sub').textContent = sub;
   }
