@@ -543,10 +543,17 @@ footer .links a { margin-right: 14px; }
   h.appendChild(el('a', { href: '#limited', cls: 'n-lim', text: lims.length + '개' }));
   h.appendChild(document.createTextNode('.'));
 
+  // 마감 임박 카드는 눌렀을 때 그 메뉴의 상세 페이지로 가요(build.js의 slug()와 같은 규칙).
+  function menuSlug(s) {
+    return String(s).replace(/[·•/&+,()\[\]{}'"!?.:;~]/g, ' ').replace(/[^0-9A-Za-z가-힣\s-]/g, '')
+      .trim().replace(/\s+/g, '-').replace(/-+/g, '-').toLowerCase();
+  }
+  function menuHref(o) { return '/menu/' + encodeURI(menuSlug(o.x.brand + ' ' + o.x.title)); }
+
   // 마감 임박 띠: 날짜 있는 것만, 가까운 순
   var soonRow = document.getElementById('soon-row');
   lims.filter(function (o) { return o.d !== null; }).sort(byDeadline).slice(0, 6).forEach(function (o) {
-    soonRow.appendChild(el('a', { cls: 'soon-card' + (o.d <= 3 ? ' urgent' : (o.d <= 14 ? ' near' : '')), href: '#limited' }, [
+    soonRow.appendChild(el('a', { cls: 'soon-card' + (o.d <= 3 ? ' urgent' : (o.d <= 14 ? ' near' : '')), href: menuHref(o) }, [
       el('span', { cls: 'd', text: dLabel(o.d) }),
       el('span', { cls: 'b', text: o.x.brand }),
       el('span', { cls: 't', text: o.x.title }),
@@ -561,7 +568,7 @@ footer .links a { margin-right: 14px; }
   if (weekItems.length) {
     weekSection.hidden = false;
     weekItems.forEach(function (o) {
-      weekRow.appendChild(el('a', { cls: 'soon-card' + (o.d <= 3 ? ' urgent' : ' near'), href: '#limited' }, [
+      weekRow.appendChild(el('a', { cls: 'soon-card' + (o.d <= 3 ? ' urgent' : ' near'), href: menuHref(o) }, [
         el('span', { cls: 'd', text: dLabel(o.d) }),
         el('span', { cls: 'b', text: o.x.brand }),
         el('span', { cls: 't', text: o.x.title }),
