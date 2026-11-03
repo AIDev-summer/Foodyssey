@@ -135,7 +135,15 @@ function statusLabel(r, st) {
 
 // 검색에 노출하지 않을 페이지: 끝난 이벤트, 가격·메뉴표 없이 고유 설명이 짧은 메뉴.
 // (noindex,follow + sitemap·RSS 제외. 페이지는 지우지 않고 브랜드·업종·시즌 페이지에서 계속 연결해요.)
+const FORCED = new Set();
+const MENU_MIN = 650, HUB_MIN = 800;
+// 완성된 페이지의 눈에 보이는 글자 수(머리글·푸터·스크립트 제외)
+function plainLen(h) {
+  const t = h.replace(/<head>[\s\S]*?<\/head>|<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<header[\s\S]*?<\/header>|<footer[\s\S]*?<\/footer>|<nav class="crumbs"[\s\S]*?<\/nav>/g, ' ').replace(/<[^>]+>/g, ' ');
+  return t.replace(/&[a-z]+;/g, ' ').replace(/\s+/g, ' ').trim().length;
+}
 function noindexReason(r, st) {
+  if (FORCED.has(r.slug)) return 'short';
   if (r.kind === 'event' && st !== 'on') return 'ended-event';
   // 같은 묶음(group)의 메뉴는 묶음 공통 note가 아니라 메뉴 자기 설명(desc)만 고유 내용으로 쳐요.
   const own = r.group ? (r.desc || '') : [r.desc, r.note].filter(Boolean).join(' ');
@@ -240,6 +248,101 @@ function card(r, st) {
   return `<li><a href="${href(menuPath(r))}"><span class="c-brand">${esc(r.brand)}</span><span class="c-name">${esc(r.name)}</span><span class="c-meta">${esc(meta)}</span>${st !== 'on' ? `<span class="badge off">${esc(statusLabel(r, st))}</span>` : ''}</a></li>`;
 }
 
+
+// ---------- 허브·메뉴 페이지용 요약(모두 data.js에서 계산한 사실만) ----------
+const WEEK = ['일', '월', '화', '수', '목', '금', '토'];
+function wd(s) { const [y, m, d] = s.split('-').map(Number); return WEEK[new Date(Date.UTC(y, m - 1, d)).getUTCDay()]; }
+const mdw = (s) => { const [, m, d] = s.split('-').map(Number); return `${m}월 ${d}일(${wd(s)})`; };
+const whenOf = (r) => (r.kind === 'new' ? (r.when || (r.date ? short(r.date) : '')) : (r.period || r.open || ''));
+const srcLabels = (list) => [...new Set(list.map((r) => r.src && r.src.label).filter(Boolean))];
+const won = (n) => n.toLocaleString('en-US') + '원';
+
+function dataTable(list, today, caption) {
+  const live = list.filter((r) => status(r, today) === 'on');
+  if (!live.length) return '';
+  const rows = live.map((r) => `<tr><td><a href="${href(menuPath(r))}">${esc(r.name)}</a>${r.brandShow ? `<small> ${esc(r.brand)}</small>` : ''}</td><td>${esc(r.kind === 'new' ? r.tag : (r.kind === 'event' ? '이벤트' : '한정 메뉴'))}</td><td>${esc(whenOf(r) || '-')}</td><td>${esc(r.price || '확인 안 됨')}</td><td>${r.src ? `<a href="${esc(r.src.url)}" target="_blank" rel="noopener nofollow">${esc(r.src.label)}</a>` : '-'}</td></tr>`).join('');
+  return `<h2>${esc(caption)}</h2><div class="tbl"><table class="compare"><thead><tr><th>메뉴</th><th>구분</th><th>출시·기간</th><th>가격</th><th>출처</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+}
+
+function brandSummary(list, today, brand) {
+  const on = list.filter((r) => status(r, today) === 'on');
+  const past = list.length - on.length;
+  const nNew = on.filter((r) => r.kind === 'new').length, nLim = on.filter((r) => r.kind === 'limited').length, nEv = on.filter((r) => r.kind === 'event').length;
+  const parts = [nNew && `새로 나온 메뉴 ${nNew}개`, nLim && `기간 한정 메뉴 ${nLim}개`, nEv && `이벤트 ${nEv}개`].filter(Boolean);
+  const out = [];
+  out.push(on.length ? `푸디세이에 올라 있는 ${brand}의 판매·진행 중 항목은 ${on.length}개예요${parts.length ? `(${parts.join(', ')})` : ''}.` : `${brand}의 판매·진행 중 항목은 지금 없고, 지난 메뉴만 남아 있어요.`);
+  const dated = on.filter((r) => r.kind === 'new' && r.date).sort((a, c) => c.date.localeCompare(a.date));
+  if (dated.length) out.push(`가장 최근에 나온 새 메뉴는 ${dated[0].when || fmtDate(dated[0].date)} 소식의 ‘${dated[0].name}’${dated[0].group && dated[0].group.length > 1 ? ` 등 ${dated[0].group.length}종` : ''}이에요.`);
+  const priced = on.filter((r) => r.price);
+  out.push(priced.length ? `기사나 공식 자료에서 가격이 확인된 메뉴는 ${priced.length}개예요: ${priced.slice(0, 4).map((r) => `${r.name} ${r.price}`).join(', ')}${priced.length > 4 ? ' 등' : ''}.` : '아직 기사에서 가격이 확인된 메뉴가 없어서 가격은 비워 뒀어요. 가격은 확인되는 대로 채워요.');
+  const timed = on.filter((r) => r.kind !== 'new' && r.end).sort((a, c) => a.end.localeCompare(c.end));
+  if (timed.length) out.push(`끝나는 날이 정해진 항목은 ${timed.slice(0, 3).map((r) => `‘${r.name}’ ${mdw(r.end)}까지`).join(', ')}예요${timed.length > 3 ? ' 등' : ''}.`);
+  const open = on.filter((r) => r.kind !== 'new' && !r.end && r.open);
+  if (open.length) out.push(`종료일이 아직 나오지 않은 항목은 ${open.map((r) => `‘${r.name}’`).join(', ')}예요. 종료일은 기사에 나오면 반영해요.`);
+  const labels = srcLabels(list);
+  if (labels.length) out.push(`정보는 ${labels.slice(0, 5).join(', ')}${labels.length > 5 ? ' 등' : ''} 기사 원문을 보고 정리했어요.`);
+  if (past) out.push(`판매가 끝났거나 새 메뉴 목록에서 내려간 ${past}개는 아래 ‘지난 메뉴·끝난 이벤트’에 남겨 뒀어요.`);
+  return `<p>${out.join(' ')}</p>`;
+}
+
+function descList(list, today) {
+  // 묶음(group) 메뉴는 공통 note를 반복하지 않고 메뉴 자기 설명(desc)만 써요.
+  const own = (r) => (r.group ? r.desc : (r.desc || r.note));
+  const rows = list.filter((r) => status(r, today) === 'on' && own(r));
+  if (!rows.length) return '';
+  return `<h2>메뉴별 설명</h2><ul class="dl">${rows.map((r) => `<li><a href="${href(menuPath(r))}"><b>${esc(r.brand)} ${esc(r.name)}</b></a> — ${esc(own(r).replace(/\s+/g, ' '))}</li>`).join('')}</ul>`;
+}
+
+function catSummary(list, today, catName) {
+  const on = list.filter((r) => status(r, today) === 'on');
+  const bs = [...new Set(on.map((r) => r.brand))];
+  const out = [];
+  out.push(`${catName} 업종에는 지금 브랜드 ${bs.length}곳, 판매·진행 중 항목 ${on.length}개가 올라 있어요.`);
+  const nums = on.filter((r) => priceNum(r.price)).map((r) => ({ r, n: priceNum(r.price) })).sort((a, c) => a.n - c.n);
+  if (nums.length >= 2) out.push(`가격이 확인된 메뉴 ${nums.length}개 가운데 가장 싼 것은 ${nums[0].r.brand} ‘${nums[0].r.name}’ ${won(nums[0].n)}, 가장 비싼 것은 ${nums[nums.length - 1].r.brand} ‘${nums[nums.length - 1].r.name}’ ${won(nums[nums.length - 1].n)}이에요.`);
+  else if (nums.length === 1) out.push(`가격이 확인된 메뉴는 ${nums[0].r.brand} ‘${nums[0].r.name}’ ${won(nums[0].n)} 하나예요.`);
+  else out.push('이 업종은 기사에서 가격이 확인된 메뉴가 아직 없어요.');
+  const dated = on.filter((r) => r.kind === 'new' && r.date).sort((a, c) => c.date.localeCompare(a.date));
+  if (dated.length) out.push(`가장 최근 소식은 ${dated[0].brand}의 ‘${dated[0].name}’(${dated[0].when || fmtDate(dated[0].date)})이에요.`);
+  const timed = on.filter((r) => r.kind !== 'new' && r.end).sort((a, c) => a.end.localeCompare(c.end));
+  if (timed.length) out.push(`곧 끝나는 한정 항목은 ${timed.slice(0, 3).map((r) => `${r.brand} ‘${r.name}’ ${mdw(r.end)}까지`).join(', ')}예요.`);
+  return `<p>${out.join(' ')}</p>`;
+}
+
+// 메뉴 페이지: 같은 시기·같은 업종의 메뉴와 견줄 수 있는 정보
+function compareHtml(r, all, today) {
+  const on = (x) => status(x, today) === 'on' && x.slug !== r.slug;
+  let h = '';
+  const n = priceNum(r.price);
+  if (r.lines && r.lines.length) {
+    const pl = r.lines.map((l) => ({ l, n: priceNum(l[1]) })).filter((x) => x.n).sort((a, c) => a.n - c.n);
+    if (pl.length >= 2) h += `<h2>구성별 가격 비교</h2><p>이 묶음에서 가격이 확인된 ${pl.length}개 가운데 가장 싼 것은 ‘${esc(pl[0].l[0])}’ ${won(pl[0].n)}, 가장 비싼 것은 ‘${esc(pl[pl.length - 1].l[0])}’ ${won(pl[pl.length - 1].n)}이에요. 두 가격의 차이는 ${won(pl[pl.length - 1].n - pl[0].n)}이고, 모두 기사에 나온 단품 가격이에요.</p>`;
+  }
+  if (n && r.cat) {
+    const peers = all.filter((x) => on(x) && x.cat === r.cat && priceNum(x.price)).map((x) => ({ x, n: priceNum(x.price) }));
+    if (peers.length) {
+      const below = peers.filter((p) => p.n < n).length;
+      const all2 = peers.concat([{ x: r, n }]).sort((a, c) => a.n - c.n);
+      h += `<h2>같은 업종 가격 비교</h2><p>${esc(r.catName)} 업종에서 가격이 확인된 메뉴 ${all2.length}개 가운데 ‘${esc(r.name)}’ ${esc(r.price)}은 싼 쪽에서 ${below + 1}번째예요. 단품·세트·조각 구성이 달라 단순 비교는 어렵고, 기사에 나온 가격만 견줬어요.</p>`
+        + `<div class="tbl"><table class="compare"><thead><tr><th>메뉴</th><th>가격</th></tr></thead><tbody>${all2.slice(Math.max(0, below - 2), below + 4).map((p) => `<tr><td>${p.x.slug === r.slug ? '<b>' : ''}${esc(p.x.brand)} ${esc(p.x.name)}${p.x.slug === r.slug ? '</b>' : ''}</td><td>${esc(p.x.price)}</td></tr>`).join('')}</tbody></table></div>`;
+    }
+  }
+  if (r.kind === 'new' && r.date && r.cat) {
+    const t0 = Date.parse(r.date);
+    const near = all.filter((x) => on(x) && x.kind === 'new' && x.date && x.brand !== r.brand && x.cat === r.cat && Math.abs(Date.parse(x.date) - t0) <= 14 * 86400000);
+    const seen = new Set();
+    const list = near.filter((x) => (seen.has(x.brand) ? false : (seen.add(x.brand), true))).slice(0, 5);
+    if (list.length) h += `<h2>비슷한 시기에 나온 ${esc(r.catName)} 메뉴</h2><ul class="cards">${list.map((x) => card(x, 'on')).join('')}</ul>`;
+  }
+  if (r.kind !== 'new' && r.end) {
+    const t0 = Date.parse(r.end);
+    const near = all.filter((x) => on(x) && x.kind !== 'new' && x.end && x.brand !== r.brand && Math.abs(Date.parse(x.end) - t0) <= 21 * 86400000).slice(0, 4);
+    h += `<h2>마감일 읽는 법</h2><p>‘${esc(r.name)}’의 마감일은 ${esc(mdw(r.end))}이에요. 기사에 적힌 종료일 기준이고, 매장 재고나 브랜드 사정으로 먼저 끝날 수 있어요.${near.length ? ` 비슷한 시기에 끝나는 다른 한정 항목도 함께 보세요.` : ''}</p>`
+      + (near.length ? `<ul class="cards">${near.map((x) => card(x, 'on')).join('')}</ul>` : '');
+  }
+  return h;
+}
+
 // ---------- 메뉴 페이지 ----------
 function menuPage(r, all, today) {
   const st = status(r, today);
@@ -296,6 +399,7 @@ function menuPage(r, all, today) {
   const sameCat = all.filter((x) => r.cat && x.cat === r.cat && x.brand !== r.brand && status(x, today) === 'on').slice(0, 8);
   if (sameBrand.length) body += `<h2>${esc(r.brand)}의 다른 메뉴</h2><ul class="cards">${sameBrand.map((x) => card(x, status(x, today))).join('')}</ul>`;
   if (sameCat.length) body += `<h2>다른 브랜드 ${esc(r.catName)} 메뉴</h2><ul class="cards">${sameCat.map((x) => card(x, 'on')).join('')}</ul>`;
+  body += compareHtml(r, all, today);
   if (r.firstSeen) body += `<p class="stamp">푸디세이 등록일 <time datetime="${esc(r.firstSeen)}">${esc(fmtDate(r.firstSeen))}</time> · 사이트 마지막 업데이트 <time datetime="${esc(UPDATED)}">${esc(fmtDate(UPDATED))}</time></p>`;
   body += exploreHtml(r.cat);
   body += `<p class="more"><a href="/">오늘의 새 메뉴·한정 메뉴 전체 보기 →</a></p>`;
@@ -331,13 +435,13 @@ function ddayScript() {
 }
 
 // ---------- 목록 페이지(브랜드, 업종) ----------
-function listPage({ title, h1, kicker, intro, pathName, crumbList, groups, extraHtml, extra }) {
+function listPage({ title, h1, kicker, intro, pathName, crumbList, groups, extraHtml, extra, robots }) {
   const cr = crumbs(crumbList);
   const flat = groups.flatMap((g) => g.items);
   const ld = { '@context': 'https://schema.org', '@type': 'ItemList', name: h1, itemListElement: flat.map((x, i) => ({ '@type': 'ListItem', position: i + 1, url: SITE + href(menuPath(x.r)), name: `${x.r.brand} ${x.r.name}` })) };
   const body = groups.filter((g) => g.items.length).map((g) => `<h2>${esc(g.title)}</h2><ul class="cards">${g.items.map((x) => card(x.r, x.st)).join('')}</ul>`).join('');
   const desc = `${intro} ${flat.filter((x) => x.st === 'on').slice(0, 6).map((x) => x.r.name).join(', ')}`.slice(0, 155);
-  return head({ title, desc, canonical: SITE + href(pathName), jsonld: [cr.ld, ld] })
+  return head({ title, desc, canonical: SITE + href(pathName), jsonld: [cr.ld, ld], robots })
     + `<main><div class="wrap"><article>${cr.html}<p class="kicker">${esc(kicker)}</p><h1>${esc(h1)}</h1><p>${esc(intro)}</p>${stampHtml()}${extraHtml || ''}${body}${extra || ''}${exploreHtml(pathName.startsWith('/cat/') ? pathName.slice(5) : '')}<p class="more"><a href="/">오늘의 새 메뉴·한정 메뉴 전체 보기 →</a></p></article></div></main>\n`
     + foot();
 }
@@ -406,38 +510,53 @@ function main() {
   const urls = [];
   let noindexCount = 0;
   all.forEach((r) => {
-    fs.writeFileSync(path.join(ROOT, 'menu', r.slug + '.html'), menuPage(r, all, today));
+    let mp = menuPage(r, all, today);
+    if (!noindexReason(r, status(r, today)) && plainLen(mp) < MENU_MIN) { FORCED.add(r.slug); mp = menuPage(r, all, today); }
+    fs.writeFileSync(path.join(ROOT, 'menu', r.slug + '.html'), mp);
     if (noindexReason(r, status(r, today))) { noindexCount++; return; }
     urls.push({ loc: menuPath(r), lastmod: r.firstSeen, pri: status(r, today) === 'on' ? '0.7' : '0.4' });
   });
 
+  let hubNoindex = 0;
   const brands = [...new Set(all.map((r) => r.brand))].sort((a, b) => a.localeCompare(b, 'ko'));
   brands.forEach((b) => {
     const list = all.filter((r) => r.brand === b);
     const cat = list.find((r) => r.cat);
-    const page = listPage({
+    const mkBrand = (robots) => listPage({
       title: `${b} 신메뉴 (${today.slice(0, 4)}년 ${Number(today.slice(5, 7))}월) | 푸디세이`, h1: `${b} 신메뉴·한정 메뉴`, kicker: cat ? cat.catName : '브랜드',
       intro: `${b}에서 최근 새로 나온 메뉴와 기간 한정 메뉴, 이벤트를 모았어요. 매일 아침 기사를 확인해 업데이트해요.`,
       pathName: brandPath(b),
       crumbList: [{ name: '홈', path: '/' }].concat(cat ? [{ name: cat.catName, path: catPath(cat.cat) }] : []).concat([{ name: b, path: brandPath(b) }]),
       groups: groupsFor(list, today),
-      extra: cat ? sameCatBrands(all, today, cat.cat, b, cat.catName) : ''
+      extraHtml: brandSummary(list, today, b) + dataTable(list, today, `${b} 메뉴 한눈에 보기`),
+      extra: cat ? sameCatBrands(all, today, cat.cat, b, cat.catName) : '',
+      robots
     });
+    let page = mkBrand('');
+    const brandThin = plainLen(page) < HUB_MIN;
+    if (brandThin) { page = mkBrand('noindex,follow'); hubNoindex++; }
     fs.writeFileSync(path.join(ROOT, 'brand', slug(b) + '.html'), page);
+    if (brandThin) return;
     urls.push({ loc: brandPath(b), lastmod: UPDATED, pri: '0.6' });
   });
 
   D.cats.forEach((c) => {
     const list = all.filter((r) => r.cat === c.id);
     const bs = [...new Set(list.map((r) => r.brand))];
-    const page = listPage({
+    const mkCat = (robots) => listPage({
       title: `${c.name} 프랜차이즈 신메뉴·한정 메뉴 | 푸디세이`, h1: `${c.name} 신메뉴·한정 메뉴`, kicker: '업종',
       intro: `${bs.join(', ')} 등 ${c.name} 프랜차이즈의 새 메뉴와 기간 한정 메뉴를 최근 순으로 모았어요.`,
       pathName: catPath(c.id), crumbList: [{ name: '홈', path: '/' }, { name: c.name, path: catPath(c.id) }],
       groups: groupsFor(list, today),
-      extra: bs.length ? `<h2>${esc(c.name)} 브랜드</h2><p class="explore">${bs.map((x) => `<a href="${href(brandPath(x))}">${esc(x)}</a>`).join(' · ')}</p>` : ''
+      extraHtml: catSummary(list, today, c.name) + descList(list, today) + dataTable(list.map((r) => Object.assign({}, r, { brandShow: true })), today, `${c.name} 메뉴 한눈에 보기`),
+      extra: bs.length ? `<h2>${esc(c.name)} 브랜드</h2><p class="explore">${bs.map((x) => `<a href="${href(brandPath(x))}">${esc(x)}</a>`).join(' · ')}</p>` : '',
+      robots
     });
+    let page = mkCat('');
+    const catThin = plainLen(page) < HUB_MIN;
+    if (catThin) { page = mkCat('noindex,follow'); hubNoindex++; }
     fs.writeFileSync(path.join(ROOT, 'cat', c.id + '.html'), page);
+    if (catThin) return;
     urls.push({ loc: catPath(c.id), lastmod: UPDATED, pri: '0.6' });
   });
 
@@ -526,7 +645,7 @@ function main() {
   idx = replaceBlock(idx, 'jsonld', idxLd.map((j) => `<script type="application/ld+json">${JSON.stringify(j).replace(/</g, '\\u003c')}</script>`).join('\n'));
   fs.writeFileSync(idxFile, idx);
 
-  console.log(`메뉴 ${all.length}개(판매·진행 중 ${liveItems.length}, 검색 제외 noindex ${noindexCount}), 브랜드 ${brands.length}개, 업종 ${D.cats.length}개 페이지를 만들었어요.`);
+  console.log(`메뉴 ${all.length}개(판매·진행 중 ${liveItems.length}, 검색 제외 noindex ${noindexCount}, 허브 noindex ${hubNoindex}), 브랜드 ${brands.length}개, 업종 ${D.cats.length}개 페이지를 만들었어요.`);
 }
 
 main();

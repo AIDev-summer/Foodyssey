@@ -61,3 +61,18 @@ footer .links a { color: var(--muted); margin-right: 12px; }
 .stamp { color: var(--muted); font-size: 12.5px; margin: 10px 0 0; }
 .stamp a { color: inherit; }
 .explore { line-height: 2; }
+.tbl { overflow-x: auto; margin: 8px 0 4px; }
+table.compare { border-collapse: collapse; width: 100%; min-width: 520px; font-size: 13.5px; }
+table.compare td:nth-child(n+3), table.compare th:nth-child(n+3) { white-space: nowrap; }
+table.compare th, table.compare td { border-bottom: 1px solid var(--line); padding: 7px 8px 7px 0; text-align: left; vertical-align: top; }
+table.compare th { color: var(--muted); font-weight: 600; font-size: 12.5px; white-space: nowrap; }
+table.compare small { color: var(--muted); }
+.dl { padding-left: 1.1em; }
+.dl li { margin: 4px 0; font-size: 14px; }
+.dl a { color: inherit; }
+
+/* 좁은 화면에서 상단 메뉴 글자가 세로로 쪼개지지 않게 */
+header .wrap { flex-wrap: wrap; row-gap: 6px; }
+header nav { flex-wrap: wrap; justify-content: flex-end; row-gap: 2px; }
+header nav a { white-space: nowrap; word-break: keep-all; }
+@media (max-width: 520px) { .logo-en { display: none; } header nav a { margin-left: 10px; } }

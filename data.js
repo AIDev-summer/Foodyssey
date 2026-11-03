@@ -64,7 +64,7 @@ window.FOODYSSEY = {
       note: "떡 위에 소스, 치즈, 페페로니를 올린 컵 형태예요" },
 
     { cat: "chicken", brand: "bhc", when: "10월 출시", date: "2026-10-01",
-      items: [{ name: "알싹킹", tag: "신메뉴" }],
+      items: [{ name: "알싹킹", tag: "신메뉴", desc: "bhc ‘킹’ 시리즈(맛초킹·콰삭킹·스윗칠리킹·쏘이갈릭킹)를 잇는 신제품이에요. 고추, 양파, 대파로 알싸한 맛을 내고 튀김옷을 얇게 입혔어요. bhc는 기존 메뉴와 다른 얇은 튀김옷 치킨을 라인업에 더하려고 개발했다고 설명했어요. 디핑소스는 불맛 나는 매운 소스에 단맛을 더한 ‘맵싸소스’와 대파·청양고추를 넣은 크림 소스 ‘파싹소스’ 2종이에요. 출시 기념 앱 쿠폰 이벤트는 10월 31일에 끝났어요." }],
       src: { label: "비즈트리뷴", url: "https://www.biztribune.co.kr/news/articleView.html?idxno=361110" },
       note: "얇은 튀김옷에 맵싸소스·파싹소스가 같이 와요" },
     { cat: "chicken", brand: "bhc", when: "10.22 매장 판매 확대", date: "2026-10-22",
@@ -79,14 +79,14 @@ window.FOODYSSEY = {
       items: [
         { name: "허니윙콤비", tag: "신메뉴", price: "24,000원", img: "https://www.kyochon.com/uploadFiles/TB_ITEM/list_Honey%20Wing%20Combo.png" },
         { name: "허니옥수수윙콤비", tag: "신메뉴", price: "25,000원", img: "https://www.kyochon.com/uploadFiles/TB_ITEM/list_Honey%20Corn%20Wing%20Combo.png" },
-        { name: "허니옥수수윙박스 (16·20조각)", tag: "신메뉴", price: "23,000·24,000원", img: "https://www.kyochon.com/uploadFiles/TB_ITEM/list_Honey%20Corn%20Wing%20Box_20pcs.png" },
+        { name: "허니옥수수윙박스 (16·20조각)", tag: "신메뉴", price: "23,000·24,000원", img: "https://www.kyochon.com/uploadFiles/TB_ITEM/list_Honey%20Corn%20Wing%20Box_20pcs.png", desc: "2024년 7월에 나온 허니옥수수 시리즈(옥수수를 활용한 단맛 치킨)를 날개 부위로 넓힌 메뉴예요. 기존 한 마리·순살 메뉴에 허니옥수수윙콤비, 윙박스 2종(20조각·16조각), 싱글윙이 더해졌어요. 교촌은 허니옥수수가 10~20대 소비자 비중이 높은 메뉴라고 설명했어요." },
         { name: "허니옥수수싱글윙", tag: "신메뉴", price: "8,500원", img: "https://www.kyochon.com/uploadFiles/TB_ITEM/list_Honey%20Corn%20Single.png" }
       ],
       src: { label: "비즈트리뷴", url: "https://www.biztribune.co.kr/news/articleView.html?idxno=361110" },
       note: "가격은 교촌 홈페이지 권장소비자가격이에요" },
     { cat: "chicken", brand: "교촌치킨", when: "10.1 출시", date: "2026-10-01",
       items: [
-        { name: "웨지고구마 · 웨지반반", tag: "사이드", plain: true, price: "4,500·8,000원", img: "https://www.kyochon.com/uploadFiles/TB_ITEM/list_Seasoned-Wedge-Potatoes.png" }
+        { name: "웨지고구마 · 웨지반반", tag: "사이드", plain: true, price: "4,500·8,000원", img: "https://www.kyochon.com/uploadFiles/TB_ITEM/list_Seasoned-Wedge-Potatoes.png", desc: "웨지고구마는 속살이 노랗고 단맛이 나는 인도네시아산 고구마를 도톰한 웨지 모양으로 썰어 튀긴 사이드예요. 시나몬슈가가 함께 나와서 취향대로 뿌려 먹어요. 웨지반반은 웨지고구마와 기존 사이드인 웨지감자를 한 팩에 반씩 담아 두 가지 맛을 같이 먹게 한 구성이에요. 가격은 교촌 홈페이지 권장소비자가격이에요." }
       ],
       src: { label: "프라임경제", url: "https://www.newsprime.co.kr/news/article/?no=749669" },
       note: "웨지반반은 웨지고구마와 웨지감자를 반씩 담았어요 · 가격은 교촌 홈페이지 권장소비자가격" },
@@ -235,7 +235,7 @@ window.FOODYSSEY = {
       desc: "2019년 처음 나온 뒤 시즌마다 돌아오는 인기 사이드예요. 이번에는 양을 기존의 2배로 늘렸고, 소스는 살사 대신 스파이시 마요가 나와요. 판매가 끝난 뒤에도 재출시를 바라는 목소리가 이어졌다고 KFC가 밝혔어요.",
       src: { label: "뉴스밸런스", url: "https://www.newsbalance.co.kr/news/view/1065609452679016" } },
     { kind: "메뉴", brand: "배스킨라빈스", title: "도우와줘요 호빵맨", open: "11월 이달의 맛", period: "10.30 발표 · 종료일 미정",
-      desc: "호빵맨과 함께 만든 이달의 맛이에요. 호빵맨 캐릭터를 쓴 아이스크림 케이크 2종과 리유저블 컵 음료(아이스 아메리카노, 납작복숭아 아이스티)도 나와요.",
+      desc: "호빵맨과 함께 만든 11월 이달의 맛이에요. 이름은 호빵맨의 대표 대사 ‘도와줘요 호빵맨!’에 쿠키도우의 ‘도우’를 합쳐 지었어요. 호빵맨과 친구들 캐릭터를 쓴 아이스크림 케이크 2종과, 호빵맨 캐릭터를 입힌 리유저블 컵에 담은 음료(아이스 아메리카노, 납작복숭아 아이스티)도 함께 나와요. 종료일은 기사에 나오지 않았어요.",
       src: { label: "주간한국", url: "https://weekly.hankooki.com/news/articleView.html?idxno=7191453" } },
 
     { kind: "이벤트", brand: "bhc", title: "알싹킹 앱 쿠폰 이벤트", pop: 2.5, end: "2026-10-31", period: "~ 10.31(토)",
@@ -271,11 +271,11 @@ window.FOODYSSEY = {
       lines: [["쉑하우스 바비큐 버거", "10,900원"], ["쉑하우스 바비큐 치킨", "9,900원"], ["쉑하우스 바비큐 프라이", "6,500원"], ["스모어 쉐이크", "7,800원"]],
       src: { label: "식품투데이", url: "https://www.foodtoday.or.kr/news/article.html?no=208450" } },
     { kind: "메뉴", brand: "성심당", title: "알밤시루", price: "4만 원대", open: "가을 시즌", period: "9.23 출시 · 종료일 미정 · 대전 매장만",
-      desc: "알밤을 듬뿍 올린 가을 한정 케이크예요. 케익부띠끄 본점은 9월 23일부터, 롯데점과 DCC점은 9월 28일부터 팔아요.",
+      desc: "부드러운 밤크림을 층층이 쌓고 알밤을 듬뿍 올린 시루 케이크 시리즈예요. 폭신한 시트와 밤크림, 고소하고 달콤한 밤의 조합이 특징이에요. 가격은 4만 원대 중반으로 정해졌어요. 케익부띠끄 본점은 9월 23일부터, 롯데점과 DCC점은 9월 28일부터 팔았어요.",
       src: { label: "국제뉴스", url: "https://www.gukjenews.com/news/articleView.html?idxno=3703754" } },
     { kind: "메뉴", brand: "버거킹", title: "트러플 머쉬룸 시즌 5종", open: "가을 시즌", period: "9.16 출시 · 종료일 미정",
       lines: [["트러플 머쉬룸 와퍼", "9,700원"], ["핫 트러플 머쉬룸 와퍼", "9,700원"], ["메종 트러플 치즈 버거", "10,500원"], ["딥 트러플 프라이", "3,000원"], ["트러플 머쉬룸 파이로얄", "2,700원"]],
-      desc: "버거 세트는 11,900원(메종은 12,700원)이에요. 매년 가을에만 돌아오는 메뉴예요.",
+      desc: "트러플 머쉬룸 와퍼는 2017년 기간 한정으로 처음 나온 뒤 2023년에 다시 나왔고, 이후 4년 연속 가을마다 돌아온 버거킹의 대표 계절 메뉴예요. 트러플 크림소스와 4가지 버섯, 직화 패티가 들어가요. 핫 트러플 머쉬룸 와퍼는 매콤한 소스를 더해 2년 연속 팔고, 메종 트러플 치즈 버거는 브리오슈 번과 트러플 치즈를 쓴 올해 첫 메뉴예요. 딥 트러플 프라이와 트러플 머쉬룸 파이로얄(파이로얄에 트러플 소스)도 같이 나왔어요. 버거 세트는 11,900원(메종은 12,700원)이고, 일부 매장을 뺀 전국 매장에서 팔아요.",
       src: { label: "아시아경제", url: "https://view.asiae.co.kr/article/2026091608122210585" } }
   ],
 
