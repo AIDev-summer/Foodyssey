@@ -26,7 +26,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: node scripts/build.js
+      - name: JSON-LD 린트 자체 테스트
+        run: node scripts/test-lint-jsonld.js
+      - name: 페이지 만들기(끝에 JSON-LD 린트가 돌고, 실패하면 여기서 멈춰요)
+        run: node scripts/build.js
       - name: 바뀐 파일 커밋
         id: commit
         run: |

@@ -54,3 +54,12 @@
 - 시즌 모음 페이지: 항목에 `season: "christmas"`를 달면 `/season/christmas`에 모여요.
 - 정적 페이지: `about.html`, `privacy.html`, `terms.html`(이용약관), `contact.html`(문의), `404.html`. 푸터에서 모두 이어져요.
 - `updates.html`(업데이트 내역)은 `scripts/build.js`가 `data/archive.json`의 등록일(firstSeen)로 만들어요. 홈·허브·메뉴 페이지의 "마지막 업데이트" 날짜는 `data.js`의 `updated` 값이에요(그래서 데이터를 고칠 때 `updated`를 꼭 바꿔요).
+
+## 구조화된 데이터 규칙 (JSON-LD)
+
+푸디세이는 물건을 파는 사이트가 아니라 메뉴 정보 사이트예요. 눈에 보이지 않는 근거 없는 마크업은 구글 스팸 정책 위반이라 아래 규칙을 지켜요.
+
+- **쓰는 것:** `WebSite`(홈), `WebPage`(메뉴 페이지), `BreadcrumbList`(위치), `ItemList`(목록). 모두 화면에 실제 있는 내용만 담아요.
+- **쓰지 않는 것(린트가 막아요):** `Product`·`Offer`(가격/재고), `Review`·`AggregateRating`(평점), `FAQPage`, `hasMerchantReturnPolicy`·`shippingDetails`. 실제로 없는 평점·리뷰·배송·반품 정보는 절대 만들어 넣지 않아요. 가격·기간은 눈에 보이는 본문에 적어요.
+- **린트:** `scripts/lint-jsonld.js`가 `node scripts/build.js` 마지막에 자동으로 돌아요. 금지 형식·필드, 빈 문자열/`undefined`/`null`, JSON 오류, 필수 필드 누락(WebSite·WebPage·BreadcrumbList·ItemList), `image`·`og:image`·`twitter:image`가 가리키는 파일이 없거나 외부 주소인 경우에 빌드를 실패시켜요(Actions도 멈춰서 잘못된 페이지가 배포되지 않아요). `node scripts/test-lint-jsonld.js`는 린트 자체 테스트예요.
+- **사진·이미지를 빼거나 바꿀 때는** 구조화 데이터와 `og:image`·`twitter:image`를 같이 확인하세요(2026-11-03 사고: 사진 핫링크를 지우면서 Product의 `image`가 사라져 서치콘솔 경고).

@@ -416,18 +416,17 @@ function menuPage(r, all, today) {
   body += `<p class="more"><a href="/">오늘의 새 메뉴·한정 메뉴 전체 보기 →</a></p>`;
 
   const cr = crumbs([{ name: '홈', path: '/' }, { name: r.brand, path: brandPath(r.brand) }, { name: r.name, path: menuPath(r) }]);
-  const n = priceNum(r.price);
-  const product = {
-    '@context': 'https://schema.org', '@type': 'Product', name: `${r.brand} ${r.name}`,
-    brand: { '@type': 'Brand', name: r.brand }, category: r.catName || undefined,
-    description: (r.desc || r.note || `${r.brand}의 ${r.tag} ${r.name}`), url: SITE + href(menuPath(r))
+  // 푸디세이는 물건을 파는 사이트가 아니라 메뉴 정보 사이트예요. Product/Offer/Review 같은 판매·평점 마크업은 쓰지 않고,
+  // 화면에 실제 있는 내용(제목·설명·위치)만 WebPage + BreadcrumbList로 알려요. (규칙: README '구조화된 데이터 규칙')
+  const page = {
+    '@context': 'https://schema.org', '@type': 'WebPage', name: `${r.brand} ${r.name}`,
+    description: desc, url: SITE + href(menuPath(r)), inLanguage: 'ko',
+    isPartOf: { '@type': 'WebSite', name: '푸디세이', url: SITE + '/' },
+    dateModified: UPDATED
   };
-  if (r.img) product.image = r.img;
-  if (n) product.offers = { '@type': 'Offer', price: n, priceCurrency: 'KRW', availability: st === 'on' ? 'https://schema.org/InStock' : 'https://schema.org/Discontinued', url: SITE + href(menuPath(r)) };
-  // 구글 제품 스니펫은 offers(가격)가 필수라서, 가격이 없는 메뉴는 Product 구조화 데이터를 넣지 않아요.
-  const jsonld = (isEvent || !n) ? [cr.ld] : [cr.ld, product];
+  const jsonld = [cr.ld, page];
 
-  return head({ title, desc, canonical: SITE + href(menuPath(r)), image: r.img, jsonld, robots: noindexReason(r, st) ? 'noindex,follow' : '' })
+  return head({ title, desc, canonical: SITE + href(menuPath(r)), jsonld, robots: noindexReason(r, st) ? 'noindex,follow' : '' })
     + `<main><div class="wrap"><article>${cr.html}<p class="kicker">${esc(r.brand)} · ${esc(r.tag)}</p><h1>${esc(r.name)}</h1>${body}</article></div></main>\n`
     + ddayScript() + foot();
 }
@@ -656,6 +655,14 @@ function main() {
   idx = replaceBlock(idx, 'jsonld', idxLd.map((j) => `<script type="application/ld+json">${JSON.stringify(j).replace(/</g, '\\u003c')}</script>`).join('\n'));
   fs.writeFileSync(idxFile, idx);
 
+  // 구조화 데이터 린트: 금지 패턴이 있으면 빌드를 실패시켜서 잘못된 페이지가 배포되지 않게 해요.
+  const lintRes = require('./lint-jsonld').lint(ROOT);
+  if (lintRes.errs.length) {
+    console.error('JSON-LD 린트 실패 ' + lintRes.errs.length + '건');
+    lintRes.errs.slice(0, 40).forEach((e) => console.error(' - ' + e));
+    process.exit(1);
+  }
+  console.log('JSON-LD 린트 통과: ' + JSON.stringify(lintRes.stat));
   console.log(`메뉴 ${all.length}개(판매·진행 중 ${liveItems.length}, 검색 제외 noindex ${noindexCount}, 허브 noindex ${hubNoindex}), 브랜드 ${brands.length}개, 업종 ${D.cats.length}개 페이지를 만들었어요.`);
 }
 
