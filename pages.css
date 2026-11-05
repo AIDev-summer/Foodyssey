@@ -133,3 +133,6 @@ table.compare:has(th:nth-child(8)) { min-width: 860px; }
   header nav a { margin-left: 0; margin-right: 12px; }
   header nav .theme-btn { margin-left: auto; margin-right: 0; }
 }
+/* 짧은 글자 링크도 가로 44px 이상(손가락으로 누르기 쉽게) */
+header nav a, .crumbs a { min-width: 44px; justify-content: center; }
+footer .links a, .explore a { min-width: 44px; justify-content: center; }
