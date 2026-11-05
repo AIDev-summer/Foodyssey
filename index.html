@@ -181,6 +181,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 .soon-card .t { font-weight: 600; line-height: 1.4; }
 .soon-card .k { font-size: 11px; color: var(--muted); }
 
+/* 홈 첫 화면: 오늘·최근 신상(마감임박 카드 바로 위) */
+.today-new { padding-block: 22px 6px; }
+.today-new .dir-lim { margin-bottom: 0; }
+
 /* 이번 주 화제 두 장 */
 .hots { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding-block: 22px 10px; }
 .hot { display: grid; gap: 10px; align-content: start; padding: 22px; border-radius: 16px; min-width: 0; background: var(--card); }
@@ -399,6 +403,22 @@ footer .links a { min-width: 44px; justify-content: center; }
       <p class="stamp"><!-- build:stamp -->
 마지막 업데이트 <time datetime="2026-11-05">2026년 11월 5일</time> · 오늘 올라온 메뉴 2개 · 최근 7일간 등록된 메뉴 98개 · 판매·진행 중 메뉴 94개 · <a href="/updates">업데이트 내역</a> · <a href="/rss.xml">RSS 구독</a>
 <!-- /build:stamp --></p>
+  </div>
+</section>
+
+<section class="today-new" aria-labelledby="today-new-title">
+  <div class="wrap">
+    <div class="soon-head"><span class="label" id="today-new-title">오늘·최근 신상</span><a href="#new">신상 전체 보기</a></div>
+    <!-- build:todaynew -->
+      <ul class="dir-lim">
+        <li><a href="/menu/%EB%A7%98%EC%8A%A4%ED%84%B0%EC%B9%98-%EB%B9%A0%EC%82%AD%EC%96%B4%EB%8B%88%EC%96%B8%EB%A7%81"><b>맘스터치</b> 빠삭어니언링</a> <span>사이드 · 2026년 11월 2일 등록</span></li>
+        <li><a href="/menu/%EB%A7%98%EC%8A%A4%ED%84%B0%EC%B9%98-%EC%86%94%ED%8B%B0%EC%B9%B4%EB%9D%BC%EB%A9%9C%EB%B3%BC"><b>맘스터치</b> 솔티카라멜볼</a> <span>디저트 · 2026년 11월 2일 등록</span></li>
+        <li><a href="/menu/%EB%A7%98%EC%8A%A4%ED%84%B0%EC%B9%98-%EC%8A%A4%EC%9C%97%EB%B3%BC%EB%B0%95%EC%8A%A4"><b>맘스터치</b> 스윗볼박스</a> <span>스낵박스 · 2026년 11월 2일 등록</span></li>
+        <li><a href="/menu/%EB%A7%98%EC%8A%A4%ED%84%B0%EC%B9%98-%ED%8A%B8%EB%A6%AC%ED%94%8C%EC%8A%A4%EB%82%B5%EB%B0%95%EC%8A%A4"><b>맘스터치</b> 트리플스낵박스</a> <span>스낵박스 · 2026년 11월 2일 등록</span></li>
+        <li><a href="/menu/%EB%A7%98%EC%8A%A4%ED%84%B0%EC%B9%98-%ED%94%8C%EB%9E%98%ED%84%B0%EC%8A%A4%EB%82%B5%EB%B0%95%EC%8A%A4"><b>맘스터치</b> 플래터스낵박스</a> <span>스낵박스 · 2026년 11월 2일 등록</span></li>
+        <li><a href="/menu/%EB%A7%98%EC%8A%A4%ED%84%B0%EC%B9%98-%ED%97%A4%EC%9D%B4%EC%A6%90%EB%84%9B%EC%B4%88%EC%BD%94%EB%B3%BC"><b>맘스터치</b> 헤이즐넛초코볼</a> <span>디저트 · 2026년 11월 2일 등록</span></li>
+      </ul>
+<!-- /build:todaynew -->
   </div>
 </section>
 

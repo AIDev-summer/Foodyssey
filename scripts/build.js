@@ -863,6 +863,14 @@ function main() {
   const newWeek = all.filter((r) => r.firstSeen && ageOf(r) >= 0 && ageOf(r) <= 6).length;
   const freshBits = [newToday ? `오늘 올라온 메뉴 ${newToday}개` : '', newWeek ? `최근 7일간 등록된 메뉴 ${newWeek}개` : ''].filter(Boolean).join(' · ');
   idx = replaceBlock(idx, 'stamp', `마지막 업데이트 <time datetime="${esc(UPDATED)}">${esc(fmtDate(UPDATED))}</time>${freshBits ? ' · ' + freshBits : ''} · 판매·진행 중 메뉴 ${liveItems.length}개 · <a href="/updates">업데이트 내역</a> · <a href="/rss.xml">RSS 구독</a>`);
+  // 홈 첫 화면 '오늘·최근 신상': 등록일(firstSeen) 최신 순으로 신상 메뉴를 마감임박 카드 위에 보여줘요(최대 6개).
+  const recentNew = liveItems.filter((r) => r.kind === 'new').slice()
+    .sort((a, b) => String(b.firstSeen || b.date || '').localeCompare(String(a.firstSeen || a.date || '')) || a.brand.localeCompare(b.brand, 'ko'))
+    .slice(0, 6);
+  const todayNewHtml = recentNew.length
+    ? '      <ul class="dir-lim">\n' + recentNew.map((r) => `        <li><a href="${href(menuPath(r))}"><b>${esc(r.brand)}</b> ${esc(r.name)}</a> <span>${esc([r.tag, r.firstSeen === today ? '오늘 등록' : (r.firstSeen ? fmtDate(r.firstSeen) + ' 등록' : '')].filter(Boolean).join(' · '))}</span></li>`).join('\n') + '\n      </ul>'
+    : '';
+  idx = replaceBlock(idx, 'todaynew', todayNewHtml);
   const readsLinks = GUIDES.map((g) => `<li><a href="/guide/${g.slug}">${esc(g.title)}</a></li>`).concat(MONTHLY_LINKS(all, today)).concat([`<li><a href="${href(seasonPath('christmas'))}">크리스마스·연말 메뉴 모음</a></li>`, '<li><a href="/updates">날짜별 업데이트 내역</a></li>']);
   idx = replaceBlock(idx, 'reads', `      <ul class="reads-list">\n        ${readsLinks.join('\n        ')}\n      </ul>`);
   const idxLd = [
