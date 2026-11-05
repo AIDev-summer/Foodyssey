@@ -1,9 +1,9 @@
 /* 메뉴·브랜드·업종 페이지 공통 스타일 (scripts/build.js가 만드는 페이지에서 써요) */
-:root { --bg: #f6faf7; --card: #ffffff; --ink: #15191a; --muted: #5f6968; --line: #e4ebe8; --fresh: #1a7f60; --soft: #e8f4ef; --warn: #c2412d;
+:root { --bg: #f6faf7; --card: #ffffff; --ink: #15191a; --muted: #5f6968; --line: #e4ebe8; --fresh: #17745a; --soft: #e8f4ef; --warn: #c2412d;
   --f-display: "Hahmlet", "Nanum Myeongjo", serif; --f-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; --f-mono: "IBM Plex Mono", ui-monospace, monospace; color-scheme: light; }
 :root[data-theme="dark"] { --bg: #121816; --card: #1a2220; --ink: #e6ece9; --muted: #a3afab; --line: #2c3633; --fresh: #52c49d; --soft: #1f2e29; --warn: #ff8a73; color-scheme: dark; }
 * { box-sizing: border-box; }
-body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.75; word-break: keep-all; overflow-wrap: anywhere; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.75; word-break: keep-all; overflow-wrap: anywhere; }
 .wrap { max-width: 760px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
 header .wrap { display: flex; align-items: center; padding-block: 18px; }
 .logo { font-family: var(--f-display); font-weight: 800; font-size: 22px; text-decoration: none; color: var(--ink); }
@@ -62,7 +62,7 @@ footer .links a { color: var(--muted); margin-right: 12px; }
 .stamp a { color: inherit; }
 .explore { line-height: 2; }
 .tbl { overflow-x: auto; margin: 8px 0 4px; }
-table.compare { border-collapse: collapse; width: 100%; min-width: 520px; font-size: 13.5px; }
+table.compare { border-collapse: collapse; width: 100%; }
 table.compare td:nth-child(n+3), table.compare th:nth-child(n+3) { white-space: nowrap; }
 table.compare th, table.compare td { border-bottom: 1px solid var(--line); padding: 7px 8px 7px 0; text-align: left; vertical-align: top; }
 table.compare th { color: var(--muted); font-weight: 600; font-size: 12.5px; white-space: nowrap; }
@@ -81,3 +81,55 @@ header nav a { white-space: nowrap; word-break: keep-all; }
 .rel b { font-size: 12px; color: var(--muted); font-weight: 600; }
 .rel a { color: var(--ink); font-weight: 600; }
 .rel small { color: var(--muted); font-weight: 400; }
+
+/* ===== 접근성·가독성 보정(2026-11-06 디자인 검수) ===== */
+.meta { color: var(--muted); font-size: 14px; margin: 0 0 20px; }
+ul { padding-left: 1.2em; }
+li { max-width: 64ch; }
+header .wrap { padding-block: 6px; }
+.logo { display: inline-flex; align-items: center; min-height: 44px; }
+header nav a { display: inline-flex; align-items: center; min-height: 44px; padding-inline: 2px; font-size: 14px; }
+.theme-btn { width: 44px; height: 44px; }
+.theme-btn svg { width: 18px; height: 18px; }
+.crumbs { font-size: 13.5px; display: flex; flex-wrap: wrap; align-items: center; margin-bottom: 6px; }
+.crumbs a { display: inline-flex; align-items: center; min-height: 44px; padding-inline: 2px; }
+.kicker { font-size: 14px; }
+.stamp { font-size: 13.5px; }
+.src, .table-note { font-size: 13.5px; }
+.src a { display: inline-block; padding-block: 12px; margin-block: -12px; }
+.explore { display: flex; flex-wrap: wrap; align-items: center; gap: 0 6px; line-height: 1.4; }
+.explore a, footer .links a { display: inline-flex; align-items: center; min-height: 44px; }
+footer { font-size: 13.5px; }
+footer .links { display: flex; flex-wrap: wrap; gap: 0 16px; }
+footer .links a { margin-right: 0; white-space: nowrap; }
+.facts dt { font-size: 14.5px; }
+.facts a { display: inline-block; padding-block: 8px; margin-block: -8px; }
+.badge { font-size: 13px; }
+.dday { font-size: 13.5px; }
+.notice { font-size: 15px; }
+.cards .c-brand { font-size: 13px; }
+.cards .c-meta { font-size: 13.5px; }
+.dl li { font-size: 15px; }
+.compare { font-size: 14.5px; }
+table.compare { min-width: 0; font-size: 14.5px; }
+table.compare th { font-size: 13.5px; }
+table.compare th, table.compare td { padding: 11px 10px 11px 0; overflow-wrap: normal; word-break: keep-all; }
+table.compare td:nth-child(n+3), table.compare th:nth-child(n+3) { white-space: normal; }
+table.compare td.nw, table.compare th { white-space: nowrap; }
+table.compare td.nm { min-width: 9em; }
+table.compare:has(th:nth-child(4)) { min-width: 580px; }
+table.compare:has(th:nth-child(6)) { min-width: 720px; }
+table.compare:has(th:nth-child(8)) { min-width: 860px; }
+@media (max-width: 760px) { .tbl:has(table.compare th:nth-child(4))::before { content: "표는 옆으로 밀어서 볼 수 있어요 →"; display: block; font-size: 13px; color: var(--muted); } }
+/* 함께 보면 좋은 메뉴: 칩을 한 줄로 늘어놓고 옆으로 밀어서 봐요(본문을 덜 가리고, 칩 높이는 44px) */
+.rel { gap: 10px; padding: 12px 14px 8px; font-size: 14.5px; }
+.rel b { font-size: 13px; }
+.rel span { display: flex; align-items: center; gap: 8px; overflow-x: auto; padding-bottom: 6px; scrollbar-width: thin; }
+.rel a { flex: none; display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--card); text-decoration: none; color: var(--ink); font-weight: 600; font-size: 14.5px; white-space: nowrap; }
+.rel small { margin-left: 8px; font-size: 13px; color: var(--muted); font-weight: 400; white-space: nowrap; }
+/* 좁은 화면 머리글: 로고 한 줄, 메뉴 한 줄(왼쪽 정렬)에 다크모드 버튼은 오른쪽 끝 */
+@media (max-width: 560px) {
+  header nav { width: 100%; justify-content: flex-start; }
+  header nav a { margin-left: 0; margin-right: 12px; }
+  header nav .theme-btn { margin-left: auto; margin-right: 0; }
+}

@@ -292,7 +292,7 @@ const won = (n) => n.toLocaleString('en-US') + '원';
 function dataTable(list, today, caption) {
   const live = list.filter((r) => status(r, today) === 'on');
   if (!live.length) return '';
-  const rows = live.map((r) => `<tr><td><a href="${href(menuPath(r))}">${esc(r.name)}</a>${r.brandShow ? `<small> ${esc(r.brand)}</small>` : ''}</td><td>${esc(r.kind === 'new' ? r.tag : (r.kind === 'event' ? '이벤트' : '한정 메뉴'))}</td><td>${esc(whenOf(r) || '-')}</td><td>${esc(r.price || '확인 안 됨')}</td><td>${r.src ? `<a href="${esc(r.src.url)}" target="_blank" rel="noopener nofollow">${esc(r.src.label)}</a>` : '-'}</td></tr>`).join('');
+  const rows = live.map((r) => trow([`<a href="${href(menuPath(r))}">${esc(r.name)}</a>${r.brandShow ? `<small> ${esc(r.brand)}</small>` : ''}`, esc(r.kind === 'new' ? r.tag : (r.kind === 'event' ? '이벤트' : '한정 메뉴')), esc(whenOf(r) || '-'), esc(r.price || '확인 안 됨'), r.src ? `<a href="${esc(r.src.url)}" target="_blank" rel="noopener nofollow">${esc(r.src.label)}</a>` : '-'])).join('');
   return `<h2>${esc(caption)}</h2><div class="tbl"><table class="compare"><thead><tr><th>메뉴</th><th>구분</th><th>출시·기간</th><th>가격</th><th>출처</th></tr></thead><tbody>${rows}</tbody></table></div>`;
 }
 
@@ -398,13 +398,13 @@ function relatedSets(r, all, today) {
   return { brand, price, ending, endTitle };
 }
 function relTop(S) {
-  const a = (x, extra) => `<a href="${href(menuPath(x))}">${extra ? esc(x.brand) + ' ' : ''}${esc(x.name)}</a>`;
+  const a = (x, withBrand, small) => `<a href="${href(menuPath(x))}">${withBrand ? esc(x.brand) + ' ' : ''}${esc(x.name)}${small ? `<small>${esc(small)}</small>` : ''}</a>`;
   const g = [];
   if (S.brand.length) g.push(['같은 브랜드 다른 메뉴', S.brand.slice(0, 3).map((x) => a(x, false))]);
-  if (S.price.length) g.push(['비슷한 가격대 다른 브랜드', S.price.slice(0, 3).map((x) => `${a(x, true)} <small>${esc(x.price)}</small>`)]);
-  if (S.ending.length) g.push([S.endTitle, S.ending.slice(0, 3).map((x) => `${a(x, true)} <small>${esc(mdw(x.end))}까지</small>`)]);
+  if (S.price.length) g.push(['비슷한 가격대 다른 브랜드', S.price.slice(0, 3).map((x) => a(x, true, x.price))]);
+  if (S.ending.length) g.push([S.endTitle, S.ending.slice(0, 3).map((x) => a(x, true, mdw(x.end) + '까지'))]);
   if (!g.length) return '';
-  return `<aside class="rel" aria-label="함께 보면 좋은 메뉴">${g.map(([t, ls]) => `<div><b>${esc(t)}</b><span>${ls.join(' · ')}</span></div>`).join('')}</aside>`;
+  return `<aside class="rel" aria-label="함께 보면 좋은 메뉴">${g.map(([t, ls]) => `<div><b>${esc(t)}</b><span>${ls.join('')}</span></div>`).join('')}</aside>`;
 }
 function relBottom(r, S) {
   const blk = (t, list) => (list.length ? `<h2>${esc(t)}</h2><ul class="cards">${list.slice(0, 5).map((x) => card(x, 'on')).join('')}</ul>` : '');
@@ -422,7 +422,7 @@ const pageShell = ({ title, desc, canonical, crumbList, kicker, h1, body, jsonld
   return head({ title, desc, canonical: SITE + href(canonical), jsonld: [cr.ld].concat(jsonld || []) })
     + `<main><div class="wrap"><article>${cr.html}<p class="kicker">${esc(kicker)}</p><h1>${esc(h1)}</h1>${body}${exploreHtml('')}<p class="more"><a href="/">오늘의 새 메뉴·한정 메뉴 전체 보기 →</a></p></article></div></main>\n` + foot();
 };
-const trow = (cells) => `<tr>${cells.map((c) => `<td>${c}</td>`).join('')}</tr>`;
+const trow = (cells) => `<tr>${cells.map((c) => { const plain = String(c).replace(/<[^>]+>/g, ''); const cls = /^<a href="\/menu\//.test(c) ? 'nm' : (plain.length <= 14 ? 'nw' : ''); return `<td${cls ? ` class="${cls}"` : ''}>${c}</td>`; }).join('')}</tr>`;
 const srcA = (r) => (r.src ? `<a href="${esc(r.src.url)}" target="_blank" rel="noopener nofollow">${esc(r.src.label)}</a>` : '-');
 const menuA = (r) => `<a href="${href(menuPath(r))}">${esc(r.name)}</a>`;
 

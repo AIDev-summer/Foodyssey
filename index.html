@@ -319,6 +319,46 @@ footer .links a { margin-right: 14px; }
   .logo small { display: none; }
   .bar-row { grid-template-columns: 7.5em 1fr 3em; font-size: 13px; }
 }
+
+/* ===== 접근성·가독성 보정(2026-11-06 디자인 검수): 글자 크기·터치 영역 ===== */
+body { font-size: 1rem; }
+.logo { display: inline-flex; align-items: center; min-height: 44px; }
+.logo small { font-size: 14px; }
+.updated { font-size: 13px; }
+.theme-btn { width: 44px; height: 44px; }
+.label { font-size: 13px; }
+.soon-head a { display: inline-flex; align-items: center; min-height: 44px; font-size: 14px; }
+.soon-card .b { font-size: 13.5px; }
+.soon-card .k { font-size: 12.5px; }
+.hot .meta { font-size: 14px; }
+.hot .price small { font-size: 13px; }
+.specs li { font-size: 13px; }
+.seg a b { font-size: 13px; }
+.chip { font-size: 14px; padding: 10px 14px; min-height: 44px; }
+.chip .n { font-size: 12.5px; }
+.sec-head small { font-size: 13px; }
+.src { display: inline-flex; align-items: center; min-height: 44px; font-size: 13px; }
+.tile .cat { font-size: 12.5px; }
+.tile .when, .tile .sub-when { font-size: 13px; }
+.tile .note { font-size: 14px; }
+.items .tag { font-size: 12.5px; }
+.items .price { font-size: 14px; }
+.row .d.open, .row .b, .row .period { font-size: 14px; }
+.row p { font-size: 15px; }
+.lines { font-size: 14.5px; }
+.lines .p { font-size: 14px; }
+.dir p { font-size: 15px; line-height: 2.2; }
+.dir .dir-brand { padding-block: 6px; }
+.stamp { font-size: 13.5px; }
+.dir-lim { font-size: 15px; }
+.dir-lim li span { font-size: 13.5px; }
+footer { font-size: 13.5px; }
+footer .links { display: flex; flex-wrap: wrap; gap: 0 16px; }
+footer .links a { display: inline-flex; align-items: center; min-height: 44px; margin-right: 0; white-space: nowrap; }
+.reads-list { gap: 0; }
+.reads-list li { border-bottom: 1px solid var(--line); }
+.reads-list a { display: flex; align-items: center; min-height: 44px; padding-block: 6px; text-decoration: none; font-weight: 500; font-size: 15px; }
+.reads-list a::after { content: "›"; margin-left: auto; padding-left: 12px; color: var(--muted); font-size: 18px; }
 </style>
 
 </head>
@@ -569,7 +609,9 @@ footer .links a { margin-right: 14px; }
 
   // 마감 임박 띠: 날짜 있는 것만, 가까운 순
   var soonRow = document.getElementById('soon-row');
+  var soonShown = {};
   lims.filter(function (o) { return o.d !== null; }).sort(byDeadline).slice(0, 6).forEach(function (o) {
+    soonShown[o.x.brand + '|' + o.x.title] = true;
     soonRow.appendChild(el('a', { cls: 'soon-card' + (o.d <= 3 ? ' urgent' : (o.d <= 14 ? ' near' : '')), href: menuHref(o) }, [
       el('span', { cls: 'd', text: dLabel(o.d) }),
       el('span', { cls: 'b', text: o.x.brand }),
@@ -584,7 +626,9 @@ footer .links a { margin-right: 14px; }
   var weekSection = document.getElementById('week-section');
   var weekRow = document.getElementById('week-row');
   var weekItems = lims.filter(function (o) { return o.d !== null && o.d >= 0 && o.d <= 7; }).sort(byDeadline);
-  if (weekItems.length) {
+  // 위 '마감이 가까운 순' 띠에 이미 다 보이는 항목이면 같은 카드를 두 번 보여 주지 않아요.
+  var weekNew = weekItems.filter(function (o) { return !soonShown[o.x.brand + '|' + o.x.title]; });
+  if (weekItems.length && weekNew.length) {
     weekSection.hidden = false;
     weekItems.forEach(function (o) {
       weekRow.appendChild(el('a', { cls: 'soon-card' + (o.d <= 3 ? ' urgent' : ' near'), href: menuHref(o) }, [
@@ -733,6 +777,11 @@ footer .links a { margin-right: 14px; }
     window.scrollTo({ top: y, behavior: still.matches ? 'auto' : 'smooth' });
   });
   show();
+  // 공유 링크(/#limited)로 바로 들어오면 한정 목록 머리로 내려가요(해시 이벤트는 처음 열 때는 안 일어나서).
+  if (location.hash === '#limited') {
+    var go = function () { window.scrollTo({ top: mainEl.getBoundingClientRect().top + window.scrollY - bar.offsetHeight, behavior: 'auto' }); };
+    go(); setTimeout(go, 400);
+  }
 })();
 </script>
 <script src="/theme.js"></script>
