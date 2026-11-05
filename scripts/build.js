@@ -292,7 +292,8 @@ const won = (n) => n.toLocaleString('en-US') + '원';
 function dataTable(list, today, caption) {
   const live = list.filter((r) => status(r, today) === 'on');
   if (!live.length) return '';
-  const rows = live.map((r) => trow([`<a href="${href(menuPath(r))}">${esc(r.name)}</a>${r.brandShow ? `<small> ${esc(r.brand)}</small>` : ''}`, esc(r.kind === 'new' ? r.tag : (r.kind === 'event' ? '이벤트' : '한정 메뉴')), esc(whenOf(r) || '-'), esc(r.price || '확인 안 됨'), r.src ? `<a href="${esc(r.src.url)}" target="_blank" rel="noopener nofollow">${esc(r.src.label)}</a>` : '-'])).join('');
+  const dtHeads = ['메뉴', '구분', '출시·기간', '가격', '출처'];
+  const rows = live.map((r) => trow([`<a href="${href(menuPath(r))}">${esc(r.name)}</a>${r.brandShow ? `<small> ${esc(r.brand)}</small>` : ''}`, esc(r.kind === 'new' ? r.tag : (r.kind === 'event' ? '이벤트' : '한정 메뉴')), esc(whenOf(r) || '-'), esc(r.price || '확인 안 됨'), r.src ? `<a href="${esc(r.src.url)}" target="_blank" rel="noopener nofollow">${esc(r.src.label)}</a>` : '-'], dtHeads)).join('');
   return `<h2>${esc(caption)}</h2><div class="tbl"><table class="compare"><thead><tr><th>메뉴</th><th>구분</th><th>출시·기간</th><th>가격</th><th>출처</th></tr></thead><tbody>${rows}</tbody></table></div>`;
 }
 
@@ -356,7 +357,7 @@ function compareHtml(r, all, today) {
       const below = peers.filter((p) => p.n < n).length;
       const all2 = peers.concat([{ x: r, n }]).sort((a, c) => a.n - c.n);
       h += `<h2>같은 업종 가격 비교</h2><p>${esc(r.catName)} 업종에서 가격이 확인된 메뉴 ${all2.length}개 가운데 ‘${esc(r.name)}’ ${esc(r.price)}은 싼 쪽에서 ${below + 1}번째예요. 단품·세트·조각 구성이 달라 단순 비교는 어렵고, 기사에 나온 가격만 견줬어요.</p>`
-        + `<div class="tbl"><table class="compare"><thead><tr><th>메뉴</th><th>가격</th></tr></thead><tbody>${all2.slice(Math.max(0, below - 2), below + 4).map((p) => `<tr><td>${p.x.slug === r.slug ? '<b>' : ''}${esc(p.x.brand)} ${esc(p.x.name)}${p.x.slug === r.slug ? '</b>' : ''}</td><td>${esc(p.x.price)}</td></tr>`).join('')}</tbody></table></div>`;
+        + `<div class="tbl"><table class="compare"><thead><tr><th>메뉴</th><th>가격</th></tr></thead><tbody>${all2.slice(Math.max(0, below - 2), below + 4).map((p) => `<tr><td data-label="메뉴">${p.x.slug === r.slug ? '<b>' : ''}${esc(p.x.brand)} ${esc(p.x.name)}${p.x.slug === r.slug ? '</b>' : ''}</td><td data-label="가격">${esc(p.x.price)}</td></tr>`).join('')}</tbody></table></div>`;
     }
   }
   if (r.kind === 'new' && r.date && r.cat) {
@@ -422,7 +423,7 @@ const pageShell = ({ title, desc, canonical, crumbList, kicker, h1, body, jsonld
   return head({ title, desc, canonical: SITE + href(canonical), jsonld: [cr.ld].concat(jsonld || []) })
     + `<main><div class="wrap"><article>${cr.html}<p class="kicker">${esc(kicker)}</p><h1>${esc(h1)}</h1>${body}${exploreHtml('')}<p class="more"><a href="/">오늘의 새 메뉴·한정 메뉴 전체 보기 →</a></p></article></div></main>\n` + foot();
 };
-const trow = (cells) => `<tr>${cells.map((c) => { const plain = String(c).replace(/<[^>]+>/g, ''); const cls = /^<a href="\/menu\//.test(c) ? 'nm' : (plain.length <= 14 ? 'nw' : ''); return `<td${cls ? ` class="${cls}"` : ''}>${c}</td>`; }).join('')}</tr>`;
+const trow = (cells, heads) => `<tr>${cells.map((c, i) => { const plain = String(c).replace(/<[^>]+>/g, ''); const cls = /^<a href="\/menu\//.test(c) ? 'nm' : (plain.length <= 14 ? 'nw' : ''); const lbl = heads && heads[i] ? ` data-label="${esc(heads[i])}"` : ''; return `<td${cls ? ` class="${cls}"` : ''}${lbl}>${c}</td>`; }).join('')}</tr>`;
 const srcA = (r) => (r.src ? `<a href="${esc(r.src.url)}" target="_blank" rel="noopener nofollow">${esc(r.src.label)}</a>` : '-');
 const menuA = (r) => `<a href="${href(menuPath(r))}">${esc(r.name)}</a>`;
 
@@ -439,10 +440,14 @@ function durationGuide(all, today) {
   const stat = ds.length ? `계산에 쓴 ${ds.length}건의 평균은 ${f1(mean(ds))}일, 가운데 값(중앙값)은 ${f1(median(ds))}일, 가장 짧은 것은 ${Math.min(...ds)}일, 가장 긴 것은 ${Math.max(...ds)}일이에요.` : '아직 계산에 쓸 수 있는 항목이 없어요.';
   const kindBits = [byKind('limited').length ? `한정 메뉴 ${byKind('limited').length}건 평균 ${f1(mean(byKind('limited')))}일` : '', byKind('event').length ? `이벤트·프로모션 ${byKind('event').length}건 평균 ${f1(mean(byKind('event')))}일` : ''].filter(Boolean).join(', ');
   const stOf = (r) => { const s = status(r, today); return s === 'on' ? '진행 중' : '종료'; };
-  const exRows = exact.slice().sort((a, c) => a.days - c.days).map((r) => trow([esc(r.brand), menuA(r), r.kind === 'event' ? '이벤트' : '한정 메뉴', esc(fmtDate(r.start)), esc(fmtDate(r.end)), `<b>${r.days}일</b>`, stOf(r), srcA(r)])).join('');
-  const rgRows = ranged.map((r) => trow([esc(r.brand), menuA(r), esc(fmtDate(r.start)), `${esc(fmtDate(r.end))} ~ ${esc(fmtDate(r.endLate))}`, `${dayDiff(r.start, r.end) + 1}~${dayDiff(r.start, r.endLate) + 1}일`, srcA(r)])).join('');
-  const opRows = openEnded.map((r) => trow([esc(r.brand), menuA(r), esc(fmtDate(r.start)), `${dayDiff(r.start, today) + 1}일째`, esc(r.open || '종료일 미정'), srcA(r)])).join('');
-  const brRows = brands.map((b) => { const xs = exact.filter((r) => r.brand === b); return trow([esc(b), `${xs.length}건`, xs.length > 1 ? `${f1(mean(xs.map((r) => r.days)))}일` : `${xs[0].days}일(1건이라 평균 아님)`, esc(xs.map((r) => r.name).join(', '))]); }).join('');
+  const exHeads = ['브랜드', '항목', '구분', '시작', '종료', '기간', '상태', '출처'];
+  const rgHeads = ['브랜드', '항목', '시작', '종료 예상', '예상 기간', '출처'];
+  const opHeads = ['브랜드', '항목', '시작', '판매 기간', '종료 표기', '출처'];
+  const brHeads = ['브랜드', '건수', '평균 기간', '항목'];
+  const exRows = exact.slice().sort((a, c) => a.days - c.days).map((r) => trow([esc(r.brand), menuA(r), r.kind === 'event' ? '이벤트' : '한정 메뉴', esc(fmtDate(r.start)), esc(fmtDate(r.end)), `<b>${r.days}일</b>`, stOf(r), srcA(r)], exHeads)).join('');
+  const rgRows = ranged.map((r) => trow([esc(r.brand), menuA(r), esc(fmtDate(r.start)), `${esc(fmtDate(r.end))} ~ ${esc(fmtDate(r.endLate))}`, `${dayDiff(r.start, r.end) + 1}~${dayDiff(r.start, r.endLate) + 1}일`, srcA(r)], rgHeads)).join('');
+  const opRows = openEnded.map((r) => trow([esc(r.brand), menuA(r), esc(fmtDate(r.start)), `${dayDiff(r.start, today) + 1}일째`, esc(r.open || '종료일 미정'), srcA(r)], opHeads)).join('');
+  const brRows = brands.map((b) => { const xs = exact.filter((r) => r.brand === b); return trow([esc(b), `${xs.length}건`, xs.length > 1 ? `${f1(mean(xs.map((r) => r.days)))}일` : `${xs[0].days}일(1건이라 평균 아님)`, esc(xs.map((r) => r.name).join(', '))], brHeads); }).join('');
   const body = `<p class="meta">기준일 ${esc(fmtDate(today))} · 푸디세이 기록 ${all.length}개 가운데 한정·이벤트 ${lim.length}건 · 매일 자동으로 다시 계산해요</p>`
     + `<p>한정 메뉴나 이벤트가 “얼마나 오래 하는지”는 사려는 사람에게 가장 중요한 정보인데, 기사마다 표현이 달라 헷갈려요. 이 글은 푸디세이에 기록된 항목 중 <b>시작일과 종료일이 기사에 모두 나온 것만</b> 골라 기간을 직접 계산해요. 계산식은 <b>종료일 − 시작일 + 1일</b>(시작일과 종료일을 둘 다 센 기간)이에요. 기사에 없는 날짜는 추측하지 않고 계산에서 뺐어요.</p>`
     + `<h2>계산 결과 요약</h2><p>${esc(stat)}${kindBits ? ' 나눠 보면 ' + esc(kindBits) + '이에요.' : ''} 표본이 ${ds.length}건뿐이라 “프랜차이즈 한정 메뉴는 보통 이만큼 한다”고 일반화하기는 어려워요. 기록이 쌓일수록 숫자가 바뀌고, 그때마다 이 페이지가 같이 바뀌어요.</p>`
@@ -511,9 +516,12 @@ function monthPage(ym, all, today, months) {
   if (ps.length) sum.push(`그중 가격이 하나로 확인된 ${ps.length}개의 가격은 ${won(Math.min(...ps))}에서 ${won(Math.max(...ps))} 사이, 중앙값은 ${won(median(ps))}이에요.`); else sum.push('이 달 신메뉴는 기사에서 가격이 확인된 것이 아직 없어요.');
   if (ends.length) sum.push(`${monthLabel(ym)}에 끝나는 한정 메뉴·이벤트는 ${ends.length}건이고, 가장 이른 마감은 ${ends[0].brand} ‘${ends[0].name}’ ${mdw(ends[0].end)}이에요.`);
   if (starts.length) sum.push(`이 달에 시작한 한정 항목은 ${starts.length}건이에요.`);
-  const newRows = news.map((r) => trow([esc(r.date ? short(r.date) : '-'), esc(r.brand), menuA(r), esc(r.tag || '신메뉴'), esc(r.price || '확인 안 됨'), esc(stOf(r)), srcA(r)])).join('');
-  const calRows = ends.map((r) => trow([esc(`${short(r.end)}(${wd(r.end)})`), esc(r.brand), menuA(r), r.kind === 'event' ? '이벤트' : '한정 메뉴', esc(r.period || ''), esc(stOf(r)), srcA(r)])).join('');
-  const stRows = starts.map((r) => trow([esc(`${short(r.start)}(${wd(r.start)})`), esc(r.brand), menuA(r), r.kind === 'event' ? '이벤트' : '한정 메뉴', esc(r.end ? `${short(r.end)}까지` : (r.open || '종료일 미정')), srcA(r)])).join('');
+  const newHeads = ['날짜', '브랜드', '메뉴', '구분', '가격', '상태', '출처'];
+  const calHeads = ['마감일', '브랜드', '항목', '구분', '기간', '상태', '출처'];
+  const stHeads = ['시작일', '브랜드', '항목', '구분', '종료', '출처'];
+  const newRows = news.map((r) => trow([esc(r.date ? short(r.date) : '-'), esc(r.brand), menuA(r), esc(r.tag || '신메뉴'), esc(r.price || '확인 안 됨'), esc(stOf(r)), srcA(r)], newHeads)).join('');
+  const calRows = ends.map((r) => trow([esc(`${short(r.end)}(${wd(r.end)})`), esc(r.brand), menuA(r), r.kind === 'event' ? '이벤트' : '한정 메뉴', esc(r.period || ''), esc(stOf(r)), srcA(r)], calHeads)).join('');
+  const stRows = starts.map((r) => trow([esc(`${short(r.start)}(${wd(r.start)})`), esc(r.brand), menuA(r), r.kind === 'event' ? '이벤트' : '한정 메뉴', esc(r.end ? `${short(r.end)}까지` : (r.open || '종료일 미정')), srcA(r)], stHeads)).join('');
   const idx = months.indexOf(ym);
   const prev = months[idx - 1], next = months[idx + 1];
   const body = `<p class="meta">기준일 ${esc(fmtDate(today))} · ${arch ? '지난 달 보관함' : '이번 달'} · 날짜는 기사에 나온 출시·발표일, 마감일은 기사에 나온 종료일이에요</p>`
@@ -532,7 +540,7 @@ function monthHub(all, today, months) {
   const rows = months.slice().reverse().map((m) => {
     const ns = all.filter((r) => r.kind === 'new' && (r.date || r.firstSeen || '').startsWith(m));
     const es = all.filter((r) => r.kind !== 'new' && (r.end || '').startsWith(m));
-    return trow([`<a href="/new/${m}">${esc(monthLabel(m))}</a>${m < today.slice(0, 7) ? ' <small>보관함</small>' : ' <small>이번 달</small>'}`, `${ns.length}개`, `${new Set(ns.map((r) => r.brand)).size}곳`, `${es.length}건`]);
+    return trow([`<a href="/new/${m}">${esc(monthLabel(m))}</a>${m < today.slice(0, 7) ? ' <small>보관함</small>' : ' <small>이번 달</small>'}`, `${ns.length}개`, `${new Set(ns.map((r) => r.brand)).size}곳`, `${es.length}건`], ['월', '새 메뉴', '브랜드', '마감하는 한정·이벤트']);
   }).join('');
   const body = `<p>달마다 새로 나온 프랜차이즈 메뉴와 그달에 끝나는 한정 메뉴·이벤트를 한 페이지에 모았어요. 푸디세이에 기록된 항목을 날짜로 나눠 자동으로 만들고, 지난 달 페이지는 지우지 않고 보관함으로 남겨 두어서 “그때 뭐가 나왔더라” 하고 찾아볼 수 있어요.</p>`
     + `<h2>월별 현황</h2><div class="tbl"><table class="compare"><thead><tr><th>월</th><th>새 메뉴</th><th>브랜드</th><th>마감하는 한정·이벤트</th></tr></thead><tbody>${rows}</tbody></table></div><p class="table-note">새 메뉴는 기사에 나온 출시·발표일, 마감은 기사에 나온 종료일 기준이에요. 기준일 ${esc(fmtDate(today))}.</p>`
@@ -547,6 +555,32 @@ function monthHub(all, today, months) {
     + `<h2>보는 법</h2><ul><li>월 페이지에는 새 메뉴 표, 마감 달력, 그달에 시작한 한정 항목이 들어 있어요.</li><li>가격은 기사에 나온 값만 적고, 없으면 “확인 안 됨”으로 둬요.</li><li>판매가 끝난 메뉴도 지우지 않고 “판매 종료”로 표시해요.</li></ul>`
     + `<h2>더 읽을거리</h2><p><a href="/guide/limited-menu-duration">한정 메뉴 판매 기간 계산</a> · <a href="/guide/price-distribution">신메뉴 가격대 분포</a> · <a href="/guide">가이드 전체</a></p>`;
   return pageShell({ title: `월별 신메뉴·한정 메뉴 모음 (${months.length}개 월) | 푸디세이`, desc: '달마다 새로 나온 프랜차이즈 신메뉴와 마감하는 한정 메뉴·이벤트를 모은 월별 보관함이에요.', canonical: '/new', crumbList: [{ name: '홈', path: '/' }, { name: '월별 모음', path: '/new' }], kicker: '월별 모음', h1: '월별 신메뉴·한정 메뉴 모음', body });
+}
+
+// ---------- 메뉴 페이지 요약 카드(브랜드 칩·가격·D-day·판매 기간 막대) ----------
+function brandColor(brand) {
+  let h = 0;
+  for (let i = 0; i < brand.length; i++) h = (h * 31 + brand.charCodeAt(i)) >>> 0;
+  return `hsl(${h % 360}, 46%, 40%)`;
+}
+function summaryCard(r, today) {
+  const st = status(r, today);
+  const label = statusLabel(r, st);
+  const parts = [`<span class="s-chip" style="background:${brandColor(r.brand)}">${esc(r.brand)}</span>`];
+  if (r.price) parts.push(`<span class="s-price mono">${esc(r.price)}</span>`);
+  if (r.kind !== 'new' && r.end) {
+    parts.push(`<span class="badge s-badge s-dday dday" data-end="${esc(r.endLate || r.end || '')}" data-d="${esc(r.end)}"></span>`);
+  } else {
+    parts.push(`<span class="badge s-badge ${st === 'on' ? 'on' : 'off'}" data-end="${esc(r.endLate || r.end || '')}">${esc(label)}</span>`);
+  }
+  let bar = '';
+  if (r.kind !== 'new' && r.start && r.end && !r.endLate) {
+    const total = dayDiff(r.start, r.end) + 1;
+    const passed = Math.min(Math.max(dayDiff(r.start, today) + 1, 0), total);
+    const pct = total > 0 ? Math.round((passed / total) * 100) : 0;
+    bar = `<div class="s-bar" role="img" aria-label="판매 기간 중 ${pct}% 지남"><div class="s-bar-fill" style="width:${pct}%"></div></div><p class="s-period">${esc(fmtDate(r.start))} ~ ${esc(fmtDate(r.end))}</p>`;
+  }
+  return `<div class="s-card">${parts.join('')}${bar}</div>`;
 }
 
 // ---------- 메뉴 페이지 ----------
@@ -589,6 +623,7 @@ function menuPage(r, all, today) {
   if (r.img) {
     body += `<figure class="shot"><img src="${esc(r.img)}" alt="${esc(r.brand + ' ' + r.name + ' 사진')}" loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('figure').remove()"><figcaption>사진: ${esc(r.imgFrom || r.brand + ' 공식 홈페이지')}</figcaption></figure>`;
   }
+  body += summaryCard(r, today);
   body += `<dl class="facts">${facts.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>`;
   if (r.desc) body += `<p>${esc(r.desc)}</p>`;
   if (r.note && r.note !== r.desc) body += `<p>${esc(r.note)}</p>`;
@@ -670,7 +705,7 @@ function christmasCompareTable(list) {
   return `<h2>브랜드별 케이크 가격·사전예약 마감일 비교</h2>`
     + `<p class="table-note">가격·마감일은 기사나 브랜드 공식 홈페이지에서 확인한 것만 적었어요. 확인되지 않은 가격은 "가격 미공개"로 표시해요.</p>`
     + `<table class="compare"><thead><tr><th>브랜드</th><th>케이크 종류</th><th>가격</th><th>사전예약 마감</th></tr></thead><tbody>`
-    + rows.map((r) => `<tr><td>${esc(r.brand)}</td><td>${r.count}종</td><td>${esc(r.price)}</td><td>${esc(r.deadline)}</td></tr>`).join('')
+    + rows.map((r) => `<tr><td data-label="브랜드">${esc(r.brand)}</td><td data-label="케이크 종류">${r.count}종</td><td data-label="가격">${esc(r.price)}</td><td data-label="사전예약 마감">${esc(r.deadline)}</td></tr>`).join('')
     + `</tbody></table>`;
 }
 function sameCatBrands(all, today, catId, brand, catName) {
@@ -863,14 +898,6 @@ function main() {
   const newWeek = all.filter((r) => r.firstSeen && ageOf(r) >= 0 && ageOf(r) <= 6).length;
   const freshBits = [newToday ? `오늘 올라온 메뉴 ${newToday}개` : '', newWeek ? `최근 7일간 등록된 메뉴 ${newWeek}개` : ''].filter(Boolean).join(' · ');
   idx = replaceBlock(idx, 'stamp', `마지막 업데이트 <time datetime="${esc(UPDATED)}">${esc(fmtDate(UPDATED))}</time>${freshBits ? ' · ' + freshBits : ''} · 판매·진행 중 메뉴 ${liveItems.length}개 · <a href="/updates">업데이트 내역</a> · <a href="/rss.xml">RSS 구독</a>`);
-  // 홈 첫 화면 '오늘·최근 신상': 등록일(firstSeen) 최신 순으로 신상 메뉴를 마감임박 카드 위에 보여줘요(최대 6개).
-  const recentNew = liveItems.filter((r) => r.kind === 'new').slice()
-    .sort((a, b) => String(b.firstSeen || b.date || '').localeCompare(String(a.firstSeen || a.date || '')) || a.brand.localeCompare(b.brand, 'ko'))
-    .slice(0, 6);
-  const todayNewHtml = recentNew.length
-    ? '      <ul class="dir-lim">\n' + recentNew.map((r) => `        <li><a href="${href(menuPath(r))}"><b>${esc(r.brand)}</b> ${esc(r.name)}</a> <span>${esc([r.tag, r.firstSeen === today ? '오늘 등록' : (r.firstSeen ? fmtDate(r.firstSeen) + ' 등록' : '')].filter(Boolean).join(' · '))}</span></li>`).join('\n') + '\n      </ul>'
-    : '';
-  idx = replaceBlock(idx, 'todaynew', todayNewHtml);
   const readsLinks = GUIDES.map((g) => `<li><a href="/guide/${g.slug}">${esc(g.title)}</a></li>`).concat(MONTHLY_LINKS(all, today)).concat([`<li><a href="${href(seasonPath('christmas'))}">크리스마스·연말 메뉴 모음</a></li>`, '<li><a href="/updates">날짜별 업데이트 내역</a></li>']);
   idx = replaceBlock(idx, 'reads', `      <ul class="reads-list">\n        ${readsLinks.join('\n        ')}\n      </ul>`);
   const idxLd = [
