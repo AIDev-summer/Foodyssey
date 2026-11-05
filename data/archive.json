@@ -1482,6 +1482,34 @@
   "catName": "커피·디저트",
   "firstSeen": "2026-11-02"
  },
+ "스타벅스-수능-응원-기획전": {
+  "kind": "event",
+  "brand": "스타벅스",
+  "cat": "cafe",
+  "name": "수능 응원 기획전",
+  "tag": "이벤트",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "start": "",
+  "end": "2026-11-17",
+  "endLate": "",
+  "open": "",
+  "period": "~ 11.17(화)",
+  "desc": "인절미 찰떡파이, 쫀득 마롱 찰떡 세트, 클로버 틴 초콜릿 같은 수능 응원 제품을 모았어요. 스타벅스 앱 온라인 스토어, 카카오톡 선물하기, 무신사에서 구매 금액별 할인 쿠폰과 추가 별 적립을 줘요.",
+  "specs": null,
+  "priceNote": "",
+  "lines": null,
+  "cups": null,
+  "src": {
+   "label": "코리아포스트",
+   "url": "https://www.koreapost.co.kr/news/articleView.html?idxno=89910"
+  },
+  "season": "",
+  "slug": "스타벅스-수능-응원-기획전",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-11-05"
+ },
  "스타벅스-윈터-스카치-바닐라-라떼": {
   "kind": "new",
   "brand": "스타벅스",
@@ -2900,6 +2928,34 @@
   "slug": "파스쿠찌-포레스트-쇼콜라-라떼",
   "catName": "커피·디저트",
   "firstSeen": "2026-11-02"
+ },
+ "파파존스-kt-멤버십-방문-포장-50-할인": {
+  "kind": "event",
+  "brand": "파파존스",
+  "cat": "pizza",
+  "name": "KT 멤버십 방문 포장 50% 할인",
+  "tag": "이벤트",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "start": "2026-11-02",
+  "end": "2026-11-30",
+  "endLate": "",
+  "open": "",
+  "period": "11.2 ~ 11.30",
+  "desc": "KT 멤버십 앱에서 쿠폰을 받고 파파존스 공식 홈페이지나 앱에서 주문해 매장에서 받으면 50% 할인해 줘요. 피자, 사이드, 음료에 똑같이 적용돼요. 월 1회만 쓸 수 있어요.",
+  "specs": null,
+  "priceNote": "",
+  "lines": null,
+  "cups": null,
+  "src": {
+   "label": "뉴스웨이",
+   "url": "https://newsway.co.kr/news/view?ud=2026110314103701126"
+  },
+  "season": "",
+  "slug": "파파존스-kt-멤버십-방문-포장-50-할인",
+  "catName": "피자",
+  "firstSeen": "2026-11-05"
  },
  "푸라닭-홍고추마요": {
   "kind": "new",
