@@ -121,3 +121,7 @@
 
 - 서치콘솔 경고: 메뉴 페이지 16곳이 `Product`+`Offer`(가격)만 내보내 `image`·`review`·`aggregateRating`·반품·배송 필드가 없다고 지적됨(사진 핫링크 삭제로 `image`가 사라진 것이 직접 원인, 판매 사이트가 아닌데 판매 마크업을 쓴 것이 근본 원인).
 - 조치: Product/Offer 전부 제거 → 메뉴 페이지는 `WebPage`+`BreadcrumbList`. 가짜 평점·리뷰·배송·반품은 넣지 않음. `scripts/lint-jsonld.js`를 빌드 끝에 추가(금지 패턴이면 빌드 실패), 자체 테스트 `scripts/test-lint-jsonld.js`를 Actions에 추가. 규칙은 README "구조화된 데이터 규칙".
+
+## 14. 인스타 짧은 주소 /ig (2026-11-04, 마케터 제안)
+
+- `ig/index.html` 추가(이동 전용, noindex,nofollow, canonical=홈, 사이트맵·RSS·내부 링크에 없음). 이동 주소에 utm_source=instagram&utm_medium=social&utm_campaign=profile, `?me=` 값 유지. 홈 canonical은 항상 `https://foodyssey.co.kr/`라서 utm 붙어도 같은 페이지로 취급돼요.

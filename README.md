@@ -63,3 +63,9 @@
 - **쓰지 않는 것(린트가 막아요):** `Product`·`Offer`(가격/재고), `Review`·`AggregateRating`(평점), `FAQPage`, `hasMerchantReturnPolicy`·`shippingDetails`. 실제로 없는 평점·리뷰·배송·반품 정보는 절대 만들어 넣지 않아요. 가격·기간은 눈에 보이는 본문에 적어요.
 - **린트:** `scripts/lint-jsonld.js`가 `node scripts/build.js` 마지막에 자동으로 돌아요. 금지 형식·필드, 빈 문자열/`undefined`/`null`, JSON 오류, 필수 필드 누락(WebSite·WebPage·BreadcrumbList·ItemList), `image`·`og:image`·`twitter:image`가 가리키는 파일이 없거나 외부 주소인 경우에 빌드를 실패시켜요(Actions도 멈춰서 잘못된 페이지가 배포되지 않아요). `node scripts/test-lint-jsonld.js`는 린트 자체 테스트예요.
 - **사진·이미지를 빼거나 바꿀 때는** 구조화 데이터와 `og:image`·`twitter:image`를 같이 확인하세요(2026-11-03 사고: 사진 핫링크를 지우면서 Product의 `image`가 사라져 서치콘솔 경고).
+
+## 인스타 프로필 링크 `/ig`
+
+- `ig/index.html`은 손으로 만든 이동 전용 페이지예요(`node scripts/build.js`가 건드리지 않아요). `https://foodyssey.co.kr/ig`로 들어오면 `/?utm_source=instagram&utm_medium=social&utm_campaign=profile`로 보내서 GA4에서 인스타 유입을 구분해요.
+- 자바스크립트가 켜져 있으면 `?me=0/1` 값을 이동 주소에 이어 붙여요(내 방문 제외 유지). 꺼져 있으면 `<noscript>`의 meta refresh가 이동해요.
+- `noindex,nofollow`, canonical은 홈이에요. 사이트맵·RSS·내부 링크·허브에는 넣지 않아요. JSON-LD·광고·통계 스크립트도 넣지 않아요.
