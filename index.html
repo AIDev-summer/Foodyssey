@@ -292,6 +292,9 @@ main .wrap { padding-block: 24px 56px; display: grid; gap: 40px; }
 .dir .dir-brand { color: var(--ink); font-weight: 600; text-decoration: none; margin-right: 4px; }
 .stamp { color: var(--muted); font-size: 12.5px; margin: 8px 0 0; }
 .stamp a { color: inherit; }
+.reads { padding-block: 22px 4px; }
+.reads-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; font-size: 14px; }
+.reads-list a { color: var(--ink); }
 .dir-lim { list-style: none; margin: 0 0 18px; padding: 0; display: grid; gap: 6px; font-size: 13.5px; }
 .dir-lim li span { color: var(--muted); margin-left: 6px; font-size: 12.5px; }
 footer { color: var(--muted); font-size: 12px; border-top: 1px solid var(--line); padding-top: 16px; display: grid; gap: 4px; }
@@ -354,6 +357,14 @@ footer .links a { margin-right: 14px; }
   <div class="wrap">
     <div class="soon-head"><span class="label" id="week-title">이번 주 끝나는 한정 메뉴</span><a href="#limited">한정 전체 보기</a></div>
     <div class="soon-row" id="week-row"></div>
+  </div>
+</section>
+
+<section class="reads" aria-labelledby="reads-title">
+  <div class="wrap">
+    <div class="soon-head"><span class="label" id="reads-title">읽을거리 · 모아보기</span><a href="/guide">가이드 전체</a></div>
+    <!-- build:reads -->
+    <!-- /build:reads -->
   </div>
 </section>
 
@@ -431,7 +442,7 @@ footer .links a { margin-right: 14px; }
     <footer>
       <p>푸디세이(Foodyssey)는 매일 아침 기사를 확인해 업데이트해요. 가격과 기간은 기사나 브랜드 공식 홈페이지에서 확인한 것만 적었어요.</p>
       <p>메뉴와 가격은 매장마다 다를 수 있어요. 푸디세이는 각 브랜드와 관계없는 독립 사이트예요.</p>
-      <p class="links"><a href="/about">소개</a><a href="/guide">가이드</a><a href="/updates">업데이트 내역</a><a href="/terms">이용약관</a><a href="/privacy">개인정보처리방침</a><a href="/contact">문의</a></p>
+      <p class="links"><a href="/about">소개</a><a href="/guide">가이드</a><a href="/updates">업데이트 내역</a><a href="/terms">이용약관</a><a href="/privacy">개인정보처리방침</a><a href="/contact">문의</a><a href="/rss.xml">RSS</a></p>
     </footer>
   </div>
 </main>

@@ -76,3 +76,8 @@ header .wrap { flex-wrap: wrap; row-gap: 6px; }
 header nav { flex-wrap: wrap; justify-content: flex-end; row-gap: 2px; }
 header nav a { white-space: nowrap; word-break: keep-all; }
 @media (max-width: 520px) { .logo-en { display: none; } header nav a { margin-left: 10px; } }
+.rel { margin: 16px 0 6px; padding: 12px 14px; border-radius: 12px; background: color-mix(in srgb, var(--fresh) 9%, var(--card)); display: grid; gap: 8px; font-size: 13.5px; }
+.rel div { display: grid; gap: 2px; }
+.rel b { font-size: 12px; color: var(--muted); font-weight: 600; }
+.rel a { color: var(--ink); font-weight: 600; }
+.rel small { color: var(--muted); font-weight: 400; }

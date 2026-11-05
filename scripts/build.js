@@ -27,9 +27,9 @@ const BRAND_CAT = {
 
 // 가이드(/guide) 글: data.js 근거로 손으로 쓴 고정 HTML이라 sitemap에만 메타를 등록해요.
 const GUIDES = [
-  { slug: 'starbucks-frequency', updated: '2026-11-03' },
-  { slug: 'christmas-cake-preorder', updated: '2026-11-03' },
-  { slug: 'limited-menu-duration', updated: '2026-11-03' }
+  { slug: 'starbucks-frequency', updated: '2026-11-03', title: '스타벅스 프리퀀시 빨리 모으는 법과 미션음료 정리' },
+  { slug: 'christmas-cake-preorder', updated: '2026-11-03', title: '크리스마스 케이크 사전예약 할인 받는 법(브랜드별 예약 기간)' },
+  { slug: 'limited-menu-duration', updated: '2026-11-03', title: '프랜차이즈 한정 메뉴는 보통 얼마나 파나(종료 시기 패턴)' }
 ];
 
 // ---------- 데이터 읽기 ----------
@@ -162,9 +162,10 @@ let UPDATED = '';
 let CATS = [];
 const stampHtml = () => UPDATED ? `<p class="stamp">마지막 업데이트 <time datetime="${esc(UPDATED)}">${esc(fmtDate(UPDATED))}</time> · 매일 아침 기사를 확인해요 · <a href="/updates">업데이트 내역</a></p>` : '';
 // 다음 페이지로 이어지는 링크 모음(업종·시즌·업데이트 내역)
+const MONTHLY_LINKS = () => [];
 function exploreHtml(exceptCat) {
   const cats = CATS.filter((c) => c.id !== exceptCat).map((c) => `<a href="${href(catPath(c.id))}">${esc(c.name)}</a>`);
-  return `<h2>더 둘러보기</h2><p class="explore">${cats.concat([`<a href="${href(seasonPath('christmas'))}">크리스마스·연말 메뉴</a>`, '<a href="/updates">업데이트 내역</a>']).join(' · ')}</p>`;
+  return `<h2>더 둘러보기</h2><p class="explore">${cats.concat([`<a href="${href(seasonPath('christmas'))}">크리스마스·연말 메뉴</a>`, '<a href="/guide">가이드</a>', '<a href="/updates">업데이트 내역</a>']).join(' · ')}</p>`;
 }
 
 // ---------- 공통 틀 ----------
@@ -228,7 +229,7 @@ ${jsonld.map((j) => `<script type="application/ld+json">${JSON.stringify(j).repl
 `;
 }
 function foot() {
-  return `<footer><div class="wrap"><p>메뉴와 가격은 매장마다 다를 수 있어요. 주문 전에 브랜드 공식 앱이나 매장에서 한 번 더 확인해 주세요. 푸디세이는 각 브랜드와 관계없는 독립 사이트예요.</p><p class="links"><a href="/">홈</a><a href="/about">소개</a><a href="/guide">가이드</a><a href="/updates">업데이트 내역</a><a href="/terms">이용약관</a><a href="/privacy">개인정보처리방침</a><a href="/contact">문의</a></p></div></footer>
+  return `<footer><div class="wrap"><p>메뉴와 가격은 매장마다 다를 수 있어요. 주문 전에 브랜드 공식 앱이나 매장에서 한 번 더 확인해 주세요. 푸디세이는 각 브랜드와 관계없는 독립 사이트예요.</p><p class="links"><a href="/">홈</a><a href="/about">소개</a><a href="/guide">가이드</a><a href="/updates">업데이트 내역</a><a href="/terms">이용약관</a><a href="/privacy">개인정보처리방침</a><a href="/contact">문의</a><a href="/rss.xml">RSS</a></p></div></footer>
 <script src="/theme.js"></script>
 </body>
 </html>
@@ -350,6 +351,42 @@ function compareHtml(r, all, today) {
   return h;
 }
 
+
+// ---------- 함께 보면 좋은 메뉴(내부 링크 블록 3종) ----------
+// 같은 브랜드 다른 메뉴 / 비슷한 가격대 다른 브랜드(가격이 근거 있는 것만) / 이번 주(없으면 곧) 끝나는 한정 메뉴
+function relatedSets(r, all, today) {
+  const onOf = (x) => status(x, today) === 'on' && x.slug !== r.slug;
+  const sibs = new Set(r.group || []);
+  const key = (x) => String(x.date || x.end || x.firstSeen || '');
+  const brand = all.filter((x) => onOf(x) && x.brand === r.brand)
+    .sort((a, c) => ((sibs.has(a.name) ? 1 : 0) - (sibs.has(c.name) ? 1 : 0)) || key(c).localeCompare(key(a)));
+  const rp = priceNum(r.price);
+  const seenB = new Set();
+  const price = rp ? all.filter((x) => onOf(x) && x.brand !== r.brand && priceNum(x.price) && Math.abs(priceNum(x.price) - rp) <= Math.max(1000, rp * 0.15))
+    .sort((a, c) => Math.abs(priceNum(a.price) - rp) - Math.abs(priceNum(c.price) - rp))
+    .filter((x) => (seenB.has(x.brand) ? false : (seenB.add(x.brand), true))) : [];
+  const t0 = Date.parse(today);
+  const dleft = (x) => Math.round((Date.parse(x.end) - t0) / 86400000);
+  const endable = all.filter((x) => onOf(x) && x.kind !== 'new' && x.end && dleft(x) >= 0).sort((a, c) => a.end.localeCompare(c.end));
+  let ending = endable.filter((x) => dleft(x) <= 7);
+  let endTitle = '이번 주 끝나는 한정 메뉴';
+  if (!ending.length) { ending = endable; endTitle = '곧 끝나는 한정 메뉴'; }
+  return { brand, price, ending, endTitle };
+}
+function relTop(S) {
+  const a = (x, extra) => `<a href="${href(menuPath(x))}">${extra ? esc(x.brand) + ' ' : ''}${esc(x.name)}</a>`;
+  const g = [];
+  if (S.brand.length) g.push(['같은 브랜드 다른 메뉴', S.brand.slice(0, 3).map((x) => a(x, false))]);
+  if (S.price.length) g.push(['비슷한 가격대 다른 브랜드', S.price.slice(0, 3).map((x) => `${a(x, true)} <small>${esc(x.price)}</small>`)]);
+  if (S.ending.length) g.push([S.endTitle, S.ending.slice(0, 3).map((x) => `${a(x, true)} <small>${esc(mdw(x.end))}까지</small>`)]);
+  if (!g.length) return '';
+  return `<aside class="rel" aria-label="함께 보면 좋은 메뉴">${g.map(([t, ls]) => `<div><b>${esc(t)}</b><span>${ls.join(' · ')}</span></div>`).join('')}</aside>`;
+}
+function relBottom(r, S) {
+  const blk = (t, list) => (list.length ? `<h2>${esc(t)}</h2><ul class="cards">${list.slice(0, 5).map((x) => card(x, 'on')).join('')}</ul>` : '');
+  return blk(`${r.brand}의 다른 메뉴`, S.brand) + blk('비슷한 가격대 다른 브랜드', S.price) + blk(S.endTitle, S.ending);
+}
+
 // ---------- 메뉴 페이지 ----------
 function menuPage(r, all, today) {
   const st = status(r, today);
@@ -402,15 +439,12 @@ function menuPage(r, all, today) {
   }
   if (r.src) body += `<p class="src">출처: <a href="${esc(r.src.url)}" target="_blank" rel="noopener nofollow">${esc(r.src.label)}</a></p>`;
 
-  const sameBrand = all.filter((x) => x.brand === r.brand && x.kind === 'new' && x.slug !== r.slug);
-  const sameCat = all.filter((x) => r.cat && x.cat === r.cat && x.brand !== r.brand && status(x, today) === 'on').slice(0, 8);
-  const rPrice = priceNum(r.price);
-  // 가격이 비슷한(±15%, 최소 1,000원) 다른 브랜드 메뉴. 가격이 숫자로 확인된 것만 비교해요.
-  const similarPrice = rPrice ? all.filter((x) => x.brand !== r.brand && priceNum(x.price) && Math.abs(priceNum(x.price) - rPrice) <= Math.max(1000, rPrice * 0.15) && status(x, today) === 'on').slice(0, 8) : [];
-  if (sameBrand.length) body += `<h2>${esc(r.brand)}의 다른 신메뉴</h2><ul class="cards">${sameBrand.map((x) => card(x, status(x, today))).join('')}</ul>`;
-  if (sameCat.length) body += `<h2>다른 브랜드 ${esc(r.catName)} 메뉴</h2><ul class="cards">${sameCat.map((x) => card(x, 'on')).join('')}</ul>`;
+  const REL = relatedSets(r, all, today);
+  body += relTop(REL);
   body += compareHtml(r, all, today);
-  if (similarPrice.length) body += `<h2>비슷한 가격대 다른 브랜드</h2><ul class="cards">${similarPrice.map((x) => card(x, 'on')).join('')}</ul>`;
+  body += relBottom(r, REL);
+  const sameCat = all.filter((x) => r.cat && x.cat === r.cat && x.brand !== r.brand && status(x, today) === 'on' && !REL.price.includes(x)).slice(0, 4);
+  if (sameCat.length) body += `<h2>다른 브랜드 ${esc(r.catName)} 메뉴</h2><ul class="cards">${sameCat.map((x) => card(x, 'on')).join('')}</ul>`;
   if (r.firstSeen) body += `<p class="stamp">푸디세이 등록일 <time datetime="${esc(r.firstSeen)}">${esc(fmtDate(r.firstSeen))}</time> · 사이트 마지막 업데이트 <time datetime="${esc(UPDATED)}">${esc(fmtDate(UPDATED))}</time></p>`;
   body += exploreHtml(r.cat);
   body += `<p class="more"><a href="/">오늘의 새 메뉴·한정 메뉴 전체 보기 →</a></p>`;
@@ -647,7 +681,15 @@ function main() {
     ? '      <ul class="dir-lim">\n' + lim.map((r) => `        <li><a href="${href(menuPath(r))}"><b>${esc(r.brand)}</b> ${esc(r.name)}</a> <span>${esc([r.kind === 'event' ? '이벤트' : '한정 메뉴', r.period || r.open].filter(Boolean).join(' · '))}</span></li>`).join('\n') + '\n      </ul>'
     : '';
   idx = replaceBlock(idx, 'upcoming', limHtml);
-  idx = replaceBlock(idx, 'stamp', `마지막 업데이트 <time datetime="${esc(UPDATED)}">${esc(fmtDate(UPDATED))}</time> · 판매·진행 중 메뉴 ${liveItems.length}개 · <a href="/updates">업데이트 내역</a> · <a href="${href(seasonPath('christmas'))}">크리스마스·연말 메뉴</a>`);
+  // 홈 상단 '오늘/이번 주 업데이트': archive.json의 등록일(firstSeen) 기준으로 센 사실만 써요.
+  const t0 = Date.parse(today);
+  const ageOf = (r) => Math.round((t0 - Date.parse(r.firstSeen)) / 86400000);
+  const newToday = all.filter((r) => r.firstSeen === today).length;
+  const newWeek = all.filter((r) => r.firstSeen && ageOf(r) >= 0 && ageOf(r) <= 6).length;
+  const freshBits = [newToday ? `오늘 올라온 메뉴 ${newToday}개` : '', newWeek ? `최근 7일간 등록된 메뉴 ${newWeek}개` : ''].filter(Boolean).join(' · ');
+  idx = replaceBlock(idx, 'stamp', `마지막 업데이트 <time datetime="${esc(UPDATED)}">${esc(fmtDate(UPDATED))}</time>${freshBits ? ' · ' + freshBits : ''} · 판매·진행 중 메뉴 ${liveItems.length}개 · <a href="/updates">업데이트 내역</a> · <a href="/rss.xml">RSS 구독</a>`);
+  const readsLinks = GUIDES.map((g) => `<li><a href="/guide/${g.slug}">${esc(g.title)}</a></li>`).concat(MONTHLY_LINKS(all, today)).concat([`<li><a href="${href(seasonPath('christmas'))}">크리스마스·연말 메뉴 모음</a></li>`, '<li><a href="/updates">날짜별 업데이트 내역</a></li>']);
+  idx = replaceBlock(idx, 'reads', `      <ul class="reads-list">\n        ${readsLinks.join('\n        ')}\n      </ul>`);
   const idxLd = [
     { '@context': 'https://schema.org', '@type': 'WebSite', name: '푸디세이', alternateName: 'Foodyssey', url: SITE + '/' },
     { '@context': 'https://schema.org', '@type': 'ItemList', name: '프랜차이즈 새 메뉴와 한정 메뉴', itemListElement: liveItems.map((r, i) => ({ '@type': 'ListItem', position: i + 1, url: SITE + href(menuPath(r)), name: `${r.brand} ${r.name}` })) }
