@@ -646,7 +646,7 @@ footer .links a { min-width: 44px; justify-content: center; }
   var weekNew = weekItems.filter(function (o) { return !soonShown[o.x.brand + '|' + o.x.title]; });
   if (weekItems.length && weekNew.length) {
     weekSection.hidden = false;
-    weekItems.forEach(function (o) {
+    weekNew.forEach(function (o) {
       weekRow.appendChild(el('a', { cls: 'soon-card' + (o.d <= 3 ? ' urgent' : ' near'), href: menuHref(o) }, [
         el('span', { cls: 'd', text: dLabel(o.d) }),
         el('span', { cls: 'b', text: o.x.brand }),
