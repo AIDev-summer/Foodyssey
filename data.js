@@ -8,7 +8,7 @@
 //   lines 항목은 [이름, 가격, 사진 주소] 순서로 세 번째 칸에 사진을 넣을 수 있어요.
 // - pop: 검색량 배수(최근 3일 / 지난 4주). 한정 탭 인기순 정렬에 써요. 없으면 마감순으로 뒤에 놓여요.
 window.FOODYSSEY = {
-  updated: "2026-11-02",
+  updated: "2026-11-05",
   weekLabel: "2026년 11월 첫째 주",
 
   cats: [
@@ -216,6 +216,9 @@ window.FOODYSSEY = {
   ],
 
   limited: [
+    { kind: "이벤트", brand: "파파존스", title: "KT 멤버십 방문 포장 50% 할인", end: "2026-11-30", period: "11.2 ~ 11.30",
+      desc: "KT 멤버십 앱에서 쿠폰을 받고 파파존스 공식 홈페이지나 앱에서 주문해 매장에서 받으면 50% 할인해 줘요. 피자, 사이드, 음료에 똑같이 적용돼요. 월 1회만 쓸 수 있어요.",
+      src: { label: "뉴스웨이", url: "https://newsway.co.kr/news/view?ud=2026110314103701126" } },
     { kind: "이벤트", brand: "파스쿠찌", title: "네이버페이 결제 40% 혜택", end: "2026-11-15", period: "11.11 ~ 11.15",
       desc: "크리스마스 시즌 음료 출시를 기념해 전 제품을 네이버페이로 1만 원 이상 결제하면 40% 혜택을 줘요.",
       src: { label: "푸드투데이", url: "https://www.foodtoday.or.kr/news/article.html?no=209327" } },
