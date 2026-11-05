@@ -69,3 +69,10 @@
 - `ig/index.html`은 손으로 만든 이동 전용 페이지예요(`node scripts/build.js`가 건드리지 않아요). `https://foodyssey.co.kr/ig`로 들어오면 `/?utm_source=instagram&utm_medium=social&utm_campaign=profile`로 보내서 GA4에서 인스타 유입을 구분해요.
 - 자바스크립트가 켜져 있으면 `?me=0/1` 값을 이동 주소에 이어 붙여요(내 방문 제외 유지). 꺼져 있으면 `<noscript>`의 meta refresh가 이동해요.
 - `noindex,nofollow`, canonical은 홈이에요. 사이트맵·RSS·내부 링크·허브에는 넣지 않아요. JSON-LD·광고·통계 스크립트도 넣지 않아요.
+
+## 월별 모음과 자동 계산 가이드
+
+- `scripts/build.js`가 `/new`(월별 모음 목록), `/new/YYYY-MM`(그달 새 메뉴·마감 달력, 지난 달은 보관함 표시), `/guide`(가이드 목록), `/guide/limited-menu-duration`(판매 기간 계산), `/guide/price-distribution`(가격대 분포)를 `data/archive.json`과 `data.js` 값으로 매일 다시 만들어요. 손으로 고치지 않아요.
+- 한정 항목에 기사에서 확인한 **`start`(시작·출시일, YYYY-MM-DD)** 를 넣으면 판매 기간 계산에 들어가요. 기사에 없으면 넣지 않아요(추측 금지). 가격은 기사에 숫자 하나로 있을 때만 `price`에 적어요.
+- 손으로 쓰는 가이드는 `guide/starbucks-frequency.html`, `guide/christmas-cake-preorder.html`뿐이에요(기사 근거 문장만, 일반론 금지).
+- 메뉴 페이지 맨 위·아래의 "함께 보면 좋은 메뉴"(같은 브랜드, 비슷한 가격대, 이번 주 끝나는 한정)는 `relatedSets()`가 데이터로 골라요.
