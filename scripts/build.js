@@ -873,7 +873,7 @@ function main() {
   fs.writeFileSync(idxFile, idx);
 
   // 구조화 데이터 린트: 금지 패턴이 있으면 빌드를 실패시켜서 잘못된 페이지가 배포되지 않게 해요.
-  const lintRes = require('./lint-jsonld').lint(ROOT);
+  const lintRes = require('./lint-jsonld').lint(ROOT, { analytics: true });
   if (lintRes.errs.length) {
     console.error('JSON-LD 린트 실패 ' + lintRes.errs.length + '건');
     lintRes.errs.slice(0, 40).forEach((e) => console.error(' - ' + e));

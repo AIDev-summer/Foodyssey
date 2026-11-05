@@ -55,6 +55,20 @@ window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-LN6SS7QZSR');
+(function () {
+  // 사람 신호: 첫 스크롤·터치/마우스 이동·5초 이상 화면 가시 중 하나. 세션당 1회, 새 쿠키/개인정보 없음(sessionStorage 플래그만).
+  var SKEY = 'fd_eh', fired = false;
+  function send() {
+    if (fired) return; fired = true;
+    try { if (sessionStorage.getItem(SKEY)) return; sessionStorage.setItem(SKEY, '1'); } catch (e) {}
+    gtag('event', 'engaged_human');
+  }
+  window.addEventListener('scroll', send, { passive: true, once: true });
+  window.addEventListener('pointermove', send, { passive: true, once: true });
+  window.addEventListener('touchstart', send, { passive: true, once: true });
+  setTimeout(function () { if (!document.hidden) send(); }, 5000);
+})();
+
 </script>
 <!-- build:jsonld -->
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"푸디세이","alternateName":"Foodyssey","url":"https://foodyssey.co.kr/"}</script>

@@ -74,7 +74,8 @@ function check(node, where, errs, ctx) {
   Object.keys(node).forEach((k) => { if (k !== '@context' && typeof node[k] === 'object') check(node[k], where + '.' + k, errs, ctx); else if (typeof node[k] === 'string' && k !== '@context' && k !== '@type') check(node[k], where + '.' + k, errs, ctx); });
 }
 
-function lint(root) {
+function lint(root, opts) {
+  opts = opts || {};
   const files = walk(root, []);
   const errs = [];
   const stat = {};
@@ -103,6 +104,14 @@ function lint(root) {
         else if (!fs.existsSync(f)) errs.push(rel + ': ' + p + ' 파일이 없어요 ' + mm[1]);
       } else if (mm) errs.push(rel + ': ' + p + ' 값이 비었어요');
     });
+    // 통계 코드 일관성(2026-11-06 사고: 정적 페이지 7개가 gtag 설정 없이 gtag.js만 불러 방문이 집계되지 않음).
+    // 이동 전용 페이지(ig/)를 뺀 모든 페이지에 gtag config 1번, 내 방문 제외(ga-disable), 사람 신호 이벤트 1번이 있어야 해요.
+    if (opts.analytics && !/^ig\//.test(rel)) {
+      const cnt = (re) => (h.match(re) || []).length;
+      if (cnt(/gtag\('config'/g) !== 1) errs.push(rel + ": gtag('config') 가 " + cnt(/gtag\('config'/g) + '번이에요(1번이어야 해요)');
+      if (cnt(/gtag\('event', 'engaged_human'\)/g) !== 1) errs.push(rel + ': engaged_human 이벤트가 ' + cnt(/gtag\('event', 'engaged_human'\)/g) + '번이에요(1번이어야 해요)');
+      if (!/ga-disable-/.test(h)) errs.push(rel + ': 내 방문 제외(ga-disable) 코드가 없어요');
+    }
     // 화면에 없는 FAQ 방지: FAQ 마크업 자체를 금지했으니 본문에도 질문-답변 스키마 속성이 없어야 해요.
     if (/itemtype="https?:\/\/schema\.org\/(Product|FAQPage|Review|Offer)"/.test(h)) errs.push(rel + ': 마이크로데이터 Product/FAQ/Review/Offer 금지');
   });
