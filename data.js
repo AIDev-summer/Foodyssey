@@ -9,7 +9,7 @@
 // - start: 기사에 시작·출시일이 나온 한정 항목의 시작일(YYYY-MM-DD). 판매 기간 계산 가이드(/guide/limited-menu-duration)에 쓰여요. 기사에 없으면 넣지 않아요.
 // - pop: 검색량 배수(최근 3일 / 지난 4주). 한정 탭 인기순 정렬에 써요. 없으면 마감순으로 뒤에 놓여요.
 window.FOODYSSEY = {
-  updated: "2026-11-05",
+  updated: "2026-11-06",
   weekLabel: "2026년 11월 첫째 주",
 
   cats: [
@@ -213,7 +213,14 @@ window.FOODYSSEY = {
         { name: "스노우 돌체 카페라떼", tag: "음료", desc: "달콤한 스카치 캐러멜과 향긋한 시나몬이 부드럽게 어우러지는 카페라떼예요." },
         { name: "포레스트 쇼콜라 라떼", tag: "음료", desc: "고소하고 쫀득한 피스타치오 크림에 진한 초콜릿을 합친 라떼예요. 파스쿠찌 크리스마스 시즌 음료 4종 중 하나예요." }
       ],
-      src: { label: "푸드투데이", url: "https://www.foodtoday.or.kr/news/article.html?no=209327" } }
+      src: { label: "푸드투데이", url: "https://www.foodtoday.or.kr/news/article.html?no=209327" } },
+    { cat: "cafe", brand: "던킨", when: "11.2 발표", date: "2026-11-02",
+      items: [
+        { name: "피스타치오 크림 카스텔라", tag: "도넛", desc: "두바이 스타일 초코 도넛 출시 2주년을 맞아 나온 도넛이에요." },
+        { name: "라즈베리 피스타치오", tag: "도넛", desc: "두바이 스타일 초코 도넛 출시 2주년을 맞아 나온 도넛이에요." }
+      ],
+      src: { label: "겟뉴스", url: "https://www.getnews.co.kr/news/articleView.html?idxno=885661" },
+      note: "가격과 판매 기간은 기사에 나오지 않았어요" }
   ],
 
   limited: [
