@@ -112,6 +112,22 @@ function lint(root, opts) {
       if (cnt(/gtag\('event', 'engaged_human'\)/g) !== 1) errs.push(rel + ': engaged_human 이벤트가 ' + cnt(/gtag\('event', 'engaged_human'\)/g) + '번이에요(1번이어야 해요)');
       if (!/ga-disable-/.test(h)) errs.push(rel + ': 내 방문 제외(ga-disable) 코드가 없어요');
     }
+    // 공유 미리보기(카카오·네이버·SNS): 색인 대상 페이지(noindex·이동 전용 제외)는 og 5종(title·description·image·url·site_name)이 모두 있고 값이 있어야 해요.
+    if (opts.analytics && !/^ig\//.test(rel) && !/<meta name="robots" content="[^"]*noindex/.test(h)) {
+      ['og:title', 'og:description', 'og:image', 'og:url', 'og:site_name'].forEach((p) => {
+        const mm = h.match(new RegExp('<meta property="' + p + '" content="([^"]*)"'));
+        if (!mm) errs.push(rel + ': ' + p + ' 가 없어요(og 5종 필수)');
+        else if (!mm[1].trim()) errs.push(rel + ': ' + p + ' 값이 비었어요');
+      });
+    }
+    // 공유 미리보기(카카오·네이버·SNS): 색인 대상 페이지(noindex·이동 전용 제외)는 og 5종(title·description·image·url·site_name)이 모두 있고 값이 있어야 해요.
+    if (opts.analytics && !/^ig\//.test(rel) && !/<meta name="robots" content="[^"]*noindex/.test(h)) {
+      ['og:title', 'og:description', 'og:image', 'og:url', 'og:site_name'].forEach((p) => {
+        const mm = h.match(new RegExp('<meta property="' + p + '" content="([^"]*)"'));
+        if (!mm) errs.push(rel + ': ' + p + ' 가 없어요(og 5종 필수)');
+        else if (!mm[1].trim()) errs.push(rel + ': ' + p + ' 값이 비었어요');
+      });
+    }
     // 화면에 없는 FAQ 방지: FAQ 마크업 자체를 금지했으니 본문에도 질문-답변 스키마 속성이 없어야 해요.
     if (/itemtype="https?:\/\/schema\.org\/(Product|FAQPage|Review|Offer)"/.test(h)) errs.push(rel + ': 마이크로데이터 Product/FAQ/Review/Offer 금지');
   });
