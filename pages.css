@@ -75,7 +75,7 @@ table.compare small { color: var(--muted); }
 header .wrap { flex-wrap: wrap; row-gap: 6px; }
 header nav { flex-wrap: wrap; justify-content: flex-end; row-gap: 2px; }
 header nav a { white-space: nowrap; word-break: keep-all; }
-@media (max-width: 520px) { .logo-en { display: none; } header nav a { margin-left: 10px; } }
+@media (max-width: 520px) { header nav a { margin-left: 10px; } }
 .rel { margin: 16px 0 6px; padding: 12px 14px; border-radius: 12px; background: color-mix(in srgb, var(--fresh) 9%, var(--card)); display: grid; gap: 8px; font-size: 13.5px; }
 .rel div { display: grid; gap: 2px; }
 .rel b { font-size: 12px; color: var(--muted); font-weight: 600; }
@@ -87,7 +87,12 @@ header nav a { white-space: nowrap; word-break: keep-all; }
 ul { padding-left: 1.2em; }
 li { max-width: 64ch; }
 header .wrap { padding-block: 6px; }
-.logo { display: inline-flex; align-items: baseline; min-height: 44px; padding: 9px 0; line-height: 1.2; white-space: nowrap; flex-shrink: 0; }
+.logo { display: inline-flex; align-items: stretch; gap: 12px; min-height: 44px; padding: 8px 0; white-space: nowrap; flex-shrink: 0; text-decoration: none; }
+.logo-name { font-size: 28px; line-height: 28px; }
+.logo-sub { display: flex; flex-direction: column; justify-content: space-between; height: 28px; font-family: var(--f-body); font-size: 13px; line-height: 13px; font-weight: 600; letter-spacing: .02em; color: var(--muted); }
+.logo-sub .logo-en, .logo-sub small { display: block; margin: 0; padding: 0; border: 0; font-size: 13px; line-height: 13px; font-weight: 600; letter-spacing: .02em; color: var(--muted); white-space: nowrap; }
+.logo-sub .logo-en:only-child { margin: auto 0; }
+@media (max-width: 520px) { .logo-sub { display: none; } .logo-name { font-size: 24px; line-height: 28px; } }
 header nav a { display: inline-flex; align-items: center; min-height: 44px; padding-inline: 2px; font-size: 14px; }
 .theme-btn { width: 44px; height: 44px; }
 .theme-btn svg { width: 18px; height: 18px; }
@@ -164,3 +169,6 @@ header nav a, .crumbs a { min-width: 44px; justify-content: center; }
 .s-bar-fill { height: 100%; background: var(--fresh); border-radius: 999px; }
 .s-period { flex: 1 1 100%; margin: 0; font-size: 12.5px; color: var(--muted); }
 footer .links a, .explore a { min-width: 44px; justify-content: center; }
+/* 헤더 로고 옆 소개 문구는 넓은 화면에서만, 좁은 화면 상단 메뉴는 한 줄로 */
+@media (max-width: 760px) { .logo-sub small { display: none; } }
+@media (max-width: 520px) { header nav a { min-width: 0; margin-right: 8px; padding-inline: 4px; } header nav .theme-btn { margin-left: auto; } }

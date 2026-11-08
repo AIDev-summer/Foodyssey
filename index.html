@@ -334,18 +334,18 @@ footer .links a { margin-right: 14px; }
   .row { grid-template-columns: 4.6em 1fr; }
   .row .price { grid-column: 2; text-align: left; padding-top: 0; }
   .row .d { font-size: 24px; }
-  .logo small { display: none; }
+  .logo-sub small { display: none; }
   .bar-row { grid-template-columns: 7.5em 1fr 3em; font-size: 13px; }
 }
 
 /* ===== 접근성·가독성 보정(2026-11-06 디자인 검수): 글자 크기·터치 영역 ===== */
 body { font-size: 1rem; }
-.logo { display: inline-flex; align-items: baseline; flex-wrap: nowrap; min-height: 44px; padding: 9px 0; line-height: 1.2; }
-.logo { white-space: nowrap; flex-shrink: 0; }
-.logo small { margin-left: 14px; padding: 0; border: 0; line-height: inherit; align-self: baseline; }
-.logo small { font-size: 13px; font-weight: 600; letter-spacing: .02em; white-space: nowrap; }
-.logo-en { font-size: 13px; margin-left: 10px; }
-@media (max-width: 520px) { .logo-en { display: none; } }
+.logo { display: inline-flex; align-items: stretch; gap: 12px; min-height: 44px; padding: 8px 0; white-space: nowrap; flex-shrink: 0; text-decoration: none; }
+.logo-name { font-size: 28px; line-height: 28px; }
+.logo-sub { display: flex; flex-direction: column; justify-content: space-between; height: 28px; font-family: var(--f-body); font-size: 13px; line-height: 13px; font-weight: 600; letter-spacing: .02em; color: var(--muted); }
+.logo-sub .logo-en, .logo-sub small { display: block; margin: 0; padding: 0; border: 0; font-size: 13px; line-height: 13px; font-weight: 600; letter-spacing: .02em; color: var(--muted); white-space: nowrap; }
+.logo-sub .logo-en:only-child { margin: auto 0; }
+@media (max-width: 520px) { .logo-sub { display: none; } .logo-name { font-size: 24px; line-height: 28px; } }
 .updated { font-size: 13px; }
 .theme-btn { width: 44px; height: 44px; }
 .label { font-size: 13px; }
@@ -389,7 +389,7 @@ footer .links a { min-width: 44px; justify-content: center; }
 <body>
 <header class="topbar">
   <div class="wrap">
-    <a class="logo" href="#new">푸디세이<span class="logo-en" lang="en">Food Odyssey</span><small>새 메뉴를 찾아 떠나는 여정</small></a>
+    <a class="logo" href="#new"><span class="logo-name">푸디세이</span><span class="logo-sub"><span class="logo-en" lang="en">Food Odyssey</span><small>새 메뉴를 찾아 떠나는 여정</small></span></a>
     <div class="top-r">
       <span class="updated" id="updated"></span>
       <button class="theme-btn" id="theme-btn" type="button" aria-label="다크모드 켜기">
