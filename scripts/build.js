@@ -29,6 +29,7 @@ const BRAND_CAT = {
 const GUIDES = [
   { slug: 'starbucks-frequency', updated: '2026-11-05', title: '스타벅스 프리퀀시 빨리 모으는 법과 미션음료 정리', desc: '겨울 e-프리퀀시 적립 조건과 증정품을 기사 근거로 정리했어요.' },
   { slug: 'christmas-cake-preorder', updated: '2026-11-05', title: '크리스마스 케이크 사전예약 할인 받는 법(브랜드별 예약 기간)', desc: '파스쿠찌·스타벅스 케이크 예약 기간과 할인율을 비교해요.' },
+  { slug: 'bigarch-duration', updated: '2026-11-08', title: '맥도날드 빅아치 판매기간·가격·크기 정리(종료일 계산)', desc: '빅아치 출시일·가격·무게와 한정 판매 4~6주로 계산한 종료 예상일을 기사 근거로 정리했어요.' },
   { slug: 'limited-menu-duration', updated: '', generated: true, title: '한정 메뉴·이벤트는 며칠 동안 할까: 푸디세이 기록으로 계산한 판매 기간', desc: '시작일과 종료일이 기사에 나온 항목만 골라 기간을 계산하고 브랜드별로 정리했어요.' },
   { slug: 'price-distribution', updated: '', generated: true, title: '프랜차이즈 신메뉴 가격대 분포: 푸디세이 기록 기준', desc: '가격이 기사에 확인된 신메뉴를 가격대별로 나눠 업종별 범위까지 계산했어요.' }
 ];
