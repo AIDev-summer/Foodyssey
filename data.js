@@ -9,7 +9,7 @@
 // - start: 기사에 시작·출시일이 나온 한정 항목의 시작일(YYYY-MM-DD). 판매 기간 계산 가이드(/guide/limited-menu-duration)에 쓰여요. 기사에 없으면 넣지 않아요.
 // - pop: 검색량 배수(최근 3일 / 지난 4주). 한정 탭 인기순 정렬에 써요. 없으면 마감순으로 뒤에 놓여요.
 window.FOODYSSEY = {
-  updated: "2026-11-06",
+  updated: "2026-11-07",
   weekLabel: "2026년 11월 첫째 주",
 
   cats: [
@@ -126,6 +126,9 @@ window.FOODYSSEY = {
         { name: "스틱 츄러스 · 브리오슈 소금빵", tag: "리뉴얼", plain: true, desc: "기존에 팔던 메뉴의 맛과 상품성을 보완해 새로 내놓은 리뉴얼 메뉴예요." }
       ],
       src: { label: "베타뉴스", url: "https://www.betanews.net/article/view/beta202610220164" } },
+    { cat: "cafe", brand: "투썸플레이스", when: "10.30 출시 · 가나디 협업", date: "2026-10-30",
+      items: [{ name: "투썸 X 가나디 초코 베리 케이크", tag: "디저트" }, { name: "치즈케이크 빵", tag: "디저트" }],
+      src: { label: "세계일보", url: "https://www.segye.com/newsView/20261105504330" } },
     { cat: "cafe", brand: "투썸플레이스", when: "10월 · 가을 시즌", date: "2026-10-01",
       items: [{ name: "블랙 치즈폼 라떼", tag: "음료", price: "6,300원" }, { name: "딸기 요거트 프라페", tag: "음료", price: "6,500원" }],
       src: { label: "프라임경제", url: "https://www.newsprime.co.kr/news/article/?no=749669" } },
@@ -232,6 +235,12 @@ window.FOODYSSEY = {
       desc: "해피오더앱에서 사전예약하면 예약 시기에 따라 할인해 줘요. 11월 8일까지 최대 40%, 9일부터 22일까지 30%, 이후 일반 사전예약 기간에는 25%예요. 11월 9일부터 카카오 예약하기, 23일부터 땡겨요·배달의민족에서도 예약할 수 있어요.",
       src: { label: "전자신문", url: "https://www.etnews.com/20261029000139" } },
 
+    { kind: "이벤트", brand: "스타벅스", title: "e-프리퀀시 더블 적립", start: "2026-11-06", end: "2026-11-12", period: "11.6 ~ 11.12",
+      desc: "리워드 회원이 제조 음료를 사면 스티커를 2개씩 줘요. 미션 음료 조건은 그대로 채워야 해요. 증정품 예약은 11월 19일부터예요.",
+      src: { label: "세계일보", url: "https://www.segye.com/newsView/20261105504330" } },
+    { kind: "이벤트", brand: "스타벅스", title: "대한민국 쓱데이 프로모션", start: "2026-10-30", end: "2026-11-08", period: "10.30 ~ 11.8",
+      desc: "쓱데이 한정 상품을 팔고, 스타벅스 비아 7종은 2+1이에요. 오프라인은 11월 2일까지 쓱데이 리유저블백, 3일부터 베어리스타 파우치를 줘요(소진 시 종료).",
+      src: { label: "디스커버리뉴스", url: "https://www.discoverynews.kr/news/articleView.html?idxno=1105349" } },
     { kind: "이벤트", brand: "스타벅스", title: "수능 응원 기획전", end: "2026-11-17", period: "~ 11.17(화)",
       desc: "인절미 찰떡파이, 쫀득 마롱 찰떡 세트, 클로버 틴 초콜릿 같은 수능 응원 제품을 모았어요. 스타벅스 앱 온라인 스토어, 카카오톡 선물하기, 무신사에서 구매 금액별 할인 쿠폰과 추가 별 적립을 줘요.",
       src: { label: "코리아포스트", url: "https://www.koreapost.co.kr/news/articleView.html?idxno=89910" } },
