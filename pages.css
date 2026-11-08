@@ -87,7 +87,7 @@ header nav a { white-space: nowrap; word-break: keep-all; }
 ul { padding-left: 1.2em; }
 li { max-width: 64ch; }
 header .wrap { padding-block: 6px; }
-.logo { display: inline-flex; align-items: center; min-height: 44px; }
+.logo { display: inline-flex; align-items: baseline; min-height: 44px; padding: 9px 0; line-height: 1.2; white-space: nowrap; flex-shrink: 0; }
 header nav a { display: inline-flex; align-items: center; min-height: 44px; padding-inline: 2px; font-size: 14px; }
 .theme-btn { width: 44px; height: 44px; }
 .theme-btn svg { width: 18px; height: 18px; }

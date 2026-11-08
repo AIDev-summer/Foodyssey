@@ -340,8 +340,12 @@ footer .links a { margin-right: 14px; }
 
 /* ===== 접근성·가독성 보정(2026-11-06 디자인 검수): 글자 크기·터치 영역 ===== */
 body { font-size: 1rem; }
-.logo { display: inline-flex; align-items: center; min-height: 44px; }
-.logo small { font-size: 14px; }
+.logo { display: inline-flex; align-items: baseline; flex-wrap: nowrap; min-height: 44px; padding: 9px 0; line-height: 1.2; }
+.logo { white-space: nowrap; flex-shrink: 0; }
+.logo small { padding-left: 12px; margin-left: 12px; border-left: 1px solid var(--muted); line-height: 1; align-self: center; }
+.logo small { font-size: 13px; white-space: nowrap; }
+.logo-en { font-size: 13px; margin-left: 10px; }
+@media (max-width: 520px) { .logo-en { display: none; } }
 .updated { font-size: 13px; }
 .theme-btn { width: 44px; height: 44px; }
 .label { font-size: 13px; }
