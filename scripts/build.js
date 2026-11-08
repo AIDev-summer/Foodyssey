@@ -915,6 +915,20 @@ function main() {
     process.exit(1);
   }
   console.log('JSON-LD 린트 통과: ' + JSON.stringify(lintRes.stat));
+  // 콘텐츠 품질 점검(scripts/quality-report.js): 치명 문제(출처 없는 가격·날짜, 기사와 다른 값, 끝난 메뉴에 종료 표시 없음 등)는 빌드를 멈추고,
+  // 총점 미달 페이지 수는 경고로만 알려요. 자동 업데이트(매일 09시)가 만든 새 페이지도 같은 기준을 통과해야 게시돼요.
+  try {
+    const q = require('./quality-report').run(ROOT);
+    const hardRows = q.rows.filter((r) => r.hard.length && !r.noindex);
+    console.log('품질 점검: 페이지 ' + q.rows.length + '개, 미달 ' + q.failCount + '개, 하위 20% ' + q.bottomCount + '개(총점 ≤ ' + q.cut + '), 출처 대조 ' + q.verifiedPages + '개');
+    if (q.failCount) q.rows.filter((r) => r.fail).slice(0, 15).forEach((r) => console.warn(' ! 품질 미달 ' + r.total + '점 ' + r.url + ' — ' + r.hard.concat(r.notes).slice(0, 3).join(' / ')));
+    if (hardRows.length) {
+      console.error('품질 점검 실패(치명 문제) ' + hardRows.length + '건');
+      hardRows.slice(0, 30).forEach((r) => console.error(' - ' + r.url + ' — ' + r.hard.join(' / ')));
+      process.exit(1);
+    }
+  } catch (e) { console.warn('품질 점검을 건너뛰었어요: ' + e.message); }
+
   console.log(`메뉴 ${all.length}개(판매·진행 중 ${liveItems.length}, 검색 제외 noindex ${noindexCount}, 허브 noindex ${hubNoindex}), 브랜드 ${brands.length}개, 업종 ${D.cats.length}개 페이지를 만들었어요.`);
 }
 

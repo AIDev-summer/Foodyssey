@@ -1,0 +1,528 @@
+{
+ "https://biz.heraldcorp.com/article/10900655": {
+  "checkedAt": "2026-11-08",
+  "status": "ok",
+  "published": "2026-10-13",
+  "priceFound": {
+   "10,700원": true
+  },
+  "dateFound": {},
+  "endFound": {
+   "2027-01-05": true
+  },
+  "items": {}
+ },
+ "https://news.jkn.co.kr/post/1039964": {
+  "checkedAt": "2026-11-08",
+  "status": "ok",
+  "published": "2026-10-21",
+  "priceFound": {
+   "12,400원": true
+  },
+  "dateFound": {},
+  "endFound": {},
+  "items": {}
+ },
+ "https://news.nate.com/view/20261105n05032": {
+  "checkedAt": "2026-11-08",
+  "status": "ok",
+  "published": "2026-11-05",
+  "priceFound": {},
+  "dateFound": {},
+  "endFound": {
+   "2026-11-12": true
+  },
+  "items": {}
+ },
+ "https://news2day.co.kr/article/20261029500086": {
+  "checkedAt": "2026-11-08",
+  "status": "ok",
+  "published": "2026-11-08",
+  "priceFound": {},
+  "dateFound": {
+   "2026-10-29": true
+  },
+  "endFound": {},
+  "items": {
+   "피자설기": true,
+   "콘치즈설기": true,
+   "스윗볼박스": true,
+   "트리플스낵박스": true,
+   "플래터스낵박스": true,
+   "빠삭어니언링": true,
+   "헤이즐넛초코볼": true,
+   "솔티카라멜볼": true
+  }
+ },
+ "https://newsway.co.kr/news/view?ud=2026110314103701126": {
+  "checkedAt": "2026-11-08",
+  "status": "ok",
+  "published": "2026-11-03",
+  "priceFound": {},
+  "dateFound": {},
+  "endFound": {
+   "2026-11-30": true
+  },
+  "items": {}
+ },
+ "https://theviewers.co.kr/View.aspx?No=4280225": {
+  "checkedAt": "2026-11-08",
+  "status": "ok",
+  "published": "2026-10-27",
+  "priceFound": {},
+  "dateFound": {},
+  "endFound": {
+   "2026-11-30": true
+  },
+  "items": {}
+ },
+ "https://view.asiae.co.kr/article/2026091608122210585": {
+  "checkedAt": "2026-11-08",
+  "status": "ok",
+  "published": "2026-09-16",
+  "priceFound": {},
+  "dateFound": {},
+  "endFound": {},
+  "items": {}
+ },
+ "https://view.asiae.co.kr/article/2026102707342281900": {
+  "checkedAt": "2026-11-08",
+  "status": "ok",
+  "published": "2026-10-27",
+  "priceFound": {
+   "5,900원": true
+  },
+  "dateFound": {
+   "2026-10-27": true
+  },
+  "endFound": {},
+  "items": {
+   "진짜 비빔밥 버거": true
+  }
+ },
+ "https://weekly.hankooki.com/news/articleView.html?idxno=7191453": {
+  "checkedAt": "2026-11-08",
+  "status": "ok",
+  "published": "2026-10-30",
+  "priceFound": {},
+  "dateFound": {},
+  "endFound": {},
+  "items": {}
+ },
+ "https://www.betanews.net/article/view/beta202610220164": {
+  "checkedAt": "2026-11-08",
+  "status": "ok",
+  "published": "2026-10-22",
+  "priceFound": {},
+  "dateFound": {
+   "2026-10-22": true
+  },
+  "endFound": {},
+  "items": {
+   "와그작 생 초코파이": true,
+   "딸기 쏙쏙 모찌떡": true,
+   "말차초코 크림파운드": true,
+   "촉촉한 치즈 수플레": true,
+   "햄 치즈 스크램블 브리오슈": true,
+   "콘치즈 토스트": true,
+   "저당 콤비네이션 포켓피자": true,
+   "스틱 츄러스 · 브리오슈 소금빵": true
+  }
+ },
+ "https://www.biztribune.co.kr/news/articleView.html?idxno=361110": {
+  "checkedAt": "2026-11-08",
+  "status": "ok",
+  "published": "2026-10-22",
+  "priceFound": {},
+  "dateFound": {
+   "2026-10-01": true,
+   "2026-10-22": true
+  },
+  "endFound": {},
+  "items": {
+   "알싹킹": true,
+   "허니윙콤비": true,
+   "허니옥수수윙콤비": true,
+   "허니옥수수윙박스 (16·20조각)": true,
+   "허니옥수수싱글윙": true
+  },
+  "officialPrice": 4
+ },
+ "https://www.biztribune.co.kr/news/articleView.html?idxno=361661": {
+  "checkedAt": "2026-11-08",
+  "status": "ok",
+  "published": "2026-10-30",
+  "priceFound": {},
+  "dateFound": {
+   "2026-10-22": true
+  },
+  "endFound": {},
+  "items": {
+   "콰삭모짜킹": true
+  }
+ },
+ "https://www.dailian.co.kr/news/view/1707077/%EB%A7%A5%EB%8F%84%EB%82%A0%EB%93%9C-%EA%B2%8C%EC%82%B4-%ED%81%AC%EB%A6%BC-%ED%81%AC%EB%A1%9C%EC%BC%93-%EB%A8%B8%ED%95%80-%EB%A7%A5%EB%AA%A8-2026": {
+  "checkedAt": "2026-11-08",
+  "status": "ok",
+  "published": "2026-10-28",
+  "priceFound": {},
+  "dateFound": {
+   "2026-10-29": true
+  },
+  "endFound": {},
+  "items": {
+   "게살 크림 크로켓 머핀": true
+  }
+ },
+ "https://www.dailyt.co.kr/newsView/dlt202610150013": {
+  "checkedAt": "2026-11-08",
+  "status": "ok",
+  "published": "2026-10-15",
+  "priceFound": {},
+  "dateFound": {},
+  "endFound": {
+   "2026-12-31": true
+  },
+  "items": {}
+ },
+ "https://www.discoverynews.kr/news/articleView.html?idxno=1105349": {
+  "checkedAt": "2026-11-08",
+  "status": "ok",
+  "published": "2026-10-30",
+  "priceFound": {},
+  "dateFound": {},
+  "endFound": {
+   "2026-11-08": true
+  },
+  "items": {}
+ },
+ "https://www.etnews.com/20261029000139": {
+  "checkedAt": "2026-11-08",
+  "status": "ok",
+  "published": "2026-10-29",
+  "priceFound": {},
+  "dateFound": {
+   "2026-10-29": true
+  },
+  "endFound": {
+   "2026-12-17": true
+  },
+  "items": {
+   "크리스탈 스완": true,
+   "미라클 스노우 트리": true,
+   "메리 베리 레드": true,
+   "메리 베리 초코": true,
+   "리틀 스노우 산타": true,
+   "레드 루돌프": true
+  }
+ },
+ "https://www.fnnews.com/news/202610141826190444": {
+  "checkedAt": "2026-11-08",
+  "status": "ok",
+  "published": "2026-10-14",
+  "priceFound": {
+   "4,900원": true
+  },
+  "dateFound": {
+   "2026-10-15": true
+  },
+  "endFound": {},
+  "items": {
+   "NBB 훅": true,
+   "NBB 펀치": true
+  }
+ },
+ "https://www.foodtoday.or.kr/news/article.html?no=208450": {
+  "checkedAt": "2026-11-08",
+  "status": "ok",
+  "published": "2026-10-01",
+  "priceFound": {},
+  "dateFound": {},
+  "endFound": {},
+  "items": {}
+ },
+ "https://www.foodtoday.or.kr/news/article.html?no=208977": {
+  "checkedAt": "2026-11-08",
+  "status": "ok",
+  "published": "2026-10-20",
+  "priceFound": {},
+  "dateFound": {
+   "2026-10-20": true
+  },
+  "endFound": {},
+  "items": {
+   "슈 클라우드 라떼": true,
+   "커피 클라우드 라떼": true,
+   "클래식 딥라떼": true,
+   "치즈 딥라떼": true,
+   "PB&J 와플": true,
+   "딸기잼크림 와플": true,
+   "솔티크림 와플": true,
+   "슈 클라우드 와플": true
+  }
+ },
+ "https://www.foodtoday.or.kr/news/article.html?no=209327": {
+  "checkedAt": "2026-11-08",
+  "status": "ok",
+  "published": "2026-11-02",
+  "priceFound": {},
+  "dateFound": {
+   "2026-11-02": true
+  },
+  "endFound": {
+   "2026-11-15": true
+  },
+  "items": {
+   "메리 골든 뱅쇼": true,
+   "체리 쇼콜라 라떼": true,
+   "스노우 돌체 카페라떼": true,
+   "포레스트 쇼콜라 라떼": true
+  }
+ },
+ "https://www.getnews.co.kr/news/articleView.html?idxno=885661": {
+  "checkedAt": "2026-11-08",
+  "status": "ok",
+  "published": "2026-11-02",
+  "priceFound": {},
+  "dateFound": {
+   "2026-11-02": true
+  },
+  "endFound": {},
+  "items": {
+   "피스타치오 크림 카스텔라": true,
+   "라즈베리 피스타치오": true
+  }
+ },
+ "https://www.ggilbo.com/news/articleView.html?idxno=1189936": {
+  "checkedAt": "2026-11-08",
+  "status": "ok",
+  "published": "2026-10-29",
+  "priceFound": {
+   "4,400원": true,
+   "3,800원": true,
+   "3,500원": true
+  },
+  "dateFound": {
+   "2026-10-29": true
+  },
+  "endFound": {},
+  "items": {
+   "딥 초코 체리 프라페": true,
+   "쫀득 모찌 밀크티": true,
+   "매실 모과차": true,
+   "바삭허니 엠지씨네 컵치킨": true,
+   "엠지씨네 마라 떡볶이": true
+  }
+ },
+ "https://www.gosiweek.com/article/1065582564826094": {
+  "checkedAt": "2026-11-08",
+  "status": "ok",
+  "published": "2026-10-29",
+  "priceFound": {},
+  "dateFound": {
+   "2026-10-29": true
+  },
+  "endFound": {},
+  "items": {
+   "꿀떡컵떡볶이": true,
+   "꿀떡꿀떡": true
+  }
+ },
+ "https://www.gukjenews.com/news/articleView.html?idxno=3703754": {
+  "checkedAt": "2026-11-08",
+  "status": "ok",
+  "published": "2026-09-23",
+  "priceFound": {
+   "4만 원대": true
+  },
+  "dateFound": {},
+  "endFound": {},
+  "items": {}
+ },
+ "https://www.koreapost.co.kr/news/articleView.html?idxno=89910": {
+  "checkedAt": "2026-11-08",
+  "status": "ok",
+  "published": "2026-11-04",
+  "priceFound": {},
+  "dateFound": {},
+  "endFound": {
+   "2026-11-17": true
+  },
+  "items": {}
+ },
+ "https://www.mhns.co.kr/news/articleView.html?idxno=764579": {
+  "checkedAt": "2026-11-08",
+  "status": "ok",
+  "published": "2026-10-16",
+  "priceFound": {},
+  "dateFound": {
+   "2026-10-16": true
+  },
+  "endFound": {},
+  "items": {
+   "떠먹는피자떡볶이": true
+  }
+ },
+ "https://www.mydaily.co.kr/page/view/2026101514360760582": {
+  "checkedAt": "2026-11-08",
+  "status": "ok",
+  "published": "2026-10-15",
+  "priceFound": {},
+  "dateFound": {
+   "2026-10-15": true
+  },
+  "endFound": {},
+  "items": {
+   "베이컨치폴레싸이버거": true
+  }
+ },
+ "https://www.news1.kr/industry/distribution/6335728": {
+  "checkedAt": "2026-11-08",
+  "status": "ok",
+  "published": "2026-10-29",
+  "priceFound": {},
+  "dateFound": {},
+  "endFound": {
+   "2026-11-11": true
+  },
+  "items": {}
+ },
+ "https://www.newsbalance.co.kr/news/view/1065609452679016": {
+  "checkedAt": "2026-11-08",
+  "status": "ok",
+  "published": "2026-10-13",
+  "priceFound": {},
+  "dateFound": {},
+  "endFound": {
+   "2026-11-09": true
+  },
+  "items": {}
+ },
+ "https://www.newsprime.co.kr/news/article/?no=749669": {
+  "checkedAt": "2026-11-08",
+  "status": "ok",
+  "published": "2026-10-01",
+  "priceFound": {},
+  "dateFound": {
+   "2026-10-01": true
+  },
+  "endFound": {
+   "2026-12-31": true
+  },
+  "items": {
+   "웨지고구마 · 웨지반반": true,
+   "블랙 치즈폼 라떼": true,
+   "딸기 요거트 프라페": true
+  },
+  "officialPrice": 1
+ },
+ "https://www.newstap.co.kr/news/articleView.html?idxno=335540": {
+  "checkedAt": "2026-11-08",
+  "status": "ok",
+  "published": "2026-10-10",
+  "priceFound": {
+   "3,900원": true
+  },
+  "dateFound": {
+   "2026-10-08": true
+  },
+  "endFound": {},
+  "items": {
+   "피자설기": true
+  }
+ },
+ "https://www.segye.com/newsView/20261024502967": {
+  "checkedAt": "2026-11-08",
+  "status": "ok",
+  "published": "2026-10-24",
+  "priceFound": {},
+  "dateFound": {
+   "2026-10-21": true
+  },
+  "endFound": {},
+  "items": {
+   "홍고추마요": true
+  }
+ },
+ "https://www.segye.com/newsView/20261105504330": {
+  "checkedAt": "2026-11-08",
+  "status": "ok",
+  "published": "2026-11-05",
+  "priceFound": {},
+  "dateFound": {
+   "2026-10-30": true
+  },
+  "endFound": {},
+  "items": {
+   "투썸 X 가나디 초코 베리 케이크": true,
+   "치즈케이크 빵": true
+  }
+ },
+ "https://www.shinailbo.co.kr/news/articleView.html?idxno=5077387": {
+  "checkedAt": "2026-11-08",
+  "status": "ok",
+  "published": "2026-10-30",
+  "priceFound": {},
+  "dateFound": {},
+  "endFound": {
+   "2026-11-01": true
+  },
+  "items": {}
+ },
+ "https://www.slist.kr/news/articleView.html?idxno=773578": {
+  "checkedAt": "2026-11-08",
+  "status": "ok",
+  "published": "2026-10-15",
+  "priceFound": {},
+  "dateFound": {
+   "2026-10-15": true
+  },
+  "endFound": {},
+  "items": {
+   "멕시칸 핫도그": true,
+   "고다치즈 올리브식빵": true,
+   "치즈 소보루빵": true,
+   "크림치즈말랑": true,
+   "모짜렐라 치즈봉": true,
+   "사르르 호박 카스테라 크림빵": true,
+   "꿀맛 고구마 생도넛": true,
+   "오리지널 퀴니아망": true,
+   "흑임자 퀴니아망": true,
+   "흑임자 가나슈 바게트": true
+  }
+ },
+ "https://www.yna.co.kr/view/AKR20261021030500030": {
+  "checkedAt": "2026-11-08",
+  "status": "ok",
+  "published": "2026-10-21",
+  "priceFound": {},
+  "dateFound": {
+   "2026-10-22": true
+  },
+  "endFound": {},
+  "items": {
+   "토피 넛 라떼": true,
+   "윈터 스카치 바닐라 라떼": true,
+   "클래식 뱅쇼 히비스커스 티": true,
+   "누텔라 촉촉 생크림 케이크": true,
+   "루돌프 쿠키 치즈 케이크": true,
+   "비프 멜트 바게트 샌드위치": true
+  }
+ },
+ "https://www.yna.co.kr/view/AKR20261101021200030": {
+  "checkedAt": "2026-11-08",
+  "status": "ok",
+  "published": "2026-11-01",
+  "priceFound": {},
+  "dateFound": {
+   "2026-11-01": true
+  },
+  "endFound": {},
+  "items": {
+   "모찌 품은 바스크 치즈 케이크": true,
+   "보늬밤 몽블랑 치즈 케이크": true,
+   "진한 얼 그레이 카라멜 넛츠 케이크": true,
+   "티라미수 크레이프 케이크": true
+  }
+ }
+}

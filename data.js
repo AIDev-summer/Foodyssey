@@ -55,7 +55,7 @@ window.FOODYSSEY = {
       note: "단품 4,900원 · 세트 6,900원" },
     { cat: "burger", brand: "노브랜드버거", when: "10.27 발표", date: "2026-10-27",
       items: [{ name: "진짜 비빔밥 버거", tag: "신메뉴", price: "5,900원" }],
-      src: { label: "머니투데이", url: "https://www.mt.co.kr/living/2026/10/27/2026102709110962425" },
+      src: { label: "아시아경제", url: "https://view.asiae.co.kr/article/2026102707342281900" },
       note: "세트 7,900원 · 튀긴 비빔밥 패티와 직화 패티가 들어가요" },
 
     { cat: "pizza", brand: "피자헛", when: "10.8 출시", date: "2026-10-08",
@@ -130,7 +130,7 @@ window.FOODYSSEY = {
       items: [{ name: "투썸 X 가나디 초코 베리 케이크", tag: "디저트" }, { name: "치즈케이크 빵", tag: "디저트" }],
       src: { label: "세계일보", url: "https://www.segye.com/newsView/20261105504330" } },
     { cat: "cafe", brand: "투썸플레이스", when: "10월 · 가을 시즌", date: "2026-10-01",
-      items: [{ name: "블랙 치즈폼 라떼", tag: "음료", price: "6,300원" }, { name: "딸기 요거트 프라페", tag: "음료", price: "6,500원" }],
+      items: [{ name: "블랙 치즈폼 라떼", tag: "음료" }, { name: "딸기 요거트 프라페", tag: "음료" }],
       src: { label: "프라임경제", url: "https://www.newsprime.co.kr/news/article/?no=749669" } },
     { cat: "cafe", brand: "메가MGC커피", when: "10.29 출시 · 겨울 5종", date: "2026-10-29",
       items: [
