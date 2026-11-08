@@ -91,7 +91,7 @@ header .wrap { padding-block: 6px; }
 .logo-name { font-size: 28px; line-height: 28px; }
 .logo-sub { display: flex; flex-direction: column; justify-content: space-between; height: 28px; font-family: var(--f-body); font-size: 13px; line-height: 13px; font-weight: 600; letter-spacing: .02em; color: var(--muted); }
 .logo-sub .logo-en, .logo-sub small { display: block; margin: 0; padding: 0; border: 0; font-size: 13px; line-height: 13px; font-weight: 600; letter-spacing: .02em; color: var(--muted); white-space: nowrap; }
-.logo-sub .logo-en:only-child { margin: auto 0; }
+.logo-sub .logo-en:only-child { margin: auto 0; } .logo-sub { position: relative; top: 2px; } .logo-sub small { position: relative; top: -1px; }
 @media (max-width: 520px) { .logo-sub { display: none; } .logo-name { font-size: 24px; line-height: 28px; } }
 header nav a { display: inline-flex; align-items: center; min-height: 44px; padding-inline: 2px; font-size: 14px; }
 .theme-btn { width: 44px; height: 44px; }
