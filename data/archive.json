@@ -352,12 +352,68 @@
   "priceNote": "",
   "group": null,
   "src": {
-   "label": "머니투데이",
-   "url": "https://www.mt.co.kr/living/2026/10/27/2026102709110962425"
+   "label": "아시아경제",
+   "url": "https://view.asiae.co.kr/article/2026102707342281900"
   },
   "slug": "노브랜드버거-진짜-비빔밥-버거",
   "catName": "버거",
   "firstSeen": "2026-10-31"
+ },
+ "던킨-라즈베리-피스타치오": {
+  "kind": "new",
+  "brand": "던킨",
+  "cat": "cafe",
+  "name": "라즈베리 피스타치오",
+  "tag": "도넛",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-11-02",
+  "when": "11.2 발표",
+  "note": "가격과 판매 기간은 기사에 나오지 않았어요",
+  "season": "",
+  "desc": "두바이 스타일 초코 도넛 출시 2주년을 맞아 나온 도넛이에요.",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "피스타치오 크림 카스텔라",
+   "라즈베리 피스타치오"
+  ],
+  "src": {
+   "label": "겟뉴스",
+   "url": "https://www.getnews.co.kr/news/articleView.html?idxno=885661"
+  },
+  "slug": "던킨-라즈베리-피스타치오",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-11-08"
+ },
+ "던킨-피스타치오-크림-카스텔라": {
+  "kind": "new",
+  "brand": "던킨",
+  "cat": "cafe",
+  "name": "피스타치오 크림 카스텔라",
+  "tag": "도넛",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-11-02",
+  "when": "11.2 발표",
+  "note": "가격과 판매 기간은 기사에 나오지 않았어요",
+  "season": "",
+  "desc": "두바이 스타일 초코 도넛 출시 2주년을 맞아 나온 도넛이에요.",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "피스타치오 크림 카스텔라",
+   "라즈베리 피스타치오"
+  ],
+  "src": {
+   "label": "겟뉴스",
+   "url": "https://www.getnews.co.kr/news/articleView.html?idxno=885661"
+  },
+  "slug": "던킨-피스타치오-크림-카스텔라",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-11-08"
  },
  "도미노피자-레몬-버터-더블-살시챠-피자": {
   "kind": "limited",
@@ -1295,6 +1351,34 @@
   "catName": "버거",
   "firstSeen": "2026-10-31"
  },
+ "스타벅스-e-프리퀀시-더블-적립": {
+  "kind": "event",
+  "brand": "스타벅스",
+  "cat": "cafe",
+  "name": "e-프리퀀시 더블 적립",
+  "tag": "이벤트",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "start": "2026-11-06",
+  "end": "2026-11-12",
+  "endLate": "",
+  "open": "",
+  "period": "11.6 ~ 11.12",
+  "desc": "리워드 회원이 제조 음료를 사면 스티커를 2개씩 줘요. 미션 음료 조건은 그대로 채워야 해요. 추가 증정품인 북 커버는 11월 19일부터 예약할 수 있어요.",
+  "specs": null,
+  "priceNote": "",
+  "lines": null,
+  "cups": null,
+  "src": {
+   "label": "스타데일리뉴스(네이트)",
+   "url": "https://news.nate.com/view/20261105n05032"
+  },
+  "season": "",
+  "slug": "스타벅스-e-프리퀀시-더블-적립",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-11-08"
+ },
  "스타벅스-겨울-e-프리퀀시": {
   "kind": "event",
   "brand": "스타벅스",
@@ -1357,6 +1441,34 @@
   "slug": "스타벅스-누텔라-촉촉-생크림-케이크",
   "catName": "커피·디저트",
   "firstSeen": "2026-11-02"
+ },
+ "스타벅스-대한민국-쓱데이-프로모션": {
+  "kind": "event",
+  "brand": "스타벅스",
+  "cat": "cafe",
+  "name": "대한민국 쓱데이 프로모션",
+  "tag": "이벤트",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "start": "2026-10-30",
+  "end": "2026-11-08",
+  "endLate": "",
+  "open": "",
+  "period": "10.30 ~ 11.8",
+  "desc": "쓱데이 한정 상품을 팔고, 스타벅스 비아 7종은 2+1이에요. 오프라인은 11월 2일까지 쓱데이 리유저블백, 3일부터 베어리스타 파우치를 줘요(소진 시 종료).",
+  "specs": null,
+  "priceNote": "",
+  "lines": null,
+  "cups": null,
+  "src": {
+   "label": "디스커버리뉴스",
+   "url": "https://www.discoverynews.kr/news/articleView.html?idxno=1105349"
+  },
+  "season": "",
+  "slug": "스타벅스-대한민국-쓱데이-프로모션",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-11-08"
  },
  "스타벅스-루돌프-쿠키-치즈-케이크": {
   "kind": "new",
@@ -2356,7 +2468,7 @@
   "cat": "cafe",
   "name": "딸기 요거트 프라페",
   "tag": "음료",
-  "price": "6,500원",
+  "price": "",
   "img": "",
   "imgFrom": "",
   "date": "2026-10-01",
@@ -2384,7 +2496,7 @@
   "cat": "cafe",
   "name": "블랙 치즈폼 라떼",
   "tag": "음료",
-  "price": "6,300원",
+  "price": "",
   "img": "",
   "imgFrom": "",
   "date": "2026-10-01",
@@ -2405,6 +2517,62 @@
   "slug": "투썸플레이스-블랙-치즈폼-라떼",
   "catName": "커피·디저트",
   "firstSeen": "2026-10-31"
+ },
+ "투썸플레이스-치즈케이크-빵": {
+  "kind": "new",
+  "brand": "투썸플레이스",
+  "cat": "cafe",
+  "name": "치즈케이크 빵",
+  "tag": "디저트",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-10-30",
+  "when": "10.30 출시 · 가나디 협업",
+  "note": "",
+  "season": "",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "투썸 X 가나디 초코 베리 케이크",
+   "치즈케이크 빵"
+  ],
+  "src": {
+   "label": "세계일보",
+   "url": "https://www.segye.com/newsView/20261105504330"
+  },
+  "slug": "투썸플레이스-치즈케이크-빵",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-11-08"
+ },
+ "투썸플레이스-투썸-x-가나디-초코-베리-케이크": {
+  "kind": "new",
+  "brand": "투썸플레이스",
+  "cat": "cafe",
+  "name": "투썸 X 가나디 초코 베리 케이크",
+  "tag": "디저트",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-10-30",
+  "when": "10.30 출시 · 가나디 협업",
+  "note": "",
+  "season": "",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "투썸 X 가나디 초코 베리 케이크",
+   "치즈케이크 빵"
+  ],
+  "src": {
+   "label": "세계일보",
+   "url": "https://www.segye.com/newsView/20261105504330"
+  },
+  "slug": "투썸플레이스-투썸-x-가나디-초코-베리-케이크",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-11-08"
  },
  "파리바게뜨-고다치즈-올리브식빵": {
   "kind": "new",
@@ -2853,7 +3021,7 @@
   "endLate": "",
   "open": "",
   "period": "~ 12.17(목)",
-  "desc": "해피오더앱에서 사전예약하면 예약 시기에 따라 할인해 줘요. 11월 8일까지 최대 40%, 9일부터 22일까지 30%, 이후 일반 사전예약 기간에는 25%예요. 11월 9일부터 카카오 예약하기, 23일부터 땡겨요·배달의민족에서도 예약할 수 있어요.",
+  "desc": "해피오더앱에서 사전예약하면 예약 시기에 따라 할인해 줘요. 11월 8일까지 최대 40%(일반 시즌 케이크 40%, 스와로브스키 협업 크리스탈 스완은 30%), 9일부터 22일까지 30%, 이후 일반 사전예약 기간에는 25%예요. 11월 9일부터 카카오 예약하기, 23일부터 땡겨요·배달의민족에서도 예약할 수 있어요.",
   "specs": null,
   "priceNote": "",
   "lines": null,
