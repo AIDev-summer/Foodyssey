@@ -9,8 +9,8 @@
 // - start: 기사에 시작·출시일이 나온 한정 항목의 시작일(YYYY-MM-DD). 판매 기간 계산 가이드(/guide/limited-menu-duration)에 쓰여요. 기사에 없으면 넣지 않아요.
 // - pop: 검색량 배수(최근 3일 / 지난 4주). 한정 탭 인기순 정렬에 써요. 없으면 마감순으로 뒤에 놓여요.
 window.FOODYSSEY = {
-  updated: "2026-11-05",
-  weekLabel: "2026년 11월 첫째 주",
+  updated: "2026-11-08",
+  weekLabel: "2026년 11월 둘째 주",
 
   cats: [
     { id: "burger", name: "버거" },
@@ -244,15 +244,6 @@ window.FOODYSSEY = {
       desc: "호빵맨과 함께 만든 11월 이달의 맛이에요. 이름은 호빵맨의 대표 대사 ‘도와줘요 호빵맨!’에 쿠키도우의 ‘도우’를 합쳐 지었어요. 호빵맨과 친구들 캐릭터를 쓴 아이스크림 케이크 2종과, 호빵맨 캐릭터를 입힌 리유저블 컵에 담은 음료(아이스 아메리카노, 납작복숭아 아이스티)도 함께 나와요. 종료일은 기사에 나오지 않았어요.",
       src: { label: "주간한국", url: "https://weekly.hankooki.com/news/articleView.html?idxno=7191453" } },
 
-    { kind: "이벤트", brand: "bhc", title: "알싹킹 앱 쿠폰 이벤트", pop: 2.5, end: "2026-10-31", period: "~ 10.31(토)",
-      desc: "bhc 앱에서 알싹킹을 주문하고 이벤트 페이지에서 응모하면 다음 달에 쓸 알싹킹 2,000원 쿠폰을 줘요. 추첨으로 모바일 상품권도 있어요.",
-      src: { label: "비즈트리뷴", url: "https://www.biztribune.co.kr/news/articleView.html?idxno=361110" } },
-    { kind: "이벤트", brand: "교촌치킨", title: "허니페스타", end: "2026-10-31", period: "~ 10.31(토)",
-      desc: "교촌 주문 앱에서 31일까지 하는 할인 행사예요. 매일 오후 5시에 선착순 5,000원 쿠폰이 나오고(신메뉴 3종과 기존 4종, 총 7종에 사용), 상시 쿠폰은 신메뉴 3종 4,000원·기존 4종 3,000원이에요. ID당 하루 1회 받을 수 있고 중복 사용은 안 돼요. 쿠폰상점에서는 웨지고구마를 100포인트, 웨지반반을 200포인트에 살 수 있어요.",
-      src: { label: "맥스무비", url: "https://www.maxmovie.com/news/articleView.html?idxno=502586" } },
-    { kind: "이벤트", brand: "쉐이크쉑", title: "세트 업그레이드 쿠폰", end: "2026-10-31", period: "~ 10.31(토)",
-      desc: "쉑하우스 바비큐 시리즈 출시를 기념한 쿠폰이에요. 쉐이크쉑 공식 카카오톡 채널에서 받아, 신제품 버거를 단품으로 살 때 세트로 올려 먹을 수 있었어요.",
-      src: { label: "식품투데이", url: "https://www.foodtoday.or.kr/news/article.html?no=208450" } },
     { kind: "메뉴", brand: "맥도날드", title: "빅아치", start: "2026-10-22", price: "12,400원", pop: 5.2, end: "2026-11-19", endLate: "2026-12-03",
       period: "10.22 출시 · 11.19~12.3 사이 종료 예상",
       desc: "4~6주 한정이라 종료일이 정확히 나오지 않았어요. 빠르면 11월 19일에 끝날 수 있어요.",
