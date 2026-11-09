@@ -9,8 +9,8 @@
 // - start: 기사에 시작·출시일이 나온 한정 항목의 시작일(YYYY-MM-DD). 판매 기간 계산 가이드(/guide/limited-menu-duration)에 쓰여요. 기사에 없으면 넣지 않아요.
 // - pop: 검색량 배수(최근 3일 / 지난 4주). 한정 탭 인기순 정렬에 써요. 없으면 마감순으로 뒤에 놓여요.
 window.FOODYSSEY = {
-  updated: "2026-11-08",
-  weekLabel: "2026년 11월 둘째 주",
+  updated: "2026-11-09",
+  weekLabel: "2026년 11월 셋째 주",
 
   cats: [
     { id: "burger", name: "버거" },
@@ -223,7 +223,22 @@ window.FOODYSSEY = {
         { name: "라즈베리 피스타치오", tag: "도넛", desc: "두바이 스타일 초코 도넛 출시 2주년을 맞아 나온 도넛이에요." }
       ],
       src: { label: "겟뉴스", url: "https://www.getnews.co.kr/news/articleView.html?idxno=885661" },
-      note: "가격과 판매 기간은 기사에 나오지 않았어요" }
+      note: "가격과 판매 기간은 기사에 나오지 않았어요" },
+    { cat: "chicken", brand: "bhc", when: "11.5 발표", date: "2026-11-05",
+      items: [{ name: "양념킹", tag: "신메뉴", desc: "조청을 넣은 양념치킨이에요. 달콤하면서 매콤한 양념을 썼고, 반반 메뉴도 있어요." }],
+      src: { label: "라이센스뉴스", url: "https://www.lcnews.co.kr/news/articleView.html?idxno=210912" },
+      note: "가격은 기사에 나오지 않았어요" },
+    { cat: "cafe", brand: "빽다방", when: "11.7 발표", date: "2026-11-07",
+      items: [{ name: "시그니처 딥크림라떼", tag: "음료", price: "3,800원", desc: "아이스 스몰은 3,200원이에요. 일부 매장을 뺀 전국 빽다방과 빽다방 빵연구소에서 팔아요." }],
+      src: { label: "세계일보", url: "https://www.segye.com/newsView/20261107502295" } },
+    { cat: "cafe", brand: "빨라쪼", when: "11.6 출시", date: "2026-11-06",
+      items: [
+        { name: "얼그레이 밀크티", tag: "음료" },
+        { name: "마로네 젤라또", tag: "디저트" },
+        { name: "젤라또 핫 라떼 2종", tag: "음료 · 한정", desc: "내년 2월까지 전국 빨라쪼·지파시 매장에서 한정 판매해요." }
+      ],
+      src: { label: "세계일보", url: "https://www.segye.com/newsView/20261107502295" },
+      note: "가격은 기사에 나오지 않았어요" }
   ],
 
   limited: [
@@ -260,13 +275,17 @@ window.FOODYSSEY = {
       desc: "호빵맨과 함께 만든 11월 이달의 맛이에요. 이름은 호빵맨의 대표 대사 ‘도와줘요 호빵맨!’에 쿠키도우의 ‘도우’를 합쳐 지었어요. 호빵맨과 친구들 캐릭터를 쓴 아이스크림 케이크 2종과, 호빵맨 캐릭터를 입힌 리유저블 컵에 담은 음료(아이스 아메리카노, 납작복숭아 아이스티)도 함께 나와요. 종료일은 기사에 나오지 않았어요.",
       src: { label: "주간한국", url: "https://weekly.hankooki.com/news/articleView.html?idxno=7191453" } },
 
+    { kind: "이벤트", brand: "맘스터치", title: "주술회전 시부야 사변 협업 세트", end: "2026-11-29", period: "11.5 발표 · ~ 11.29",
+      desc: "아크릴스탠드를 주는 세트 3종이에요. 캐릭터 상품은 한정 수량이라 재고가 떨어지면 매장에서 일찍 끝날 수 있어요.",
+      src: { label: "위키트리", url: "https://www.wikitree.co.kr/articles/1172063" } },
+    { kind: "메뉴", brand: "빨라쪼", title: "젤라또 핫 라떼 2종", open: "내년 2월까지", period: "11.6 출시 · 내년 2월까지",
+      desc: "전국 빨라쪼·지파시 매장에서 한정 판매해요. 정확한 종료일은 기사에 나오지 않았어요.",
+      src: { label: "세계일보", url: "https://www.segye.com/newsView/20261107502295" } },
+
     { kind: "메뉴", brand: "맥도날드", title: "빅아치", start: "2026-10-22", price: "12,400원", pop: 5.2, end: "2026-11-19", endLate: "2026-12-03",
       period: "10.22 출시 · 11.19~12.3 사이 종료 예상",
       desc: "4~6주 한정이라 종료일이 정확히 나오지 않았어요. 빠르면 11월 19일에 끝날 수 있어요.",
       src: { label: "재경일보", url: "https://news.jkn.co.kr/post/1039964" } },
-    { kind: "이벤트", brand: "맥도날드", title: "배민 빅아치 3,000원 할인", end: "2026-11-01", period: "~ 11.1(일)",
-      desc: "배달의민족에서 빅아치를 선착순 3,000원 할인해 줘요. 맥도날드 전 메뉴 5,000원 할인 쿠폰도 선착순으로 줘요.",
-      src: { label: "신아일보", url: "https://www.shinailbo.co.kr/news/articleView.html?idxno=5077387" } },
     { kind: "이벤트", brand: "스타벅스", title: "겨울 e-프리퀀시", start: "2026-10-22", season: "christmas", pop: 5.8, end: "2026-12-31", period: "10.22(목) ~ 12.31(목)",
       cups: { total: 17, mission: 3 },
       desc: "미션음료 3잔을 포함해 17잔이면 증정품 1개를 예약할 수 있어요. 렉슨 스피커, 몰스킨 플래너, 코듀로이 백팩, 캔버스 토트 중에서 골라요.",
