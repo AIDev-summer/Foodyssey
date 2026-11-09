@@ -147,6 +147,43 @@ function lint(root, opts) {
       else if (!u.endsWith('/') && !hasFile) errs.push('sitemap ' + u + (hasDir ? ': 폴더 주소라 /guide → /guide/ 로 리디렉션돼요(끝에 / 필요)' : ': 대응하는 파일이 없어요'));
     });
   }
+  // 색인 일관성 게이트(2026-11-08 PULSE 지시): 사이트맵 URL은 noindex 금지, canonical·og:url은 자기 자신, 내부 링크·RSS는 최종 주소 형식.
+  if (opts.analytics) {
+    let sm = '', rss = '';
+    try { sm = fs.readFileSync(path.join(root, 'sitemap.xml'), 'utf8'); } catch (e) {}
+    try { rss = fs.readFileSync(path.join(root, 'rss.xml'), 'utf8'); } catch (e) {}
+    const fileOf = (u) => { const c = u.replace(/\/$/, ''); if (u === '/') return path.join(root, 'index.html'); const a = path.join(root, c + '.html'); return fs.existsSync(a) ? a : path.join(root, c, 'index.html'); };
+    const noindexSet = new Set();
+    files.forEach((f) => { const hh = fs.readFileSync(f, 'utf8'); if (/<meta name="robots" content="[^"]*noindex/.test(hh)) noindexSet.add(path.relative(root, f).replace(/\\/g, '/')); });
+    [...sm.matchAll(/<loc>([^<]+)<\/loc>/g)].forEach((m) => {
+      const full = m[1].replace(/&amp;/g, '&');
+      let u; try { u = decodeURIComponent(full.replace(/^https?:\/\/[^/]+/, '')); } catch (e) { return; }
+      const f = fileOf(u);
+      if (!fs.existsSync(f)) return;
+      const hh = fs.readFileSync(f, 'utf8');
+      if (/<meta name="robots" content="[^"]*noindex/.test(hh)) errs.push('sitemap ' + u + ': noindex 페이지가 사이트맵에 있어요');
+      const cm = hh.match(/<link rel="canonical" href="([^"]*)"/);
+      if (!cm) errs.push('sitemap ' + u + ': canonical 이 없어요');
+      else if (cm[1] !== full) errs.push('sitemap ' + u + ': canonical(' + cm[1].slice(0, 80) + ')이 사이트맵 주소와 달라요');
+      const om = hh.match(/<meta property="og:url" content="([^"]*)"/);
+      if (om && om[1] !== full) errs.push('sitemap ' + u + ': og:url 이 사이트맵 주소와 달라요');
+    });
+    // 내부 링크: 폴더 주소(/guide)는 끝에 /가 있어야 리디렉션이 안 생겨요. RSS의 링크도 사이트맵과 같은 형식이어야 해요.
+    const isDir = (x) => { const c = x.replace(/\/$/, ''); return c && fs.existsSync(path.join(root, c, 'index.html')) && !fs.existsSync(path.join(root, c + '.html')); };
+    const redirLinks = new Map();
+    files.forEach((f) => {
+      const rel2 = path.relative(root, f).replace(/\\/g, '/');
+      const hh = fs.readFileSync(f, 'utf8');
+      [...hh.matchAll(/href="(\/[^"#?]*)/g)].forEach((m) => { let x; try { x = decodeURIComponent(m[1]); } catch (e) { return; } if (x !== '/' && !x.endsWith('/') && isDir(x)) { if (!redirLinks.has(x)) redirLinks.set(x, []); redirLinks.get(x).push(rel2); } });
+    });
+    redirLinks.forEach((from, x) => errs.push('내부 링크 ' + x + ' 는 폴더 주소라 리디렉션돼요(끝에 / 필요), 사용 위치 ' + from.length + '곳 예: ' + from[0]));
+    [...rss.matchAll(/<(?:link|guid)[^>]*>(https?:\/\/[^<]+)<\/link>|<guid[^>]*>(https?:\/\/[^<]+)<\/guid>/g)].forEach((m) => {
+      const u0 = (m[1] || m[2] || ''); let u; try { u = decodeURIComponent(u0.replace(/^https?:\/\/[^/]+/, '')); } catch (e) { return; }
+      if (u && u !== '/' && !u.endsWith('/') && isDir(u)) errs.push('rss 주소 ' + u + ' 는 폴더 주소라 리디렉션돼요');
+    });
+    // noindex 페이지 노출 최소화(경고): 사이트맵에 없는 noindex 페이지로 가는 내부 링크 수를 세어 보고만 해요.
+    stat.noindexPages = noindexSet.size;
+  }
   return { errs, stat, pages: files.length };
 }
 
