@@ -131,6 +131,22 @@ function lint(root, opts) {
     // 화면에 없는 FAQ 방지: FAQ 마크업 자체를 금지했으니 본문에도 질문-답변 스키마 속성이 없어야 해요.
     if (/itemtype="https?:\/\/schema\.org\/(Product|FAQPage|Review|Offer)"/.test(h)) errs.push(rel + ': 마이크로데이터 Product/FAQ/Review/Offer 금지');
   });
+  // 사이트맵 주소는 리디렉션 없이 바로 200으로 열려야 해요(2026-11-08 서치콘솔 '리디렉션 포함 페이지').
+  // GitHub Pages는 폴더 주소(/guide)를 /guide/ 로 301 이동시키므로, 폴더 index 페이지는 끝에 /를 붙이고 일반 파일 주소에는 /를 붙이지 않아요.
+  if (opts.analytics) {
+    let sm = '';
+    try { sm = fs.readFileSync(path.join(root, 'sitemap.xml'), 'utf8'); } catch (e) {}
+    [...sm.matchAll(/<loc>([^<]+)<\/loc>/g)].forEach((m) => {
+      let u; try { u = decodeURIComponent(m[1].replace(/^https?:\/\/[^/]+/, '')); } catch (e) { return; }
+      const clean = u.replace(/\/$/, '');
+      const hasFile = u === '/' || fs.existsSync(path.join(root, clean + '.html'));
+      const hasDir = fs.existsSync(path.join(root, clean, 'index.html'));
+      if (u === '/') return;
+      if (u.endsWith('/') && !hasDir) errs.push('sitemap ' + u + ': 폴더 index 페이지가 없어요');
+      else if (u.endsWith('/') && hasFile) errs.push('sitemap ' + u + ': 파일과 폴더가 겹쳐요');
+      else if (!u.endsWith('/') && !hasFile) errs.push('sitemap ' + u + (hasDir ? ': 폴더 주소라 /guide → /guide/ 로 리디렉션돼요(끝에 / 필요)' : ': 대응하는 파일이 없어요'));
+    });
+  }
   return { errs, stat, pages: files.length };
 }
 
