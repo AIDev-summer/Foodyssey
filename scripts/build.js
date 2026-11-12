@@ -921,6 +921,7 @@ function main() {
   fs.writeFileSync(idxFile, idx);
 
   // 구조화 데이터 린트: 금지 패턴이 있으면 빌드를 실패시켜서 잘못된 페이지가 배포되지 않게 해요.
+  autoIsolate();
   const lintRes = require('./lint-jsonld').lint(ROOT, { analytics: true });
   if (lintRes.errs.length) {
     console.error('JSON-LD 린트 실패 ' + lintRes.errs.length + '건');
@@ -950,6 +951,39 @@ function main() {
   } catch (e) { console.warn('품질 점검을 건너뛰었어요: ' + e.message); }
 
   console.log(`메뉴 ${all.length}개(판매·진행 중 ${liveItems.length}, 검색 제외 noindex ${noindexCount}, 허브 noindex ${hubNoindex}), 브랜드 ${brands.length}개, 업종 ${D.cats.length}개 페이지를 만들었어요.`);
+}
+
+
+// 자동 격리(2026-11-12 PULSE 지시): 데이터 갱신으로 새로 생긴 메뉴·브랜드·업종 페이지가 가치 기준에 못 미치면 빌드를 멈추지 않고
+// 그 페이지만 noindex,follow + 사이트맵·RSS 제외로 돌려요. 기준은 낮추지 않았고, 보강돼 기준을 넘으면 다음 빌드에서 자동으로 색인 대상으로 돌아와요.
+// 격리 목록은 빌드 로그와 data/auto-noindex.json에 남겨요(관리자가 보강 대상으로 확인).
+function autoIsolate() {
+  const qr = require('./quality-report');
+  const q = qr.run(ROOT);
+  let ex = {};
+  try { ex = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'value-exceptions.json'), 'utf8')); } catch (e) {}
+  const list = [];
+  q.rows.filter((r) => !r.noindex).forEach((r) => {
+    if (r.type === 'menu' && r.uniqueChars < 40) list.push({ rel: r.rel, url: r.url, why: '이 페이지만의 문장 ' + r.uniqueChars + '자(40자 미만)' });
+    else if ((r.type === 'brand' || r.type === 'cat') && r.hangul < qr.VALUE_MIN_HANGUL && !ex[r.rel]) list.push({ rel: r.rel, url: r.url, why: '본문 한글 ' + r.hangul + '자(' + qr.VALUE_MIN_HANGUL + '자 미만)' });
+  });
+  let sm = fs.readFileSync(path.join(ROOT, 'sitemap.xml'), 'utf8');
+  let rss = '';
+  try { rss = fs.readFileSync(path.join(ROOT, 'rss.xml'), 'utf8'); } catch (e) {}
+  list.forEach((it) => {
+    const f = path.join(ROOT, it.rel);
+    let h = fs.readFileSync(f, 'utf8');
+    if (!/<meta name="robots"/.test(h)) h = h.replace(/(<link rel="canonical"[^>]*>\r?\n)/, '$1<meta name="robots" content="noindex,follow">\n');
+    fs.writeFileSync(f, h);
+    const loc = SITE + it.url.split('/').map((x) => encodeURIComponent(decodeURIComponent(x))).join('/');
+    sm = sm.split('\n').filter((ln) => !(ln.includes('<loc>' + loc + '</loc>'))).join('\n');
+    rss = rss.replace(/<item>(?:(?!<\/item>)[\s\S])*?<link>[^<]*<\/link>(?:(?!<\/item>)[\s\S])*?<\/item>\s*/g, (m) => (m.includes('<link>' + loc + '</link>') ? '' : m));
+  });
+  fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), sm);
+  if (rss) fs.writeFileSync(path.join(ROOT, 'rss.xml'), rss);
+  fs.mkdirSync(path.join(ROOT, 'data'), { recursive: true });
+  fs.writeFileSync(path.join(ROOT, 'data', 'auto-noindex.json'), JSON.stringify({ generated: UPDATED, note: '데이터 갱신 빌드가 기준 미달로 자동 noindex,follow·사이트맵 제외한 페이지예요. 보강하면 다음 빌드에서 자동으로 색인 대상이 돼요.', pages: list.map((x) => ({ page: x.url, why: x.why })) }, null, 1) + '\n');
+  console.log('자동 격리 ' + list.length + '건(noindex,follow, 사이트맵·RSS 제외): ' + (list.map((x) => x.url + ' [' + x.why + ']').join(', ') || '없음'));
 }
 
 main();
