@@ -154,6 +154,14 @@ function plainLen(h) {
   const t = h.replace(/<head>[\s\S]*?<\/head>|<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<header[\s\S]*?<\/header>|<footer[\s\S]*?<\/footer>|<nav class="crumbs"[\s\S]*?<\/nav>/g, ' ').replace(/<[^>]+>/g, ' ');
   return t.replace(/&[a-z]+;/g, ' ').replace(/\s+/g, ' ').trim().length;
 }
+// 본문 한글 글자 수(가치 게이트와 같은 기준): 새로 생긴 허브가 800자 미만이면 실패시키지 않고 자동으로 noindex,follow로 돌려요(보강되면 자동으로 색인 대상이 돼요).
+let VALUE_EX = {};
+try { VALUE_EX = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'value-exceptions.json'), 'utf8')); } catch (e) {}
+function hangulLen(h) {
+  const a = h.match(/<article>([\s\S]*?)<\/article>/);
+  const t = (a ? a[1] : h).replace(/<script[\s\S]*?<\/script>/g, '').replace(/<nav class="crumbs"[\s\S]*?<\/nav>/g, '').replace(/<[^>]+>/g, ' ');
+  return (t.match(/[가-힣]/g) || []).length;
+}
 function noindexReason(r, st) {
   if (FORCED.has(r.slug)) return 'short';
   if (CONSOLIDATED[r.slug]) return 'consolidated';
@@ -779,7 +787,7 @@ function main() {
       robots
     });
     let page = mkBrand('');
-    const brandThin = plainLen(page) < HUB_MIN;
+    const brandThin = plainLen(page) < HUB_MIN || (hangulLen(page) < HUB_MIN && !VALUE_EX['brand/' + slug(b) + '.html']);
     if (brandThin) { page = mkBrand('noindex,follow'); hubNoindex++; }
     fs.writeFileSync(path.join(ROOT, 'brand', slug(b) + '.html'), page);
     if (brandThin) return;
@@ -799,7 +807,7 @@ function main() {
       robots
     });
     let page = mkCat('');
-    const catThin = plainLen(page) < HUB_MIN;
+    const catThin = plainLen(page) < HUB_MIN || (hangulLen(page) < HUB_MIN && !VALUE_EX['cat/' + c.id + '.html']);
     if (catThin) { page = mkCat('noindex,follow'); hubNoindex++; }
     fs.writeFileSync(path.join(ROOT, 'cat', c.id + '.html'), page);
     if (catThin) return;

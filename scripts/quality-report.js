@@ -256,9 +256,9 @@ function valueGate(rows, root) {
   const errs = [], warns = [], stale = [];
   rows.filter((r) => !r.noindex).forEach((r) => {
     const low = r.hangul < VALUE_MIN_HANGUL;
-    if (r.uniqueChars < 40 && !ex[r.rel]) errs.push(r.url + ': 이 페이지만의 문장이 ' + r.uniqueChars + '자뿐이에요(템플릿 문구만으로 구성)');
+    if (r.uniqueChars < 40 && !ex[r.rel] && r.type !== 'menu') errs.push(r.url + ': 이 페이지만의 문장이 ' + r.uniqueChars + '자뿐이에요(템플릿 문구만으로 구성)');
     if (SIMILARITY_MAX[r.type] && r.nearDup >= SIMILARITY_MAX[r.type] && !ex[r.rel]) errs.push(r.url + ': 같은 유형 페이지와 문장 유사도 ' + r.nearDup + '%(상한 ' + SIMILARITY_MAX[r.type] + '%)');
-    if (r.type === 'menu') { if (low) warns.push(r); return; }
+    if (r.type === 'menu') { if (low || r.uniqueChars < 40) warns.push(r); return; }
     if (low && !ex[r.rel]) errs.push(r.url + ': 본문 한글 ' + r.hangul + '자(' + VALUE_MIN_HANGUL + '자 미만) — 사실 근거로 보강하거나 data/value-exceptions.json에 사유·기한을 적어요');
     if (!low && ex[r.rel] && /보강/.test(ex[r.rel].reason || '')) stale.push(r.rel);
   });
