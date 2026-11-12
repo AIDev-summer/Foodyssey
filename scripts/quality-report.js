@@ -214,7 +214,8 @@ function run(root, opts) {
     sc.fresh = clamp(fr);
     let total = 0; Object.keys(WEIGHTS).forEach((k) => { total += (sc[k] * WEIGHTS[k]) / 100; });
     total = Math.round(total);
-    return { rel: p.rel, url: p.urlPath, type: p.type, noindex: p.noindex, inSitemap: p.inSitemap, chars: p.chars, uniqueChars: p.uniqueChars, boiler: Math.round(p.boilerRatio * 100), nearDup: Math.round((p.nearDup || 0) * 100), verified: p.verified, scores: sc, total, notes, hard };
+    const hangul = (p.text.match(/[가-힣]/g) || []).length;
+    return { rel: p.rel, hangul, url: p.urlPath, type: p.type, noindex: p.noindex, inSitemap: p.inSitemap, chars: p.chars, uniqueChars: p.uniqueChars, boiler: Math.round(p.boilerRatio * 100), nearDup: Math.round((p.nearDup || 0) * 100), verified: p.verified, scores: sc, total, notes, hard };
   });
   // 하위 20%
   const sorted = rows.slice().sort((a, b) => a.total - b.total);
@@ -230,7 +231,7 @@ function write(out, res) {
   fs.mkdirSync(out, { recursive: true });
   const ks = Object.keys(WEIGHTS);
   const esc = (s) => '"' + String(s).replace(/"/g, '""') + '"';
-  const csv = ['URL,유형,색인,사이트맵,본문자수,고유문장자수,반복문장%,최대유사%,출처대조,' + ks.map((k) => LABELS[k]).join(',') + ',총점,하위20%,미달,메모'].concat(res.rows.sort((a, b) => a.total - b.total).map((r) => [r.url, r.type, r.noindex ? 'noindex' : 'index', r.inSitemap ? 'Y' : 'N', r.chars, r.uniqueChars, r.boiler, r.nearDup, r.verified ? '대조됨' : '미검증'].concat(ks.map((k) => r.scores[k]), [r.total, r.bottom20 ? 'Y' : '', r.fail ? 'Y' : '', esc(r.hard.concat(r.notes).join(' / '))]).join(','))).join('\n');
+  const csv = ['URL,유형,색인,사이트맵,본문자수,한글자수,고유문장자수,반복문장%,최대유사%,출처대조,' + ks.map((k) => LABELS[k]).join(',') + ',총점,하위20%,미달,메모'].concat(res.rows.sort((a, b) => a.total - b.total).map((r) => [r.url, r.type, r.noindex ? 'noindex' : 'index', r.inSitemap ? 'Y' : 'N', r.chars, r.hangul, r.uniqueChars, r.boiler, r.nearDup, r.verified ? '대조됨' : '미검증'].concat(ks.map((k) => r.scores[k]), [r.total, r.bottom20 ? 'Y' : '', r.fail ? 'Y' : '', esc(r.hard.concat(r.notes).join(' / '))]).join(','))).join('\n');
   fs.writeFileSync(path.join(out, 'quality-scores.csv'), '\ufeff' + csv + '\n');
   const avg = (rs, k) => (rs.length ? Math.round(rs.reduce((a, r) => a + (k ? r.scores[k] : r.total), 0) / rs.length) : '-');
   const types = [...new Set(res.rows.map((r) => r.type))];
@@ -242,7 +243,25 @@ function write(out, res) {
   fs.writeFileSync(path.join(out, 'quality-summary.json'), JSON.stringify({ today: res.today, pages: res.rows.length, fail: res.failCount, bottom20: res.bottomCount, cut: res.cut, failTypes: res.failTypes }, null, 1));
 }
 
-module.exports = { run, write, WEIGHTS, LABELS, FAIL_BELOW };
+
+// 콘텐츠 가치 게이트(2026-11 애드센스 '가치가 별로 없는 콘텐츠' 사전 차단): 색인 대상 페이지는 본문 한글 1,000자 이상이어야 해요.
+// 메뉴 상세 페이지는 한 가지 메뉴에 대한 기사 근거가 한정돼 있어 글자 수를 억지로 채우지 않고(반복 문장 금지), 경고로만 알려요.
+// 그 밖의 유형(홈·허브·가이드·월별·시즌·정적)은 미달이면 빌드를 실패시켜요. 아직 보강 중인 페이지는 data/value-exceptions.json에 사유·기한과 함께 적어요.
+const VALUE_MIN_HANGUL = 1000;
+function valueGate(rows, root) {
+  let ex = {};
+  try { ex = JSON.parse(fs.readFileSync(path.join(root, 'data', 'value-exceptions.json'), 'utf8')); } catch (e) {}
+  const errs = [], warns = [], stale = [];
+  rows.filter((r) => !r.noindex).forEach((r) => {
+    const low = r.hangul < VALUE_MIN_HANGUL;
+    if (r.type === 'menu') { if (low) warns.push(r); return; }
+    if (low && !ex[r.rel]) errs.push(r.url + ': 본문 한글 ' + r.hangul + '자(1,000자 미만) — 보강하거나 data/value-exceptions.json에 사유·기한을 적어요');
+    if (!low && ex[r.rel]) stale.push(r.rel);
+  });
+  return { errs, warns, stale, exceptions: Object.keys(ex).length };
+}
+
+module.exports = { valueGate, VALUE_MIN_HANGUL, run, write, WEIGHTS, LABELS, FAIL_BELOW };
 
 if (require.main === module) {
   const a = process.argv.slice(2); const get = (k) => { const i = a.indexOf(k); return i >= 0 ? a[i + 1] : null; };
