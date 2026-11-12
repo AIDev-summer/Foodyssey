@@ -924,7 +924,7 @@ function main() {
     console.log('품질 점검: 페이지 ' + q.rows.length + '개, 미달 ' + q.failCount + '개, 하위 20% ' + q.bottomCount + '개(총점 ≤ ' + q.cut + '), 출처 대조 ' + q.verifiedPages + '개');
     if (q.failCount) q.rows.filter((r) => r.fail).slice(0, 15).forEach((r) => console.warn(' ! 품질 미달 ' + r.total + '점 ' + r.url + ' — ' + r.hard.concat(r.notes).slice(0, 3).join(' / ')));
     const vg = require('./quality-report').valueGate(q.rows, ROOT);
-    console.log('가치 게이트(한글 1,000자): 메뉴 상세 ' + vg.warns.length + '개 미달(경고), 예외 목록 ' + vg.exceptions + '개' + (vg.stale.length ? ', 이미 통과해 예외 목록에서 뺄 수 있는 것 ' + vg.stale.length + '개' : ''));
+    console.log('가치 게이트(정보형 한글 800자): 메뉴 상세 ' + vg.warns.length + '개 미달(경고), 예외 목록 ' + vg.exceptions + '개' + (vg.stale.length ? ', 이미 통과해 예외 목록에서 뺄 수 있는 것 ' + vg.stale.length + '개' : ''));
     if (vg.errs.length) {
       console.error('가치 게이트 실패 ' + vg.errs.length + '건');
       vg.errs.slice(0, 30).forEach((e) => console.error(' - ' + e));

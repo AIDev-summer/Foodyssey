@@ -244,19 +244,23 @@ function write(out, res) {
 }
 
 
-// 콘텐츠 가치 게이트(2026-11 애드센스 '가치가 별로 없는 콘텐츠' 사전 차단): 색인 대상 페이지는 본문 한글 1,000자 이상이어야 해요.
-// 메뉴 상세 페이지는 한 가지 메뉴에 대한 기사 근거가 한정돼 있어 글자 수를 억지로 채우지 않고(반복 문장 금지), 경고로만 알려요.
-// 그 밖의 유형(홈·허브·가이드·월별·시즌·정적)은 미달이면 빌드를 실패시켜요. 아직 보강 중인 페이지는 data/value-exceptions.json에 사유·기한과 함께 적어요.
-const VALUE_MIN_HANGUL = 1000;
+// 콘텐츠 가치 게이트(PULSE 조정 2026-11-12): 1,000자는 구글 공식 기준이 아니라서 억지로 늘리지 않고, 정보형 페이지 본문 한글 800자 이상을 안전 기준으로 둬요.
+// - 메뉴 상세는 한 가지 메뉴의 기사 근거가 한정돼 있어 글자 수는 경고로만 알리고, 보강이 어려우면 병합·noindex 후보로 PULSE에 보고해요.
+// - 그 밖의 정보형 페이지(홈·허브·가이드·월별·시즌·정적)가 800자 미만이면 빌드를 실패시켜요. 도구·법정 문구·보강 중인 페이지는 data/value-exceptions.json에 사유·기한과 함께 적어요.
+// - 템플릿 문구만으로 된 페이지(그 페이지만의 문장이 40자 미만)와 같은 유형 문장 유사도 상한(메뉴 90%, 브랜드 70%)을 넘으면 실패해요.
+const VALUE_MIN_HANGUL = 800;
+const SIMILARITY_MAX = { menu: 90, brand: 70 };
 function valueGate(rows, root) {
   let ex = {};
   try { ex = JSON.parse(fs.readFileSync(path.join(root, 'data', 'value-exceptions.json'), 'utf8')); } catch (e) {}
   const errs = [], warns = [], stale = [];
   rows.filter((r) => !r.noindex).forEach((r) => {
     const low = r.hangul < VALUE_MIN_HANGUL;
+    if (r.uniqueChars < 40 && !ex[r.rel]) errs.push(r.url + ': 이 페이지만의 문장이 ' + r.uniqueChars + '자뿐이에요(템플릿 문구만으로 구성)');
+    if (SIMILARITY_MAX[r.type] && r.nearDup >= SIMILARITY_MAX[r.type] && !ex[r.rel]) errs.push(r.url + ': 같은 유형 페이지와 문장 유사도 ' + r.nearDup + '%(상한 ' + SIMILARITY_MAX[r.type] + '%)');
     if (r.type === 'menu') { if (low) warns.push(r); return; }
-    if (low && !ex[r.rel]) errs.push(r.url + ': 본문 한글 ' + r.hangul + '자(1,000자 미만) — 보강하거나 data/value-exceptions.json에 사유·기한을 적어요');
-    if (!low && ex[r.rel]) stale.push(r.rel);
+    if (low && !ex[r.rel]) errs.push(r.url + ': 본문 한글 ' + r.hangul + '자(' + VALUE_MIN_HANGUL + '자 미만) — 사실 근거로 보강하거나 data/value-exceptions.json에 사유·기한을 적어요');
+    if (!low && ex[r.rel] && /보강/.test(ex[r.rel].reason || '')) stale.push(r.rel);
   });
   return { errs, warns, stale, exceptions: Object.keys(ex).length };
 }
