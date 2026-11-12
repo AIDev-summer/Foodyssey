@@ -145,6 +145,9 @@ function statusLabel(r, st) {
 // 검색에 노출하지 않을 페이지: 끝난 이벤트, 가격·메뉴표 없이 고유 설명이 짧은 메뉴.
 // (noindex,follow + sitemap·RSS 제외. 페이지는 지우지 않고 브랜드·업종·시즌 페이지에서 계속 연결해요.)
 const FORCED = new Set();
+// 틀이 같은 얇은 페이지 정리(data/consolidation.json, 사장님 승인 2026-11-12): 페이지는 남기고 noindex,follow + 사이트맵·RSS 제외.
+let CONSOLIDATED = {};
+try { CONSOLIDATED = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'consolidation.json'), 'utf8')); } catch (e) {}
 const MENU_MIN = 650, HUB_MIN = 800;
 // 완성된 페이지의 눈에 보이는 글자 수(머리글·푸터·스크립트 제외)
 function plainLen(h) {
@@ -153,6 +156,7 @@ function plainLen(h) {
 }
 function noindexReason(r, st) {
   if (FORCED.has(r.slug)) return 'short';
+  if (CONSOLIDATED[r.slug]) return 'consolidated';
   if (r.kind === 'event' && st !== 'on') return 'ended-event';
   // 같은 묶음(group)의 메뉴는 묶음 공통 note가 아니라 메뉴 자기 설명(desc)만 고유 내용으로 쳐요.
   const own = r.group ? (r.desc || '') : [r.desc, r.note].filter(Boolean).join(' ');
