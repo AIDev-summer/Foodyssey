@@ -172,3 +172,13 @@ footer .links a, .explore a { min-width: 44px; justify-content: center; }
 /* 헤더 로고 옆 소개 문구는 넓은 화면에서만, 좁은 화면 상단 메뉴는 한 줄로 */
 @media (max-width: 760px) { .logo-sub small { display: none; } }
 @media (max-width: 520px) { header nav a { min-width: 0; margin-right: 8px; padding-inline: 4px; } header nav .theme-btn { margin-left: auto; } }
+
+/* ===== 칩·배지·숫자 가운데 정렬(2026-11-13): 글자와 숫자가 칩 안에서 가로·세로 가운데, 칩 높이 고정 ===== */
+.badge, .s-badge, .s-dday, .s-chip { display: inline-flex; align-items: center; justify-content: center; line-height: 1; box-sizing: border-box; white-space: nowrap; vertical-align: middle; }
+.badge { min-height: 24px; padding: 0 8px; }
+.s-chip, .s-badge, .s-dday { min-height: 28px; padding: 0 12px; }
+.s-dday { font-variant-numeric: tabular-nums; }
+.s-chip, .s-badge, .s-dday { padding-bottom: 1px; }
+.s-card { align-items: center; }
+/* 정보 표(상태·브랜드 등): 이름 칸과 값 칸(배지 포함)을 같은 세로 중심선에 */
+.facts { align-items: center; }
