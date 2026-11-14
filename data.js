@@ -9,7 +9,7 @@
 // - start: 기사에 시작·출시일이 나온 한정 항목의 시작일(YYYY-MM-DD). 판매 기간 계산 가이드(/guide/limited-menu-duration)에 쓰여요. 기사에 없으면 넣지 않아요.
 // - pop: 검색량 배수(최근 3일 / 지난 4주). 한정 탭 인기순 정렬에 써요. 없으면 마감순으로 뒤에 놓여요.
 window.FOODYSSEY = {
-  updated: "2026-11-12",
+  updated: "2026-11-14",
   weekLabel: "2026년 11월 셋째 주",
 
   cats: [
@@ -41,6 +41,18 @@ window.FOODYSSEY = {
   },
 
   newItems: [
+    { cat: "cafe", brand: "투썸플레이스", when: "11.13 출시", date: "2026-11-13",
+      items: [{ name: "크림탑 스초생(크초생)", tag: "디저트", desc: "대표 케이크 스초생의 새 라인업이에요. 11월 13일부터 전국 매장에서 팔아요." }],
+      src: { label: "인더뉴스", url: "https://www.inthenews.co.kr/news/article.html?no=94376" } },
+    { cat: "cafe", brand: "할리스", when: "11.11 발표 · 겨울 5종", date: "2026-11-11",
+      items: [{ name: "블랙 티라미수 라떼", tag: "음료" }, { name: "군고구마 크림 라떼", tag: "음료" }, { name: "레드 시나몬 뱅쇼", tag: "음료" }, { name: "시그니처 당근 케이크", tag: "디저트" }, { name: "클래식 쇼콜라 타르트", tag: "디저트" }],
+      src: { label: "인더뉴스", url: "https://www.inthenews.co.kr/news/article.html?no=94376" } },
+    { cat: "cafe", brand: "더벤티", when: "11.11 발표", date: "2026-11-11",
+      items: [{ name: "미드나잇 퍼플 뱅쇼", tag: "음료" }, { name: "번트 흑임자 크림 라떼", tag: "음료" }, { name: "번트 흑임자 슈페너", tag: "음료" }],
+      src: { label: "인더뉴스", url: "https://www.inthenews.co.kr/news/article.html?no=94376" } },
+    { cat: "cafe", brand: "커피앳웍스", when: "11.11 발표", date: "2026-11-11",
+      items: [{ name: "솔티드 크림 카라멜 라떼", tag: "음료" }, { name: "시나몬 플랫화이트", tag: "음료" }, { name: "핑크 레몬 진저티", tag: "음료" }],
+      src: { label: "인더뉴스", url: "https://www.inthenews.co.kr/news/article.html?no=94376" } },
     { cat: "burger", brand: "맘스터치", when: "10.15 발표", date: "2026-10-15",
       items: [{ name: "베이컨치폴레싸이버거", tag: "신메뉴", desc: "바삭하게 튀긴 닭다리살 패티에 치폴레소스와 베이컨 잼을 더해 매콤하고 스모키한 맛을 낸 버거예요. 전국 1000여 개 스매쉬버거 판매점에서 먹을 수 있어요." }],
       src: { label: "마이데일리", url: "https://www.mydaily.co.kr/page/view/2026101514360760582" },
@@ -73,10 +85,6 @@ window.FOODYSSEY = {
       src: { label: "뉴스탭", url: "https://www.newstap.co.kr/news/articleView.html?idxno=335540" },
       note: "떡 위에 소스, 치즈, 페페로니를 올린 컵 형태예요" },
 
-    { cat: "chicken", brand: "bhc", when: "10월 출시", date: "2026-10-01",
-      items: [{ name: "알싹킹", tag: "신메뉴", desc: "bhc ‘킹’ 시리즈(맛초킹·콰삭킹·스윗칠리킹·쏘이갈릭킹)를 잇는 신제품이에요. 고추, 양파, 대파로 알싸한 맛을 내고 튀김옷을 얇게 입혔어요. bhc는 기존 메뉴와 다른 얇은 튀김옷 치킨을 라인업에 더하려고 개발했다고 설명했어요. 디핑소스는 불맛 나는 매운 소스에 단맛을 더한 ‘맵싸소스’와 대파·청양고추를 넣은 크림 소스 ‘파싹소스’ 2종이에요. 출시 기념 앱 쿠폰 이벤트는 10월 31일에 끝났어요." }],
-      src: { label: "비즈트리뷴", url: "https://www.biztribune.co.kr/news/articleView.html?idxno=361110" },
-      note: "얇은 튀김옷에 맵싸소스·파싹소스가 같이 와요" },
     { cat: "chicken", brand: "bhc", when: "10.22 매장 판매 확대", date: "2026-10-22",
       items: [{ name: "콰삭모짜킹", tag: "신메뉴", desc: "이탈리안 요리사 샘킴과 만든 치킨이에요. 크리스피 크럼블 튀김옷 안에 순살치킨과 모짜렐라 치즈를 넣었고, 아라비아따딥과 그린올리브딥 중 소스 2종이 함께 나와요. 출시 한 달 만에 25만 개 넘게 팔렸다고 bhc가 밝혔어요." }],
       src: { label: "비즈트리뷴", url: "https://www.biztribune.co.kr/news/articleView.html?idxno=361661" },
@@ -94,12 +102,6 @@ window.FOODYSSEY = {
       ],
       src: { label: "비즈트리뷴", url: "https://www.biztribune.co.kr/news/articleView.html?idxno=361110" },
       note: "가격은 교촌 홈페이지 권장소비자가격이에요" },
-    { cat: "chicken", brand: "교촌치킨", when: "10.1 출시", date: "2026-10-01",
-      items: [
-        { name: "웨지고구마 · 웨지반반", tag: "사이드", plain: true, price: "4,500·8,000원", desc: "웨지고구마는 속살이 노랗고 단맛이 나는 인도네시아산 고구마를 도톰한 웨지 모양으로 썰어 튀긴 사이드예요. 시나몬슈가가 함께 나와서 취향대로 뿌려 먹어요. 웨지반반은 웨지고구마와 기존 사이드인 웨지감자를 한 팩에 반씩 담아 두 가지 맛을 같이 먹게 한 구성이에요. 가격은 교촌 홈페이지 권장소비자가격이에요." }
-      ],
-      src: { label: "프라임경제", url: "https://www.newsprime.co.kr/news/article/?no=749669" },
-      note: "웨지반반은 웨지고구마와 웨지감자를 반씩 담았어요 · 가격은 교촌 홈페이지 권장소비자가격" },
 
     { cat: "bakery", brand: "파리바게뜨", when: "10.15 출시 · 치즈 5종", date: "2026-10-15",
       items: [
@@ -139,9 +141,6 @@ window.FOODYSSEY = {
     { cat: "cafe", brand: "투썸플레이스", when: "10.30 출시 · 가나디 협업", date: "2026-10-30",
       items: [{ name: "투썸 X 가나디 초코 베리 케이크", tag: "디저트" }, { name: "치즈케이크 빵", tag: "디저트" }],
       src: { label: "세계일보", url: "https://www.segye.com/newsView/20261105504330" } },
-    { cat: "cafe", brand: "투썸플레이스", when: "10월 · 가을 시즌", date: "2026-10-01",
-      items: [{ name: "블랙 치즈폼 라떼", tag: "음료" }, { name: "딸기 요거트 프라페", tag: "음료" }],
-      src: { label: "프라임경제", url: "https://www.newsprime.co.kr/news/article/?no=749669" } },
     { cat: "cafe", brand: "메가MGC커피", when: "10.29 출시 · 겨울 5종", date: "2026-10-29",
       items: [
         { name: "딥 초코 체리 프라페", tag: "음료", price: "4,400원" },
@@ -274,6 +273,12 @@ window.FOODYSSEY = {
   ],
 
   limited: [
+    { kind: "이벤트", brand: "더벤티", title: "겨울 시즌 음료 할인", end: "2026-11-17", period: "~ 11.17",
+      desc: "시즌 음료 2잔을 사거나 신제품과 아메리카노를 세트로 사면 할인해 줘요. 11월 17일까지예요.",
+      src: { label: "인더뉴스", url: "https://www.inthenews.co.kr/news/article.html?no=94376" } },
+    { kind: "이벤트", brand: "맘스터치", title: "스낵박스 할인 쿠폰", end: "2026-11-25", period: "~ 11.25",
+      desc: "맘스터치 앱에서 스낵박스를 사는 고객에게 할인 쿠폰을 줘요. 11월 25일까지예요.",
+      src: { label: "지피코리아", url: "https://www.gpkorea.com/news/articleView.html?idxno=148071" } },
     { kind: "이벤트", brand: "파스쿠찌", title: "네이버페이 결제 40% 혜택", start: "2026-11-11", end: "2026-11-15", period: "11.11 ~ 11.15",
       desc: "크리스마스 시즌 음료 출시를 기념해 전 제품을 네이버페이로 1만 원 이상 결제하면 40% 혜택을 줘요.",
       src: { label: "푸드투데이", url: "https://www.foodtoday.or.kr/news/article.html?no=209327" } },
