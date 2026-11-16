@@ -1030,6 +1030,7 @@ function autoIsolate() {
 }
 
 
+// (워크플로는 정적 페이지 5개도 함께 커밋해요.)
 // 스타일 캐시 무효화(2026-11-16): pages.css가 바뀌면 모든 페이지의 링크 주소(?v=해시)가 함께 바뀌어서, 브라우저·CDN에 남은 옛 CSS가 새 HTML에 쓰이지 않게 해요.
 function versionAssets() {
   const crypto = require('crypto');
