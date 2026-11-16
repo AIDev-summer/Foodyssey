@@ -9,7 +9,7 @@
 // - start: 기사에 시작·출시일이 나온 한정 항목의 시작일(YYYY-MM-DD). 판매 기간 계산 가이드(/guide/limited-menu-duration)에 쓰여요. 기사에 없으면 넣지 않아요.
 // - pop: 검색량 배수(최근 3일 / 지난 4주). 한정 탭 인기순 정렬에 써요. 없으면 마감순으로 뒤에 놓여요.
 window.FOODYSSEY = {
-  updated: "2026-11-12",
+  updated: "2026-11-16",
   weekLabel: "2026년 11월 셋째 주",
 
   cats: [
@@ -73,10 +73,6 @@ window.FOODYSSEY = {
       src: { label: "뉴스탭", url: "https://www.newstap.co.kr/news/articleView.html?idxno=335540" },
       note: "떡 위에 소스, 치즈, 페페로니를 올린 컵 형태예요" },
 
-    { cat: "chicken", brand: "bhc", when: "10월 출시", date: "2026-10-01",
-      items: [{ name: "알싹킹", tag: "신메뉴", desc: "bhc ‘킹’ 시리즈(맛초킹·콰삭킹·스윗칠리킹·쏘이갈릭킹)를 잇는 신제품이에요. 고추, 양파, 대파로 알싸한 맛을 내고 튀김옷을 얇게 입혔어요. bhc는 기존 메뉴와 다른 얇은 튀김옷 치킨을 라인업에 더하려고 개발했다고 설명했어요. 디핑소스는 불맛 나는 매운 소스에 단맛을 더한 ‘맵싸소스’와 대파·청양고추를 넣은 크림 소스 ‘파싹소스’ 2종이에요. 출시 기념 앱 쿠폰 이벤트는 10월 31일에 끝났어요." }],
-      src: { label: "비즈트리뷴", url: "https://www.biztribune.co.kr/news/articleView.html?idxno=361110" },
-      note: "얇은 튀김옷에 맵싸소스·파싹소스가 같이 와요" },
     { cat: "chicken", brand: "bhc", when: "10.22 매장 판매 확대", date: "2026-10-22",
       items: [{ name: "콰삭모짜킹", tag: "신메뉴", desc: "이탈리안 요리사 샘킴과 만든 치킨이에요. 크리스피 크럼블 튀김옷 안에 순살치킨과 모짜렐라 치즈를 넣었고, 아라비아따딥과 그린올리브딥 중 소스 2종이 함께 나와요. 출시 한 달 만에 25만 개 넘게 팔렸다고 bhc가 밝혔어요." }],
       src: { label: "비즈트리뷴", url: "https://www.biztribune.co.kr/news/articleView.html?idxno=361661" },
@@ -94,13 +90,6 @@ window.FOODYSSEY = {
       ],
       src: { label: "비즈트리뷴", url: "https://www.biztribune.co.kr/news/articleView.html?idxno=361110" },
       note: "가격은 교촌 홈페이지 권장소비자가격이에요" },
-    { cat: "chicken", brand: "교촌치킨", when: "10.1 출시", date: "2026-10-01",
-      items: [
-        { name: "웨지고구마 · 웨지반반", tag: "사이드", plain: true, price: "4,500·8,000원", desc: "웨지고구마는 속살이 노랗고 단맛이 나는 인도네시아산 고구마를 도톰한 웨지 모양으로 썰어 튀긴 사이드예요. 시나몬슈가가 함께 나와서 취향대로 뿌려 먹어요. 웨지반반은 웨지고구마와 기존 사이드인 웨지감자를 한 팩에 반씩 담아 두 가지 맛을 같이 먹게 한 구성이에요. 가격은 교촌 홈페이지 권장소비자가격이에요." }
-      ],
-      src: { label: "프라임경제", url: "https://www.newsprime.co.kr/news/article/?no=749669" },
-      note: "웨지반반은 웨지고구마와 웨지감자를 반씩 담았어요 · 가격은 교촌 홈페이지 권장소비자가격" },
-
     { cat: "bakery", brand: "파리바게뜨", when: "10.15 출시 · 치즈 5종", date: "2026-10-15",
       items: [
         { name: "멕시칸 핫도그", tag: "신제품", desc: "파마산 치즈와 뽀드득한 식감의 긴 소시지에 짭짤한 치즈와 매콤한 치폴레 소스를 조합한 소시지빵이에요." },
@@ -139,9 +128,6 @@ window.FOODYSSEY = {
     { cat: "cafe", brand: "투썸플레이스", when: "10.30 출시 · 가나디 협업", date: "2026-10-30",
       items: [{ name: "투썸 X 가나디 초코 베리 케이크", tag: "디저트" }, { name: "치즈케이크 빵", tag: "디저트" }],
       src: { label: "세계일보", url: "https://www.segye.com/newsView/20261105504330" } },
-    { cat: "cafe", brand: "투썸플레이스", when: "10월 · 가을 시즌", date: "2026-10-01",
-      items: [{ name: "블랙 치즈폼 라떼", tag: "음료" }, { name: "딸기 요거트 프라페", tag: "음료" }],
-      src: { label: "프라임경제", url: "https://www.newsprime.co.kr/news/article/?no=749669" } },
     { cat: "cafe", brand: "메가MGC커피", when: "10.29 출시 · 겨울 5종", date: "2026-10-29",
       items: [
         { name: "딥 초코 체리 프라페", tag: "음료", price: "4,400원" },
@@ -270,7 +256,15 @@ window.FOODYSSEY = {
         { name: "딸기 주스", tag: "음료" }
       ],
       src: { label: "파이낸셜뉴스", url: "https://www.fnnews.com/news/202611091621213427" },
-      note: "11월 10~11일 매머드오더 앱에서 신메뉴 4종 10% 할인 쿠폰을 줘요 · 가격은 기사에 나오지 않았어요" }
+      note: "11월 10~11일 매머드오더 앱에서 신메뉴 4종 10% 할인 쿠폰을 줘요 · 가격은 기사에 나오지 않았어요" },
+    { cat: "cafe", brand: "커피빈", when: "11.12 출시 · 겨울 시즌 3종", date: "2026-11-12",
+      items: [
+        { name: "구운밤 우롱티 라떼", tag: "음료", desc: "구운 밤의 은은한 단맛과 우롱티의 구수한 향을 합친 라떼예요. 따뜻한 음료와 아이스 음료로 주문할 수 있어요." },
+        { name: "진저브레드 라떼", tag: "음료", desc: "진저브레드 쿠키 같은 달콤하고 스파이시한 맛에 에스프레소를 더했어요. 진저브레드맨 모양 버터 쿠키가 토핑으로 올라가요." },
+        { name: "퓨어 드림 레드뱅쇼", tag: "음료", desc: "퓨어 드림 티에 뱅쇼 베이스를 더하고 오렌지와 사과를 곁들인 무알콜 음료예요. 겨울 한정 메뉴 '퓨어 드림 티'도 다시 나와요." }
+      ],
+      src: { label: "이코노미스트", url: "https://economist.co.kr/article/view/ecn202611100058" },
+      note: "가격과 판매 기간은 기사에 나오지 않았어요" }
   ],
 
   limited: [
@@ -292,9 +286,6 @@ window.FOODYSSEY = {
     { kind: "이벤트", brand: "스타벅스", title: "e-프리퀀시 더블 적립", start: "2026-11-06", end: "2026-11-12", period: "11.6 ~ 11.12",
       desc: "리워드 회원이 제조 음료를 사면 스티커를 2개씩 줘요. 미션 음료 조건은 그대로 채워야 해요. 추가 증정품인 북 커버는 11월 19일부터 예약할 수 있어요.",
       src: { label: "스타데일리뉴스(네이트)", url: "https://news.nate.com/view/20261105n05032" } },
-    { kind: "이벤트", brand: "스타벅스", title: "대한민국 쓱데이 프로모션", start: "2026-10-30", end: "2026-11-08", period: "10.30 ~ 11.8",
-      desc: "쓱데이 한정 상품을 팔고, 스타벅스 비아 7종은 2+1이에요. 오프라인은 11월 2일까지 쓱데이 리유저블백, 3일부터 베어리스타 파우치를 줘요(소진 시 종료).",
-      src: { label: "디스커버리뉴스", url: "https://www.discoverynews.kr/news/articleView.html?idxno=1105349" } },
     { kind: "이벤트", brand: "스타벅스", title: "수능 응원 기획전", end: "2026-11-17", period: "~ 11.17(화)",
       desc: "인절미 찰떡파이, 쫀득 마롱 찰떡 세트, 클로버 틴 초콜릿 같은 수능 응원 제품을 모았어요. 스타벅스 앱 온라인 스토어, 카카오톡 선물하기, 무신사에서 구매 금액별 할인 쿠폰과 추가 별 적립을 줘요.",
       src: { label: "코리아포스트", url: "https://www.koreapost.co.kr/news/articleView.html?idxno=89910" } },
