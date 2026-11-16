@@ -265,8 +265,23 @@ ${jsonld.map((j) => `<script type="application/ld+json">${JSON.stringify(j).repl
 <header><div class="wrap"><a class="logo" href="/"><span class="logo-name">푸디세이</span><span class="logo-sub"><span class="logo-en" lang="en">Food Odyssey</span><small>새 메뉴를 찾아 떠나는 여정</small></span></a><nav><a href="/#new">신상</a><a href="/#limited">한정</a><a href="/season/christmas">연말</a><a href="/guide/">가이드</a><a href="/updates">업데이트</a><button class="theme-btn" id="theme-btn" type="button" aria-label="다크모드 켜기"><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button></nav></div></header>
 `;
 }
+// '내 근처 매장 찾기'(2026-11-16 마케터 제안, 사장님 승인): 네이버 지도 검색을 새 창으로 여는 링크예요. 위치 권한·지도 임베드·API 키 없이, 누른 횟수만 GA4 이벤트 store_find로 세요.
+const FEW_STORES = new Set(['성심당']);
+function storeFind(brand, pageType) {
+  const label = FEW_STORES.has(brand) ? `${esc(brand)} 매장 위치 보기` : `내 근처 ${esc(brand)} 매장 찾기`;
+  const pin = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>';
+  return `<p class="store-find"><a href="https://map.naver.com/p/search/${encodeURIComponent(brand)}" target="_blank" rel="noopener" data-store-find="${esc(brand)}" data-page-type="${esc(pageType)}">${pin}<span>${label}</span></a><small>네이버 지도가 새 창으로 열려요</small></p>`;
+}
 function foot() {
   return `<footer><div class="wrap"><p>메뉴와 가격은 매장마다 다를 수 있어요. 주문 전에 브랜드 공식 앱이나 매장에서 한 번 더 확인해 주세요. 푸디세이는 각 브랜드와 관계없는 독립 사이트예요.</p><p class="links"><a href="/">홈</a><a href="/about">소개</a><a href="/guide/">가이드</a><a href="/updates">업데이트 내역</a><a href="/terms">이용약관</a><a href="/privacy">개인정보처리방침</a><a href="/contact">문의</a><a href="/rss.xml">RSS</a></p></div></footer>
+<script>
+document.addEventListener('click', function (e) {
+  var a = e.target.closest && e.target.closest('a[data-store-find]');
+  if (!a) return;
+  try { if (localStorage.getItem('fd_me')) return; } catch (x) {}
+  if (typeof gtag === 'function') gtag('event', 'store_find', { brand: a.getAttribute('data-store-find'), page_type: a.getAttribute('data-page-type') });
+});
+</script>
 <script src="/theme.js"></script>
 </body>
 </html>
@@ -687,7 +702,7 @@ function menuPage(r, all, today) {
   const jsonld = [cr.ld, page];
 
   return head({ title, desc, canonical: SITE + href(menuPath(r)), jsonld, robots: noindexReason(r, st) ? 'noindex,follow' : '' })
-    + `<main><div class="wrap"><article>${cr.html}<p class="kicker">${esc(r.brand)} · ${esc(r.tag)}</p><h1>${esc(h1Text)}</h1>${answerLine}${body}</article></div></main>\n`
+    + `<main><div class="wrap"><article>${cr.html}<p class="kicker">${esc(r.brand)} · ${esc(r.tag)}</p><h1>${esc(h1Text)}</h1>${answerLine}${storeFind(r.brand, 'menu')}${body}</article></div></main>\n`
     + ddayScript() + foot();
 }
 // D-day와 마감 지남은 날마다 바뀌니 브라우저에서 한국 시간으로 다시 계산해요.
@@ -809,7 +824,7 @@ function main() {
       pathName: brandPath(b),
       crumbList: [{ name: '홈', path: '/' }].concat(cat ? [{ name: cat.catName, path: catPath(cat.cat) }] : []).concat([{ name: b, path: brandPath(b) }]),
       groups: groupsFor(list, today),
-      extraHtml: brandSummary(list, today, b) + dataTable(list, today, `${b} 메뉴 한눈에 보기`) + descList(list, today),
+      extraHtml: storeFind(b, 'brand') + brandSummary(list, today, b) + dataTable(list, today, `${b} 메뉴 한눈에 보기`) + descList(list, today),
       extra: cat ? sameCatBrands(all, today, cat.cat, b, cat.catName) : '',
       robots
     });
