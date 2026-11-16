@@ -964,6 +964,7 @@ function main() {
 
   // 구조화 데이터 린트: 금지 패턴이 있으면 빌드를 실패시켜서 잘못된 페이지가 배포되지 않게 해요.
   autoIsolate();
+  versionAssets();
   const lintRes = require('./lint-jsonld').lint(ROOT, { analytics: true });
   if (lintRes.errs.length) {
     console.error('JSON-LD 린트 실패 ' + lintRes.errs.length + '건');
@@ -1026,6 +1027,21 @@ function autoIsolate() {
   fs.mkdirSync(path.join(ROOT, 'data'), { recursive: true });
   fs.writeFileSync(path.join(ROOT, 'data', 'auto-noindex.json'), JSON.stringify({ generated: UPDATED, note: '데이터 갱신 빌드가 기준 미달로 자동 noindex,follow·사이트맵 제외한 페이지예요. 보강하면 다음 빌드에서 자동으로 색인 대상이 돼요.', pages: list.map((x) => ({ page: x.url, why: x.why })) }, null, 1) + '\n');
   console.log('자동 격리 ' + list.length + '건(noindex,follow, 사이트맵·RSS 제외): ' + (list.map((x) => x.url + ' [' + x.why + ']').join(', ') || '없음'));
+}
+
+
+// 스타일 캐시 무효화(2026-11-16): pages.css가 바뀌면 모든 페이지의 링크 주소(?v=해시)가 함께 바뀌어서, 브라우저·CDN에 남은 옛 CSS가 새 HTML에 쓰이지 않게 해요.
+function versionAssets() {
+  const crypto = require('crypto');
+  const v = crypto.createHash('md5').update(fs.readFileSync(path.join(ROOT, 'pages.css'))).digest('hex').slice(0, 8);
+  const walkH = (d, out) => { fs.readdirSync(d, { withFileTypes: true }).forEach((e) => { if (['.git', 'node_modules', 'scripts', 'data'].includes(e.name)) return; const f = path.join(d, e.name); if (e.isDirectory()) walkH(f, out); else if (e.name.endsWith('.html')) out.push(f); }); return out; };
+  let n = 0;
+  walkH(ROOT, []).forEach((f) => {
+    const h = fs.readFileSync(f, 'utf8');
+    const u = h.replace(/href="\/pages\.css(?:\?v=[0-9a-f]+)?"/g, 'href="/pages.css?v=' + v + '"');
+    if (u !== h) { fs.writeFileSync(f, u); n++; }
+  });
+  console.log('스타일 버전 ?v=' + v + ' 적용 ' + n + '개 페이지');
 }
 
 main();
