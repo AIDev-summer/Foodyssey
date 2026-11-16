@@ -27,8 +27,8 @@ const BRAND_CAT = {
 
 // 가이드(/guide) 글: data.js 근거로 손으로 쓴 고정 HTML이라 sitemap에만 메타를 등록해요.
 const GUIDES = [
-  { slug: 'starbucks-frequency', updated: '2026-11-05', title: '스타벅스 프리퀀시 빨리 모으는 법과 미션음료 정리', desc: '겨울 e-프리퀀시 적립 조건과 증정품을 기사 근거로 정리했어요.' },
-  { slug: 'christmas-cake-preorder', updated: '2026-11-05', title: '크리스마스 케이크 사전예약 할인 받는 법(브랜드별 예약 기간)', desc: '파스쿠찌·스타벅스 케이크 예약 기간과 할인율을 비교해요.' },
+  { slug: 'starbucks-frequency', updated: '2026-11-16', title: '스타벅스 겨울 e-프리퀀시 2026 정리: 17잔 조건·미션 음료·증정품·예약 요령', desc: '17잔 조건, 미션 음료 8가지, 증정품과 추가 증정품, 예약 취소 대기·적립 주의사항을 기사 근거로 정리했어요.' },
+  { slug: 'christmas-cake-preorder', updated: '2026-11-16', title: '크리스마스 케이크 사전예약 비교 2026: 브랜드별 할인·예약 마감·수령 기간', desc: '파바·뚜레쥬르·투썸·배라·스타벅스·파스쿠찌의 사전예약 할인, 마감일, 수령 기간을 마감 임박 순으로 비교했어요.' },
   { slug: 'bigarch-duration', updated: '2026-11-08', title: '맥도날드 빅아치 판매기간·가격·크기 정리(종료일 계산)', desc: '빅아치 출시일·가격·무게와 한정 판매 4~6주로 계산한 종료 예상일을 기사 근거로 정리했어요.' },
   { slug: 'limited-menu-duration', updated: '', generated: true, title: '한정 메뉴·이벤트는 며칠 동안 할까: 푸디세이 기록으로 계산한 판매 기간', desc: '시작일과 종료일이 기사에 나온 항목만 골라 기간을 계산하고 브랜드별로 정리했어요.' },
   { slug: 'price-distribution', updated: '', generated: true, title: '프랜차이즈 신메뉴 가격대 분포: 푸디세이 기록 기준', desc: '가격이 기사에 확인된 신메뉴를 가격대별로 나눠 업종별 범위까지 계산했어요.' }
@@ -617,6 +617,11 @@ function menuPage(r, all, today) {
   if (r.catName) facts.push(['업종', `<a href="${href(catPath(r.cat))}">${esc(r.catName)}</a>`]);
   facts.push(['구분', esc(r.tag)]);
   if (r.season && SEASONS[r.season]) facts.push(['모아보기', `<a href="${href(seasonPath(r.season))}">${esc(SEASONS[r.season].name)} 메뉴 전체</a>`]);
+  if (r.season === 'christmas') {
+    const cmp = [['<a href="/guide/christmas-cake-preorder">크리스마스 케이크 사전예약 비교(브랜드별 할인·마감)</a>']];
+    if (/프리퀀시/.test(r.name + ' ' + (r.title || ''))) cmp.unshift(['<a href="/guide/starbucks-frequency">스타벅스 겨울 e-프리퀀시 정리</a>']);
+    facts.push(['같은 시즌 비교', cmp.map((x) => x[0]).join(' · ')]);
+  }
   if (r.price) facts.push(['가격', `<b class="mono">${esc(r.price)}</b>${r.priceNote ? ` <small>${esc(r.priceNote)}</small>` : ''}`]);
   if (r.kind === 'new' && r.date) facts.push([/발표/.test(r.when) ? '발표일' : '출시일', esc(fmtDate(r.date)) + (r.when && /[가-힣]/.test(r.when.replace(/출시|발표/g, '')) ? ` <small>(${esc(r.when)})</small>` : '')]);
   if (r.kind !== 'new') {
@@ -822,7 +827,7 @@ function main() {
       title: S.title(today.slice(0, 4)), h1: S.h1, kicker: '시즌', intro: S.intro, pathName: seasonPath(sid),
       crumbList: [{ name: '홈', path: '/' }, { name: S.name, path: seasonPath(sid) }],
       groups: groupsFor(list, today),
-      extraHtml: sid === 'christmas' ? christmasCompareTable(list) : ''
+      extraHtml: sid === 'christmas' ? '<div class="notice">예약 마감이 가까운 순으로 브랜드별 할인·수령 기간을 비교했어요: <a href="/guide/christmas-cake-preorder">크리스마스 케이크 사전예약 비교</a> · <a href="/guide/starbucks-frequency">스타벅스 겨울 e-프리퀀시 정리</a></div>' + christmasCompareTable(list) : ''
     });
     fs.writeFileSync(path.join(ROOT, 'season', sid + '.html'), page);
     urls.push({ loc: seasonPath(sid), lastmod: UPDATED, pri: '0.7' });

@@ -55,14 +55,6 @@
   "reason": "법정·안내 문구 페이지라 분량 기준 예외(연락처·운영 정보는 최신 유지)",
   "due": "상시"
  },
- "guide/christmas-cake-preorder.html": {
-  "reason": "본문 한글 698자, 정보형 800자 기준 사실 근거로 보강 중",
-  "due": "2026-11-14"
- },
- "guide/starbucks-frequency.html": {
-  "reason": "본문 한글 779자, 정보형 800자 기준 사실 근거로 보강 중",
-  "due": "2026-11-14"
- },
  "cat/pizza.html": {
   "reason": "본문 한글 670자, 정보형 800자 기준 사실 근거로 보강 중",
   "due": "2026-11-14"
