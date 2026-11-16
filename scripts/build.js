@@ -601,15 +601,26 @@ function menuPage(r, all, today) {
   const st = status(r, today);
   const label = statusLabel(r, st);
   const isEvent = r.kind === 'event';
+  // 검색 의도형 제목(2026-11-16 네이버 CTR 개선): 기간 정보가 있는 항목만 '언제까지?'를 붙이고, 없으면 억지로 넣지 않아요.
+  const hasPeriod = r.kind !== 'new' && !!(r.end || r.endLate || r.period || r.open);
+  const priceTag = r.price || (r.lines && r.lines.length) ? '·가격' : '';
   const title = isEvent
-    ? `${r.brand} ${r.name} 기간·참여 방법 | 푸디세이`
-    : `${r.brand} ${r.name} 가격·${r.kind === 'new' ? '출시일' : '판매 기간'} | 푸디세이`;
+    ? (r.end ? `${r.brand} ${r.name} 언제까지? 기간·참여 방법 | 푸디세이` : `${r.brand} ${r.name} 기간·참여 방법 | 푸디세이`)
+    : (r.kind === 'new' ? `${r.brand} ${r.name} 신메뉴 출시일·가격 | 푸디세이`
+      : (hasPeriod ? `${r.brand} ${r.name} 언제까지? 판매 기간${priceTag || '·가격'} | 푸디세이` : `${r.brand} ${r.name} 가격·판매 기간 | 푸디세이`));
+  const h1Text = isEvent ? `${r.brand} ${r.name} ${r.end ? '기간' : '기간·참여 방법'}` : (r.kind === 'new' ? `${r.brand} ${r.name}` : (hasPeriod ? `${r.brand} ${r.name} 판매 기간·가격` : `${r.brand} ${r.name}`));
+  const priceTxt = r.price ? r.price : (r.lines && r.lines.length ? r.lines.map((l) => l[0] + ' ' + l[1]).join(', ') : '');
+  const answerBits = [];
+  if (r.kind !== 'new') { if (r.period) answerBits.push(`판매·진행 기간은 ${r.period}`); }
+  else if (r.date) answerBits.push(`${fmtDate(r.date)} ${/발표/.test(r.when) ? '발표' : '출시'}`);
+  if (!isEvent || priceTxt) answerBits.push(priceTxt ? `가격은 ${priceTxt}` : '가격은 기사에서 확인되지 않았어요');
+  const answerLine = `<p class="answer"><b>한 줄 답:</b> ${esc(r.brand + ' ' + r.name)} — ${esc(answerBits.join(' · '))}${priceTxt ? '' : ''}. 출처는 아래 기사 링크예요.</p>`;
   const descBits = [];
   if (r.price) descBits.push(`가격 ${r.price}`);
   if (r.kind === 'new' && r.date) descBits.push(`${fmtDate(r.date)} ${/발표/.test(r.when) ? '발표' : '출시'}`);
   if (r.kind !== 'new' && r.period) descBits.push(r.period);
   const lead = (r.desc || r.note || '').replace(/\s+/g, ' ');
-  const desc = `${r.brand} ${r.name}${st === 'on' ? '' : '(' + label + ')'} 정보예요. ${descBits.join(', ')}${descBits.length ? '. ' : ''}${lead}`.slice(0, 155);
+  const desc = `${r.brand} ${r.name}${st === 'on' ? '' : '(' + label + ')'} ${isEvent ? '기간·참여 방법' : (hasPeriod ? '판매 기간·가격' : '정보')}: ${descBits.join(', ')}${descBits.length ? '. ' : ''}${lead}`.slice(0, 155);
 
   const facts = [];
   facts.push(['상태', `<span class="badge ${st === 'on' ? 'on' : 'off'}" data-end="${esc(r.endLate || r.end || '')}">${esc(label)}</span>`]);
@@ -676,7 +687,7 @@ function menuPage(r, all, today) {
   const jsonld = [cr.ld, page];
 
   return head({ title, desc, canonical: SITE + href(menuPath(r)), jsonld, robots: noindexReason(r, st) ? 'noindex,follow' : '' })
-    + `<main><div class="wrap"><article>${cr.html}<p class="kicker">${esc(r.brand)} · ${esc(r.tag)}</p><h1>${esc(r.name)}</h1>${body}</article></div></main>\n`
+    + `<main><div class="wrap"><article>${cr.html}<p class="kicker">${esc(r.brand)} · ${esc(r.tag)}</p><h1>${esc(h1Text)}</h1>${answerLine}${body}</article></div></main>\n`
     + ddayScript() + foot();
 }
 // D-day와 마감 지남은 날마다 바뀌니 브라우저에서 한국 시간으로 다시 계산해요.
@@ -706,6 +717,17 @@ function listPage({ title, h1, kicker, intro, pathName, crumbList, groups, extra
 }
 // 크리스마스 시즌 페이지용: 브랜드별 케이크 가격·사전예약 마감일 비교표.
 // 기사에서 확인한 값만 쓰고, 가격이 확인되지 않으면 추측하지 않고 "가격 미공개"로 적어요.
+// 업종 페이지 '이번 주 신메뉴 요약표'(2026-11-16 네이버 노출 검색어 대응): 최근 10일 안에 나온 신메뉴만 브랜드별로 정리해요.
+function catWeekTable(list, today, catName) {
+  const from = new Date(Date.parse(today) - 10 * 86400000).toISOString().slice(0, 10);
+  const rows = list.filter((r) => r.kind === 'new' && r.date && r.date >= from && r.date <= today && status(r, today) === 'on')
+    .sort((a, c) => c.date.localeCompare(a.date) || a.brand.localeCompare(c.brand, 'ko'));
+  if (rows.length < 2) return '';
+  const heads = ['브랜드', '메뉴', '출시·발표일', '가격', '출처'];
+  const body = rows.map((r) => trow([esc(r.brand), `<a href="${href(menuPath(r))}">${esc(r.name)}</a>`, esc(mdw(r.date)), esc(r.price || '확인 안 됨'), r.src ? `<a href="${esc(r.src.url)}" target="_blank" rel="noopener nofollow">${esc(r.src.label)}</a>` : '-'], heads)).join('');
+  return `<h2>이번 주 ${esc(catName)} 신메뉴 한눈에</h2><p>최근 10일(${esc(mdw(from))}~${esc(mdw(today))}) 안에 나온 ${rows.length}개를 브랜드별로 모았어요. 가격은 기사에 나온 값만 적었고, 없으면 “확인 안 됨”이에요.</p><div class="tbl"><table class="compare"><thead><tr>${heads.map((h) => `<th>${h}</th>`).join('')}</tr></thead><tbody>${body}</tbody></table></div>`;
+}
+
 function christmasCompareTable(list) {
   const brands = [...new Set(list.map((r) => r.brand))];
   const rows = brands.map((b) => {
@@ -803,11 +825,11 @@ function main() {
     const list = all.filter((r) => r.cat === c.id);
     const bs = [...new Set(list.map((r) => r.brand))];
     const mkCat = (robots) => listPage({
-      title: `${c.name} 프랜차이즈 신메뉴·한정 메뉴 | 푸디세이`, h1: `${c.name} 신메뉴·한정 메뉴`, kicker: '업종',
+      title: `${c.name} 신메뉴 ${Number(today.slice(5, 7))}월 최신: 브랜드별 이번 주 신상·한정 메뉴 | 푸디세이`, h1: `${c.name} 신메뉴·한정 메뉴`, kicker: '업종',
       intro: `${bs.join(', ')} 등 ${c.name} 프랜차이즈의 새 메뉴와 기간 한정 메뉴를 최근 순으로 모았어요.`,
       pathName: catPath(c.id), crumbList: [{ name: '홈', path: '/' }, { name: c.name, path: catPath(c.id) }],
       groups: groupsFor(list, today),
-      extraHtml: catSummary(list, today, c.name) + descList(list, today) + dataTable(list.map((r) => Object.assign({}, r, { brandShow: true })), today, `${c.name} 메뉴 한눈에 보기`),
+      extraHtml: catSummary(list, today, c.name) + catWeekTable(list, today, c.name) + descList(list, today) + dataTable(list.map((r) => Object.assign({}, r, { brandShow: true })), today, `${c.name} 메뉴 한눈에 보기`),
       extra: bs.length ? `<h2>${esc(c.name)} 브랜드</h2><p class="explore">${bs.map((x) => `<a href="${href(brandPath(x))}">${esc(x)}</a>`).join(' · ')}</p>` : '',
       robots
     });
