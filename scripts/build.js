@@ -743,6 +743,11 @@ function catWeekTable(list, today, catName) {
   return `<h2>이번 주 ${esc(catName)} 신메뉴 한눈에</h2><p>최근 10일(${esc(mdw(from))}~${esc(mdw(today))}) 안에 나온 ${rows.length}개를 브랜드별로 모았어요. 가격은 기사에 나온 값만 적었고, 없으면 “확인 안 됨”이에요.</p><div class="tbl"><table class="compare"><thead><tr>${heads.map((h) => `<th>${h}</th>`).join('')}</tr></thead><tbody>${body}</tbody></table></div>`;
 }
 
+// 표 안에 넣는 작은 '매장 찾기' 링크(마케터 요청 2026-11-16): storeFind와 같은 네이버 지도 검색·GA4 store_find 이벤트를 써요.
+function storeLink(brand, pageType) {
+  const pin = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>';
+  return `<a class="store-link" href="https://map.naver.com/p/search/${encodeURIComponent(brand)}" target="_blank" rel="noopener" data-store-find="${esc(brand)}" data-page-type="${esc(pageType)}">${pin}<span>매장 찾기</span></a>`;
+}
 function christmasCompareTable(list) {
   const brands = [...new Set(list.map((r) => r.brand))];
   const rows = brands.map((b) => {
@@ -760,7 +765,7 @@ function christmasCompareTable(list) {
   return `<h2>브랜드별 케이크 가격·사전예약 마감일 비교</h2>`
     + `<p class="table-note">가격·마감일은 기사나 브랜드 공식 홈페이지에서 확인한 것만 적었어요. 확인되지 않은 가격은 "가격 미공개"로 표시해요.</p>`
     + `<table class="compare"><thead><tr><th>브랜드</th><th>케이크 종류</th><th>가격</th><th>사전예약 마감</th></tr></thead><tbody>`
-    + rows.map((r) => `<tr><td data-label="브랜드">${esc(r.brand)}</td><td data-label="케이크 종류">${r.count}종</td><td data-label="가격">${esc(r.price)}</td><td data-label="사전예약 마감">${esc(r.deadline)}</td></tr>`).join('')
+    + rows.map((r) => `<tr><td data-label="브랜드">${esc(r.brand)}<br>${storeLink(r.brand, 'season')}</td><td data-label="케이크 종류">${r.count}종</td><td data-label="가격">${esc(r.price)}</td><td data-label="사전예약 마감">${esc(r.deadline)}</td></tr>`).join('')
     + `</tbody></table>`;
 }
 function sameCatBrands(all, today, catId, brand, catName) {
