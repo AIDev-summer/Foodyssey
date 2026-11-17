@@ -9,7 +9,7 @@
 // - start: 기사에 시작·출시일이 나온 한정 항목의 시작일(YYYY-MM-DD). 판매 기간 계산 가이드(/guide/limited-menu-duration)에 쓰여요. 기사에 없으면 넣지 않아요.
 // - pop: 검색량 배수(최근 3일 / 지난 4주). 한정 탭 인기순 정렬에 써요. 없으면 마감순으로 뒤에 놓여요.
 window.FOODYSSEY = {
-  updated: "2026-11-16",
+  updated: "2026-11-17",
   weekLabel: "2026년 11월 셋째 주",
 
   cats: [
@@ -287,6 +287,24 @@ window.FOODYSSEY = {
     { kind: "이벤트", brand: "맘스터치", title: "스낵박스 할인 쿠폰", end: "2026-11-25", period: "~ 11.25",
       desc: "맘스터치 앱에서 스낵박스를 사는 고객에게 할인 쿠폰을 줘요. 11월 25일까지예요.",
       src: { label: "지피코리아", url: "https://www.gpkorea.com/news/articleView.html?idxno=148071" } },
+    { cat: "cafe", brand: "투썸플레이스", when: "11.13 출시", date: "2026-11-13",
+      items: [{ name: "크림탑 스초생", tag: "신제품" }],
+      src: { label: "뉴스와이어", url: "https://www.newswire.co.kr/newsRead.php?no=1046870" },
+      note: "전국 매장에서 팔지만 매장마다 판매 여부가 달라요 · 가격은 기사에 나오지 않았어요" },
+    { cat: "chicken", brand: "60계치킨", when: "11.11 출시", date: "2026-11-11",
+      items: [{ name: "크크크 골드", tag: "신메뉴", desc: "기존 '크크크치킨'을 업그레이드한 신메뉴예요." }],
+      src: { label: "서플(머니투데이)", url: "https://supple.kr/news/cmwbwrki7fcnnal9pli3atxh8" },
+      note: "가격은 기사에 나오지 않았어요" }
+  ],
+
+  limited: [
+    { kind: "이벤트", brand: "투썸플레이스", title: "크림탑 스초생 사전예약 20% 쿠폰", start: "2026-11-11", end: "2026-11-18", period: "11.11 ~ 11.18",
+      desc: "투썸하트 앱에서 사전예약하면 20% 할인 쿠폰을 선착순으로 줘요. 사전예약한 케이크는 12월 1일부터 31일 사이 원하는 날 받아요.",
+      src: { label: "뉴스와이어", url: "https://www.newswire.co.kr/newsRead.php?no=1046870" } },
+    { kind: "이벤트", brand: "60계치킨", title: "크크크 골드 리뷰 이벤트", start: "2026-11-11", end: "2026-12-31", period: "11.11 ~ 12.31",
+      desc: "신메뉴를 맛본 뒤 SNS나 블로그에 리뷰를 쓰면 응모돼요. 추첨으로 20명에게 50만 원씩 현금을 줘요.",
+      src: { label: "서플(머니투데이)", url: "https://supple.kr/news/cmwbwrki7fcnnal9pli3atxh8" } },
+
     { kind: "이벤트", brand: "파스쿠찌", title: "네이버페이 결제 40% 혜택", start: "2026-11-11", end: "2026-11-15", period: "11.11 ~ 11.15",
       desc: "크리스마스 시즌 음료 출시를 기념해 전 제품을 네이버페이로 1만 원 이상 결제하면 40% 혜택을 줘요.",
       src: { label: "푸드투데이", url: "https://www.foodtoday.or.kr/news/article.html?no=209327" } },
@@ -327,9 +345,6 @@ window.FOODYSSEY = {
       desc: "오후 2시부터 6시까지 6개 메뉴를 할인해 줘요. 치킨버거 18%, 아메리카노 38%, 치즈스틱 24%, 토네이도(초코쿠키) 21%, 양념너겟 26%, 포테이토 19%예요.",
       src: { label: "뷰어스", url: "https://theviewers.co.kr/View.aspx?No=4280225" } },
     
-    { kind: "메뉴", brand: "KFC", title: "닭껍질튀김", end: "2026-11-09", period: "10.13 발표 · ~ 11.9(월)",
-      desc: "2019년 처음 나온 뒤 시즌마다 돌아오는 인기 사이드예요. 이번에는 양을 기존의 2배로 늘렸고, 소스는 살사 대신 스파이시 마요가 나와요. 판매가 끝난 뒤에도 재출시를 바라는 목소리가 이어졌다고 KFC가 밝혔어요.",
-      src: { label: "뉴스밸런스", url: "https://www.newsbalance.co.kr/news/view/1065609452679016" } },
     { kind: "메뉴", brand: "배스킨라빈스", title: "도우와줘요 호빵맨", open: "11월 이달의 맛", period: "10.30 발표 · 종료일 미정",
       desc: "호빵맨과 함께 만든 11월 이달의 맛이에요. 이름은 호빵맨의 대표 대사 ‘도와줘요 호빵맨!’에 쿠키도우의 ‘도우’를 합쳐 지었어요. 호빵맨과 친구들 캐릭터를 쓴 아이스크림 케이크 2종과, 호빵맨 캐릭터를 입힌 리유저블 컵에 담은 음료(아이스 아메리카노, 납작복숭아 아이스티)도 함께 나와요. 종료일은 기사에 나오지 않았어요.",
       src: { label: "주간한국", url: "https://weekly.hankooki.com/news/articleView.html?idxno=7191453" } },
