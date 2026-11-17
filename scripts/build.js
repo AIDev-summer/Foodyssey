@@ -975,7 +975,7 @@ function main() {
   fs.writeFileSync(idxFile, idx);
 
   // 구조화 데이터 린트: 금지 패턴이 있으면 빌드를 실패시켜서 잘못된 페이지가 배포되지 않게 해요.
-  autoIsolate();
+  autoIsolate(releaseHold(all, today));
   versionAssets();
   const lintRes = require('./lint-jsonld').lint(ROOT, { analytics: true });
   if (lintRes.errs.length) {
@@ -1012,7 +1012,35 @@ function main() {
 // 자동 격리(2026-11-12 PULSE 지시): 데이터 갱신으로 새로 생긴 메뉴·브랜드·업종 페이지가 가치 기준에 못 미치면 빌드를 멈추지 않고
 // 그 페이지만 noindex,follow + 사이트맵·RSS 제외로 돌려요. 기준은 낮추지 않았고, 보강돼 기준을 넘으면 다음 빌드에서 자동으로 색인 대상으로 돌아와요.
 // 격리 목록은 빌드 로그와 data/auto-noindex.json에 남겨요(관리자가 보강 대상으로 확인).
-function autoIsolate() {
+// 하루 새 메뉴 페이지 한도(2026-11 PULSE 승인): 같은 틀의 페이지가 한꺼번에 색인 대상이 되지 않게, 새로 생긴 메뉴 페이지는 하루 5쪽까지만 색인 대상으로 풀어요.
+// 이미 라이브였던 페이지는 처음 이 기능을 켠 날 seed로 기록해 한도에 세지 않아요. 한도를 넘는 새 페이지는 release 날짜가 뒤로 밀려 그날까지 noindex,follow·사이트맵 제외예요.
+const DAILY_NEW_LIMIT = 5;
+function releaseHold(all, today) {
+  const f = path.join(ROOT, 'data', 'index-release.json');
+  let m = { dailyLimit: DAILY_NEW_LIMIT, release: {} };
+  try { m = JSON.parse(fs.readFileSync(f, 'utf8')); } catch (e) {}
+  const first = !Object.keys(m.release || {}).length;
+  m.dailyLimit = DAILY_NEW_LIMIT;
+  const live = all.filter((r) => !noindexReason(r, status(r, today)));
+  const count = {};
+  Object.values(m.release).forEach((x) => { if (!x.seed) count[x.date] = (count[x.date] || 0) + 1; });
+  live.slice().sort((a, b) => String(a.firstSeen || '').localeCompare(String(b.firstSeen || '')) || a.slug.localeCompare(b.slug)).forEach((r) => {
+    if (m.release[r.slug]) return;
+    if (first) { m.release[r.slug] = { date: r.firstSeen || today, seed: true }; return; }
+    let d = r.firstSeen && r.firstSeen > today ? r.firstSeen : today;
+    if (r.firstSeen && r.firstSeen < today) d = today;
+    while ((count[d] || 0) >= DAILY_NEW_LIMIT) d = new Date(Date.parse(d) + 86400000).toISOString().slice(0, 10);
+    count[d] = (count[d] || 0) + 1;
+    m.release[r.slug] = { date: d };
+  });
+  const hold = [];
+  live.forEach((r) => { const x = m.release[r.slug]; if (x && x.date > today) hold.push({ rel: 'menu/' + r.slug + '.html', url: menuPath(r), why: '하루 새 페이지 한도(' + DAILY_NEW_LIMIT + '쪽): ' + x.date + '에 색인 대상이 돼요' }); });
+  fs.mkdirSync(path.join(ROOT, 'data'), { recursive: true });
+  fs.writeFileSync(f, JSON.stringify(m, null, 1) + '\n');
+  return hold;
+}
+
+function autoIsolate(extraHold) {
   const qr = require('./quality-report');
   const q = qr.run(ROOT);
   let ex = {};
@@ -1022,6 +1050,7 @@ function autoIsolate() {
     if (r.type === 'menu' && r.uniqueChars < 40) list.push({ rel: r.rel, url: r.url, why: '이 페이지만의 문장 ' + r.uniqueChars + '자(40자 미만)' });
     else if ((r.type === 'brand' || r.type === 'cat') && r.hangul < qr.VALUE_MIN_HANGUL && !ex[r.rel]) list.push({ rel: r.rel, url: r.url, why: '본문 한글 ' + r.hangul + '자(' + qr.VALUE_MIN_HANGUL + '자 미만)' });
   });
+  (extraHold || []).forEach((h) => { if (!list.some((x) => x.rel === h.rel)) list.push(h); });
   let sm = fs.readFileSync(path.join(ROOT, 'sitemap.xml'), 'utf8');
   let rss = '';
   try { rss = fs.readFileSync(path.join(ROOT, 'rss.xml'), 'utf8'); } catch (e) {}
