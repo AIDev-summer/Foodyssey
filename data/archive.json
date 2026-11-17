@@ -1,4 +1,57 @@
 {
+ "60계치킨-크크크-골드": {
+  "kind": "new",
+  "brand": "60계치킨",
+  "cat": "chicken",
+  "name": "크크크 골드",
+  "tag": "신메뉴",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-11-11",
+  "when": "11.11 출시",
+  "note": "가격은 기사에 나오지 않았어요",
+  "season": "",
+  "desc": "기존 '크크크치킨'을 업그레이드한 신메뉴예요.",
+  "specs": null,
+  "priceNote": "",
+  "group": null,
+  "src": {
+   "label": "서플(머니투데이)",
+   "url": "https://supple.kr/news/cmwbwrki7fcnnal9pli3atxh8"
+  },
+  "slug": "60계치킨-크크크-골드",
+  "catName": "치킨",
+  "firstSeen": "2026-11-18"
+ },
+ "60계치킨-크크크-골드-리뷰-이벤트": {
+  "kind": "event",
+  "brand": "60계치킨",
+  "cat": "chicken",
+  "name": "크크크 골드 리뷰 이벤트",
+  "tag": "이벤트",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "start": "2026-11-11",
+  "end": "2026-12-31",
+  "endLate": "",
+  "open": "",
+  "period": "11.11 ~ 12.31",
+  "desc": "신메뉴를 맛본 뒤 SNS나 블로그에 리뷰를 쓰면 응모돼요. 추첨으로 20명에게 50만 원씩 현금을 줘요.",
+  "specs": null,
+  "priceNote": "",
+  "lines": null,
+  "cups": null,
+  "src": {
+   "label": "서플(머니투데이)",
+   "url": "https://supple.kr/news/cmwbwrki7fcnnal9pli3atxh8"
+  },
+  "season": "",
+  "slug": "60계치킨-크크크-골드-리뷰-이벤트",
+  "catName": "치킨",
+  "firstSeen": "2026-11-18"
+ },
  "bhc-알싹킹": {
   "kind": "new",
   "brand": "bhc",
@@ -157,6 +210,126 @@
   "slug": "kfc-둠-시리즈-5종",
   "catName": "버거",
   "firstSeen": "2026-11-12"
+ },
+ "공차-그리핀도르-딸기-밀크티": {
+  "kind": "new",
+  "brand": "공차",
+  "cat": "cafe",
+  "name": "그리핀도르 딸기 밀크티",
+  "tag": "음료",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-11-17",
+  "when": "11.17 발표 · 해리포터 4종",
+  "note": "해리포터 시리즈 협업이에요. 포장 주문 시 기숙사 디자인 컵홀더를 주고, 18일부터 키링 등 굿즈를 선보여요 · 가격은 기사에 나오지 않았어요",
+  "season": "",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "그리핀도르 딸기 밀크티",
+   "슬리데린 그린 밀크티",
+   "레번클로 캐모마일티",
+   "후플푸프 망고&페어티"
+  ],
+  "src": {
+   "label": "스마트비즈(네이트)",
+   "url": "https://news.nate.com/view/20261117n31032"
+  },
+  "slug": "공차-그리핀도르-딸기-밀크티",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-11-18"
+ },
+ "공차-레번클로-캐모마일티": {
+  "kind": "new",
+  "brand": "공차",
+  "cat": "cafe",
+  "name": "레번클로 캐모마일티",
+  "tag": "음료",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-11-17",
+  "when": "11.17 발표 · 해리포터 4종",
+  "note": "해리포터 시리즈 협업이에요. 포장 주문 시 기숙사 디자인 컵홀더를 주고, 18일부터 키링 등 굿즈를 선보여요 · 가격은 기사에 나오지 않았어요",
+  "season": "",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "그리핀도르 딸기 밀크티",
+   "슬리데린 그린 밀크티",
+   "레번클로 캐모마일티",
+   "후플푸프 망고&페어티"
+  ],
+  "src": {
+   "label": "스마트비즈(네이트)",
+   "url": "https://news.nate.com/view/20261117n31032"
+  },
+  "slug": "공차-레번클로-캐모마일티",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-11-18"
+ },
+ "공차-슬리데린-그린-밀크티": {
+  "kind": "new",
+  "brand": "공차",
+  "cat": "cafe",
+  "name": "슬리데린 그린 밀크티",
+  "tag": "음료",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-11-17",
+  "when": "11.17 발표 · 해리포터 4종",
+  "note": "해리포터 시리즈 협업이에요. 포장 주문 시 기숙사 디자인 컵홀더를 주고, 18일부터 키링 등 굿즈를 선보여요 · 가격은 기사에 나오지 않았어요",
+  "season": "",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "그리핀도르 딸기 밀크티",
+   "슬리데린 그린 밀크티",
+   "레번클로 캐모마일티",
+   "후플푸프 망고&페어티"
+  ],
+  "src": {
+   "label": "스마트비즈(네이트)",
+   "url": "https://news.nate.com/view/20261117n31032"
+  },
+  "slug": "공차-슬리데린-그린-밀크티",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-11-18"
+ },
+ "공차-후플푸프-망고-페어티": {
+  "kind": "new",
+  "brand": "공차",
+  "cat": "cafe",
+  "name": "후플푸프 망고&페어티",
+  "tag": "음료",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-11-17",
+  "when": "11.17 발표 · 해리포터 4종",
+  "note": "해리포터 시리즈 협업이에요. 포장 주문 시 기숙사 디자인 컵홀더를 주고, 18일부터 키링 등 굿즈를 선보여요 · 가격은 기사에 나오지 않았어요",
+  "season": "",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "그리핀도르 딸기 밀크티",
+   "슬리데린 그린 밀크티",
+   "레번클로 캐모마일티",
+   "후플푸프 망고&페어티"
+  ],
+  "src": {
+   "label": "스마트비즈(네이트)",
+   "url": "https://news.nate.com/view/20261117n31032"
+  },
+  "slug": "공차-후플푸프-망고-페어티",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-11-18"
  },
  "교촌치킨-웨지고구마-웨지반반": {
   "kind": "new",
@@ -411,6 +584,121 @@
   "slug": "노브랜드버거-진짜-비빔밥-버거",
   "catName": "버거",
   "firstSeen": "2026-10-31"
+ },
+ "더벤티-겨울-시즌-음료-할인": {
+  "kind": "event",
+  "brand": "더벤티",
+  "cat": "cafe",
+  "name": "겨울 시즌 음료 할인",
+  "tag": "이벤트",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "start": "",
+  "end": "2026-11-17",
+  "endLate": "",
+  "open": "",
+  "period": "~ 11.17",
+  "desc": "시즌 음료 2잔을 사거나 신제품과 아메리카노를 세트로 사면 할인해 줘요. 11월 17일까지예요.",
+  "specs": null,
+  "priceNote": "",
+  "lines": null,
+  "cups": null,
+  "src": {
+   "label": "인더뉴스",
+   "url": "https://www.inthenews.co.kr/news/article.html?no=94376"
+  },
+  "season": "",
+  "slug": "더벤티-겨울-시즌-음료-할인",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-11-18"
+ },
+ "더벤티-미드나잇-퍼플-뱅쇼": {
+  "kind": "new",
+  "brand": "더벤티",
+  "cat": "cafe",
+  "name": "미드나잇 퍼플 뱅쇼",
+  "tag": "음료",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-11-11",
+  "when": "11.11 발표",
+  "note": "",
+  "season": "",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "미드나잇 퍼플 뱅쇼",
+   "번트 흑임자 크림 라떼",
+   "번트 흑임자 슈페너"
+  ],
+  "src": {
+   "label": "인더뉴스",
+   "url": "https://www.inthenews.co.kr/news/article.html?no=94376"
+  },
+  "slug": "더벤티-미드나잇-퍼플-뱅쇼",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-11-18"
+ },
+ "더벤티-번트-흑임자-슈페너": {
+  "kind": "new",
+  "brand": "더벤티",
+  "cat": "cafe",
+  "name": "번트 흑임자 슈페너",
+  "tag": "음료",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-11-11",
+  "when": "11.11 발표",
+  "note": "",
+  "season": "",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "미드나잇 퍼플 뱅쇼",
+   "번트 흑임자 크림 라떼",
+   "번트 흑임자 슈페너"
+  ],
+  "src": {
+   "label": "인더뉴스",
+   "url": "https://www.inthenews.co.kr/news/article.html?no=94376"
+  },
+  "slug": "더벤티-번트-흑임자-슈페너",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-11-18"
+ },
+ "더벤티-번트-흑임자-크림-라떼": {
+  "kind": "new",
+  "brand": "더벤티",
+  "cat": "cafe",
+  "name": "번트 흑임자 크림 라떼",
+  "tag": "음료",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-11-11",
+  "when": "11.11 발표",
+  "note": "",
+  "season": "",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "미드나잇 퍼플 뱅쇼",
+   "번트 흑임자 크림 라떼",
+   "번트 흑임자 슈페너"
+  ],
+  "src": {
+   "label": "인더뉴스",
+   "url": "https://www.inthenews.co.kr/news/article.html?no=94376"
+  },
+  "slug": "더벤티-번트-흑임자-크림-라떼",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-11-18"
  },
  "던킨-라즈베리-피스타치오": {
   "kind": "new",
@@ -709,6 +997,34 @@
   "catName": "베이커리",
   "firstSeen": "2026-10-31"
  },
+ "뚜레쥬르-홀리데이-상품-앱-예약-최대-30-혜택": {
+  "kind": "event",
+  "brand": "뚜레쥬르",
+  "cat": "bakery",
+  "name": "홀리데이 상품 앱 예약 최대 30% 혜택",
+  "tag": "이벤트",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "start": "",
+  "end": "2026-12-22",
+  "endLate": "",
+  "open": "",
+  "period": "~ 12.22(화)",
+  "desc": "공식 앱으로 홀리데이 상품 35종을 미리 주문하면 최대 30% 혜택을 줘요. 11월 17일까지 예약하면 추첨으로 한정판 굿즈도 줘요.",
+  "specs": null,
+  "priceNote": "",
+  "lines": null,
+  "cups": null,
+  "src": {
+   "label": "한국경제",
+   "url": "https://www.hankyung.com/article/202611123157g"
+  },
+  "season": "christmas",
+  "slug": "뚜레쥬르-홀리데이-상품-앱-예약-최대-30-혜택",
+  "catName": "베이커리",
+  "firstSeen": "2026-11-18"
+ },
  "뚜레쥬르-흑임자-가나슈-바게트": {
   "kind": "new",
   "brand": "뚜레쥬르",
@@ -887,6 +1203,34 @@
   "slug": "맘스터치-솔티카라멜볼",
   "catName": "버거",
   "firstSeen": "2026-11-02"
+ },
+ "맘스터치-스낵박스-할인-쿠폰": {
+  "kind": "event",
+  "brand": "맘스터치",
+  "cat": "burger",
+  "name": "스낵박스 할인 쿠폰",
+  "tag": "이벤트",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "start": "",
+  "end": "2026-11-25",
+  "endLate": "",
+  "open": "",
+  "period": "~ 11.25",
+  "desc": "맘스터치 앱에서 스낵박스를 사는 고객에게 할인 쿠폰을 줘요. 11월 25일까지예요.",
+  "specs": null,
+  "priceNote": "",
+  "lines": null,
+  "cups": null,
+  "src": {
+   "label": "지피코리아",
+   "url": "https://www.gpkorea.com/news/articleView.html?idxno=148071"
+  },
+  "season": "",
+  "slug": "맘스터치-스낵박스-할인-쿠폰",
+  "catName": "버거",
+  "firstSeen": "2026-11-18"
  },
  "맘스터치-스윗볼박스": {
   "kind": "new",
@@ -1496,6 +1840,34 @@
   "slug": "버거킹-블랙-트러플치즈-버거",
   "catName": "버거",
   "firstSeen": "2026-10-31"
+ },
+ "버거킹-초콜릿-와퍼": {
+  "kind": "limited",
+  "brand": "버거킹",
+  "cat": "burger",
+  "name": "초콜릿 와퍼",
+  "tag": "한정 메뉴",
+  "price": "9,800원",
+  "img": "",
+  "imgFrom": "",
+  "start": "2026-11-19",
+  "end": "",
+  "endLate": "",
+  "open": "수량 소진 시 당일 종료",
+  "period": "11.19 출시 · 성수 플래그십 한정 · 매일 11시부터 한정 수량",
+  "desc": "초콜릿 빵 사이에 브라우니 패티를 넣고 토마토와 양파는 젤리로, 양상추와 피클은 초콜릿으로 표현한 디저트 와퍼예요. 누텔라와 크림치즈 무스, 라즈베리 소스를 더했어요. 서울 성수동 플래그십 매장 ‘플레임그라운드’에서만 팔고, 준비한 수량이 떨어지면 그날 판매를 마쳐요.",
+  "specs": null,
+  "priceNote": "",
+  "lines": null,
+  "cups": null,
+  "src": {
+   "label": "스마트비즈(네이트)",
+   "url": "https://news.nate.com/view/20261117n31032"
+  },
+  "season": "",
+  "slug": "버거킹-초콜릿-와퍼",
+  "catName": "버거",
+  "firstSeen": "2026-11-18"
  },
  "버거킹-트러플-머쉬룸-시즌-5종": {
   "kind": "limited",
@@ -2228,6 +2600,34 @@
   "catName": "커피·디저트",
   "firstSeen": "2026-11-02"
  },
+ "스타벅스-케이크-예약-10-할인-쿠폰": {
+  "kind": "event",
+  "brand": "스타벅스",
+  "cat": "cafe",
+  "name": "케이크 예약 10% 할인 쿠폰",
+  "tag": "이벤트",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "start": "2026-11-13",
+  "end": "2026-11-26",
+  "endLate": "",
+  "open": "",
+  "period": "11.13 ~ 11.26",
+  "desc": "13일부터 매장 픽업 케이크 예약을 받아요(12월 11일까지). 리워드 회원에게 10% 할인 쿠폰을 줘요. '조선델리 노엘 트리 케이크'는 할인에서 빠져요.",
+  "specs": null,
+  "priceNote": "",
+  "lines": null,
+  "cups": null,
+  "src": {
+   "label": "한국경제",
+   "url": "https://www.hankyung.com/article/202611123157g"
+  },
+  "season": "christmas",
+  "slug": "스타벅스-케이크-예약-10-할인-쿠폰",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-11-18"
+ },
  "스타벅스-클래식-뱅쇼-히비스커스-티": {
   "kind": "new",
   "brand": "스타벅스",
@@ -2321,6 +2721,31 @@
   "slug": "스타벅스-티라미수-크레이프-케이크",
   "catName": "커피·디저트",
   "firstSeen": "2026-11-02"
+ },
+ "우지커피-에스프레소-음료": {
+  "kind": "new",
+  "brand": "우지커피",
+  "cat": "cafe",
+  "name": "에스프레소 음료",
+  "tag": "음료",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-11-18",
+  "when": "11.18 출시 · 겨울 에스프레소 6종",
+  "note": "가격은 기사에 나오지 않았어요",
+  "season": "",
+  "desc": "총 6종이에요. 기본 에스프레소와 크림, 크럼블, 과일 그라니따 등을 활용한 에스프레소 음료예요. 티라미수 같은 디저트도 함께 선보일 예정이에요.",
+  "specs": null,
+  "priceNote": "",
+  "group": null,
+  "src": {
+   "label": "뉴스1(네이버)",
+   "url": "https://n.news.naver.com/article/353/0000057201"
+  },
+  "slug": "우지커피-에스프레소-음료",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-11-18"
  },
  "이디야커피-고단백-저당-베이글": {
   "kind": "new",
@@ -2978,6 +3403,180 @@
   "catName": "커피·디저트",
   "firstSeen": "2026-11-02"
  },
+ "커피빈-구운밤-우롱티-라떼": {
+  "kind": "new",
+  "brand": "커피빈",
+  "cat": "cafe",
+  "name": "구운밤 우롱티 라떼",
+  "tag": "음료",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-11-12",
+  "when": "11.12 출시 · 겨울 시즌 3종",
+  "note": "가격과 판매 기간은 기사에 나오지 않았어요",
+  "season": "",
+  "desc": "구운 밤의 은은한 단맛과 우롱티의 구수한 향을 합친 라떼예요. 따뜻한 음료와 아이스 음료로 주문할 수 있어요.",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "구운밤 우롱티 라떼",
+   "진저브레드 라떼",
+   "퓨어 드림 레드뱅쇼"
+  ],
+  "src": {
+   "label": "이코노미스트",
+   "url": "https://economist.co.kr/article/view/ecn202611100058"
+  },
+  "slug": "커피빈-구운밤-우롱티-라떼",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-11-18"
+ },
+ "커피빈-진저브레드-라떼": {
+  "kind": "new",
+  "brand": "커피빈",
+  "cat": "cafe",
+  "name": "진저브레드 라떼",
+  "tag": "음료",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-11-12",
+  "when": "11.12 출시 · 겨울 시즌 3종",
+  "note": "가격과 판매 기간은 기사에 나오지 않았어요",
+  "season": "",
+  "desc": "진저브레드 쿠키 같은 달콤하고 스파이시한 맛에 에스프레소를 더했어요. 진저브레드맨 모양 버터 쿠키가 토핑으로 올라가요.",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "구운밤 우롱티 라떼",
+   "진저브레드 라떼",
+   "퓨어 드림 레드뱅쇼"
+  ],
+  "src": {
+   "label": "이코노미스트",
+   "url": "https://economist.co.kr/article/view/ecn202611100058"
+  },
+  "slug": "커피빈-진저브레드-라떼",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-11-18"
+ },
+ "커피빈-퓨어-드림-레드뱅쇼": {
+  "kind": "new",
+  "brand": "커피빈",
+  "cat": "cafe",
+  "name": "퓨어 드림 레드뱅쇼",
+  "tag": "음료",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-11-12",
+  "when": "11.12 출시 · 겨울 시즌 3종",
+  "note": "가격과 판매 기간은 기사에 나오지 않았어요",
+  "season": "",
+  "desc": "퓨어 드림 티에 뱅쇼 베이스를 더하고 오렌지와 사과를 곁들인 무알콜 음료예요. 겨울 한정 메뉴 '퓨어 드림 티'도 다시 나와요.",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "구운밤 우롱티 라떼",
+   "진저브레드 라떼",
+   "퓨어 드림 레드뱅쇼"
+  ],
+  "src": {
+   "label": "이코노미스트",
+   "url": "https://economist.co.kr/article/view/ecn202611100058"
+  },
+  "slug": "커피빈-퓨어-드림-레드뱅쇼",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-11-18"
+ },
+ "커피앳웍스-솔티드-크림-카라멜-라떼": {
+  "kind": "new",
+  "brand": "커피앳웍스",
+  "cat": "cafe",
+  "name": "솔티드 크림 카라멜 라떼",
+  "tag": "음료",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-11-11",
+  "when": "11.11 발표",
+  "note": "",
+  "season": "",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "솔티드 크림 카라멜 라떼",
+   "시나몬 플랫화이트",
+   "핑크 레몬 진저티"
+  ],
+  "src": {
+   "label": "인더뉴스",
+   "url": "https://www.inthenews.co.kr/news/article.html?no=94376"
+  },
+  "slug": "커피앳웍스-솔티드-크림-카라멜-라떼",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-11-18"
+ },
+ "커피앳웍스-시나몬-플랫화이트": {
+  "kind": "new",
+  "brand": "커피앳웍스",
+  "cat": "cafe",
+  "name": "시나몬 플랫화이트",
+  "tag": "음료",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-11-11",
+  "when": "11.11 발표",
+  "note": "",
+  "season": "",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "솔티드 크림 카라멜 라떼",
+   "시나몬 플랫화이트",
+   "핑크 레몬 진저티"
+  ],
+  "src": {
+   "label": "인더뉴스",
+   "url": "https://www.inthenews.co.kr/news/article.html?no=94376"
+  },
+  "slug": "커피앳웍스-시나몬-플랫화이트",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-11-18"
+ },
+ "커피앳웍스-핑크-레몬-진저티": {
+  "kind": "new",
+  "brand": "커피앳웍스",
+  "cat": "cafe",
+  "name": "핑크 레몬 진저티",
+  "tag": "음료",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-11-11",
+  "when": "11.11 발표",
+  "note": "",
+  "season": "",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "솔티드 크림 카라멜 라떼",
+   "시나몬 플랫화이트",
+   "핑크 레몬 진저티"
+  ],
+  "src": {
+   "label": "인더뉴스",
+   "url": "https://www.inthenews.co.kr/news/article.html?no=94376"
+  },
+  "slug": "커피앳웍스-핑크-레몬-진저티",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-11-18"
+ },
  "컴포즈커피-pb-j-와플": {
   "kind": "new",
   "brand": "컴포즈커피",
@@ -3012,6 +3611,36 @@
   "catName": "커피·디저트",
   "firstSeen": "2026-11-02"
  },
+ "컴포즈커피-고구마무스-케이크-스무디": {
+  "kind": "new",
+  "brand": "컴포즈커피",
+  "cat": "cafe",
+  "name": "고구마무스 케이크 스무디",
+  "tag": "음료",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-11-17",
+  "when": "11.17 발표 · 옐로우 홀리데이 4종",
+  "note": "11월 30일까지 옐로우 홀리데이 음료 4종 프로모션 · 가격은 기사에 나오지 않았어요",
+  "season": "",
+  "desc": "고구마 케이크의 맛을 음료로 만들었어요.",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "뱅쇼",
+   "토피넛 라떼",
+   "토피넛 카페라떼",
+   "고구마무스 케이크 스무디"
+  ],
+  "src": {
+   "label": "비욘드포스트",
+   "url": "https://www.beyondpost.co.kr/view.php?ud=20261117093203445246a9e4dd7f_30"
+  },
+  "slug": "컴포즈커피-고구마무스-케이크-스무디",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-11-18"
+ },
  "컴포즈커피-딸기잼크림-와플": {
   "kind": "new",
   "brand": "컴포즈커피",
@@ -3045,6 +3674,36 @@
   "slug": "컴포즈커피-딸기잼크림-와플",
   "catName": "커피·디저트",
   "firstSeen": "2026-11-02"
+ },
+ "컴포즈커피-뱅쇼": {
+  "kind": "new",
+  "brand": "컴포즈커피",
+  "cat": "cafe",
+  "name": "뱅쇼",
+  "tag": "음료",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-11-17",
+  "when": "11.17 발표 · 옐로우 홀리데이 4종",
+  "note": "11월 30일까지 옐로우 홀리데이 음료 4종 프로모션 · 가격은 기사에 나오지 않았어요",
+  "season": "",
+  "desc": "과일의 새콤달콤한 맛에 시나몬 향을 더한 음료예요.",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "뱅쇼",
+   "토피넛 라떼",
+   "토피넛 카페라떼",
+   "고구마무스 케이크 스무디"
+  ],
+  "src": {
+   "label": "비욘드포스트",
+   "url": "https://www.beyondpost.co.kr/view.php?ud=20261117093203445246a9e4dd7f_30"
+  },
+  "slug": "컴포즈커피-뱅쇼",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-11-18"
  },
  "컴포즈커피-솔티크림-와플": {
   "kind": "new",
@@ -3147,6 +3806,34 @@
   "slug": "컴포즈커피-슈-클라우드-와플",
   "catName": "커피·디저트",
   "firstSeen": "2026-11-02"
+ },
+ "컴포즈커피-스노우-민트초코-프라페": {
+  "kind": "limited",
+  "brand": "컴포즈커피",
+  "cat": "cafe",
+  "name": "스노우 민트초코 프라페",
+  "tag": "한정 메뉴",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "start": "2026-11-17",
+  "end": "",
+  "endLate": "",
+  "open": "수량 소진 시 종료",
+  "period": "11.17 출시 · 겨울 한정 · 수량 소진 시 종료",
+  "desc": "민트와 초콜릿에 휘핑크림을 더한 프라페예요. 지난해 민트초코 메뉴가 단종된 뒤 이어진 재출시 요청을 반영했고, 준비한 수량이 소진되면 판매가 끝날 수 있어요.",
+  "specs": null,
+  "priceNote": "",
+  "lines": null,
+  "cups": null,
+  "src": {
+   "label": "비욘드포스트",
+   "url": "https://www.beyondpost.co.kr/view.php?ud=20261117093203445246a9e4dd7f_30"
+  },
+  "season": "",
+  "slug": "컴포즈커피-스노우-민트초코-프라페",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-11-18"
  },
  "컴포즈커피-치즈-딥라떼": {
   "kind": "new",
@@ -3278,6 +3965,66 @@
   "catName": "커피·디저트",
   "firstSeen": "2026-11-02"
  },
+ "컴포즈커피-토피넛-라떼": {
+  "kind": "new",
+  "brand": "컴포즈커피",
+  "cat": "cafe",
+  "name": "토피넛 라떼",
+  "tag": "음료",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-11-17",
+  "when": "11.17 발표 · 옐로우 홀리데이 4종",
+  "note": "11월 30일까지 옐로우 홀리데이 음료 4종 프로모션 · 가격은 기사에 나오지 않았어요",
+  "season": "",
+  "desc": "볶은 견과류와 캐러멜, 버터의 풍미를 조합한 논커피 음료예요.",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "뱅쇼",
+   "토피넛 라떼",
+   "토피넛 카페라떼",
+   "고구마무스 케이크 스무디"
+  ],
+  "src": {
+   "label": "비욘드포스트",
+   "url": "https://www.beyondpost.co.kr/view.php?ud=20261117093203445246a9e4dd7f_30"
+  },
+  "slug": "컴포즈커피-토피넛-라떼",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-11-18"
+ },
+ "컴포즈커피-토피넛-카페라떼": {
+  "kind": "new",
+  "brand": "컴포즈커피",
+  "cat": "cafe",
+  "name": "토피넛 카페라떼",
+  "tag": "음료",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-11-17",
+  "when": "11.17 발표 · 옐로우 홀리데이 4종",
+  "note": "11월 30일까지 옐로우 홀리데이 음료 4종 프로모션 · 가격은 기사에 나오지 않았어요",
+  "season": "",
+  "desc": "에스프레소에 토피넛의 달콤하고 고소한 맛을 더했어요.",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "뱅쇼",
+   "토피넛 라떼",
+   "토피넛 카페라떼",
+   "고구마무스 케이크 스무디"
+  ],
+  "src": {
+   "label": "비욘드포스트",
+   "url": "https://www.beyondpost.co.kr/view.php?ud=20261117093203445246a9e4dd7f_30"
+  },
+  "slug": "컴포즈커피-토피넛-카페라떼",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-11-18"
+ },
  "투썸플레이스-딸기-요거트-프라페": {
   "kind": "new",
   "brand": "투썸플레이스",
@@ -3361,6 +4108,59 @@
   "slug": "투썸플레이스-치즈케이크-빵",
   "catName": "커피·디저트",
   "firstSeen": "2026-11-08"
+ },
+ "투썸플레이스-크림탑-스초생-사전예약-20-쿠폰": {
+  "kind": "event",
+  "brand": "투썸플레이스",
+  "cat": "cafe",
+  "name": "크림탑 스초생 사전예약 20% 쿠폰",
+  "tag": "이벤트",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "start": "2026-11-11",
+  "end": "2026-11-18",
+  "endLate": "",
+  "open": "",
+  "period": "11.11 ~ 11.18",
+  "desc": "투썸하트 앱에서 사전예약하면 20% 할인 쿠폰을 선착순으로 줘요. 사전예약한 케이크는 12월 1일부터 31일 사이 원하는 날 받아요.",
+  "specs": null,
+  "priceNote": "",
+  "lines": null,
+  "cups": null,
+  "src": {
+   "label": "뉴스와이어",
+   "url": "https://www.newswire.co.kr/newsRead.php?no=1046870"
+  },
+  "season": "",
+  "slug": "투썸플레이스-크림탑-스초생-사전예약-20-쿠폰",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-11-18"
+ },
+ "투썸플레이스-크림탑-스초생-크초생": {
+  "kind": "new",
+  "brand": "투썸플레이스",
+  "cat": "cafe",
+  "name": "크림탑 스초생(크초생)",
+  "tag": "디저트",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-11-13",
+  "when": "11.13 출시",
+  "note": "",
+  "season": "",
+  "desc": "대표 케이크 스초생의 새 라인업이에요. 11월 13일부터 전국 매장에서 팔아요.",
+  "specs": null,
+  "priceNote": "",
+  "group": null,
+  "src": {
+   "label": "인더뉴스",
+   "url": "https://www.inthenews.co.kr/news/article.html?no=94376"
+  },
+  "slug": "투썸플레이스-크림탑-스초생-크초생",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-11-18"
  },
  "투썸플레이스-투썸-x-가나디-초코-베리-케이크": {
   "kind": "new",
@@ -4018,5 +4818,160 @@
   "slug": "피자헛-피자설기",
   "catName": "피자",
   "firstSeen": "2026-10-31"
+ },
+ "할리스-군고구마-크림-라떼": {
+  "kind": "new",
+  "brand": "할리스",
+  "cat": "cafe",
+  "name": "군고구마 크림 라떼",
+  "tag": "음료",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-11-11",
+  "when": "11.11 발표 · 겨울 5종",
+  "note": "",
+  "season": "",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "블랙 티라미수 라떼",
+   "군고구마 크림 라떼",
+   "레드 시나몬 뱅쇼",
+   "시그니처 당근 케이크",
+   "클래식 쇼콜라 타르트"
+  ],
+  "src": {
+   "label": "인더뉴스",
+   "url": "https://www.inthenews.co.kr/news/article.html?no=94376"
+  },
+  "slug": "할리스-군고구마-크림-라떼",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-11-18"
+ },
+ "할리스-레드-시나몬-뱅쇼": {
+  "kind": "new",
+  "brand": "할리스",
+  "cat": "cafe",
+  "name": "레드 시나몬 뱅쇼",
+  "tag": "음료",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-11-11",
+  "when": "11.11 발표 · 겨울 5종",
+  "note": "",
+  "season": "",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "블랙 티라미수 라떼",
+   "군고구마 크림 라떼",
+   "레드 시나몬 뱅쇼",
+   "시그니처 당근 케이크",
+   "클래식 쇼콜라 타르트"
+  ],
+  "src": {
+   "label": "인더뉴스",
+   "url": "https://www.inthenews.co.kr/news/article.html?no=94376"
+  },
+  "slug": "할리스-레드-시나몬-뱅쇼",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-11-18"
+ },
+ "할리스-블랙-티라미수-라떼": {
+  "kind": "new",
+  "brand": "할리스",
+  "cat": "cafe",
+  "name": "블랙 티라미수 라떼",
+  "tag": "음료",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-11-11",
+  "when": "11.11 발표 · 겨울 5종",
+  "note": "",
+  "season": "",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "블랙 티라미수 라떼",
+   "군고구마 크림 라떼",
+   "레드 시나몬 뱅쇼",
+   "시그니처 당근 케이크",
+   "클래식 쇼콜라 타르트"
+  ],
+  "src": {
+   "label": "인더뉴스",
+   "url": "https://www.inthenews.co.kr/news/article.html?no=94376"
+  },
+  "slug": "할리스-블랙-티라미수-라떼",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-11-18"
+ },
+ "할리스-시그니처-당근-케이크": {
+  "kind": "new",
+  "brand": "할리스",
+  "cat": "cafe",
+  "name": "시그니처 당근 케이크",
+  "tag": "디저트",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-11-11",
+  "when": "11.11 발표 · 겨울 5종",
+  "note": "",
+  "season": "",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "블랙 티라미수 라떼",
+   "군고구마 크림 라떼",
+   "레드 시나몬 뱅쇼",
+   "시그니처 당근 케이크",
+   "클래식 쇼콜라 타르트"
+  ],
+  "src": {
+   "label": "인더뉴스",
+   "url": "https://www.inthenews.co.kr/news/article.html?no=94376"
+  },
+  "slug": "할리스-시그니처-당근-케이크",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-11-18"
+ },
+ "할리스-클래식-쇼콜라-타르트": {
+  "kind": "new",
+  "brand": "할리스",
+  "cat": "cafe",
+  "name": "클래식 쇼콜라 타르트",
+  "tag": "디저트",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-11-11",
+  "when": "11.11 발표 · 겨울 5종",
+  "note": "",
+  "season": "",
+  "desc": "",
+  "specs": null,
+  "priceNote": "",
+  "group": [
+   "블랙 티라미수 라떼",
+   "군고구마 크림 라떼",
+   "레드 시나몬 뱅쇼",
+   "시그니처 당근 케이크",
+   "클래식 쇼콜라 타르트"
+  ],
+  "src": {
+   "label": "인더뉴스",
+   "url": "https://www.inthenews.co.kr/news/article.html?no=94376"
+  },
+  "slug": "할리스-클래식-쇼콜라-타르트",
+  "catName": "커피·디저트",
+  "firstSeen": "2026-11-18"
  }
 }
