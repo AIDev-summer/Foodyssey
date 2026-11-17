@@ -9,7 +9,7 @@
 // - start: 기사에 시작·출시일이 나온 한정 항목의 시작일(YYYY-MM-DD). 판매 기간 계산 가이드(/guide/limited-menu-duration)에 쓰여요. 기사에 없으면 넣지 않아요.
 // - pop: 검색량 배수(최근 3일 / 지난 4주). 한정 탭 인기순 정렬에 써요. 없으면 마감순으로 뒤에 놓여요.
 window.FOODYSSEY = {
-  updated: "2026-11-17",
+  updated: "2026-11-18",
   weekLabel: "2026년 11월 셋째 주",
 
   cats: [
@@ -277,27 +277,48 @@ window.FOODYSSEY = {
         { name: "퓨어 드림 레드뱅쇼", tag: "음료", desc: "퓨어 드림 티에 뱅쇼 베이스를 더하고 오렌지와 사과를 곁들인 무알콜 음료예요. 겨울 한정 메뉴 '퓨어 드림 티'도 다시 나와요." }
       ],
       src: { label: "이코노미스트", url: "https://economist.co.kr/article/view/ecn202611100058" },
-      note: "가격과 판매 기간은 기사에 나오지 않았어요" }
+      note: "가격과 판매 기간은 기사에 나오지 않았어요" },
+    { cat: "chicken", brand: "60계치킨", when: "11.11 출시", date: "2026-11-11",
+      items: [{ name: "크크크 골드", tag: "신메뉴", desc: "기존 '크크크치킨'을 업그레이드한 신메뉴예요." }],
+      src: { label: "서플(머니투데이)", url: "https://supple.kr/news/cmwbwrki7fcnnal9pli3atxh8" },
+      note: "가격은 기사에 나오지 않았어요" },
+    { cat: "cafe", brand: "컴포즈커피", when: "11.17 발표 · 옐로우 홀리데이 4종", date: "2026-11-17",
+      items: [
+        { name: "뱅쇼", tag: "음료", desc: "과일의 새콤달콤한 맛에 시나몬 향을 더한 음료예요." },
+        { name: "토피넛 라떼", tag: "음료", desc: "볶은 견과류와 캐러멜, 버터의 풍미를 조합한 논커피 음료예요." },
+        { name: "토피넛 카페라떼", tag: "음료", desc: "에스프레소에 토피넛의 달콤하고 고소한 맛을 더했어요." },
+        { name: "고구마무스 케이크 스무디", tag: "음료", desc: "고구마 케이크의 맛을 음료로 만들었어요." }
+      ],
+      src: { label: "비욘드포스트", url: "https://www.beyondpost.co.kr/view.php?ud=20261117093203445246a9e4dd7f_30" },
+      note: "11월 30일까지 옐로우 홀리데이 음료 4종 프로모션 · 가격은 기사에 나오지 않았어요" },
+    { cat: "cafe", brand: "공차", when: "11.17 발표 · 해리포터 4종", date: "2026-11-17",
+      items: [
+        { name: "그리핀도르 딸기 밀크티", tag: "음료" },
+        { name: "슬리데린 그린 밀크티", tag: "음료" },
+        { name: "레번클로 캐모마일티", tag: "음료" },
+        { name: "후플푸프 망고&페어티", tag: "음료" }
+      ],
+      src: { label: "스마트비즈(네이트)", url: "https://news.nate.com/view/20261117n31032" },
+      note: "해리포터 시리즈 협업이에요. 포장 주문 시 기숙사 디자인 컵홀더를 주고, 18일부터 키링 등 굿즈를 선보여요 · 가격은 기사에 나오지 않았어요" },
+    { cat: "cafe", brand: "우지커피", when: "11.18 출시 · 겨울 에스프레소 6종", date: "2026-11-18",
+      items: [{ name: "에스프레소 음료", tag: "음료", desc: "총 6종이에요. 기본 에스프레소와 크림, 크럼블, 과일 그라니따 등을 활용한 에스프레소 음료예요. 티라미수 같은 디저트도 함께 선보일 예정이에요." }],
+      src: { label: "뉴스1(네이버)", url: "https://n.news.naver.com/article/353/0000057201" },
+      note: "가격은 기사에 나오지 않았어요" }
   ],
 
   limited: [
+    { kind: "메뉴", brand: "버거킹", title: "초콜릿 와퍼", start: "2026-11-19", price: "9,800원", open: "수량 소진 시 당일 종료", period: "11.19 출시 · 성수 플래그십 한정 · 매일 11시부터 한정 수량",
+      desc: "초콜릿 빵 사이에 브라우니 패티를 넣고 토마토와 양파는 젤리로, 양상추와 피클은 초콜릿으로 표현한 디저트 와퍼예요. 누텔라와 크림치즈 무스, 라즈베리 소스를 더했어요. 서울 성수동 플래그십 매장 ‘플레임그라운드’에서만 팔고, 준비한 수량이 떨어지면 그날 판매를 마쳐요.",
+      src: { label: "스마트비즈(네이트)", url: "https://news.nate.com/view/20261117n31032" } },
+    { kind: "메뉴", brand: "컴포즈커피", title: "스노우 민트초코 프라페", start: "2026-11-17", open: "수량 소진 시 종료", period: "11.17 출시 · 겨울 한정 · 수량 소진 시 종료",
+      desc: "민트와 초콜릿에 휘핑크림을 더한 프라페예요. 지난해 민트초코 메뉴가 단종된 뒤 이어진 재출시 요청을 반영했고, 준비한 수량이 소진되면 판매가 끝날 수 있어요.",
+      src: { label: "비욘드포스트", url: "https://www.beyondpost.co.kr/view.php?ud=20261117093203445246a9e4dd7f_30" } },
     { kind: "이벤트", brand: "더벤티", title: "겨울 시즌 음료 할인", end: "2026-11-17", period: "~ 11.17",
       desc: "시즌 음료 2잔을 사거나 신제품과 아메리카노를 세트로 사면 할인해 줘요. 11월 17일까지예요.",
       src: { label: "인더뉴스", url: "https://www.inthenews.co.kr/news/article.html?no=94376" } },
     { kind: "이벤트", brand: "맘스터치", title: "스낵박스 할인 쿠폰", end: "2026-11-25", period: "~ 11.25",
       desc: "맘스터치 앱에서 스낵박스를 사는 고객에게 할인 쿠폰을 줘요. 11월 25일까지예요.",
       src: { label: "지피코리아", url: "https://www.gpkorea.com/news/articleView.html?idxno=148071" } },
-    { cat: "cafe", brand: "투썸플레이스", when: "11.13 출시", date: "2026-11-13",
-      items: [{ name: "크림탑 스초생", tag: "신제품" }],
-      src: { label: "뉴스와이어", url: "https://www.newswire.co.kr/newsRead.php?no=1046870" },
-      note: "전국 매장에서 팔지만 매장마다 판매 여부가 달라요 · 가격은 기사에 나오지 않았어요" },
-    { cat: "chicken", brand: "60계치킨", when: "11.11 출시", date: "2026-11-11",
-      items: [{ name: "크크크 골드", tag: "신메뉴", desc: "기존 '크크크치킨'을 업그레이드한 신메뉴예요." }],
-      src: { label: "서플(머니투데이)", url: "https://supple.kr/news/cmwbwrki7fcnnal9pli3atxh8" },
-      note: "가격은 기사에 나오지 않았어요" }
-  ],
-
-  limited: [
     { kind: "이벤트", brand: "투썸플레이스", title: "크림탑 스초생 사전예약 20% 쿠폰", start: "2026-11-11", end: "2026-11-18", period: "11.11 ~ 11.18",
       desc: "투썸하트 앱에서 사전예약하면 20% 할인 쿠폰을 선착순으로 줘요. 사전예약한 케이크는 12월 1일부터 31일 사이 원하는 날 받아요.",
       src: { label: "뉴스와이어", url: "https://www.newswire.co.kr/newsRead.php?no=1046870" } },
@@ -320,9 +341,6 @@ window.FOODYSSEY = {
       desc: "2026 홀리데이 케이크 사전예약에 최대 30% 혜택을 줘요. 딸기 시그니처 케이크 '베리밤'을 6종으로 늘렸고, 신제품 '베리밤 와르르'와 '베리밤 파티', 트리 모양 '기적같은 오늘'·'위싱트리'가 나와요.",
       src: { label: "프라임경제(네이트)", url: "https://m.news.nate.com/view/20261110n25926" } },
 
-    { kind: "이벤트", brand: "투썸플레이스", title: "크리스마스 케이크 20% 할인 쿠폰", end: "2026-11-18", season: "christmas", period: "~ 11.18(수)",
-      desc: "투썸 앱에서 선착순으로 20% 할인 쿠폰을 줘요. 신제품 케이크 예약에 맞춘 이벤트예요.",
-      src: { label: "한국경제", url: "https://www.hankyung.com/article/202611123157g" } },
     { kind: "이벤트", brand: "뚜레쥬르", title: "홀리데이 상품 앱 예약 최대 30% 혜택", end: "2026-12-22", season: "christmas", period: "~ 12.22(화)",
       desc: "공식 앱으로 홀리데이 상품 35종을 미리 주문하면 최대 30% 혜택을 줘요. 11월 17일까지 예약하면 추첨으로 한정판 굿즈도 줘요.",
       src: { label: "한국경제", url: "https://www.hankyung.com/article/202611123157g" } },
