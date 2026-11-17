@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 514" width="960" height="514" role="img" aria-labelledby="t d">
+<title id="t">크리스마스 케이크 사전예약·수령 일정(2026-11-16 기준)</title>
+<desc id="d">배스킨라빈스, 투썸플레이스, 스타벅스, 파스쿠찌, 파리바게뜨, 뚜레쥬르의 사전예약 기간과 수령 기간을 날짜 축에 막대로 그린 표예요.</desc>
+<rect width="960" height="514" fill="#fbfdfc"/>
+<text x="24" y="38" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="22" font-weight="700" fill="#15191a">크리스마스 케이크 사전예약·수령 일정</text>
+<text x="24" y="64" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="14" fill="#4d5755">2026-11-16 기준 · 브랜드 공식 발표와 언론 보도로 확인된 날짜만 표시 · 푸디세이가 직접 정리</text>
+<rect x="24" y="80" width="16" height="12" rx="3" fill="#17745a"/><text x="46" y="91" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="13" fill="#15191a">사전예약(최대 할인 기간)</text>
+<rect x="274" y="80" width="16" height="12" rx="3" fill="#2a7f64"/><text x="296" y="91" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="13" fill="#15191a">일반 사전예약</text>
+<rect x="524" y="80" width="16" height="12" rx="3" fill="#c27a1c"/><text x="546" y="91" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="13" fill="#15191a">수령 기간</text>
+<line x1="263.5" y1="116" x2="263.5" y2="480" stroke="#dfe7e4" stroke-width="1"/>
+<text x="263.5" y="110" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="12" fill="#4d5755" text-anchor="middle">11/11</text>
+<line x1="357.6" y1="116" x2="357.6" y2="480" stroke="#dfe7e4" stroke-width="1"/>
+<text x="357.6" y="110" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="12" fill="#4d5755" text-anchor="middle">11/18</text>
+<line x1="451.8" y1="116" x2="451.8" y2="480" stroke="#dfe7e4" stroke-width="1"/>
+<text x="451.8" y="110" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="12" fill="#4d5755" text-anchor="middle">11/25</text>
+<line x1="545.9" y1="116" x2="545.9" y2="480" stroke="#dfe7e4" stroke-width="1"/>
+<text x="545.9" y="110" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="12" fill="#4d5755" text-anchor="middle">12/2</text>
+<line x1="640.1" y1="116" x2="640.1" y2="480" stroke="#dfe7e4" stroke-width="1"/>
+<text x="640.1" y="110" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="12" fill="#4d5755" text-anchor="middle">12/9</text>
+<line x1="734.2" y1="116" x2="734.2" y2="480" stroke="#dfe7e4" stroke-width="1"/>
+<text x="734.2" y="110" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="12" fill="#4d5755" text-anchor="middle">12/16</text>
+<line x1="828.4" y1="116" x2="828.4" y2="480" stroke="#dfe7e4" stroke-width="1"/>
+<text x="828.4" y="110" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="12" fill="#4d5755" text-anchor="middle">12/23</text>
+<line x1="922.5" y1="116" x2="922.5" y2="480" stroke="#dfe7e4" stroke-width="1"/>
+<text x="922.5" y="110" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="12" fill="#4d5755" text-anchor="middle">12/30</text>
+<line x1="330.7" y1="116" x2="330.7" y2="480" stroke="#b9442f" stroke-width="2" stroke-dasharray="5 4"/>
+<text x="336.7" y="500" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="12" font-weight="700" fill="#b9442f">기준일 11/16</text>
+<text x="238" y="148" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="14" font-weight="600" fill="#15191a" text-anchor="end">배스킨라빈스</text>
+<rect x="263.5" y="132" width="94.2" height="22" rx="5" fill="#17745a"/>
+<rect x="371.1" y="132" width="349.7" height="22" rx="5" fill="#2a7f64"/>
+<text x="379.1" y="148" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="12" font-weight="600" fill="#ffffff">~11/18 얼리버드 최대 40% → 일반 최대 30% · ~12/15</text>
+<rect x="801.5" y="132" width="53.8" height="22" rx="5" fill="#c27a1c"/>
+<text x="861.3" y="148" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="12" fill="#15191a">~12/25</text>
+<text x="238" y="200" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="14" font-weight="600" fill="#15191a" text-anchor="end">투썸플레이스</text>
+<rect x="263.5" y="184" width="94.2" height="22" rx="5" fill="#17745a"/>
+<text x="363.6" y="200" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="12" fill="#15191a">~11/18 앱 쿠폰 20%</text>
+<rect x="532.5" y="184" width="403.5" height="22" rx="5" fill="#c27a1c"/>
+<text x="540.5" y="200" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="12" font-weight="600" fill="#ffffff">수령 · ~12/31</text>
+<text x="238" y="252" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="14" font-weight="600" fill="#15191a" text-anchor="end">스타벅스 조선델리 노엘 트리</text>
+<rect x="263.5" y="236" width="107.6" height="22" rx="5" fill="#17745a"/>
+<text x="377.1" y="252" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="12" fill="#15191a">~11/19 한정 수량</text>
+<text x="238" y="304" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="14" font-weight="600" fill="#15191a" text-anchor="end">파스쿠찌</text>
+<rect x="263.5" y="288" width="484.2" height="22" rx="5" fill="#17745a"/>
+<text x="271.5" y="304" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="12" font-weight="600" fill="#ffffff">30% 할인은 11/22까지 · ~12/17</text>
+<text x="238" y="356" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="14" font-weight="600" fill="#15191a" text-anchor="end">스타벅스 홀케이크</text>
+<rect x="317.3" y="340" width="349.7" height="22" rx="5" fill="#17745a"/>
+<text x="325.3" y="356" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="12" font-weight="600" fill="#ffffff">리워드 10%는 11/26까지 · ~12/11</text>
+<rect x="774.6" y="340" width="107.6" height="22" rx="5" fill="#c27a1c"/>
+<text x="888.2" y="356" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="12" fill="#15191a">~12/27</text>
+<text x="238" y="408" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="14" font-weight="600" fill="#15191a" text-anchor="end">파리바게뜨</text>
+<rect x="263.5" y="392" width="511.1" height="22" rx="5" fill="#17745a"/>
+<text x="271.5" y="408" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="12" font-weight="600" fill="#ffffff">앱 최대 30% · ~12/19</text>
+<rect x="801.5" y="392" width="53.8" height="22" rx="5" fill="#c27a1c"/>
+<text x="861.3" y="408" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="12" fill="#15191a">~12/25</text>
+<text x="238" y="460" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="14" font-weight="600" fill="#15191a" text-anchor="end">뚜레쥬르</text>
+<rect x="263.5" y="444" width="551.5" height="22" rx="5" fill="#17745a"/>
+<text x="271.5" y="460" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="12" font-weight="600" fill="#ffffff">35종 최대 30% · ~12/22</text>
+<rect x="761.1" y="444" width="94.2" height="22" rx="5" fill="#c27a1c"/>
+<text x="861.3" y="460" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="12" fill="#15191a">~12/25</text>
+</svg>

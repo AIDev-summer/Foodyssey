@@ -522,6 +522,7 @@ function guideIndex(all, today) {
   const body = `<p>푸디세이 가이드는 기사에 나온 사실과 푸디세이가 직접 모은 데이터로만 쓴 글이에요. 계산하는 글은 날짜와 계산식을 적고, 데이터가 바뀌면 자동으로 다시 계산해요.</p>`
     + `<ul class="dl">${GUIDES.map((g) => `<li><a href="/guide/${g.slug}"><b>${esc(g.title)}</b></a> — ${esc(g.desc)}</li>`).join('')}</ul>`
     + `<h2>이 가이드의 데이터 현황</h2><p>기준일 ${esc(fmtDate(today))} 현재 푸디세이에는 브랜드 ${brands}곳의 신메뉴 ${news.length}개와 한정 메뉴·이벤트 ${lim.length}건이 기록돼 있어요. 신메뉴 가운데 가격이 숫자 하나로 확인된 것은 ${priced}개, 한정 항목 가운데 시작일과 종료일이 모두 확인된 것은 ${both}건이에요. 계산 가이드는 이 확인된 값만 써서 만들기 때문에, 기사에서 값이 확인되지 않은 항목은 계산에 들어가지 않아요.</p>`
+    + `<h2>가이드별 마지막 갱신일</h2><ul class="dl">${GUIDES.map((g) => `<li><a href="/guide/${g.slug}">${esc(g.title)}</a> — ${esc(fmtDate(g.updated || today))} 갱신${g.generated ? '(푸디세이 데이터로 매번 다시 계산해요)' : '(기사 원문을 다시 확인해 손으로 고쳐요)'}</li>`).join('')}</ul>`
     + `<h2>가이드를 쓰는 기준</h2><ul><li>가격·출시일·종료일은 기사 본문이나 브랜드 공식 자료에 있는 값만 써요.</li><li>계산하는 글은 기준일과 계산식을 글 안에 적어요.</li><li>값이 확인되지 않은 부분은 추측하지 않고 “확인 안 됨”이라고 적어요.</li></ul>`
     + `<h2>월별 모음</h2><p>달마다 새로 나온 메뉴와 마감 달력을 모았어요. 지난 달은 보관함으로 남아요. <a href="/new/">월별 모음 전체 보기</a></p>`
     + `<h2>함께 보면 좋은 곳</h2><p>크리스마스·연말 메뉴는 <a href="/season/christmas">시즌 모음</a>에, 날짜별 새 항목은 <a href="/updates">업데이트 내역</a>에, 업종별 정리는 각 업종 페이지에 있어요.</p>`;
@@ -580,6 +581,12 @@ function monthHub(all, today, months) {
       return `<li><a href="/new/${m}"><b>${esc(monthLabel(m))}</b></a> — 새 메뉴 ${ns.length}개${top ? '(많은 브랜드: ' + esc(top) + ')' : ''}${ps.length ? `, 가격이 확인된 ${ps.length}개는 ${esc(won(Math.min(...ps)))}~${esc(won(Math.max(...ps)))}` : ', 가격이 확인된 메뉴는 아직 없어요'}</li>`;
     }).join('')}</ul>`
     + `<h2>전체 합계</h2><p>${months.length}개 월 합계로 새 메뉴 ${all.filter((r) => r.kind === 'new').length}개, 마감하는 한정 메뉴·이벤트 ${all.filter((r) => r.kind !== 'new' && r.end).length}건, 종료일이 아직 없는 한정 항목 ${all.filter((r) => r.kind !== 'new' && !r.end).length}건이 기록돼 있어요. 종료일이 아직 없는 항목은 종료일이 기사에 나오면 그달 마감 달력에 들어가요.</p>`
+    + (() => {
+      const from = new Date(Date.parse(today) - 7 * 86400000).toISOString().slice(0, 10);
+      const rec = all.filter((r) => r.firstSeen && r.firstSeen >= from && !noindexReason(r, status(r, today))).sort((a, c) => c.firstSeen.localeCompare(a.firstSeen) || a.brand.localeCompare(c.brand, 'ko')).slice(0, 12);
+      if (rec.length < 3) return '';
+      return `<h2>최근 7일 안에 푸디세이에 올라온 메뉴</h2><p>${esc(mdw(from))}부터 ${esc(mdw(today))}까지 등록된 항목 중 검색에 노출되는 ${rec.length}개예요(등록일 순).</p><ul class="dl">${rec.map((r) => `<li><a href="${href(menuPath(r))}"><b>${esc(r.brand)} ${esc(r.name)}</b></a> — ${esc(fmtDate(r.firstSeen))} 등록${r.price ? ', 가격 ' + esc(r.price) : ''}${r.kind === 'new' ? '' : r.period ? ', ' + esc(r.period) : ''}</li>`).join('')}</ul>`;
+    })()
     + `<h2>보는 법</h2><ul><li>월 페이지에는 새 메뉴 표, 마감 달력, 그달에 시작한 한정 항목이 들어 있어요.</li><li>가격은 기사에 나온 값만 적고, 없으면 “확인 안 됨”으로 둬요.</li><li>판매가 끝난 메뉴도 지우지 않고 “판매 종료”로 표시해요.</li></ul>`
     + `<h2>더 읽을거리</h2><p><a href="/guide/limited-menu-duration">한정 메뉴 판매 기간 계산</a> · <a href="/guide/price-distribution">신메뉴 가격대 분포</a> · <a href="/guide/">가이드 전체</a></p>`;
   return pageShell({ title: `월별 신메뉴·한정 메뉴 모음 (${months.length}개 월) | 푸디세이`, desc: '달마다 새로 나온 프랜차이즈 신메뉴와 마감하는 한정 메뉴·이벤트를 모은 월별 보관함이에요.', canonical: '/new/', crumbList: [{ name: '홈', path: '/' }, { name: '월별 모음', path: '/new/' }], kicker: '월별 모음', h1: '월별 신메뉴·한정 메뉴 모음', body });

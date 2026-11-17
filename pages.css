@@ -193,3 +193,6 @@ footer .links a, .explore a { min-width: 44px; justify-content: center; }
 /* 표 안 '매장 찾기' 링크: 아이콘과 글자 한 줄 가운데, 터치 44px */
 .store-link { display: inline-flex; align-items: center; justify-content: center; gap: 4px; min-height: 44px; padding: 0 12px; margin-top: 4px; border-radius: 8px; border: 1px solid var(--fresh); color: var(--fresh); font-size: 14px; font-weight: 600; line-height: 1; text-decoration: none; white-space: nowrap; box-sizing: border-box; }
 .store-link svg { flex: none; }
+/* 직접 만든 넓은 그림(일정표·막대 그래프): 작은 화면에서는 글자가 작아지지 않게 옆으로 밀어 보게 해요 */
+.shot.wide { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.shot.wide img { width: 100%; min-width: 760px; max-height: none; height: auto; }
