@@ -196,3 +196,23 @@ footer .links a, .explore a { min-width: 44px; justify-content: center; }
 /* 직접 만든 넓은 그림(일정표·막대 그래프): 작은 화면에서는 글자가 작아지지 않게 옆으로 밀어 보게 해요 */
 .shot.wide { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .shot.wide img { width: 100%; min-width: 760px; max-height: none; height: auto; }
+/* 상단 답 상자: 첫 화면에서 상태·기간·남은 기간·가격을 큰 글씨로 */
+.ans-wrap { display: grid; gap: 12px; margin: 0 0 16px; }
+.ans-wrap > .store-find { margin: 0; }
+.ans-wrap.has-img { grid-template-columns: 1fr; }
+@media (min-width: 760px) { .ans-wrap.has-img { grid-template-columns: minmax(0, 1fr) 240px; grid-template-areas: 'card fig' 'btn fig'; grid-template-rows: auto 1fr; align-items: start; } .ans-wrap.has-img > .answer-card { grid-area: card; } .ans-wrap.has-img > .store-find { grid-area: btn; } .ans-wrap.has-img > .ans-img { grid-area: fig; } }
+.answer-card { display: grid; grid-template-columns: repeat(auto-fit, minmax(124px, 1fr)); gap: 16px 24px; padding: 20px; border: 1px solid var(--line); border-radius: 16px; background: var(--card); }
+.ans-row { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.ans-k { font-size: 13px; font-weight: 600; color: var(--muted); line-height: 1.2; }
+.ans-v { font-size: 20px; font-weight: 700; line-height: 1.35; overflow-wrap: anywhere; }
+.ans-v b { font-weight: 700; }
+.ans-v small { display: block; margin-top: 4px; font-size: 13px; font-weight: 400; color: var(--muted); line-height: 1.4; }
+.ans-v .badge { font-size: 16px; min-height: 32px; padding: 0 12px; }
+.ans-v .dday { font-family: var(--f-mono); font-variant-numeric: tabular-nums; color: var(--fresh); }
+.ans-v .dday.soon { color: var(--warn); }
+.ans-src { grid-column: 1 / -1; margin: 0; padding-top: 12px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+.ans-img { margin: 0; }
+.ans-img img { display: block; width: 100%; height: auto; max-height: 300px; object-fit: contain; border-radius: 12px; background: var(--bg); border: 1px solid var(--line); }
+.ans-img figcaption { margin-top: 8px; font-size: 13px; line-height: 1.4; color: var(--muted); }
+.ans-row.wide { grid-column: 1 / -1; }
+@media (max-width: 520px) { .answer-card { padding: 16px; gap: 12px 16px; } .ans-v { font-size: 18px; } }

@@ -598,6 +598,36 @@ function brandColor(brand) {
   for (let i = 0; i < brand.length; i++) h = (h * 31 + brand.charCodeAt(i)) >>> 0;
   return `hsl(${h % 360}, 46%, 40%)`;
 }
+// 상단 답 상자(2026-11-18 사장님 지시): H1 바로 아래, 첫 화면 안에서 상태·기간·남은 기간·가격·출처를 큰 글씨로 보여 줘요. 데이터가 있는 항목만 노출해요.
+let IMG_META = {};
+try { IMG_META = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'img-meta.json'), 'utf8')); } catch (e) {}
+const IMG_MAX_BYTES = 700000;
+function answerCard(r, today) {
+  const st = status(r, today);
+  const label = statusLabel(r, st);
+  const rows = [];
+  rows.push(['상태', `<span class="badge ${st === 'on' ? 'on' : 'off'}" data-end="${esc(r.endLate || r.end || '')}">${esc(label)}</span>`]);
+  if (r.kind === 'new') {
+    if (r.date) rows.push([/발표/.test(r.when) ? '발표일' : '출시일', esc(fmtDate(r.date))]);
+  } else if (r.end && r.endLate) {
+    rows.push(['판매 기간', `${r.start ? esc(fmtDate(r.start)) + ' 출시 · ' : ''}<b>종료 예상 ${esc(short(r.end))} ~ ${esc(short(r.endLate))}</b><small>확정이 아니라 기사에 나온 운영 기간으로 계산한 예상이에요</small>`]);
+    rows.push(['남은 기간(예상)', `<span class="dday" data-d="${esc(r.end)}"></span> ~ <span class="dday" data-d="${esc(r.endLate)}"></span>`]);
+  } else if (r.end) {
+    rows.push(['판매 기간', `${r.start ? esc(fmtDate(r.start)) + ' ~ ' : '~ '}${esc(fmtDate(r.end))}`]);
+    rows.push(['남은 기간', `<span class="dday" data-d="${esc(r.end)}"></span>`]);
+  } else if (r.open || r.period) {
+    rows.push(['판매 기간', `${esc(r.period || r.open)}${r.open && r.period && !r.period.includes(r.open) ? '' : ''}<small>종료일은 기사에 아직 나오지 않았어요</small>`]);
+  }
+  const priceTxt = r.price ? esc(r.price) : (r.lines && r.lines.length ? r.lines.slice(0, 3).map((l) => esc(l[0]) + ' ' + esc(l[1])).join('<br>') : '');
+  if (priceTxt) rows.push(['가격', `<b class="mono">${priceTxt}</b>${r.priceNote ? `<small>${esc(r.priceNote)}</small>` : ''}`]);
+  const srcTxt = r.src ? `<a href="${esc(r.src.url)}" target="_blank" rel="noopener nofollow">${esc(r.src.label)}</a>` : '';
+  const meta = r.img ? IMG_META[r.img] : null;
+  const showImg = !!(meta && meta.bytes <= IMG_MAX_BYTES);
+  const imgFrom = r.imgFrom || (meta && meta.official ? meta.official.replace(/\(.*\)/, '') + ' 공식 홈페이지' : r.brand + ' 공식 홈페이지');
+  const fig = showImg ? `<figure class="ans-img"><img src="${esc(r.img)}" alt="${esc(r.brand + ' ' + r.name)} 공식 홈페이지 사진" width="${meta.w}" height="${meta.h}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.closest('figure').remove()"><figcaption>사진: ${esc(imgFrom)} · 확인일 ${esc(fmtDate(UPDATED))}</figcaption></figure>` : '';
+  const grid = rows.map(([k, v]) => `<div class="ans-row${/기간$|기간\(예상\)$/.test(k) && k.startsWith('판매') ? ' wide' : ''}"><span class="ans-k">${k}</span><span class="ans-v">${v}</span></div>`).join('');
+  return `<div class="ans-wrap${showImg ? ' has-img' : ''}"><div class="answer-card" aria-label="한눈에 보는 답">${grid}<p class="ans-src">${srcTxt ? '출처: ' + srcTxt + ' · ' : ''}기준일 ${esc(fmtDate(UPDATED))}</p></div>${storeFind(r.brand, 'menu')}${fig}</div>`;
+}
 function summaryCard(r, today) {
   const st = status(r, today);
   const label = statusLabel(r, st);
@@ -671,10 +701,6 @@ function menuPage(r, all, today) {
       ? (isEvent ? '이 이벤트는 끝났어요.' : '이 한정 메뉴는 판매가 끝났어요. 다시 나오면 이 페이지에 다시 표시돼요.')
       : '출시한 지 시간이 지나 새 메뉴 목록에서는 내려갔어요. 지금도 파는지는 매장이나 브랜드 앱에서 확인해 주세요.'}</p>`;
   }
-  if (r.img) {
-    body += `<figure class="shot"><img src="${esc(r.img)}" alt="${esc(r.brand + ' ' + r.name + ' 사진')}" loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('figure').remove()"><figcaption>사진: ${esc(r.imgFrom || r.brand + ' 공식 홈페이지')}</figcaption></figure>`;
-  }
-  body += summaryCard(r, today);
   body += `<dl class="facts">${facts.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>`;
   if (r.desc) body += `<p>${esc(r.desc)}</p>`;
   if (r.note && r.note !== r.desc) body += `<p>${esc(r.note)}</p>`;
@@ -709,7 +735,7 @@ function menuPage(r, all, today) {
   const jsonld = [cr.ld, page];
 
   return head({ title, desc, canonical: SITE + href(menuPath(r)), jsonld, robots: noindexReason(r, st) ? 'noindex,follow' : '' })
-    + `<main><div class="wrap"><article>${cr.html}<p class="kicker">${esc(r.brand)} · ${esc(r.tag)}</p><h1>${esc(h1Text)}</h1>${answerLine}${storeFind(r.brand, 'menu')}${body}</article></div></main>\n`
+    + `<main><div class="wrap"><article>${cr.html}<p class="kicker">${esc(r.brand)} · ${esc(r.tag)}</p><h1>${esc(h1Text)}</h1>${answerCard(r, today)}${body}</article></div></main>\n`
     + ddayScript() + foot();
 }
 // D-day와 마감 지남은 날마다 바뀌니 브라우저에서 한국 시간으로 다시 계산해요.
