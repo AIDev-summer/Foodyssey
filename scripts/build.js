@@ -624,7 +624,8 @@ function answerCard(r, today) {
   } else if (r.open || r.period) {
     rows.push(['판매 기간', `${esc(natural(r.period || r.open))}${r.open && r.period && !r.period.includes(r.open) ? '' : ''}<small>종료일은 기사에 아직 나오지 않았어요</small>`]);
   }
-  const priceTxt = r.price ? esc(r.price) : (r.lines && r.lines.length ? r.lines.slice(0, 3).map((l) => esc(l[0]) + ' ' + esc(l[1])).join('<br>') : '');
+  const lineNums = (r.lines || []).map((l) => priceNum(l[1])).filter(Boolean);
+  const priceTxt = r.price ? esc(r.price) : (lineNums.length ? `${Math.min(...lineNums).toLocaleString('en-US')}원 ~ ${Math.max(...lineNums).toLocaleString('en-US')}원` : (r.lines && r.lines.length ? r.lines.slice(0, 3).map((l) => esc(l[0]) + ' ' + esc(l[1])).join('<br>') : ''));
   if (priceTxt) rows.push(['가격', `<b class="mono">${priceTxt}</b>${r.priceNote ? `<small>${esc(r.priceNote)}</small>` : ''}`]);
   const srcTxt = r.src ? `<a href="${esc(r.src.url)}" target="_blank" rel="noopener nofollow">${esc(r.src.label)}</a>` : '';
   const meta = r.img ? IMG_META[r.img] : null;
@@ -841,6 +842,31 @@ function seasonCardsHtml(all, today) {
   return out.length ? `<nav class="season-cards" aria-label="지금 많이 찾는 시즌 정리">${out.join('')}</nav>` : '';
 }
 
+// ---------- 크리스마스 케이크 가이드의 '가장 급한 마감' 답 상자(data/seasons.json의 마감일에서 매 빌드마다 계산) ----------
+function cakeUrgentHtml(today) {
+  let cfg = { cards: [] };
+  try { cfg = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'seasons.json'), 'utf8')); } catch (e) {}
+  const c = cfg.cards.find((x) => x.id === 'christmas-cake');
+  if (!c) return '';
+  const dleft = (d) => Math.round((Date.parse(d) - Date.parse(today)) / 86400000);
+  const items = c.items.filter((x) => dleft(x[1]) >= 0).sort((a, b) => a[1].localeCompare(b[1]));
+  const dtxt = (n) => (n === 0 ? 'D-DAY' : 'D-' + n);
+  const row = (k, v, wide) => `<div class="ans-row${wide ? ' wide' : ''}"><span class="ans-k">${k}</span><span class="ans-v">${v}</span></div>`;
+  let rows = '';
+  if (items.length) {
+    const [b, d] = items[0];
+    rows += row('상태', `<span class="badge on">사전예약 진행 중</span>`);
+    rows += row('가장 급한 마감', `<span id="cu-first">${esc(b)} · <span class="nw">${esc(mdKo(d))}</span> · <span class="nw dday-t">${dtxt(dleft(d))}</span></span>`, true);
+    const nxt = items.slice(1, 3);
+    if (nxt.length) rows += row('그다음 마감', `<span id="cu-next">${nxt.map((x) => `${esc(x[0])} · <span class="nw">${esc(mdKo(x[1]))}</span>`).join('<br>')}</span>`, true);
+  } else {
+    rows += row('상태', `<span class="badge off">사전예약 마감</span>`);
+  }
+  const srcDate = c.updated || UPDATED;
+  const script = `<script>(function(){var A=${JSON.stringify(c.items)};var p=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());var t=new Date(p+'T00:00:00Z');function dl(s){return Math.round((new Date(s+'T00:00:00Z')-t)/86400000)}function md(s){var a=s.split('-');return Number(a[1])+'월 '+Number(a[2])+'일'}var L=A.filter(function(x){return dl(x[1])>=0}).sort(function(a,b){return a[1]<b[1]?-1:1});var f=document.getElementById('cu-first'),n=document.getElementById('cu-next');if(!f||!L.length)return;var d=dl(L[0][1]);f.textContent=L[0][0]+' · '+md(L[0][1])+' · '+(d===0?'D-DAY':'D-'+d);if(n){n.innerHTML='';L.slice(1,3).forEach(function(x,i){if(i)n.appendChild(document.createElement('br'));n.appendChild(document.createTextNode(x[0]+' · '+md(x[1])))})}})();</script>`;
+  return `<div class="ans-wrap"><div class="answer-card" aria-label="한눈에 보는 답">${rows}<p class="ans-src">출처: 브랜드 공식 발표·언론 보도(표 아래 목록) · 기준일 <span class="nw">${esc(fmtDate(srcDate))}</span></p></div></div>${script}`;
+}
+
 // ---------- index.html 갱신 ----------
 function replaceBlock(html, name, inner) {
   const re = new RegExp(`(<!-- build:${name} -->)[\\s\\S]*?(<!-- /build:${name} -->)`);
@@ -1014,6 +1040,10 @@ function main() {
   idx = replaceBlock(idx, 'stamp', `마지막 업데이트 <time datetime="${esc(UPDATED)}">${esc(fmtDate(UPDATED))}</time>${freshBits ? ' · ' + freshBits : ''} · 판매·진행 중 메뉴 ${liveItems.length}개 · <a href="/updates">업데이트 내역</a> · <a href="/rss.xml">RSS 구독</a>`);
   const readsLinks = GUIDES.map((g) => `<li><a href="/guide/${g.slug}">${esc(g.title)}</a></li>`).concat(MONTHLY_LINKS(all, today)).concat([`<li><a href="${href(seasonPath('christmas'))}">크리스마스·연말 메뉴 모음</a></li>`, '<li><a href="/updates">날짜별 업데이트 내역</a></li>']);
   idx = replaceBlock(idx, 'seasons', seasonCardsHtml(all, today));
+  try {
+    const gp = path.join(ROOT, 'guide', 'christmas-cake-preorder.html');
+    fs.writeFileSync(gp, replaceBlock(fs.readFileSync(gp, 'utf8'), 'cake-urgent', cakeUrgentHtml(today)));
+  } catch (e) { console.warn('케이크 가이드 답 상자 갱신 건너뜀: ' + e.message); }
   idx = replaceBlock(idx, 'reads', `      <ul class="reads-list">\n        ${readsLinks.join('\n        ')}\n      </ul>`);
   const idxLd = [
     { '@context': 'https://schema.org', '@type': 'WebSite', name: '푸디세이', alternateName: 'Foodyssey', url: SITE + '/' },
@@ -1039,6 +1069,9 @@ function main() {
     const hardRows = q.rows.filter((r) => r.hard.length && !r.noindex);
     console.log('품질 점검: 페이지 ' + q.rows.length + '개, 미달 ' + q.failCount + '개, 하위 20% ' + q.bottomCount + '개(총점 ≤ ' + q.cut + '), 출처 대조 ' + q.verifiedPages + '개');
     if (q.failCount) q.rows.filter((r) => r.fail).slice(0, 15).forEach((r) => console.warn(' ! 품질 미달 ' + r.total + '점 ' + r.url + ' — ' + r.hard.concat(r.notes).slice(0, 3).join(' / ')));
+    const dup = require('./lint-dup').run(ROOT);
+    console.log('중복 점검: ' + dup.checked + '쪽, 위반 ' + dup.bad.length + '쪽');
+    if (dup.bad.length) { dup.bad.slice(0, 30).forEach((x) => console.error(' - ' + x.page + ': ' + x.errs.join(' / '))); console.error('같은 내용 중복 ' + dup.bad.length + '쪽'); process.exit(1); }
     const vg = require('./quality-report').valueGate(q.rows, ROOT);
     console.log('가치 게이트(정보형 한글 800자): 메뉴 상세 ' + vg.warns.length + '개 미달(경고), 예외 목록 ' + vg.exceptions + '개' + (vg.stale.length ? ', 이미 통과해 예외 목록에서 뺄 수 있는 것 ' + vg.stale.length + '개' : ''));
     if (vg.errs.length) {
