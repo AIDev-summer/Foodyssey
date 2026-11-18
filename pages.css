@@ -252,3 +252,17 @@ article > p:not(.kicker):not(.stamp):not(.more):not(.src):not(.ans-src):not(.met
 .season-tag.tone-red { --tone: #b3261e; }
 .season-tag.tone-green { --tone: var(--fresh); }
 :root[data-theme="dark"] .season-tag.tone-red { --tone: #f08a7f; }
+/* 글이 시작하는 왼쪽 줄 맞춤(2026-11-19): 빵부스러기·제목·답 상자·표·본문이 같은 왼쪽 선에서 시작해요 */
+.crumbs a:first-child { min-width: 0; padding-left: 0; position: relative; }
+.crumbs a:first-child::before { content: ""; position: absolute; inset: 0 -10px; }
+.answer-card { padding: 0 0 16px; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; background: none; }
+.facts { padding: 0 0 16px; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; }
+.ans-src { border-top: 0; padding-top: 0; }
+.ans-v .dday, .ans-v .badge { margin-left: 0; padding-left: 0; background: none; }
+.ans-v .badge.off { padding-left: 12px; }
+.crumbs { margin-bottom: 4px; }
+.kicker + h1 { margin-top: 4px; }
+.store-find small { margin-top: -4px; }
+.facts { grid-template-columns: max-content minmax(0, 1fr); }
+.facts dd { overflow-wrap: anywhere; word-break: keep-all; }
+.rel-list a { display: inline-flex; align-items: center; min-height: 44px; padding: 0; border: 0; border-radius: 0; background: none; }

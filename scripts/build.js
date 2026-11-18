@@ -612,7 +612,7 @@ function answerCard(r, today) {
   const st = status(r, today);
   const label = statusLabel(r, st);
   const rows = [];
-  rows.push(['상태', `<span class="badge ${st === 'on' ? 'on' : 'off'}" data-end="${esc(r.endLate || r.end || '')}">${esc(label)}</span>`]);
+  if (st !== 'on') rows.push(['상태', `<span class="badge off" data-end="${esc(r.endLate || r.end || '')}">${esc(label)}</span>`]);
   if (r.kind === 'new') {
     if (r.date) rows.push([/발표/.test(r.when) ? '발표일' : '출시일', esc(mdKo(r.date)) + (r.when && /[가-힣]/.test(r.when.replace(/출시|발표/g, '')) ? `<small>${esc(r.when)}</small>` : '')]);
   } else if (r.end && r.endLate) {
@@ -632,9 +632,9 @@ function answerCard(r, today) {
   const showImg = !!(meta && meta.bytes <= IMG_MAX_BYTES);
   const imgFrom = r.imgFrom || (meta && meta.official ? meta.official.replace(/\(.*\)/, '') + ' 공식 홈페이지' : r.brand + ' 공식 홈페이지');
   const fig = showImg ? `<figure class="ans-img"><img src="${esc(r.img)}" alt="${esc(r.brand + ' ' + r.name)} 공식 홈페이지 사진" width="${meta.w}" height="${meta.h}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.closest('figure').remove()"><figcaption>사진: ${esc(imgFrom)} · 확인일 ${esc(fmtDate(UPDATED))}</figcaption></figure>` : '';
-  if (rows.length < 2 && !srcTxt) return `<div class="ans-wrap${showImg ? ' has-img' : ''}">${fig}${storeFind(r.brand, 'menu')}</div>`;
+  if (!rows.length && !srcTxt) return `<div class="ans-wrap${showImg ? ' has-img' : ''}">${fig}${storeFind(r.brand, 'menu')}</div>`;
   const grid = rows.map(([k, v]) => `<div class="ans-row${k.startsWith('판매') ? ' wide' : ''}"><span class="ans-k">${k}</span><span class="ans-v">${nwTok(v)}</span></div>`).join('');
-  return `<div class="ans-wrap${showImg ? ' has-img' : ''}">${fig}${r.season && SEASONS[r.season] ? `<p class="season-tag tone-${r.season === 'christmas' ? 'red' : 'green'}">${esc(SEASONS[r.season].name)} 시즌</p>` : ''}<div class="answer-card" aria-label="한눈에 보는 답">${grid}${r.kind !== 'new' && r.end ? '<p class="ans-note">재고가 떨어지면 마감일보다 일찍 끝날 수 있어요.</p>' : ''}<p class="ans-src">${srcTxt ? '출처: ' + srcTxt + ' · ' : ''}기준일 <span class="nw">${esc(fmtDate(UPDATED))}</span></p></div>${storeFind(r.brand, 'menu')}</div>`;
+  return `<div class="ans-wrap${showImg ? ' has-img' : ''}">${fig}${r.season && SEASONS[r.season] ? `<p class="season-tag tone-${r.season === 'christmas' ? 'red' : 'green'}">${esc(SEASONS[r.season].name)} 시즌</p>` : ''}<div class="answer-card" aria-label="한눈에 보는 답">${grid}${r.kind !== 'new' && r.end && !/재고/.test((r.desc || '') + (r.note || '')) ? '<p class="ans-note">재고가 떨어지면 마감일보다 일찍 끝날 수 있어요.</p>' : ''}<p class="ans-src">${srcTxt ? '출처: ' + srcTxt + ' · ' : ''}기준일 <span class="nw">${esc(fmtDate(UPDATED))}</span></p></div>${storeFind(r.brand, 'menu')}</div>`;
 }
 function summaryCard(r, today) {
   const st = status(r, today);
@@ -684,9 +684,6 @@ function menuPage(r, all, today) {
   const desc = `${r.brand} ${r.name}${st === 'on' ? '' : '(' + label + ')'} ${isEvent ? '기간·참여 방법' : (hasPeriod ? '판매 기간·가격' : '정보')}: ${descBits.join(', ')}${descBits.length ? '. ' : ''}${lead}`.slice(0, 155);
 
   const facts = [];
-  facts.push(['브랜드', `<a href="${href(brandPath(r.brand))}">${esc(r.brand)}</a>`]);
-  if (r.catName) facts.push(['업종', `<a href="${href(catPath(r.cat))}">${esc(r.catName)}</a>`]);
-  facts.push(['구분', esc(r.tag)]);
   if (r.season && SEASONS[r.season]) facts.push(['모아보기', `<a href="${href(seasonPath(r.season))}">${esc(SEASONS[r.season].name)} 메뉴 전체</a>`]);
   if (r.season === 'christmas') {
     const cmp = [['<a href="/guide/christmas-cake-preorder">크리스마스 케이크 사전예약 비교(브랜드별 할인·마감)</a>']];
@@ -702,7 +699,7 @@ function menuPage(r, all, today) {
       ? (isEvent ? '이 이벤트는 끝났어요.' : '이 한정 메뉴는 판매가 끝났어요. 다시 나오면 이 페이지에 다시 표시돼요.')
       : '출시한 지 시간이 지나 새 메뉴 목록에서는 내려갔어요. 지금도 파는지는 매장이나 브랜드 앱에서 확인해 주세요.'}</p>`;
   }
-  body += `<dl class="facts">${facts.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>`;
+  if (facts.length) body += `<dl class="facts">${facts.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>`;
   if (r.desc) body += `<p>${esc(r.desc)}</p>`;
   if (r.note && r.note !== r.desc) body += `<p>${esc(r.note)}</p>`;
   if (r.lines && r.lines.length) {
