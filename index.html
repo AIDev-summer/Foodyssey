@@ -392,6 +392,10 @@ footer .links a { min-width: 44px; justify-content: center; }
 .seg a b { margin-left: 8px; }
 .mono, .dday, .soon-card .d, .row .d, .chip .n, .seg a b, time { font-variant-numeric: tabular-nums; }
 body { font-synthesis: none; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
+/* 줄바꿈 정리(2026-11-18): 제목은 의미 단위로 균형 있게, 본문은 외톨이 줄 없이 */
+h1, h2, h3, .soon-card .t, .row h3, .tile h3, .hot h2 { word-break: keep-all; text-wrap: balance; }
+p, li, dd, .row .period, .row .b, .tile p, .dir-cat p { word-break: keep-all; text-wrap: pretty; }
+.nw, .dday, time { white-space: nowrap; }
 </style>
 
 </head>

@@ -23,7 +23,7 @@ a { color: var(--fresh); }
 .kicker { margin: 0; font-size: 13px; color: var(--muted); }
 h1 { font-family: var(--f-display); font-weight: 700; font-size: clamp(26px, 5vw, 36px); line-height: 1.25; letter-spacing: 0; margin: 2px 0 20px; }
 h2 { font-size: 17px; margin: 32px 0 12px; }
-p { max-width: 64ch; }
+p { max-width: none; }
 .mono { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
 .notice { background: var(--soft); border-radius: 10px; padding: 12px 16px; font-size: 14px; }
 .shot { margin: 0 0 20px; }
@@ -85,7 +85,7 @@ header nav a { white-space: nowrap; word-break: keep-all; }
 /* ===== 접근성·가독성 보정(2026-11-06 디자인 검수) ===== */
 .meta { color: var(--muted); font-size: 14px; margin: 0 0 20px; }
 ul { padding-left: 1.2em; }
-li { max-width: 64ch; }
+li { max-width: none; }
 header .wrap { padding-block: 8px; }
 .logo { display: inline-flex; align-items: stretch; gap: 12px; min-height: 44px; padding: 8px 0; white-space: nowrap; flex-shrink: 0; text-decoration: none; }
 .logo-name { font-size: 28px; line-height: 28px; }
@@ -222,3 +222,13 @@ body { font-synthesis: none; text-rendering: optimizeLegibility; -webkit-font-sm
 .ans-v .s-bar { display: block; width: 100%; height: 10px; border-radius: 6px; background: var(--line); overflow: hidden; margin: 6px 0 2px; }
 .ans-v .s-bar-fill { display: block; height: 100%; border-radius: 6px; background: var(--fresh); }
 .ans-v .s-chip { vertical-align: middle; }
+/* 줄바꿈·폭 정리(2026-11-18): 제목은 의미 단위로 균형 있게, 본문은 외톨이 줄 없이, 날짜·가격은 중간에서 끊기지 않게 */
+h1, h2, h3, .c-name, .dir-cat h3 { word-break: keep-all; text-wrap: balance; }
+p, li, dd, td, .ans-v small, .c-meta, figcaption { word-break: keep-all; text-wrap: pretty; }
+.nw, .dday, time, .mono { white-space: nowrap; }
+article > *, .ans-wrap, .answer-card, .facts, .tbl, .store-find { max-width: 100%; }
+@media (max-width: 520px) { .store-find { display: grid; grid-template-columns: 1fr; } .store-find a { width: 100%; } .store-find small { flex-basis: auto; } }
+/* 빵부스러기: 한 줄로, 마지막 긴 이름은 말줄임 */
+.crumbs { display: flex; flex-wrap: nowrap; align-items: center; gap: 0; min-width: 0; }
+.crumbs a, .crumbs .sep { flex: none; white-space: nowrap; }
+.crumbs [aria-current] { flex: 1 1 0; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
