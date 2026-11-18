@@ -255,9 +255,7 @@ gtag('config', '${GA_ID}');
 })();
 </script>
 ${jsonld.map((j) => `<script type="application/ld+json">${JSON.stringify(j).replace(/</g, '\\u003c')}</script>`).join('\n')}
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@700;800&family=IBM+Plex+Sans+KR:wght@400;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>\n<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="alternate" type="application/rss+xml" title="푸디세이" href="/rss.xml">
 <link rel="stylesheet" href="/pages.css">
 </head>
@@ -606,15 +604,21 @@ function answerCard(r, today) {
   const st = status(r, today);
   const label = statusLabel(r, st);
   const rows = [];
-  rows.push(['상태', `<span class="badge ${st === 'on' ? 'on' : 'off'}" data-end="${esc(r.endLate || r.end || '')}">${esc(label)}</span>`]);
+  rows.push(['상태', `<span class="s-chip" style="background:${brandColor(r.brand)}">${esc(r.brand)}</span> <span class="badge ${st === 'on' ? 'on' : 'off'}" data-end="${esc(r.endLate || r.end || '')}">${esc(label)}</span>`]);
   if (r.kind === 'new') {
-    if (r.date) rows.push([/발표/.test(r.when) ? '발표일' : '출시일', esc(fmtDate(r.date))]);
+    if (r.date) rows.push([/발표/.test(r.when) ? '발표일' : '출시일', esc(fmtDate(r.date)) + (r.when && /[가-힣]/.test(r.when.replace(/출시|발표/g, '')) ? `<small>${esc(r.when)}</small>` : '')]);
   } else if (r.end && r.endLate) {
     rows.push(['판매 기간', `${r.start ? esc(fmtDate(r.start)) + ' 출시 · ' : ''}<b>종료 예상 ${esc(short(r.end))} ~ ${esc(short(r.endLate))}</b><small>확정이 아니라 기사에 나온 운영 기간으로 계산한 예상이에요</small>`]);
     rows.push(['남은 기간(예상)', `<span class="dday" data-d="${esc(r.end)}"></span> ~ <span class="dday" data-d="${esc(r.endLate)}"></span>`]);
   } else if (r.end) {
-    rows.push(['판매 기간', `${r.start ? esc(fmtDate(r.start)) + ' ~ ' : '~ '}${esc(fmtDate(r.end))}`]);
+    rows.push(['판매 기간', r.start ? `${esc(fmtDate(r.start))} ~ ${esc(r.start.slice(0, 4) === r.end.slice(0, 4) ? fmtDate(r.end).replace(/^\d{4}년 /, '') : fmtDate(r.end))}` : `~ ${esc(fmtDate(r.end))}`]);
     rows.push(['남은 기간', `<span class="dday" data-d="${esc(r.end)}"></span>`]);
+    if (r.start) {
+      const total = dayDiff(r.start, r.end) + 1;
+      const passed = Math.min(Math.max(dayDiff(r.start, today) + 1, 0), total);
+      const pct = total > 0 ? Math.round((passed / total) * 100) : 0;
+      rows.push(['진행', `<span class="s-bar" role="img" aria-label="판매 기간 중 ${pct}% 지남"><span class="s-bar-fill" style="width:${pct}%"></span></span><small>${pct}% 지남</small>`]);
+    }
   } else if (r.open || r.period) {
     rows.push(['판매 기간', `${esc(r.period || r.open)}${r.open && r.period && !r.period.includes(r.open) ? '' : ''}<small>종료일은 기사에 아직 나오지 않았어요</small>`]);
   }
@@ -625,7 +629,7 @@ function answerCard(r, today) {
   const showImg = !!(meta && meta.bytes <= IMG_MAX_BYTES);
   const imgFrom = r.imgFrom || (meta && meta.official ? meta.official.replace(/\(.*\)/, '') + ' 공식 홈페이지' : r.brand + ' 공식 홈페이지');
   const fig = showImg ? `<figure class="ans-img"><img src="${esc(r.img)}" alt="${esc(r.brand + ' ' + r.name)} 공식 홈페이지 사진" width="${meta.w}" height="${meta.h}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.closest('figure').remove()"><figcaption>사진: ${esc(imgFrom)} · 확인일 ${esc(fmtDate(UPDATED))}</figcaption></figure>` : '';
-  const grid = rows.map(([k, v]) => `<div class="ans-row${/기간$|기간\(예상\)$/.test(k) && k.startsWith('판매') ? ' wide' : ''}"><span class="ans-k">${k}</span><span class="ans-v">${v}</span></div>`).join('');
+  const grid = rows.map(([k, v]) => `<div class="ans-row${(k.startsWith('판매') || k === '진행') ? ' wide' : ''}"><span class="ans-k">${k}</span><span class="ans-v">${v}</span></div>`).join('');
   return `<div class="ans-wrap${showImg ? ' has-img' : ''}"><div class="answer-card" aria-label="한눈에 보는 답">${grid}<p class="ans-src">${srcTxt ? '출처: ' + srcTxt + ' · ' : ''}기준일 ${esc(fmtDate(UPDATED))}</p></div>${storeFind(r.brand, 'menu')}${fig}</div>`;
 }
 function summaryCard(r, today) {
@@ -675,7 +679,6 @@ function menuPage(r, all, today) {
   const desc = `${r.brand} ${r.name}${st === 'on' ? '' : '(' + label + ')'} ${isEvent ? '기간·참여 방법' : (hasPeriod ? '판매 기간·가격' : '정보')}: ${descBits.join(', ')}${descBits.length ? '. ' : ''}${lead}`.slice(0, 155);
 
   const facts = [];
-  facts.push(['상태', `<span class="badge ${st === 'on' ? 'on' : 'off'}" data-end="${esc(r.endLate || r.end || '')}">${esc(label)}</span>`]);
   facts.push(['브랜드', `<a href="${href(brandPath(r.brand))}">${esc(r.brand)}</a>`]);
   if (r.catName) facts.push(['업종', `<a href="${href(catPath(r.cat))}">${esc(r.catName)}</a>`]);
   facts.push(['구분', esc(r.tag)]);
@@ -684,13 +687,6 @@ function menuPage(r, all, today) {
     const cmp = [['<a href="/guide/christmas-cake-preorder">크리스마스 케이크 사전예약 비교(브랜드별 할인·마감)</a>']];
     if (/프리퀀시/.test(r.name + ' ' + (r.title || ''))) cmp.unshift(['<a href="/guide/starbucks-frequency">스타벅스 겨울 e-프리퀀시 정리</a>']);
     facts.push(['같은 시즌 비교', cmp.map((x) => x[0]).join(' · ')]);
-  }
-  if (r.price) facts.push(['가격', `<b class="mono">${esc(r.price)}</b>${r.priceNote ? ` <small>${esc(r.priceNote)}</small>` : ''}`]);
-  if (r.kind === 'new' && r.date) facts.push([/발표/.test(r.when) ? '발표일' : '출시일', esc(fmtDate(r.date)) + (r.when && /[가-힣]/.test(r.when.replace(/출시|발표/g, '')) ? ` <small>(${esc(r.when)})</small>` : '')]);
-  if (r.kind !== 'new') {
-    if (r.period) facts.push(['기간', esc(r.period)]);
-    if (r.end) facts.push([r.endLate ? '빠른 종료 예상' : '마감일', `${esc(fmtDate(r.end))} <span class="dday" data-d="${esc(r.end)}"></span>`]);
-    else if (r.open) facts.push(['마감', esc(r.open)]);
   }
   (r.specs || []).forEach(([k, v]) => facts.push([esc(k), esc(v)]));
   if (r.cups) facts.push(['적립', `${r.cups.total}잔 (미션음료 ${r.cups.mission}잔 포함)`]);
