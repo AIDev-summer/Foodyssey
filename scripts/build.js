@@ -149,6 +149,9 @@ const FORCED = new Set();
 let CONSOLIDATED = {};
 try { CONSOLIDATED = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'consolidation.json'), 'utf8')); } catch (e) {}
 const MENU_MIN = 650, HUB_MIN = 800;
+// 임시 유예(2026-11-18): 반복 영역을 빼서 짧아진 메뉴 페이지는 until 날짜까지만 색인을 유지하고, 그 안에 고유 정보를 보강해요.
+let GRACE = { until: '', slugs: [] };
+try { GRACE = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'menu-short-grace.json'), 'utf8')); } catch (e) {}
 // 완성된 페이지의 눈에 보이는 글자 수(머리글·푸터·스크립트 제외)
 function plainLen(h) {
   const t = h.replace(/<head>[\s\S]*?<\/head>|<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<header[\s\S]*?<\/header>|<footer[\s\S]*?<\/footer>|<nav class="crumbs"[\s\S]*?<\/nav>/g, ' ').replace(/<[^>]+>/g, ' ');
@@ -407,19 +410,6 @@ function compareHtml(r, all, today) {
         + `<div class="tbl"><table class="compare"><thead><tr><th>메뉴</th><th>가격</th></tr></thead><tbody>${all2.slice(Math.max(0, below - 2), below + 4).map((p) => `<tr><td data-label="메뉴">${p.x.slug === r.slug ? '<b>' : ''}${esc(p.x.brand)} ${esc(p.x.name)}${p.x.slug === r.slug ? '</b>' : ''}</td><td data-label="가격">${esc(p.x.price)}</td></tr>`).join('')}</tbody></table></div>`;
     }
   }
-  if (r.kind === 'new' && r.date && r.cat) {
-    const t0 = Date.parse(r.date);
-    const near = all.filter((x) => on(x) && x.kind === 'new' && x.date && x.brand !== r.brand && x.cat === r.cat && Math.abs(Date.parse(x.date) - t0) <= 14 * 86400000);
-    const seen = new Set();
-    const list = near.filter((x) => (seen.has(x.brand) ? false : (seen.add(x.brand), true))).slice(0, 5);
-    if (list.length) h += `<h2>비슷한 시기에 나온 ${esc(r.catName)} 메뉴</h2><ul class="cards">${list.map((x) => card(x, 'on')).join('')}</ul>`;
-  }
-  if (r.kind !== 'new' && r.end) {
-    const t0 = Date.parse(r.end);
-    const near = all.filter((x) => on(x) && x.kind !== 'new' && x.end && x.brand !== r.brand && Math.abs(Date.parse(x.end) - t0) <= 21 * 86400000).slice(0, 4);
-    h += `<h2>마감일 읽는 법</h2><p>‘${esc(r.name)}’의 마감일은 ${esc(mdw(r.end))}이에요. 기사에 적힌 종료일 기준이고, 매장 재고나 브랜드 사정으로 먼저 끝날 수 있어요.${near.length ? ` 비슷한 시기에 끝나는 다른 한정 항목도 함께 보세요.` : ''}</p>`
-      + (near.length ? `<ul class="cards">${near.map((x) => card(x, 'on')).join('')}</ul>` : '');
-  }
   return h;
 }
 
@@ -449,8 +439,6 @@ function relTop(S) {
   const a = (x, withBrand, small) => `<a href="${href(menuPath(x))}">${withBrand ? esc(x.brand) + ' ' : ''}${esc(x.name)}${small ? `<small>${esc(small)}</small>` : ''}</a>`;
   const g = [];
   if (S.brand.length) g.push(['같은 브랜드 다른 메뉴', S.brand.slice(0, 3).map((x) => a(x, false))]);
-  if (S.price.length) g.push(['비슷한 가격대 다른 브랜드', S.price.slice(0, 3).map((x) => a(x, true, x.price))]);
-  if (S.ending.length) g.push([S.endTitle, S.ending.slice(0, 3).map((x) => a(x, true, mdw(x.end) + '까지'))]);
   if (!g.length) return '';
   return `<aside class="rel" aria-label="함께 보면 좋은 메뉴">${g.map(([t, ls]) => `<div><b>${esc(t)}</b><span>${ls.join('')}</span></div>`).join('')}</aside>`;
 }
@@ -729,9 +717,6 @@ function menuPage(r, all, today) {
   const REL = relatedSets(r, all, today);
   body += relTop(REL);
   body += compareHtml(r, all, today);
-  body += relBottom(r, REL);
-  const sameCat = all.filter((x) => r.cat && x.cat === r.cat && x.brand !== r.brand && status(x, today) === 'on' && !REL.price.includes(x)).slice(0, 4);
-  if (sameCat.length) body += `<h2>다른 브랜드 ${esc(r.catName)} 메뉴</h2><ul class="cards">${sameCat.map((x) => card(x, 'on')).join('')}</ul>`;
   if (r.firstSeen) body += `<p class="stamp">푸디세이 등록일 <time datetime="${esc(r.firstSeen)}">${esc(fmtDate(r.firstSeen))}</time> · 사이트 마지막 업데이트 <time datetime="${esc(UPDATED)}">${esc(fmtDate(UPDATED))}</time></p>`;
   body += exploreHtml(r.cat);
   body += `<p class="more"><a href="/">오늘의 새 메뉴·한정 메뉴 전체 보기 →</a></p>`;
@@ -858,7 +843,7 @@ function main() {
   let noindexCount = 0;
   all.forEach((r) => {
     let mp = menuPage(r, all, today);
-    if (!noindexReason(r, status(r, today)) && plainLen(mp) < MENU_MIN) { FORCED.add(r.slug); mp = menuPage(r, all, today); }
+    if (!noindexReason(r, status(r, today)) && plainLen(mp) < MENU_MIN && !(GRACE.until >= today && GRACE.slugs.includes(r.slug))) { FORCED.add(r.slug); mp = menuPage(r, all, today); }
     fs.writeFileSync(path.join(ROOT, 'menu', r.slug + '.html'), mp);
     if (noindexReason(r, status(r, today))) { noindexCount++; return; }
     urls.push({ loc: menuPath(r), lastmod: r.firstSeen, pri: status(r, today) === 'on' ? '0.7' : '0.4' });

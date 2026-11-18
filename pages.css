@@ -232,3 +232,6 @@ article > *, .ans-wrap, .answer-card, .facts, .tbl, .store-find { max-width: 100
 .crumbs { display: flex; flex-wrap: nowrap; align-items: center; gap: 0; min-width: 0; }
 .crumbs a, .crumbs .sep { flex: none; white-space: nowrap; }
 .crumbs [aria-current] { flex: 1 1 0; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* 본문 문단만 양쪽 정렬(표·카드·버튼·짧은 문구 제외). 좁은 화면은 틈이 커져 왼쪽 정렬 */
+article > p:not(.kicker):not(.stamp):not(.more):not(.src):not(.ans-src):not(.meta):not(.store-find), article > section > p { text-align: justify; text-justify: inter-word; }
+@media (max-width: 400px) { article > p:not(.kicker):not(.stamp):not(.more):not(.src):not(.ans-src):not(.meta):not(.store-find), article > section > p { text-align: left; } }
