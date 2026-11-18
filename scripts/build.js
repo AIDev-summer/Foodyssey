@@ -426,11 +426,22 @@ function relatedSets(r, all, today) {
   if (!ending.length) { ending = endable; endTitle = '곧 끝나는 한정 메뉴'; }
   return { brand, price, ending, endTitle };
 }
-function relTop(S, today) {
-  if (!S.brand.length) return '';
+function relTop(S, today, r, all) {
   const when = (x) => (x.kind !== 'new' && x.end ? `${mdKo(x.end)}까지` : '판매 중');
-  const li = S.brand.slice(0, 4).map((x) => `<li><a href="${href(menuPath(x))}">${esc(x.name)}</a><span>${esc(when(x))}</span></li>`).join('');
-  return `<aside class="rel" aria-label="같은 브랜드 다른 메뉴"><h2>${esc(S.brand[0].brand)}의 다른 메뉴</h2><ul class="rel-list">${li}</ul></aside>`;
+  let h = '';
+  if (S.brand.length) {
+    h += `<aside class="rel" aria-label="같은 브랜드 다른 메뉴"><h2>${esc(S.brand[0].brand)}의 다른 메뉴</h2><ul class="rel-list">${S.brand.slice(0, 4).map((x) => `<li><a href="${href(menuPath(x))}">${esc(x.name)}</a><span>${esc(x.price ? x.price + ' · ' + when(x) : when(x))}</span></li>`).join('')}</ul></aside>`;
+  }
+  // 다른 브랜드의 같은 종류: 같은 업종이고, 시즌 메뉴면 같은 시즌만. 브랜드당 1개, 최대 3개, 맞는 게 없으면 영역을 숨겨요.
+  const seen = new Set([r.brand]);
+  const same = all.filter((x) => status(x, today) === 'on' && x.slug !== r.slug && x.brand !== r.brand && r.cat && x.cat === r.cat && (!r.season || x.season === r.season)
+    && (r.kind === 'new') === (x.kind === 'new'))
+    .sort((a, c) => String(c.date || c.end || c.firstSeen || '').localeCompare(String(a.date || a.end || a.firstSeen || '')))
+    .filter((x) => (seen.has(x.brand) ? false : (seen.add(x.brand), true))).slice(0, 3);
+  if (same.length) {
+    h += `<aside class="rel" aria-label="다른 브랜드의 비슷한 메뉴"><h2>다른 브랜드의 비슷한 ${esc(r.catName || '')} 메뉴</h2><ul class="rel-list">${same.map((x) => `<li><a href="${href(menuPath(x))}">${esc(x.brand)} ${esc(x.name)}</a><span>${esc(x.price ? x.price + ' · ' + when(x) : when(x))}</span></li>`).join('')}</ul></aside>`;
+  }
+  return h;
 }
 function relBottom(r, S) {
   const blk = (t, list) => (list.length ? `<h2>${esc(t)}</h2><ul class="cards">${list.slice(0, 5).map((x) => card(x, 'on')).join('')}</ul>` : '');
@@ -620,9 +631,9 @@ function answerCard(r, today) {
   const showImg = !!(meta && meta.bytes <= IMG_MAX_BYTES);
   const imgFrom = r.imgFrom || (meta && meta.official ? meta.official.replace(/\(.*\)/, '') + ' 공식 홈페이지' : r.brand + ' 공식 홈페이지');
   const fig = showImg ? `<figure class="ans-img"><img src="${esc(r.img)}" alt="${esc(r.brand + ' ' + r.name)} 공식 홈페이지 사진" width="${meta.w}" height="${meta.h}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.closest('figure').remove()"><figcaption>사진: ${esc(imgFrom)} · 확인일 ${esc(fmtDate(UPDATED))}</figcaption></figure>` : '';
-  if (rows.length < 2 && !srcTxt) return `<div class="ans-wrap${showImg ? ' has-img' : ''}">${storeFind(r.brand, 'menu')}${fig}</div>`;
+  if (rows.length < 2 && !srcTxt) return `<div class="ans-wrap${showImg ? ' has-img' : ''}">${fig}${storeFind(r.brand, 'menu')}</div>`;
   const grid = rows.map(([k, v]) => `<div class="ans-row${k.startsWith('판매') ? ' wide' : ''}"><span class="ans-k">${k}</span><span class="ans-v">${nwTok(v)}</span></div>`).join('');
-  return `<div class="ans-wrap${showImg ? ' has-img' : ''}"><div class="answer-card" aria-label="한눈에 보는 답">${grid}${r.kind !== 'new' && r.end ? '<p class="ans-note">재고가 떨어지면 마감일보다 일찍 끝날 수 있어요.</p>' : ''}<p class="ans-src">${srcTxt ? '출처: ' + srcTxt + ' · ' : ''}기준일 <span class="nw">${esc(fmtDate(UPDATED))}</span></p></div>${storeFind(r.brand, 'menu')}${fig}</div>`;
+  return `<div class="ans-wrap${showImg ? ' has-img' : ''}">${fig}<div class="answer-card" aria-label="한눈에 보는 답">${grid}${r.kind !== 'new' && r.end ? '<p class="ans-note">재고가 떨어지면 마감일보다 일찍 끝날 수 있어요.</p>' : ''}<p class="ans-src">${srcTxt ? '출처: ' + srcTxt + ' · ' : ''}기준일 <span class="nw">${esc(fmtDate(UPDATED))}</span></p></div>${storeFind(r.brand, 'menu')}</div>`;
 }
 function summaryCard(r, today) {
   const st = status(r, today);
@@ -704,7 +715,7 @@ function menuPage(r, all, today) {
 
   const REL = relatedSets(r, all, today);
   body += compareHtml(r, all, today);
-  body += relTop(REL);
+  body += relTop(REL, today, r, all);
 
   const cr = crumbs([{ name: '홈', path: '/' }, { name: r.brand, path: brandPath(r.brand) }, { name: r.name, path: menuPath(r) }]);
   // 푸디세이는 물건을 파는 사이트가 아니라 메뉴 정보 사이트예요. Product/Offer/Review 같은 판매·평점 마크업은 쓰지 않고,

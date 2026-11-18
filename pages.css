@@ -200,7 +200,6 @@ footer .links a, .explore a { min-width: 44px; justify-content: center; }
 .ans-wrap { display: grid; gap: 12px; margin: 0 0 16px; }
 .ans-wrap > .store-find { margin: 0; }
 .ans-wrap.has-img { grid-template-columns: 1fr; }
-@media (min-width: 760px) { .ans-wrap.has-img { grid-template-columns: minmax(0, 1fr) 240px; grid-template-areas: 'card fig' 'btn fig'; grid-template-rows: auto 1fr; align-items: start; } .ans-wrap.has-img > .answer-card { grid-area: card; } .ans-wrap.has-img > .store-find { grid-area: btn; } .ans-wrap.has-img > .ans-img { grid-area: fig; } }
 .answer-card { display: grid; grid-template-columns: repeat(auto-fit, minmax(124px, 1fr)); gap: 16px 24px; padding: 20px; border: 1px solid var(--line); border-radius: 16px; background: var(--card); }
 .ans-row { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
 .ans-k { font-size: 13px; font-weight: 600; color: var(--muted); line-height: 1.2; }
@@ -244,3 +243,6 @@ article > p:not(.kicker):not(.stamp):not(.more):not(.src):not(.ans-src):not(.met
 .rel-list a { color: var(--ink); text-decoration: none; font-weight: 600; }
 .rel-list span { color: var(--muted); font-size: 14px; white-space: nowrap; }
 .ans-note { grid-column: 1 / -1; margin: 0; font-size: 13px; color: var(--muted); text-align: left; }
+/* 이미지는 제목 바로 아래 맨 위, 높이는 화면의 28%(모바일 기준 40% 이하)로 제한해 답 상자가 첫 화면에 보이게 */
+.ans-img img { width: 100%; height: clamp(140px, 28vh, 320px); max-height: none; object-fit: cover; border-radius: 12px; }
+.rel + .rel { margin-top: 16px; }
