@@ -604,7 +604,7 @@ function answerCard(r, today) {
   const st = status(r, today);
   const label = statusLabel(r, st);
   const rows = [];
-  rows.push(['상태', `<span class="s-chip" style="background:${brandColor(r.brand)}">${esc(r.brand)}</span> <span class="badge ${st === 'on' ? 'on' : 'off'}" data-end="${esc(r.endLate || r.end || '')}">${esc(label)}</span>`]);
+  rows.push(['상태', `<span class="badge ${st === 'on' ? 'on' : 'off'}" data-end="${esc(r.endLate || r.end || '')}">${esc(label)}</span>`]);
   if (r.kind === 'new') {
     if (r.date) rows.push([/발표/.test(r.when) ? '발표일' : '출시일', esc(fmtDate(r.date)) + (r.when && /[가-힣]/.test(r.when.replace(/출시|발표/g, '')) ? `<small>${esc(r.when)}</small>` : '')]);
   } else if (r.end && r.endLate) {
@@ -613,12 +613,6 @@ function answerCard(r, today) {
   } else if (r.end) {
     rows.push(['판매 기간', r.start ? `${esc(fmtDate(r.start))} ~ ${esc(r.start.slice(0, 4) === r.end.slice(0, 4) ? fmtDate(r.end).replace(/^\d{4}년 /, '') : fmtDate(r.end))}` : `~ ${esc(fmtDate(r.end))}`]);
     rows.push(['남은 기간', `<span class="dday" data-d="${esc(r.end)}"></span>`]);
-    if (r.start) {
-      const total = dayDiff(r.start, r.end) + 1;
-      const passed = Math.min(Math.max(dayDiff(r.start, today) + 1, 0), total);
-      const pct = total > 0 ? Math.round((passed / total) * 100) : 0;
-      rows.push(['진행', `<span class="s-bar" role="img" aria-label="판매 기간 중 ${pct}% 지남"><span class="s-bar-fill" style="width:${pct}%"></span></span><small>${pct}% 지남</small>`]);
-    }
   } else if (r.open || r.period) {
     rows.push(['판매 기간', `${esc(r.period || r.open)}${r.open && r.period && !r.period.includes(r.open) ? '' : ''}<small>종료일은 기사에 아직 나오지 않았어요</small>`]);
   }
@@ -629,7 +623,8 @@ function answerCard(r, today) {
   const showImg = !!(meta && meta.bytes <= IMG_MAX_BYTES);
   const imgFrom = r.imgFrom || (meta && meta.official ? meta.official.replace(/\(.*\)/, '') + ' 공식 홈페이지' : r.brand + ' 공식 홈페이지');
   const fig = showImg ? `<figure class="ans-img"><img src="${esc(r.img)}" alt="${esc(r.brand + ' ' + r.name)} 공식 홈페이지 사진" width="${meta.w}" height="${meta.h}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.closest('figure').remove()"><figcaption>사진: ${esc(imgFrom)} · 확인일 ${esc(fmtDate(UPDATED))}</figcaption></figure>` : '';
-  const grid = rows.map(([k, v]) => `<div class="ans-row${(k.startsWith('판매') || k === '진행') ? ' wide' : ''}"><span class="ans-k">${k}</span><span class="ans-v">${v}</span></div>`).join('');
+  if (rows.length < 2 && !srcTxt) return `<div class="ans-wrap${showImg ? ' has-img' : ''}">${storeFind(r.brand, 'menu')}${fig}</div>`;
+  const grid = rows.map(([k, v]) => `<div class="ans-row${k.startsWith('판매') ? ' wide' : ''}"><span class="ans-k">${k}</span><span class="ans-v">${v}</span></div>`).join('');
   return `<div class="ans-wrap${showImg ? ' has-img' : ''}"><div class="answer-card" aria-label="한눈에 보는 답">${grid}<p class="ans-src">${srcTxt ? '출처: ' + srcTxt + ' · ' : ''}기준일 ${esc(fmtDate(UPDATED))}</p></div>${storeFind(r.brand, 'menu')}${fig}</div>`;
 }
 function summaryCard(r, today) {
@@ -707,7 +702,7 @@ function menuPage(r, all, today) {
     const sibs = r.group.filter((n) => n !== r.name);
     body += `<h2>같이 나온 메뉴</h2><p>${esc(r.brand)}에서 ${esc(r.name)}${josaWa(r.name)} 함께 ${esc(sibs.join(', '))}도 나왔어요.</p>`;
   }
-  if (r.src) body += `<p class="src">출처: <a href="${esc(r.src.url)}" target="_blank" rel="noopener nofollow">${esc(r.src.label)}</a></p>`;
+  // 출처는 상단 답 상자에 한 번만 보여 줘요(같은 정보가 두 번 나오지 않게).
 
   const REL = relatedSets(r, all, today);
   body += relTop(REL);
