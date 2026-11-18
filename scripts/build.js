@@ -27,9 +27,9 @@ const BRAND_CAT = {
 
 // 가이드(/guide) 글: data.js 근거로 손으로 쓴 고정 HTML이라 sitemap에만 메타를 등록해요.
 const GUIDES = [
-  { slug: 'starbucks-frequency', updated: '2026-11-16', title: '스타벅스 겨울 e-프리퀀시 2026 정리: 17잔 조건·미션 음료·증정품·예약 요령', desc: '17잔 조건, 미션 음료 8가지, 증정품과 추가 증정품, 예약 취소 대기·적립 주의사항을 기사 근거로 정리했어요.' },
-  { slug: 'christmas-cake-preorder', updated: '2026-11-16', title: '크리스마스 케이크 사전예약 비교 2026: 브랜드별 할인·예약 마감·수령 기간', desc: '파바·뚜레쥬르·투썸·배라·스타벅스·파스쿠찌의 사전예약 할인, 마감일, 수령 기간을 마감 임박 순으로 비교했어요.' },
-  { slug: 'bigarch-duration', updated: '2026-11-08', title: '맥도날드 빅아치 판매기간·가격·크기 정리(종료일 계산)', desc: '빅아치 출시일·가격·무게와 한정 판매 4~6주로 계산한 종료 예상일을 기사 근거로 정리했어요.' },
+  { slug: 'starbucks-frequency', updated: '2026-11-19', title: '스타벅스 겨울 e-프리퀀시 2026 정리: 17잔 조건·미션 음료·증정품·예약 요령', desc: '17잔 조건, 미션 음료 8가지, 증정품과 추가 증정품, 예약 취소 대기·적립 주의사항을 기사 근거로 정리했어요.' },
+  { slug: 'christmas-cake-preorder', updated: '2026-11-19', title: '크리스마스 케이크 사전예약 비교 2026: 브랜드별 할인·예약 마감·수령 기간', desc: '파바·뚜레쥬르·투썸·배라·스타벅스·파스쿠찌의 사전예약 할인, 마감일, 수령 기간을 마감 임박 순으로 비교했어요.' },
+  { slug: 'bigarch-duration', updated: '2026-11-19', title: '맥도날드 빅아치 판매기간·가격·크기 정리(종료일 계산)', desc: '빅아치 출시일·가격·무게와 한정 판매 4~6주로 계산한 종료 예상일을 기사 근거로 정리했어요.' },
   { slug: 'limited-menu-duration', updated: '', generated: true, title: '한정 메뉴·이벤트는 며칠 동안 할까: 푸디세이 기록으로 계산한 판매 기간', desc: '시작일과 종료일이 기사에 나온 항목만 골라 기간을 계산하고 브랜드별로 정리했어요.' },
   { slug: 'price-distribution', updated: '', generated: true, title: '프랜차이즈 신메뉴 가격대 분포: 푸디세이 기록 기준', desc: '가격이 기사에 확인된 신메뉴를 가격대별로 나눠 업종별 범위까지 계산했어요.' }
 ];
@@ -631,7 +631,7 @@ function answerCard(r, today) {
   const meta = r.img ? IMG_META[r.img] : null;
   const showImg = !!(meta && meta.bytes <= IMG_MAX_BYTES);
   const imgFrom = r.imgFrom || (meta && meta.official ? meta.official.replace(/\(.*\)/, '') + ' 공식 홈페이지' : r.brand + ' 공식 홈페이지');
-  const fig = showImg ? `<figure class="ans-img"><img src="${esc(r.img)}" alt="${esc(r.brand + ' ' + r.name)} 공식 홈페이지 사진" width="${meta.w}" height="${meta.h}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.closest('figure').remove()"><figcaption>사진: ${esc(imgFrom)} · 확인일 ${esc(fmtDate(UPDATED))}</figcaption></figure>` : '';
+  const fig = showImg ? `<figure class="ans-img"><img src="${esc(r.img)}" alt="${esc(r.brand + ' ' + r.name)} 공식 홈페이지 사진" width="${meta.w}" height="${meta.h}" fetchpriority="high" decoding="async" referrerpolicy="no-referrer" onerror="this.closest('figure').remove()"><figcaption>사진: ${esc(imgFrom)} · 확인일 ${esc(fmtDate(UPDATED))}</figcaption></figure>` : '';
   if (!rows.length && !srcTxt) return `<div class="ans-wrap${showImg ? ' has-img' : ''}">${fig}${storeFind(r.brand, 'menu')}</div>`;
   const grid = rows.map(([k, v]) => `<div class="ans-row${k.startsWith('판매') ? ' wide' : ''}"><span class="ans-k">${k}</span><span class="ans-v">${nwTok(v)}</span></div>`).join('');
   return `<div class="ans-wrap${showImg ? ' has-img' : ''}">${fig}${r.season && SEASONS[r.season] ? `<p class="season-tag tone-${r.season === 'christmas' ? 'red' : 'green'}">${esc(SEASONS[r.season].name)} 시즌</p>` : ''}<div class="answer-card" aria-label="한눈에 보는 답">${grid}${r.kind !== 'new' && r.end && !/재고/.test((r.desc || '') + (r.note || '')) ? '<p class="ans-note">재고가 떨어지면 마감일보다 일찍 끝날 수 있어요.</p>' : ''}<p class="ans-src">${srcTxt ? '출처: ' + srcTxt + ' · ' : ''}기준일 <span class="nw">${esc(fmtDate(UPDATED))}</span></p></div>${storeFind(r.brand, 'menu')}</div>`;
@@ -864,6 +864,31 @@ function cakeUrgentHtml(today) {
   return `<div class="ans-wrap"><div class="answer-card" aria-label="한눈에 보는 답">${rows}<p class="ans-src">출처: 브랜드 공식 발표·언론 보도(표 아래 목록) · 기준일 <span class="nw">${esc(fmtDate(srcDate))}</span></p></div></div>${script}`;
 }
 
+// ---------- 손으로 쓴 가이드의 구조화 데이터(BreadcrumbList + Article). datePublished는 처음 올린 날, dateModified는 GUIDES의 updated(실제 수정일) ----------
+const GUIDE_PUBLISHED = { 'starbucks-frequency': '2026-11-03', 'christmas-cake-preorder': '2026-11-03', 'bigarch-duration': '2026-11-08' };
+function guideLd(g) {
+  const url = SITE + '/guide/' + g.slug;
+  const org = { '@type': 'Organization', name: '푸디세이', url: SITE + '/', logo: { '@type': 'ImageObject', url: SITE + '/icon-512.png' } };
+  const bc = { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: SITE + '/' },
+    { '@type': 'ListItem', position: 2, name: '가이드', item: SITE + '/guide/' },
+    { '@type': 'ListItem', position: 3, name: g.title, item: url }] };
+  const art = { '@context': 'https://schema.org', '@type': 'Article', headline: g.title.slice(0, 110), description: g.desc, inLanguage: 'ko', mainEntityOfPage: url,
+    datePublished: GUIDE_PUBLISHED[g.slug], dateModified: g.updated, author: org, publisher: org };
+  return [bc, art].map((o) => `<script type="application/ld+json">${JSON.stringify(o)}</script>`).join('\n');
+}
+function ensureGuideLd() {
+  GUIDES.filter((g) => GUIDE_PUBLISHED[g.slug]).forEach((g) => {
+    const f = path.join(ROOT, 'guide', g.slug + '.html');
+    if (!fs.existsSync(f)) return;
+    let h = fs.readFileSync(f, 'utf8');
+    const block = `<!-- build:ld -->\n${guideLd(g)}\n<!-- /build:ld -->`;
+    if (/<!-- build:ld -->/.test(h)) h = h.replace(/<!-- build:ld -->[\s\S]*?<!-- \/build:ld -->/, block);
+    else h = h.replace('</head>', block + '\n</head>');
+    fs.writeFileSync(f, h);
+  });
+}
+
 // ---------- index.html 갱신 ----------
 function replaceBlock(html, name, inner) {
   const re = new RegExp(`(<!-- build:${name} -->)[\\s\\S]*?(<!-- /build:${name} -->)`);
@@ -1037,6 +1062,7 @@ function main() {
   idx = replaceBlock(idx, 'stamp', `마지막 업데이트 <time datetime="${esc(UPDATED)}">${esc(fmtDate(UPDATED))}</time>${freshBits ? ' · ' + freshBits : ''} · 판매·진행 중 메뉴 ${liveItems.length}개 · <a href="/updates">업데이트 내역</a> · <a href="/rss.xml">RSS 구독</a>`);
   const readsLinks = GUIDES.map((g) => `<li><a href="/guide/${g.slug}">${esc(g.title)}</a></li>`).concat(MONTHLY_LINKS(all, today)).concat([`<li><a href="${href(seasonPath('christmas'))}">크리스마스·연말 메뉴 모음</a></li>`, '<li><a href="/updates">날짜별 업데이트 내역</a></li>']);
   idx = replaceBlock(idx, 'seasons', seasonCardsHtml(all, today));
+  ensureGuideLd();
   try {
     const gp = path.join(ROOT, 'guide', 'christmas-cake-preorder.html');
     fs.writeFileSync(gp, replaceBlock(fs.readFileSync(gp, 'utf8'), 'cake-urgent', cakeUrgentHtml(today)));
@@ -1044,6 +1070,7 @@ function main() {
   idx = replaceBlock(idx, 'reads', `      <ul class="reads-list">\n        ${readsLinks.join('\n        ')}\n      </ul>`);
   const idxLd = [
     { '@context': 'https://schema.org', '@type': 'WebSite', name: '푸디세이', alternateName: 'Foodyssey', url: SITE + '/' },
+    { '@context': 'https://schema.org', '@type': 'Organization', name: '푸디세이', alternateName: 'Foodyssey', url: SITE + '/', logo: SITE + '/icon-512.png' },
     { '@context': 'https://schema.org', '@type': 'ItemList', name: '프랜차이즈 새 메뉴와 한정 메뉴', itemListElement: liveItems.map((r, i) => ({ '@type': 'ListItem', position: i + 1, url: SITE + href(menuPath(r)), name: `${r.brand} ${r.name}` })) }
   ];
   idx = replaceBlock(idx, 'jsonld', idxLd.map((j) => `<script type="application/ld+json">${JSON.stringify(j).replace(/</g, '\\u003c')}</script>`).join('\n'));
@@ -1066,6 +1093,9 @@ function main() {
     const hardRows = q.rows.filter((r) => r.hard.length && !r.noindex);
     console.log('품질 점검: 페이지 ' + q.rows.length + '개, 미달 ' + q.failCount + '개, 하위 20% ' + q.bottomCount + '개(총점 ≤ ' + q.cut + '), 출처 대조 ' + q.verifiedPages + '개');
     if (q.failCount) q.rows.filter((r) => r.fail).slice(0, 15).forEach((r) => console.warn(' ! 품질 미달 ' + r.total + '점 ' + r.url + ' — ' + r.hard.concat(r.notes).slice(0, 3).join(' / ')));
+    const lk = require('./lint-links').run(ROOT);
+    console.log('링크 구조: 색인 대상 ' + lk.indexable + '쪽, 고아 ' + lk.orphans.length + '쪽, 설명 없는 링크 글자 ' + lk.weak.length + '곳');
+    if (lk.orphans.length || lk.weak.length) { lk.orphans.slice(0, 20).forEach((x) => console.error(' - 고아 페이지: ' + x)); lk.weak.slice(0, 20).forEach((x) => console.error(' - 설명 없는 링크: ' + x)); console.error('링크 구조 위반'); process.exit(1); }
     const dup = require('./lint-dup').run(ROOT);
     console.log('중복 점검: ' + dup.checked + '쪽, 위반 ' + dup.bad.length + '쪽');
     if (dup.bad.length) { dup.bad.slice(0, 30).forEach((x) => console.error(' - ' + x.page + ': ' + x.errs.join(' / '))); console.error('같은 내용 중복 ' + dup.bad.length + '쪽'); process.exit(1); }

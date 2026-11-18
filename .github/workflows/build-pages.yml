@@ -40,6 +40,7 @@ jobs:
         if: steps.build.outcome == 'success'
         run: |
           git config core.quotepath false
+          echo "base=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
           if [ -z "$(git status --porcelain)" ]; then echo "바뀐 페이지 없음"; echo "changed=false" >> "$GITHUB_OUTPUT"; exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -54,3 +55,8 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh api -X POST "repos/${{ github.repository }}/pages/builds" || echo "Pages 빌드 요청 실패(다음 푸시 때 반영돼요)"
+      - name: IndexNow(바뀐 색인 대상 URL을 검색엔진에 알려요)
+        if: steps.commit.outputs.changed == 'true'
+        run: |
+          sleep 90
+          node scripts/indexnow.js "${{ steps.commit.outputs.base }}" || echo "IndexNow 전송 실패(배포에는 영향 없어요)"
