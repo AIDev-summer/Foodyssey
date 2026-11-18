@@ -230,6 +230,11 @@ main .wrap { padding-block: 24px 56px; display: grid; gap: 40px; }
 .tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 16px; align-items: start; }
 .tile { display: grid; gap: 12px; padding: 20px 20px 16px; border-radius: 16px; background: var(--soft); }
 .tile-head { display: flex; justify-content: space-between; align-items: baseline; gap: 4px 12px; flex-wrap: wrap; }
+.tile-r { display: grid; justify-items: end; gap: 4px; }
+.tile-find { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; padding: 0 12px; border: 1px solid var(--line); border-radius: 10px; background: none; color: var(--fresh); font-size: 13px; font-weight: 700; line-height: 1; text-decoration: none; white-space: nowrap; }
+.tile-find:hover { border-color: var(--fresh); }
+.tile-find:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.tile-head { align-items: flex-start; }
 .tile .cat { font-size: 13px; font-weight: 700; letter-spacing: .06em; color: var(--tone); }
 .tile h3 { margin: 0; font-family: var(--f-display); font-weight: 700; font-size: 21px; letter-spacing: 0; line-height: 1.2; }
 .tile .when { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
@@ -743,6 +748,29 @@ p, li, dd, .row .period, .row .b, .tile p, .dir-cat p { word-break: keep-all; te
   hot(document.getElementById('hot-new'), D.hotNew, '이번 주 화제 신상');
   hot(document.getElementById('hot-limited'), D.hotLimited, '이번 주 화제 한정');
 
+  // 가까운 매장 찾기: 네이버 지도 검색 새 창(위치 권한·API 없음). 클릭은 GA4 store_find(brand, page_type=home)로 세고, 내 방문(fd_me)은 세지 않아요.
+  var PIN = 'M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z';
+  function storeLink(brand) {
+    var ns = 'http://www.w3.org/2000/svg';
+    var svg = document.createElementNS(ns, 'svg');
+    svg.setAttribute('viewBox', '0 0 24 24'); svg.setAttribute('width', '16'); svg.setAttribute('height', '16');
+    svg.setAttribute('fill', 'none'); svg.setAttribute('stroke', 'currentColor'); svg.setAttribute('stroke-width', '1.8');
+    svg.setAttribute('stroke-linecap', 'round'); svg.setAttribute('stroke-linejoin', 'round'); svg.setAttribute('aria-hidden', 'true');
+    var p1 = document.createElementNS(ns, 'path'); p1.setAttribute('d', PIN);
+    var c1 = document.createElementNS(ns, 'circle'); c1.setAttribute('cx', '12'); c1.setAttribute('cy', '10'); c1.setAttribute('r', '2.5');
+    svg.appendChild(p1); svg.appendChild(c1);
+    var a = el('a', { cls: 'tile-find', href: 'https://map.naver.com/p/search/' + encodeURIComponent(brand), target: '_blank', rel: 'noopener', 'data-store-find': brand, 'data-page-type': 'home', 'aria-label': brand + (brand === '성심당' ? ' 매장 위치 보기' : ' 가까운 매장 찾기') + ' (네이버 지도 새 창)' });
+    a.appendChild(svg);
+    a.appendChild(el('span', { text: brand === '성심당' ? '매장 위치 보기' : '가까운 매장 찾기' }));
+    return a;
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[data-store-find]');
+    if (!a) return;
+    try { if (localStorage.getItem('fd_me')) return; } catch (x) {}
+    if (typeof gtag === 'function') gtag('event', 'store_find', { brand: a.getAttribute('data-store-find'), page_type: a.getAttribute('data-page-type') });
+  });
+
   // 신상: 같은 브랜드는 한 타일로, 최근 출시 순
   var tilesBox = document.getElementById('tiles');
   var tiles = [];
@@ -755,7 +783,7 @@ p, li, dd, .row .period, .row .b, .tile p, .dir-cat p { word-break: keep-all; te
     var box = el('article', { cls: 'tile cat-' + t.cat, 'data-cat': t.cat }, [
       el('div', { cls: 'tile-head' }, [
         el('div', null, [el('div', { cls: 'cat', text: catName[t.cat] || '' }), el('h3', { text: t.brand })]),
-        el('span', { cls: 'when', text: t.list[0].when })
+        el('div', { cls: 'tile-r' }, [el('span', { cls: 'when', text: t.list[0].when }), storeLink(t.brand)])
       ])
     ]);
     t.list.forEach(function (g, i) {
