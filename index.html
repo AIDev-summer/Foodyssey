@@ -308,8 +308,19 @@ main .wrap { padding-block: 24px 56px; display: grid; gap: 40px; }
 .stamp { color: var(--muted); font-size: 13px; margin: 8px 0 0; }
 .stamp a { color: inherit; }
 .reads { padding-block: 40px 8px; }
-.season-links { margin: 12px 0 0; font-size: 15px; line-height: 1.6; }
-.season-links a { font-weight: 600; }
+/* 시즌 카드(2026-11-18): 헤드라인 바로 아래, 시즌 색 포인트 1색 */
+.season-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin: 20px 0 8px; }
+.season-card { --tone: var(--fresh); display: grid; gap: 4px; padding: 16px 16px 16px 20px; border: 1px solid var(--line); border-left: 4px solid var(--tone); border-radius: 12px; background: var(--card); color: var(--ink); text-decoration: none; min-height: 44px; }
+.season-card.tone-red { --tone: #b3261e; }
+.season-card.tone-green { --tone: var(--fresh); }
+:root[data-theme="dark"] .season-card.tone-red { --tone: #f08a7f; }
+.season-card:hover { border-color: var(--tone); }
+.season-card:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.sc-label { font-size: 13px; font-weight: 700; color: var(--tone); line-height: 1.3; }
+.sc-title { font-size: 18px; font-weight: 700; line-height: 1.35; word-break: keep-all; text-wrap: balance; }
+.sc-meta { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 14px; color: var(--muted); line-height: 1.4; font-variant-numeric: tabular-nums; }
+.sc-d { flex: none; font-weight: 700; color: var(--tone); font-variant-numeric: tabular-nums; }
+.nw { white-space: nowrap; }
 .reads-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; font-size: 14px; }
 .reads-list a { color: var(--ink); }
 .dir-lim { list-style: none; margin: 0 0 20px; padding: 0; display: grid; gap: 8px; font-size: 14px; }
@@ -416,8 +427,9 @@ p, li, dd, .row .period, .row .b, .tile p, .dir-cat p { word-break: keep-all; te
 <section class="intro">
   <div class="wrap">
     <h1 id="headline">새로 나온 메뉴와<br>곧 사라질 메뉴</h1>
+<!-- build:seasons -->
+<!-- /build:seasons -->
     <p>버거, 치킨, 피자, 빵, 분식, 커피까지. 프랜차이즈 새 메뉴와 기간 한정 메뉴를 매일 아침 기사로 확인해 정리해요.</p>
-    <p class="season-links">지금 많이 찾는 시즌 정리: <a href="/guide/christmas-cake-preorder">크리스마스 케이크 사전예약 비교</a> · <a href="/guide/starbucks-frequency">스타벅스 겨울 e-프리퀀시</a></p>
       <p class="stamp"><!-- build:stamp -->
 마지막 업데이트 <time datetime="2026-11-18">2026년 11월 18일</time> · 최근 7일간 등록된 메뉴 39개 · 판매·진행 중 메뉴 151개 · <a href="/updates">업데이트 내역</a> · <a href="/rss.xml">RSS 구독</a>
 <!-- /build:stamp --></p>
@@ -563,6 +575,32 @@ p, li, dd, .row .period, .row .b, .tile p, .dir-cat p { word-break: keep-all; te
   <button class="close" id="photo-close" type="button" aria-label="닫기">×</button>
 </dialog>
 
+<script>
+/* 시즌 카드: 마감·D-n은 방문한 날(한국 시간) 기준으로 다시 계산해요 */
+(function () {
+  var p = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+  var t = new Date(p + 'T00:00:00Z');
+  function dl(s) { return Math.round((new Date(s + 'T00:00:00Z') - t) / 86400000); }
+  function md(s) { var a = s.split('-'); return Number(a[1]) + '/' + Number(a[2]); }
+  function dtxt(n) { return n === 0 ? 'D-DAY' : 'D-' + n; }
+  document.querySelectorAll('.season-card').forEach(function (c) {
+    var main = c.querySelector('.sc-main'), d = c.querySelector('.sc-d');
+    if (c.dataset.dl) {
+      var ds = c.dataset.dl.split(',').filter(function (x) { return dl(x) >= 0; }).sort();
+      if (!ds.length) { c.remove(); return; }
+      main.textContent = c.dataset.unit + ' · 가장 빠른 마감 ' + md(ds[0]);
+      if (d) d.textContent = dl(ds[0]) <= 60 ? dtxt(dl(ds[0])) : '';
+    } else if (c.dataset.end) {
+      var n = dl(c.dataset.end);
+      if (n < 0) { c.remove(); return; }
+      main.textContent = md(c.dataset.end) + '까지' + (c.dataset.tail || '');
+      if (d) d.textContent = dtxt(n);
+    }
+  });
+  var box = document.querySelector('.season-cards');
+  if (box && !box.querySelector('.season-card')) box.remove();
+})();
+</script>
 <script src="data.js"></script>
 <script>
 (function () {

@@ -1,0 +1,61 @@
+{
+ "note": "홈 상단 시즌 카드 목록. type=deadlines: items의 날짜 중 오늘 이후 가장 빠른 마감을 자동 계산. type=menu: data.js의 메뉴(brand+name)에서 종료일·잔 수를 가져와요. hidden이 true거나 시즌이 끝나면 카드가 빠져요.",
+ "cards": [
+  {
+   "id": "christmas-cake",
+   "season": "christmas",
+   "label": "크리스마스",
+   "title": "크리스마스 케이크 사전예약 비교",
+   "href": "/guide/christmas-cake-preorder",
+   "tone": "red",
+   "type": "deadlines",
+   "unit": "브랜드",
+   "updated": "2026-11-16",
+   "items": [
+    [
+     "배스킨라빈스",
+     "2026-11-18"
+    ],
+    [
+     "투썸플레이스",
+     "2026-11-18"
+    ],
+    [
+     "스타벅스 조선델리 노엘 트리",
+     "2026-11-19"
+    ],
+    [
+     "파스쿠찌",
+     "2026-12-17"
+    ],
+    [
+     "스타벅스 홀케이크",
+     "2026-12-11"
+    ],
+    [
+     "파리바게뜨",
+     "2026-12-19"
+    ],
+    [
+     "뚜레쥬르",
+     "2026-12-22"
+    ],
+    [
+     "스타벅스 럭키 쉽 케이크",
+     "2026-12-23"
+    ]
+   ]
+  },
+  {
+   "id": "starbucks-frequency",
+   "season": "christmas",
+   "label": "겨울 시즌",
+   "title": "스타벅스 겨울 e-프리퀀시",
+   "href": "/guide/starbucks-frequency",
+   "tone": "green",
+   "type": "menu",
+   "brand": "스타벅스",
+   "name": "겨울 e-프리퀀시"
+  }
+ ]
+}

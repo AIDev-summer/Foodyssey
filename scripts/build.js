@@ -633,7 +633,7 @@ function answerCard(r, today) {
   const fig = showImg ? `<figure class="ans-img"><img src="${esc(r.img)}" alt="${esc(r.brand + ' ' + r.name)} 공식 홈페이지 사진" width="${meta.w}" height="${meta.h}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.closest('figure').remove()"><figcaption>사진: ${esc(imgFrom)} · 확인일 ${esc(fmtDate(UPDATED))}</figcaption></figure>` : '';
   if (rows.length < 2 && !srcTxt) return `<div class="ans-wrap${showImg ? ' has-img' : ''}">${fig}${storeFind(r.brand, 'menu')}</div>`;
   const grid = rows.map(([k, v]) => `<div class="ans-row${k.startsWith('판매') ? ' wide' : ''}"><span class="ans-k">${k}</span><span class="ans-v">${nwTok(v)}</span></div>`).join('');
-  return `<div class="ans-wrap${showImg ? ' has-img' : ''}">${fig}<div class="answer-card" aria-label="한눈에 보는 답">${grid}${r.kind !== 'new' && r.end ? '<p class="ans-note">재고가 떨어지면 마감일보다 일찍 끝날 수 있어요.</p>' : ''}<p class="ans-src">${srcTxt ? '출처: ' + srcTxt + ' · ' : ''}기준일 <span class="nw">${esc(fmtDate(UPDATED))}</span></p></div>${storeFind(r.brand, 'menu')}</div>`;
+  return `<div class="ans-wrap${showImg ? ' has-img' : ''}">${fig}${r.season && SEASONS[r.season] ? `<p class="season-tag tone-${r.season === 'christmas' ? 'red' : 'green'}">${esc(SEASONS[r.season].name)} 시즌</p>` : ''}<div class="answer-card" aria-label="한눈에 보는 답">${grid}${r.kind !== 'new' && r.end ? '<p class="ans-note">재고가 떨어지면 마감일보다 일찍 끝날 수 있어요.</p>' : ''}<p class="ans-src">${srcTxt ? '출처: ' + srcTxt + ' · ' : ''}기준일 <span class="nw">${esc(fmtDate(UPDATED))}</span></p></div>${storeFind(r.brand, 'menu')}</div>`;
 }
 function summaryCard(r, today) {
   const st = status(r, today);
@@ -814,6 +814,33 @@ function groupsFor(list, today, withBrand) {
   return g;
 }
 
+// ---------- 홈 시즌 카드(data/seasons.json 한 곳에서 관리) ----------
+function seasonCardsHtml(all, today) {
+  let cfg = { cards: [] };
+  try { cfg = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'seasons.json'), 'utf8')); } catch (e) {}
+  const dleft = (d) => Math.round((Date.parse(d) - Date.parse(today)) / 86400000);
+  const dtxt = (n) => (n === 0 ? 'D-DAY' : 'D-' + n);
+  const out = [];
+  cfg.cards.filter((c) => !c.hidden).forEach((c) => {
+    let main = '', dd = '', attr = '';
+    if (c.type === 'deadlines') {
+      const ds = c.items.map((x) => x[1]).filter((d) => dleft(d) >= 0).sort();
+      if (!ds.length) return;
+      main = `${c.items.length}개 브랜드 · 가장 빠른 마감 <span class="nw">${esc(mdKo(ds[0]).replace('월 ', '/').replace('일', ''))}</span>`;
+      dd = dleft(ds[0]) <= 60 ? dtxt(dleft(ds[0])) : '';
+      attr = ` data-dl="${esc(c.items.map((x) => x[1]).join(','))}" data-unit="${esc(c.items.length + '개 ' + c.unit)}"`;
+    } else {
+      const r = all.find((x) => x.brand === c.brand && x.name.includes(c.name));
+      if (!r || !r.end || dleft(r.end) < 0) return;
+      main = `<span class="nw">${esc(mdKo(r.end).replace('월 ', '/').replace('일', ''))}</span>까지` + (r.cups ? ` · <span class="nw">${r.cups.total}잔</span>` : '');
+      dd = dtxt(dleft(r.end));
+      attr = ` data-end="${esc(r.end)}"${r.cups ? ` data-tail="${esc(' · ' + r.cups.total + '잔')}"` : ''}`;
+    }
+    out.push(`<a class="season-card tone-${esc(c.tone || 'green')}" href="${esc(c.href)}"${attr}><span class="sc-label">${esc(c.label)}</span><span class="sc-title">${esc(c.title)}</span><span class="sc-meta"><span class="sc-main">${main}</span>${dd ? `<span class="sc-d">${dd}</span>` : ''}</span></a>`);
+  });
+  return out.length ? `<nav class="season-cards" aria-label="지금 많이 찾는 시즌 정리">${out.join('')}</nav>` : '';
+}
+
 // ---------- index.html 갱신 ----------
 function replaceBlock(html, name, inner) {
   const re = new RegExp(`(<!-- build:${name} -->)[\\s\\S]*?(<!-- /build:${name} -->)`);
@@ -986,6 +1013,7 @@ function main() {
   const freshBits = [newToday ? `오늘 올라온 메뉴 ${newToday}개` : '', newWeek ? `최근 7일간 등록된 메뉴 ${newWeek}개` : ''].filter(Boolean).join(' · ');
   idx = replaceBlock(idx, 'stamp', `마지막 업데이트 <time datetime="${esc(UPDATED)}">${esc(fmtDate(UPDATED))}</time>${freshBits ? ' · ' + freshBits : ''} · 판매·진행 중 메뉴 ${liveItems.length}개 · <a href="/updates">업데이트 내역</a> · <a href="/rss.xml">RSS 구독</a>`);
   const readsLinks = GUIDES.map((g) => `<li><a href="/guide/${g.slug}">${esc(g.title)}</a></li>`).concat(MONTHLY_LINKS(all, today)).concat([`<li><a href="${href(seasonPath('christmas'))}">크리스마스·연말 메뉴 모음</a></li>`, '<li><a href="/updates">날짜별 업데이트 내역</a></li>']);
+  idx = replaceBlock(idx, 'seasons', seasonCardsHtml(all, today));
   idx = replaceBlock(idx, 'reads', `      <ul class="reads-list">\n        ${readsLinks.join('\n        ')}\n      </ul>`);
   const idxLd = [
     { '@context': 'https://schema.org', '@type': 'WebSite', name: '푸디세이', alternateName: 'Foodyssey', url: SITE + '/' },

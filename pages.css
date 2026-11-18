@@ -246,3 +246,9 @@ article > p:not(.kicker):not(.stamp):not(.more):not(.src):not(.ans-src):not(.met
 /* 이미지는 제목 바로 아래 맨 위, 높이는 화면의 28%(모바일 기준 40% 이하)로 제한해 답 상자가 첫 화면에 보이게 */
 .ans-img img { width: 100%; height: clamp(140px, 28vh, 320px); max-height: none; object-fit: cover; border-radius: 12px; }
 .rel + .rel { margin-top: 16px; }
+/* 시즌 라벨: 답 상자 위에 작게 */
+.season-tag { display: inline-flex; align-items: center; gap: 8px; margin: 0; font-size: 13px; font-weight: 700; line-height: 1.3; color: var(--tone, var(--fresh)); }
+.season-tag::before { content: ""; width: 4px; height: 14px; border-radius: 2px; background: currentColor; }
+.season-tag.tone-red { --tone: #b3261e; }
+.season-tag.tone-green { --tone: var(--fresh); }
+:root[data-theme="dark"] .season-tag.tone-red { --tone: #f08a7f; }
