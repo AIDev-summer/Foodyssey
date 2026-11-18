@@ -235,3 +235,12 @@ article > *, .ans-wrap, .answer-card, .facts, .tbl, .store-find { max-width: 100
 /* 본문 문단만 양쪽 정렬(표·카드·버튼·짧은 문구 제외). 좁은 화면은 틈이 커져 왼쪽 정렬 */
 article > p:not(.kicker):not(.stamp):not(.more):not(.src):not(.ans-src):not(.meta):not(.store-find), article > section > p { text-align: justify; text-justify: inter-word; }
 @media (max-width: 400px) { article > p:not(.kicker):not(.stamp):not(.more):not(.src):not(.ans-src):not(.meta):not(.store-find), article > section > p { text-align: left; } }
+/* 같은 브랜드 다른 메뉴: 메뉴명 + 기간 한 줄 */
+.rel { margin: 24px 0 0; padding: 0; border: 0; background: none; display: block; }
+.rel h2 { font-size: 16px; margin: 0 0 4px; }
+.rel-list { list-style: none; margin: 0; padding: 0; }
+.rel-list li { display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 44px; border-bottom: 1px solid var(--line); max-width: none; }
+.rel-list li:last-child { border-bottom: 0; }
+.rel-list a { color: var(--ink); text-decoration: none; font-weight: 600; }
+.rel-list span { color: var(--muted); font-size: 14px; white-space: nowrap; }
+.ans-note { grid-column: 1 / -1; margin: 0; font-size: 13px; color: var(--muted); text-align: left; }

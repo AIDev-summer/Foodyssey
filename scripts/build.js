@@ -401,15 +401,6 @@ function compareHtml(r, all, today) {
     const pl = r.lines.map((l) => ({ l, n: priceNum(l[1]) })).filter((x) => x.n).sort((a, c) => a.n - c.n);
     if (pl.length >= 2) h += `<h2>구성별 가격 비교</h2><p>이 묶음에서 가격이 확인된 ${pl.length}개 가운데 가장 싼 것은 ‘${esc(pl[0].l[0])}’ ${won(pl[0].n)}, 가장 비싼 것은 ‘${esc(pl[pl.length - 1].l[0])}’ ${won(pl[pl.length - 1].n)}이에요. 두 가격의 차이는 ${won(pl[pl.length - 1].n - pl[0].n)}이고, 모두 기사에 나온 단품 가격이에요.</p>`;
   }
-  if (n && r.cat) {
-    const peers = all.filter((x) => on(x) && x.cat === r.cat && priceNum(x.price)).map((x) => ({ x, n: priceNum(x.price) }));
-    if (peers.length) {
-      const below = peers.filter((p) => p.n < n).length;
-      const all2 = peers.concat([{ x: r, n }]).sort((a, c) => a.n - c.n);
-      h += `<h2>같은 업종 가격 비교</h2><p>${esc(r.catName)} 업종에서 가격이 확인된 메뉴 ${all2.length}개 가운데 ‘${esc(r.name)}’ ${esc(r.price)}은 싼 쪽에서 ${below + 1}번째예요. 단품·세트·조각 구성이 달라 단순 비교는 어렵고, 기사에 나온 가격만 견줬어요.</p>`
-        + `<div class="tbl"><table class="compare"><thead><tr><th>메뉴</th><th>가격</th></tr></thead><tbody>${all2.slice(Math.max(0, below - 2), below + 4).map((p) => `<tr><td data-label="메뉴">${p.x.slug === r.slug ? '<b>' : ''}${esc(p.x.brand)} ${esc(p.x.name)}${p.x.slug === r.slug ? '</b>' : ''}</td><td data-label="가격">${esc(p.x.price)}</td></tr>`).join('')}</tbody></table></div>`;
-    }
-  }
   return h;
 }
 
@@ -435,12 +426,11 @@ function relatedSets(r, all, today) {
   if (!ending.length) { ending = endable; endTitle = '곧 끝나는 한정 메뉴'; }
   return { brand, price, ending, endTitle };
 }
-function relTop(S) {
-  const a = (x, withBrand, small) => `<a href="${href(menuPath(x))}">${withBrand ? esc(x.brand) + ' ' : ''}${esc(x.name)}${small ? `<small>${esc(small)}</small>` : ''}</a>`;
-  const g = [];
-  if (S.brand.length) g.push(['같은 브랜드 다른 메뉴', S.brand.slice(0, 3).map((x) => a(x, false))]);
-  if (!g.length) return '';
-  return `<aside class="rel" aria-label="함께 보면 좋은 메뉴">${g.map(([t, ls]) => `<div><b>${esc(t)}</b><span>${ls.join('')}</span></div>`).join('')}</aside>`;
+function relTop(S, today) {
+  if (!S.brand.length) return '';
+  const when = (x) => (x.kind !== 'new' && x.end ? `${mdKo(x.end)}까지` : '판매 중');
+  const li = S.brand.slice(0, 4).map((x) => `<li><a href="${href(menuPath(x))}">${esc(x.name)}</a><span>${esc(when(x))}</span></li>`).join('');
+  return `<aside class="rel" aria-label="같은 브랜드 다른 메뉴"><h2>${esc(S.brand[0].brand)}의 다른 메뉴</h2><ul class="rel-list">${li}</ul></aside>`;
 }
 function relBottom(r, S) {
   const blk = (t, list) => (list.length ? `<h2>${esc(t)}</h2><ul class="cards">${list.slice(0, 5).map((x) => card(x, 'on')).join('')}</ul>` : '');
@@ -490,8 +480,7 @@ function durationGuide(all, today) {
     + (brRows ? `<h2>브랜드별 기간</h2><div class="tbl"><table class="compare"><thead><tr><th>브랜드</th><th>건수</th><th>평균 기간</th><th>항목</th></tr></thead><tbody>${brRows}</tbody></table></div><p class="table-note">브랜드별 건수가 1건이면 그 항목의 기간을 그대로 적었어요. 평균은 2건 이상일 때만 계산해요.</p>` : '')
     + (rgRows ? `<h2>종료일이 범위로만 나온 항목</h2><p>기사에 “4~6주 한정”처럼 범위로만 나온 항목은 평균에서 빼고 따로 적어요.</p><div class="tbl"><table class="compare"><thead><tr><th>브랜드</th><th>항목</th><th>시작</th><th>종료 예상</th><th>예상 기간</th><th>출처</th></tr></thead><tbody>${rgRows}</tbody></table></div>` : '')
     + (opRows ? `<h2>종료일이 아직 안 나온 항목</h2><p>시작일은 알지만 종료일이 기사에 없는 항목이에요. “○일째”는 시작일부터 기준일까지 센 날수(시작일 포함)이고, 종료일이 나오면 위 표로 옮겨 계산해요.</p><div class="tbl"><table class="compare"><thead><tr><th>브랜드</th><th>항목</th><th>시작</th><th>판매 기간</th><th>종료 표기</th><th>출처</th></tr></thead><tbody>${opRows}</tbody></table></div>` : '')
-    + `<h2>계산에서 뺀 항목</h2><p>시작일이 기사에 나오지 않아 기간을 계산하지 않은 한정·이벤트 항목은 ${noStart.length}건이에요: ${esc(noStart.map((r) => r.brand + ' ' + r.name).join(', '))}. 이 항목들은 메뉴 페이지에서 종료일만 확인할 수 있어요.</p>`
-    + `<h2>이 글을 읽는 법</h2><ul><li>“진행 중”은 기준일 기준 아직 종료일이 지나지 않았다는 뜻이고, 매장 재고나 브랜드 사정으로 먼저 끝날 수 있어요.</li><li>이벤트(앱 쿠폰·프리퀀시·할인)는 메뉴 판매 기간과 달라서 따로 평균을 냈어요.</li><li>데이터가 늘면 숫자가 바뀌므로, 인용할 때는 기준일을 같이 적어 주세요.</li></ul>`;
+    + `<h2>계산에서 뺀 항목</h2><p>시작일이 기사에 나오지 않아 기간을 계산하지 않은 한정·이벤트 항목은 ${noStart.length}건이에요: ${esc(noStart.map((r) => r.brand + ' ' + r.name).join(', '))}. 이 항목들은 메뉴 페이지에서 종료일만 확인할 수 있어요.</p>`;
   return pageShell({ title: `한정 메뉴·이벤트 판매 기간 계산 (${ds.length}건, ${monthLabel(today.slice(0, 7))} 기준) | 푸디세이`, desc: `시작일과 종료일이 기사에 나온 한정 메뉴·이벤트 ${ds.length}건의 기간을 직접 계산했어요. ${stat}`.slice(0, 155), canonical: '/guide/limited-menu-duration', crumbList: [{ name: '홈', path: '/' }, { name: '가이드', path: '/guide/' }, { name: '한정 메뉴 판매 기간', path: '/guide/limited-menu-duration' }], kicker: '가이드 · 자체 계산', h1: GUIDES.find((g) => g.slug === 'limited-menu-duration').title, body });
 }
 
@@ -594,7 +583,6 @@ function monthHub(all, today, months) {
       if (rec.length < 3) return '';
       return `<h2>최근 7일 안에 푸디세이에 올라온 메뉴</h2><p>${esc(mdw(from))}부터 ${esc(mdw(today))}까지 등록된 항목 중 검색에 노출되는 ${rec.length}개예요(등록일 순).</p><ul class="dl">${rec.map((r) => `<li><a href="${href(menuPath(r))}"><b>${esc(r.brand)} ${esc(r.name)}</b></a> — ${esc(fmtDate(r.firstSeen))} 등록${r.price ? ', 가격 ' + esc(r.price) : ''}${r.kind === 'new' ? '' : r.period ? ', ' + esc(r.period) : ''}</li>`).join('')}</ul>`;
     })()
-    + `<h2>보는 법</h2><ul><li>월 페이지에는 새 메뉴 표, 마감 달력, 그달에 시작한 한정 항목이 들어 있어요.</li><li>가격은 기사에 나온 값만 적고, 없으면 “확인 안 됨”으로 둬요.</li><li>판매가 끝난 메뉴도 지우지 않고 “판매 종료”로 표시해요.</li></ul>`
     + `<h2>더 읽을거리</h2><p><a href="/guide/limited-menu-duration">한정 메뉴 판매 기간 계산</a> · <a href="/guide/price-distribution">신메뉴 가격대 분포</a> · <a href="/guide/">가이드 전체</a></p>`;
   return pageShell({ title: `월별 신메뉴·한정 메뉴 모음 (${months.length}개 월) | 푸디세이`, desc: '달마다 새로 나온 프랜차이즈 신메뉴와 마감하는 한정 메뉴·이벤트를 모은 월별 보관함이에요.', canonical: '/new/', crumbList: [{ name: '홈', path: '/' }, { name: '월별 모음', path: '/new/' }], kicker: '월별 모음', h1: '월별 신메뉴·한정 메뉴 모음', body });
 }
@@ -634,7 +622,7 @@ function answerCard(r, today) {
   const fig = showImg ? `<figure class="ans-img"><img src="${esc(r.img)}" alt="${esc(r.brand + ' ' + r.name)} 공식 홈페이지 사진" width="${meta.w}" height="${meta.h}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.closest('figure').remove()"><figcaption>사진: ${esc(imgFrom)} · 확인일 ${esc(fmtDate(UPDATED))}</figcaption></figure>` : '';
   if (rows.length < 2 && !srcTxt) return `<div class="ans-wrap${showImg ? ' has-img' : ''}">${storeFind(r.brand, 'menu')}${fig}</div>`;
   const grid = rows.map(([k, v]) => `<div class="ans-row${k.startsWith('판매') ? ' wide' : ''}"><span class="ans-k">${k}</span><span class="ans-v">${nwTok(v)}</span></div>`).join('');
-  return `<div class="ans-wrap${showImg ? ' has-img' : ''}"><div class="answer-card" aria-label="한눈에 보는 답">${grid}<p class="ans-src">${srcTxt ? '출처: ' + srcTxt + ' · ' : ''}기준일 <span class="nw">${esc(fmtDate(UPDATED))}</span></p></div>${storeFind(r.brand, 'menu')}${fig}</div>`;
+  return `<div class="ans-wrap${showImg ? ' has-img' : ''}"><div class="answer-card" aria-label="한눈에 보는 답">${grid}${r.kind !== 'new' && r.end ? '<p class="ans-note">재고가 떨어지면 마감일보다 일찍 끝날 수 있어요.</p>' : ''}<p class="ans-src">${srcTxt ? '출처: ' + srcTxt + ' · ' : ''}기준일 <span class="nw">${esc(fmtDate(UPDATED))}</span></p></div>${storeFind(r.brand, 'menu')}${fig}</div>`;
 }
 function summaryCard(r, today) {
   const st = status(r, today);
@@ -715,11 +703,8 @@ function menuPage(r, all, today) {
   // 출처는 상단 답 상자에 한 번만 보여 줘요(같은 정보가 두 번 나오지 않게).
 
   const REL = relatedSets(r, all, today);
-  body += relTop(REL);
   body += compareHtml(r, all, today);
-  if (r.firstSeen) body += `<p class="stamp">푸디세이 등록일 <time datetime="${esc(r.firstSeen)}">${esc(fmtDate(r.firstSeen))}</time> · 사이트 마지막 업데이트 <time datetime="${esc(UPDATED)}">${esc(fmtDate(UPDATED))}</time></p>`;
-  body += exploreHtml(r.cat);
-  body += `<p class="more"><a href="/">오늘의 새 메뉴·한정 메뉴 전체 보기 →</a></p>`;
+  body += relTop(REL);
 
   const cr = crumbs([{ name: '홈', path: '/' }, { name: r.brand, path: brandPath(r.brand) }, { name: r.name, path: menuPath(r) }]);
   // 푸디세이는 물건을 파는 사이트가 아니라 메뉴 정보 사이트예요. Product/Offer/Review 같은 판매·평점 마크업은 쓰지 않고,
