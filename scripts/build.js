@@ -435,7 +435,7 @@ function relTop(S, today, r, all) {
   // 다른 브랜드의 같은 종류: 같은 업종이고, 시즌 메뉴면 같은 시즌만. 브랜드당 1개, 최대 3개, 맞는 게 없으면 영역을 숨겨요.
   const seen = new Set([r.brand]);
   const same = all.filter((x) => status(x, today) === 'on' && x.slug !== r.slug && x.brand !== r.brand && r.cat && x.cat === r.cat && (!r.season || x.season === r.season)
-    && (r.kind === 'new') === (x.kind === 'new'))
+    && (r.kind === 'new') === (x.kind === 'new') && (r.kind === 'event') === (x.kind === 'event'))
     .sort((a, c) => String(c.date || c.end || c.firstSeen || '').localeCompare(String(a.date || a.end || a.firstSeen || '')))
     .filter((x) => (seen.has(x.brand) ? false : (seen.add(x.brand), true))).slice(0, 3);
   if (same.length) {

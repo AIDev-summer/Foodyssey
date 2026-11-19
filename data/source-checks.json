@@ -1,6 +1,6 @@
 {
  "https://biz.heraldcorp.com/article/10900655": {
-  "checkedAt": "2026-11-08",
+  "checkedAt": "2026-11-19",
   "status": "ok",
   "published": "2026-10-13",
   "priceFound": {
@@ -12,8 +12,48 @@
   },
   "items": {}
  },
+ "https://economist.co.kr/article/view/ecn202611100058": {
+  "checkedAt": "2026-11-19",
+  "status": "ok",
+  "published": "2026-11-11",
+  "priceFound": {},
+  "dateFound": {
+   "2026-11-12": true
+  },
+  "endFound": {},
+  "items": {
+   "구운밤 우롱티 라떼": true,
+   "진저브레드 라떼": true,
+   "퓨어 드림 레드뱅쇼": true
+  }
+ },
+ "https://m.news.nate.com/view/20261110n25926": {
+  "checkedAt": "2026-11-19",
+  "status": "ok",
+  "published": "2026-11-10",
+  "priceFound": {},
+  "dateFound": {},
+  "endFound": {
+   "2027-01-04": true,
+   "2026-12-19": true
+  },
+  "items": {}
+ },
+ "https://n.news.naver.com/article/353/0000057201": {
+  "checkedAt": "2026-11-19",
+  "status": "ok",
+  "published": "2026-11-12",
+  "priceFound": {},
+  "dateFound": {
+   "2026-11-18": true
+  },
+  "endFound": {},
+  "items": {
+   "에스프레소 음료": true
+  }
+ },
  "https://news.jkn.co.kr/post/1039964": {
-  "checkedAt": "2026-11-08",
+  "checkedAt": "2026-11-19",
   "status": "ok",
   "published": "2026-10-21",
   "priceFound": {
@@ -24,7 +64,7 @@
   "items": {}
  },
  "https://news.nate.com/view/20261105n05032": {
-  "checkedAt": "2026-11-08",
+  "checkedAt": "2026-11-19",
   "status": "ok",
   "published": "2026-11-05",
   "priceFound": {},
@@ -34,10 +74,28 @@
   },
   "items": {}
  },
- "https://news2day.co.kr/article/20261029500086": {
-  "checkedAt": "2026-11-08",
+ "https://news.nate.com/view/20261117n31032": {
+  "checkedAt": "2026-11-19",
   "status": "ok",
-  "published": "2026-11-08",
+  "published": "2026-11-17",
+  "priceFound": {
+   "9,800원": true
+  },
+  "dateFound": {
+   "2026-11-17": true
+  },
+  "endFound": {},
+  "items": {
+   "그리핀도르 딸기 밀크티": true,
+   "슬리데린 그린 밀크티": true,
+   "레번클로 캐모마일티": true,
+   "후플푸프 망고&페어티": true
+  }
+ },
+ "https://news2day.co.kr/article/20261029500086": {
+  "checkedAt": "2026-11-19",
+  "status": "ok",
+  "published": "2026-11-20",
   "priceFound": {},
   "dateFound": {
    "2026-10-29": true
@@ -55,7 +113,7 @@
   }
  },
  "https://newsway.co.kr/news/view?ud=2026110314103701126": {
-  "checkedAt": "2026-11-08",
+  "checkedAt": "2026-11-19",
   "status": "ok",
   "published": "2026-11-03",
   "priceFound": {},
@@ -65,8 +123,44 @@
   },
   "items": {}
  },
+ "https://supple.kr/news/cmw94qpsy16tpal9pk95qhawt": {
+  "checkedAt": "2026-11-19",
+  "status": "ok",
+  "published": "2026-11-09",
+  "priceFound": {
+   "9,000원": true,
+   "6,000원": true,
+   "8,000원": true,
+   "21,000원": true
+  },
+  "dateFound": {
+   "2026-11-09": true
+  },
+  "endFound": {},
+  "items": {
+   "가리비짜조": true,
+   "고구마짜조": true,
+   "모둠짜조": true,
+   "소곱창전골": true
+  }
+ },
+ "https://supple.kr/news/cmwbwrki7fcnnal9pli3atxh8": {
+  "checkedAt": "2026-11-19",
+  "status": "ok",
+  "published": "2026-11-11",
+  "priceFound": {},
+  "dateFound": {
+   "2026-11-11": true
+  },
+  "endFound": {
+   "2026-12-31": true
+  },
+  "items": {
+   "크크크 골드": true
+  }
+ },
  "https://theviewers.co.kr/View.aspx?No=4280225": {
-  "checkedAt": "2026-11-08",
+  "checkedAt": "2026-11-19",
   "status": "ok",
   "published": "2026-10-27",
   "priceFound": {},
@@ -76,8 +170,28 @@
   },
   "items": {}
  },
+ "https://tnnews.co.kr/archives/298901": {
+  "checkedAt": "2026-11-19",
+  "status": "ok",
+  "published": "2026-11-09",
+  "priceFound": {},
+  "dateFound": {
+   "2026-11-10": true
+  },
+  "endFound": {},
+  "items": {
+   "단호박 카스테라 인절미": true,
+   "크림 퐁듀 김치볶음밥": true,
+   "피자 오픈핫도그": true,
+   "로스티드 포크 포카치아 샌드위치": true,
+   "고단백 저당 베이글": true,
+   "저당 떠먹는 티라미수": true,
+   "소떡소떡 · 순대강정 · 떡강정 · 밥김말이": true,
+   "허니카라멜 브리오슈 브레드": true
+  }
+ },
  "https://view.asiae.co.kr/article/2026091608122210585": {
-  "checkedAt": "2026-11-08",
+  "checkedAt": "2026-11-19",
   "status": "ok",
   "published": "2026-09-16",
   "priceFound": {},
@@ -86,7 +200,7 @@
   "items": {}
  },
  "https://view.asiae.co.kr/article/2026102707342281900": {
-  "checkedAt": "2026-11-08",
+  "checkedAt": "2026-11-19",
   "status": "ok",
   "published": "2026-10-27",
   "priceFound": {
@@ -101,7 +215,7 @@
   }
  },
  "https://weekly.hankooki.com/news/articleView.html?idxno=7191453": {
-  "checkedAt": "2026-11-08",
+  "checkedAt": "2026-11-19",
   "status": "ok",
   "published": "2026-10-30",
   "priceFound": {},
@@ -110,7 +224,7 @@
   "items": {}
  },
  "https://www.betanews.net/article/view/beta202610220164": {
-  "checkedAt": "2026-11-08",
+  "checkedAt": "2026-11-19",
   "status": "ok",
   "published": "2026-10-22",
   "priceFound": {},
@@ -130,17 +244,15 @@
   }
  },
  "https://www.biztribune.co.kr/news/articleView.html?idxno=361110": {
-  "checkedAt": "2026-11-08",
+  "checkedAt": "2026-11-19",
   "status": "ok",
   "published": "2026-10-22",
   "priceFound": {},
   "dateFound": {
-   "2026-10-01": true,
    "2026-10-22": true
   },
   "endFound": {},
   "items": {
-   "알싹킹": true,
    "허니윙콤비": true,
    "허니옥수수윙콤비": true,
    "허니옥수수윙박스 (16·20조각)": true,
@@ -149,7 +261,7 @@
   "officialPrice": 4
  },
  "https://www.biztribune.co.kr/news/articleView.html?idxno=361661": {
-  "checkedAt": "2026-11-08",
+  "checkedAt": "2026-11-19",
   "status": "ok",
   "published": "2026-10-30",
   "priceFound": {},
@@ -162,7 +274,7 @@
   }
  },
  "https://www.dailian.co.kr/news/view/1707077/%EB%A7%A5%EB%8F%84%EB%82%A0%EB%93%9C-%EA%B2%8C%EC%82%B4-%ED%81%AC%EB%A6%BC-%ED%81%AC%EB%A1%9C%EC%BC%93-%EB%A8%B8%ED%95%80-%EB%A7%A5%EB%AA%A8-2026": {
-  "checkedAt": "2026-11-08",
+  "checkedAt": "2026-11-19",
   "status": "ok",
   "published": "2026-10-28",
   "priceFound": {},
@@ -175,7 +287,7 @@
   }
  },
  "https://www.dailyt.co.kr/newsView/dlt202610150013": {
-  "checkedAt": "2026-11-08",
+  "checkedAt": "2026-11-19",
   "status": "ok",
   "published": "2026-10-15",
   "priceFound": {},
@@ -197,7 +309,7 @@
   "items": {}
  },
  "https://www.etnews.com/20261029000139": {
-  "checkedAt": "2026-11-08",
+  "checkedAt": "2026-11-19",
   "status": "ok",
   "published": "2026-10-29",
   "priceFound": {},
@@ -216,8 +328,33 @@
    "레드 루돌프": true
   }
  },
+ "https://www.etoday.co.kr/news/view/2628978": {
+  "checkedAt": "2026-11-19",
+  "status": "ok",
+  "published": "2026-09-23",
+  "priceFound": {
+   "45,000원": true,
+   "19,000원": true
+  },
+  "dateFound": {},
+  "endFound": {},
+  "items": {}
+ },
+ "https://www.etoday.co.kr/news/view/2645514": {
+  "checkedAt": "2026-11-19",
+  "status": "ok",
+  "published": "2026-11-09",
+  "priceFound": {
+   "42,000원": true,
+   "41,000원": true,
+   "17,000원": true
+  },
+  "dateFound": {},
+  "endFound": {},
+  "items": {}
+ },
  "https://www.fnnews.com/news/202610141826190444": {
-  "checkedAt": "2026-11-08",
+  "checkedAt": "2026-11-19",
   "status": "ok",
   "published": "2026-10-14",
   "priceFound": {
@@ -232,8 +369,24 @@
    "NBB 펀치": true
   }
  },
+ "https://www.fnnews.com/news/202611091621213427": {
+  "checkedAt": "2026-11-19",
+  "status": "ok",
+  "published": "2026-11-10",
+  "priceFound": {},
+  "dateFound": {
+   "2026-11-10": true
+  },
+  "endFound": {},
+  "items": {
+   "딸기 피치 우롱 밀크티": true,
+   "딸기 리치티": true,
+   "딸기 리치 젤리티": true,
+   "딸기 주스": true
+  }
+ },
  "https://www.foodtoday.or.kr/news/article.html?no=208450": {
-  "checkedAt": "2026-11-08",
+  "checkedAt": "2026-11-19",
   "status": "ok",
   "published": "2026-10-01",
   "priceFound": {},
@@ -242,7 +395,7 @@
   "items": {}
  },
  "https://www.foodtoday.or.kr/news/article.html?no=208977": {
-  "checkedAt": "2026-11-08",
+  "checkedAt": "2026-11-19",
   "status": "ok",
   "published": "2026-10-20",
   "priceFound": {},
@@ -262,7 +415,7 @@
   }
  },
  "https://www.foodtoday.or.kr/news/article.html?no=209327": {
-  "checkedAt": "2026-11-08",
+  "checkedAt": "2026-11-19",
   "status": "ok",
   "published": "2026-11-02",
   "priceFound": {},
@@ -280,7 +433,7 @@
   }
  },
  "https://www.getnews.co.kr/news/articleView.html?idxno=885661": {
-  "checkedAt": "2026-11-08",
+  "checkedAt": "2026-11-19",
   "status": "ok",
   "published": "2026-11-02",
   "priceFound": {},
@@ -294,7 +447,7 @@
   }
  },
  "https://www.ggilbo.com/news/articleView.html?idxno=1189936": {
-  "checkedAt": "2026-11-08",
+  "checkedAt": "2026-11-19",
   "status": "ok",
   "published": "2026-10-29",
   "priceFound": {
@@ -314,8 +467,29 @@
    "엠지씨네 마라 떡볶이": true
   }
  },
+ "https://www.ggilbo.com/news/articleView.html?idxno=1193823": {
+  "checkedAt": "2026-11-19",
+  "status": "ok",
+  "published": "2026-11-17",
+  "priceFound": {
+   "3,900원": true,
+   "3,500원": true,
+   "4,000원": true,
+   "4,500원": true
+  },
+  "dateFound": {
+   "2026-11-17": true
+  },
+  "endFound": {},
+  "items": {
+   "뱅쇼": true,
+   "토피넛 라떼": true,
+   "토피넛 카페라떼": true,
+   "고구마무스 케이크 스무디": true
+  }
+ },
  "https://www.gosiweek.com/article/1065582564826094": {
-  "checkedAt": "2026-11-08",
+  "checkedAt": "2026-11-19",
   "status": "ok",
   "published": "2026-10-29",
   "priceFound": {},
@@ -328,6 +502,17 @@
    "꿀떡꿀떡": true
   }
  },
+ "https://www.gpkorea.com/news/articleView.html?idxno=148071": {
+  "checkedAt": "2026-11-19",
+  "status": "ok",
+  "published": "2026-10-29",
+  "priceFound": {},
+  "dateFound": {},
+  "endFound": {
+   "2026-11-25": true
+  },
+  "items": {}
+ },
  "https://www.gukjenews.com/news/articleView.html?idxno=3703754": {
   "checkedAt": "2026-11-08",
   "status": "ok",
@@ -339,8 +524,47 @@
   "endFound": {},
   "items": {}
  },
+ "https://www.hankyung.com/article/202611123157g": {
+  "checkedAt": "2026-11-19",
+  "status": "ok",
+  "published": "2026-11-12",
+  "priceFound": {},
+  "dateFound": {},
+  "endFound": {
+   "2026-12-22": true,
+   "2026-11-26": true
+  },
+  "items": {}
+ },
+ "https://www.inthenews.co.kr/news/article.html?no=94376": {
+  "checkedAt": "2026-11-19",
+  "status": "ok",
+  "published": "2026-11-11",
+  "priceFound": {},
+  "dateFound": {
+   "2026-11-13": true,
+   "2026-11-11": true
+  },
+  "endFound": {
+   "2026-11-17": true
+  },
+  "items": {
+   "크림탑 스초생(크초생)": true,
+   "블랙 티라미수 라떼": true,
+   "군고구마 크림 라떼": true,
+   "레드 시나몬 뱅쇼": true,
+   "시그니처 당근 케이크": true,
+   "클래식 쇼콜라 타르트": true,
+   "미드나잇 퍼플 뱅쇼": true,
+   "번트 흑임자 크림 라떼": true,
+   "번트 흑임자 슈페너": true,
+   "솔티드 크림 카라멜 라떼": true,
+   "시나몬 플랫화이트": true,
+   "핑크 레몬 진저티": true
+  }
+ },
  "https://www.koreapost.co.kr/news/articleView.html?idxno=89910": {
-  "checkedAt": "2026-11-08",
+  "checkedAt": "2026-11-19",
   "status": "ok",
   "published": "2026-11-04",
   "priceFound": {},
@@ -350,8 +574,21 @@
   },
   "items": {}
  },
+ "https://www.lcnews.co.kr/news/articleView.html?idxno=210912": {
+  "checkedAt": "2026-11-19",
+  "status": "ok",
+  "published": "2026-11-05",
+  "priceFound": {},
+  "dateFound": {
+   "2026-11-05": true
+  },
+  "endFound": {},
+  "items": {
+   "양념킹": true
+  }
+ },
  "https://www.mhns.co.kr/news/articleView.html?idxno=764579": {
-  "checkedAt": "2026-11-08",
+  "checkedAt": "2026-11-19",
   "status": "ok",
   "published": "2026-10-16",
   "priceFound": {},
@@ -364,7 +601,7 @@
   }
  },
  "https://www.mydaily.co.kr/page/view/2026101514360760582": {
-  "checkedAt": "2026-11-08",
+  "checkedAt": "2026-11-19",
   "status": "ok",
   "published": "2026-10-15",
   "priceFound": {},
@@ -399,25 +636,18 @@
   "items": {}
  },
  "https://www.newsprime.co.kr/news/article/?no=749669": {
-  "checkedAt": "2026-11-08",
+  "checkedAt": "2026-11-19",
   "status": "ok",
   "published": "2026-10-01",
   "priceFound": {},
-  "dateFound": {
-   "2026-10-01": true
-  },
+  "dateFound": {},
   "endFound": {
    "2026-12-31": true
   },
-  "items": {
-   "웨지고구마 · 웨지반반": true,
-   "블랙 치즈폼 라떼": true,
-   "딸기 요거트 프라페": true
-  },
-  "officialPrice": 1
+  "items": {}
  },
  "https://www.newstap.co.kr/news/articleView.html?idxno=335540": {
-  "checkedAt": "2026-11-08",
+  "checkedAt": "2026-11-19",
   "status": "ok",
   "published": "2026-10-10",
   "priceFound": {
@@ -431,8 +661,19 @@
    "피자설기": true
   }
  },
+ "https://www.newswire.co.kr/newsRead.php?no=1046870": {
+  "checkedAt": "2026-11-19",
+  "status": "ok",
+  "published": "2026-11-11",
+  "priceFound": {},
+  "dateFound": {},
+  "endFound": {
+   "2026-11-18": true
+  },
+  "items": {}
+ },
  "https://www.segye.com/newsView/20261024502967": {
-  "checkedAt": "2026-11-08",
+  "checkedAt": "2026-11-19",
   "status": "ok",
   "published": "2026-10-24",
   "priceFound": {},
@@ -445,7 +686,7 @@
   }
  },
  "https://www.segye.com/newsView/20261105504330": {
-  "checkedAt": "2026-11-08",
+  "checkedAt": "2026-11-19",
   "status": "ok",
   "published": "2026-11-05",
   "priceFound": {},
@@ -457,6 +698,49 @@
    "투썸 X 가나디 초코 베리 케이크": true,
    "치즈케이크 빵": true
   }
+ },
+ "https://www.segye.com/newsView/20261107502295": {
+  "checkedAt": "2026-11-19",
+  "status": "ok",
+  "published": "2026-11-07",
+  "priceFound": {
+   "3,800원": true
+  },
+  "dateFound": {
+   "2026-11-07": true,
+   "2026-11-06": true
+  },
+  "endFound": {},
+  "items": {
+   "시그니처 딥크림라떼": true,
+   "얼그레이 밀크티": true,
+   "마로네 젤라또": true,
+   "젤라또 핫 라떼 2종": true
+  }
+ },
+ "https://www.segye.com/newsView/20261114502701": {
+  "checkedAt": "2026-11-19",
+  "status": "ok",
+  "published": "2026-11-14",
+  "priceFound": {},
+  "dateFound": {},
+  "endFound": {
+   "2026-12-15": true
+  },
+  "items": {}
+ },
+ "https://www.segye.com/newsView/20261114502710": {
+  "checkedAt": "2026-11-19",
+  "status": "ok",
+  "published": "2026-11-14",
+  "priceFound": {
+   "3,500~3,800원": true
+  },
+  "dateFound": {},
+  "endFound": {
+   "2026-12-29": true
+  },
+  "items": {}
  },
  "https://www.shinailbo.co.kr/news/articleView.html?idxno=5077387": {
   "checkedAt": "2026-11-08",
@@ -470,7 +754,7 @@
   "items": {}
  },
  "https://www.slist.kr/news/articleView.html?idxno=773578": {
-  "checkedAt": "2026-11-08",
+  "checkedAt": "2026-11-19",
   "status": "ok",
   "published": "2026-10-15",
   "priceFound": {},
@@ -491,8 +775,19 @@
    "흑임자 가나슈 바게트": true
   }
  },
+ "https://www.wikitree.co.kr/articles/1172063": {
+  "checkedAt": "2026-11-19",
+  "status": "ok",
+  "published": "2026-11-05",
+  "priceFound": {},
+  "dateFound": {},
+  "endFound": {
+   "2026-11-29": true
+  },
+  "items": {}
+ },
  "https://www.yna.co.kr/view/AKR20261021030500030": {
-  "checkedAt": "2026-11-08",
+  "checkedAt": "2026-11-19",
   "status": "ok",
   "published": "2026-10-21",
   "priceFound": {},
@@ -510,7 +805,7 @@
   }
  },
  "https://www.yna.co.kr/view/AKR20261101021200030": {
-  "checkedAt": "2026-11-08",
+  "checkedAt": "2026-11-19",
   "status": "ok",
   "published": "2026-11-01",
   "priceFound": {},
