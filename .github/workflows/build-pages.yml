@@ -5,7 +5,7 @@ name: 메뉴 페이지 만들기
 on:
   push:
     branches: [main]
-    paths: ['data.js', 'scripts/**', 'index.html']
+    paths: ['data.js', 'scripts/**', 'index.html', '.github/workflows/**']
   schedule:
     - cron: '10 15 * * *'
   workflow_dispatch:
@@ -26,6 +26,27 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: 워크플로 YAML 검증(깨진 파일이 있으면 GitHub이 워크플로를 읽지 못해 자동 작업이 조용히 멈춰요)
+        run: |
+          python3 - <<'PY'
+          import glob, sys
+          try:
+              import yaml
+          except ImportError:
+              import subprocess
+              subprocess.check_call([sys.executable, '-m', 'pip', 'install', '-q', 'pyyaml'])
+              import yaml
+          bad = 0
+          for f in sorted(glob.glob('.github/workflows/*.yml') + glob.glob('.github/workflows/*.yaml')):
+              try:
+                  d = yaml.safe_load(open(f, encoding='utf-8'))
+                  assert isinstance(d, dict) and 'jobs' in d and (True in d or 'on' in d), 'on/jobs 없음'
+                  print('OK', f)
+              except Exception as e:
+                  bad += 1
+                  print('::error file=%s::워크플로 YAML이 깨졌어요: %s' % (f, str(e).replace('\n', ' ')[:300]))
+          sys.exit(1 if bad else 0)
+          PY
       - name: JSON-LD 린트 자체 테스트
         run: node scripts/test-lint-jsonld.js
       - name: 페이지 만들기(끝에 JSON-LD 린트가 돌고, 진짜 오류면 산출물을 올리지 않아요)

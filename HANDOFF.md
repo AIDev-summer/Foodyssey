@@ -178,3 +178,7 @@
 - **홈 신상 타일 매장 찾기(2026-11-19, 사장님 지시):** 홈 신상 타일마다 브랜드 이름 오른쪽(날짜 글자 아래)에 "가까운 매장 찾기" 버튼이 있어요(성심당은 "매장 위치 보기"). 네이버 지도 검색 새 창이고 위치 권한·API는 없어요. 클릭은 GA4 `store_find`(brand, page_type=home)로 세고 내 방문(fd_me)은 세지 않아요.
 - **둥근 모서리 줄이기(2026-11-19, 사장님 지시):** 카드·타일·상자·칩·표의 큰 둥근 모서리(8~18px)는 모두 4px로 줄였어요(원형 점·컵·테마 버튼·진행 막대 제외). 새 컴포넌트도 둥근 네모 대신 4px 이하나 테두리 없는 글자 링크를 써요. 홈 신상 타일의 "가까운 매장 찾기"는 테두리 없는 작은 글자 링크(높이 18px, 터치 영역만 투명하게 확장)예요.
 - **검색 노출 전략(2026-11-19, PULSE 지시):** ① IndexNow: 루트 `<key>.txt`(키는 `data/indexnow-key.json`)와 `scripts/indexnow.js`가 배포 후 바뀐 색인 대상 URL을 api.indexnow.org로 보내요(워크플로 마지막 단계, 실패해도 배포에 영향 없음, 수동 실행은 `node scripts/indexnow.js <이전커밋>`). ② 구조화 데이터: 손으로 쓴 가이드 3편에 BreadcrumbList+Article(datePublished=처음 올린 날, dateModified=GUIDES의 updated=실제 수정일)을 `<!-- build:ld -->`로 매 빌드 채우고, 홈에 Organization을 더했어요. FAQ·Product 계열은 계속 금지예요. ③ `scripts/lint-links.js`: 색인 대상 고아 페이지 0, "여기·클릭" 같은 설명 없는 링크 글자 0을 빌드에서 검사해요. ④ 첫 화면 이미지는 `fetchpriority="high"`(지연 로딩 아님)이고 width/height가 있어요. ⑤ 가이드를 고치면 `build.js` GUIDES의 `updated`를 실제 수정일로 같이 고쳐요(사이트맵 lastmod·dateModified).
+- **워크플로 YAML 검증(2026-11-19):** `auto-merge-daily.yml` 89행의 `tr '
+' ' '`에서 `
+`이 실제 줄바꿈으로 들어가 YAML이 깨졌고, GitHub이 워크플로를 읽지 못해 push마다 "잡 0개 실패"가 나고 schedule도 멈췄어요. 고친 뒤 `build-pages.yml` 첫 단계가 모든 `.github/workflows/*.yml`을 YAML로 읽어 보고(깨지면 빌드 실패+오류 표시), `.github/workflows/**`만 바뀌어도 이 워크플로가 돌아요. 워크플로 안에서 셸에 `
+`을 쓸 때는 줄바꿈이 아니라 두 글자(백슬래시+n)로 들어갔는지 확인해요.
