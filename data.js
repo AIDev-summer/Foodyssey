@@ -9,7 +9,7 @@
 // - start: 기사에 시작·출시일이 나온 한정 항목의 시작일(YYYY-MM-DD). 판매 기간 계산 가이드(/guide/limited-menu-duration)에 쓰여요. 기사에 없으면 넣지 않아요.
 // - pop: 검색량 배수(최근 3일 / 지난 4주). 한정 탭 인기순 정렬에 써요. 없으면 마감순으로 뒤에 놓여요.
 window.FOODYSSEY = {
-  updated: "2026-11-19",
+  updated: "2026-11-20",
   weekLabel: "2026년 11월 셋째 주",
 
   cats: [
@@ -79,11 +79,6 @@ window.FOODYSSEY = {
       ],
       src: { label: "서플(머니투데이)", url: "https://supple.kr/news/cmw94qpsy16tpal9pk95qhawt" },
       note: "짜조는 10개 기준이고, 모둠짜조는 가리비짜조와 고구마짜조를 5개씩 담았어요. 소곱창전골은 우동사리가 들어가요" },
-
-    { cat: "pizza", brand: "피자헛", when: "10.8 출시", date: "2026-10-08",
-      items: [{ name: "피자설기", tag: "신메뉴", price: "3,900원" }],
-      src: { label: "뉴스탭", url: "https://www.newstap.co.kr/news/articleView.html?idxno=335540" },
-      note: "떡 위에 소스, 치즈, 페페로니를 올린 컵 형태예요" },
 
     { cat: "chicken", brand: "bhc", when: "10.22 매장 판매 확대", date: "2026-10-22",
       items: [{ name: "콰삭모짜킹", tag: "신메뉴", desc: "이탈리안 요리사 샘킴과 만든 치킨이에요. 크리스피 크럼블 튀김옷 안에 순살치킨과 모짜렐라 치즈를 넣었고, 아라비아따딥과 그린올리브딥 중 소스 2종이 함께 나와요. 출시 한 달 만에 25만 개 넘게 팔렸다고 bhc가 밝혔어요." }],
@@ -353,9 +348,6 @@ window.FOODYSSEY = {
     { kind: "이벤트", brand: "스타벅스", title: "케이크 예약 10% 할인 쿠폰", start: "2026-11-13", end: "2026-11-26", season: "christmas", period: "11.13 ~ 11.26",
       desc: "13일부터 매장 픽업 케이크 예약을 받아요(12월 11일까지). 리워드 회원에게 10% 할인 쿠폰을 줘요. '조선델리 노엘 트리 케이크'는 할인에서 빠져요.",
       src: { label: "한국경제", url: "https://www.hankyung.com/article/202611123157g" } },
-    { kind: "이벤트", brand: "스타벅스", title: "e-프리퀀시 더블 적립", start: "2026-11-06", end: "2026-11-12", period: "11.6 ~ 11.12",
-      desc: "리워드 회원이 제조 음료를 사면 스티커를 2개씩 줘요. 미션 음료 조건은 그대로 채워야 해요. 추가 증정품인 북 커버는 11월 19일부터 예약할 수 있어요.",
-      src: { label: "스타데일리뉴스(네이트)", url: "https://news.nate.com/view/20261105n05032" } },
     { kind: "이벤트", brand: "스타벅스", title: "수능 응원 기획전", end: "2026-11-17", period: "~ 11.17(화)",
       desc: "인절미 찰떡파이, 쫀득 마롱 찰떡 세트, 클로버 틴 초콜릿 같은 수능 응원 제품을 모았어요. 스타벅스 앱 온라인 스토어, 카카오톡 선물하기, 무신사에서 구매 금액별 할인 쿠폰과 추가 별 적립을 줘요.",
       src: { label: "코리아포스트", url: "https://www.koreapost.co.kr/news/articleView.html?idxno=89910" } },
