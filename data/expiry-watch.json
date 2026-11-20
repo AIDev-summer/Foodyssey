@@ -1,0 +1,164 @@
+{
+ "generated": "2026-11-20",
+ "note": "매일 아침 확인 목록: 종료가 공식/기사로 확인되면 data.js에 end를 넣어 같은 URL에서 판매 종료로 바꿔요. 새 URL은 만들지 않아요.",
+ "ended": [
+  {
+   "brand": "더벤티",
+   "name": "겨울 시즌 음료 할인",
+   "url": "/menu/더벤티-겨울-시즌-음료-할인",
+   "end": "2026-11-17",
+   "endLate": "",
+   "daysAgo": 3
+  },
+  {
+   "brand": "스타벅스",
+   "name": "수능 응원 기획전",
+   "url": "/menu/스타벅스-수능-응원-기획전",
+   "end": "2026-11-17",
+   "endLate": "",
+   "daysAgo": 3
+  },
+  {
+   "brand": "투썸플레이스",
+   "name": "크림탑 스초생 사전예약 20% 쿠폰",
+   "url": "/menu/투썸플레이스-크림탑-스초생-사전예약-20-쿠폰",
+   "end": "2026-11-18",
+   "endLate": "",
+   "daysAgo": 2
+  },
+  {
+   "brand": "파스쿠찌",
+   "name": "네이버페이 결제 40% 혜택",
+   "url": "/menu/파스쿠찌-네이버페이-결제-40-혜택",
+   "end": "2026-11-15",
+   "endLate": "",
+   "daysAgo": 5
+  }
+ ],
+ "expectedPassed": [
+  {
+   "brand": "맥도날드",
+   "name": "빅아치",
+   "url": "/menu/맥도날드-빅아치",
+   "end": "2026-11-19",
+   "endLate": "2026-12-03",
+   "daysSinceEarliest": 1
+  }
+ ],
+ "endingSoon": [
+  {
+   "brand": "맘스터치",
+   "name": "스낵박스 할인 쿠폰",
+   "url": "/menu/맘스터치-스낵박스-할인-쿠폰",
+   "end": "2026-11-25",
+   "endLate": "",
+   "daysLeft": 5
+  },
+  {
+   "brand": "스타벅스",
+   "name": "케이크 예약 10% 할인 쿠폰",
+   "url": "/menu/스타벅스-케이크-예약-10-할인-쿠폰",
+   "end": "2026-11-26",
+   "endLate": "",
+   "daysLeft": 6
+  }
+ ],
+ "noEnd": [
+  {
+   "brand": "맘스터치",
+   "name": "햄치즈휠렛버거",
+   "url": "/menu/맘스터치-햄치즈휠렛버거",
+   "end": "",
+   "endLate": "",
+   "startedDaysAgo": null
+  },
+  {
+   "brand": "배스킨라빈스",
+   "name": "도우와줘요 호빵맨",
+   "url": "/menu/배스킨라빈스-도우와줘요-호빵맨",
+   "end": "",
+   "endLate": "",
+   "startedDaysAgo": null
+  },
+  {
+   "brand": "버거킹",
+   "name": "초콜릿 와퍼",
+   "url": "/menu/버거킹-초콜릿-와퍼",
+   "end": "",
+   "endLate": "",
+   "startedDaysAgo": 1
+  },
+  {
+   "brand": "버거킹",
+   "name": "트러플 머쉬룸 시즌 5종",
+   "url": "/menu/버거킹-트러플-머쉬룸-시즌-5종",
+   "end": "",
+   "endLate": "",
+   "startedDaysAgo": 65
+  },
+  {
+   "brand": "빨라쪼",
+   "name": "젤라또 핫 라떼 2종",
+   "url": "/menu/빨라쪼-젤라또-핫-라떼-2종",
+   "end": "",
+   "endLate": "",
+   "startedDaysAgo": null
+  },
+  {
+   "brand": "성심당",
+   "name": "사과요거케익",
+   "url": "/menu/성심당-사과요거케익",
+   "end": "",
+   "endLate": "",
+   "startedDaysAgo": 13
+  },
+  {
+   "brand": "성심당",
+   "name": "알밤롤",
+   "url": "/menu/성심당-알밤롤",
+   "end": "",
+   "endLate": "",
+   "startedDaysAgo": 58
+  },
+  {
+   "brand": "성심당",
+   "name": "알밤시루",
+   "url": "/menu/성심당-알밤시루",
+   "end": "",
+   "endLate": "",
+   "startedDaysAgo": 58
+  },
+  {
+   "brand": "성심당",
+   "name": "홍시롤",
+   "url": "/menu/성심당-홍시롤",
+   "end": "",
+   "endLate": "",
+   "startedDaysAgo": 11
+  },
+  {
+   "brand": "성심당",
+   "name": "홍시홍시",
+   "url": "/menu/성심당-홍시홍시",
+   "end": "",
+   "endLate": "",
+   "startedDaysAgo": 7
+  },
+  {
+   "brand": "쉐이크쉑",
+   "name": "쉑하우스 바비큐 4종",
+   "url": "/menu/쉐이크쉑-쉑하우스-바비큐-4종",
+   "end": "",
+   "endLate": "",
+   "startedDaysAgo": 50
+  },
+  {
+   "brand": "컴포즈커피",
+   "name": "스노우 민트초코 프라페",
+   "url": "/menu/컴포즈커피-스노우-민트초코-프라페",
+   "end": "",
+   "endLate": "",
+   "startedDaysAgo": 3
+  }
+ ]
+}

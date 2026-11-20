@@ -681,7 +681,17 @@ function menuPage(r, all, today) {
   if (r.kind === 'new' && r.date) descBits.push(`${fmtDate(r.date)} ${/발표/.test(r.when) ? '발표' : '출시'}`);
   if (r.kind !== 'new' && r.period) descBits.push(r.period);
   const lead = (r.desc || r.note || '').replace(/\s+/g, ' ');
-  const desc = `${r.brand} ${r.name}${st === 'on' ? '' : '(' + label + ')'} ${isEvent ? '기간·참여 방법' : (hasPeriod ? '판매 기간·가격' : '정보')}: ${descBits.join(', ')}${descBits.length ? '. ' : ''}${lead}`.slice(0, 155);
+  let desc;
+  if (hasPeriod && !isEvent && st === 'on') {
+    const ans = r.end && r.endLate ? `종료 예상 ${mdKo(r.end)}~${mdKo(r.endLate)}(확정 아님)` : (r.end ? `${mdKo(r.end)}까지` : '종료일은 기사에 아직 없어요');
+    const head = `${r.brand} ${r.name} 언제까지? ${ans}.${r.price ? ' 가격 ' + r.price + '.' : ''}`;
+    const room = Math.max(0, 118 - head.length - 1);
+    let rest = lead;
+    if (rest.length > room) { const cut = rest.slice(0, room); const e = Math.max(cut.lastIndexOf('요.'), cut.lastIndexOf('다.')); rest = e > 15 ? cut.slice(0, e + 2) : ''; }
+    desc = (head + (room > 15 && rest ? ' ' + rest : '')).trim();
+  } else {
+    desc = `${r.brand} ${r.name}${st === 'on' ? '' : '(' + label + ')'} ${isEvent ? '기간·참여 방법' : (hasPeriod ? '판매 기간·가격' : '정보')}: ${descBits.join(', ')}${descBits.length ? '. ' : ''}${lead}`.slice(0, 155);
+  }
 
   const facts = [];
   if (r.season && SEASONS[r.season]) facts.push(['모아보기', `<a href="${href(seasonPath(r.season))}">${esc(SEASONS[r.season].name)} 메뉴 전체</a>`]);
@@ -889,6 +899,25 @@ function ensureGuideLd() {
   });
 }
 
+// ---------- 종료 확인 목록(2026-11-20 PULSE 지시): 매일 아침 빌드가 data/expiry-watch.json과 로그에 남겨요 ----------
+// ended: 종료일이 지난 한정 메뉴(오늘 '판매 종료'로 표시된 것), expectedPassed: 예상 종료 구간이 시작됐는데 아직 '판매 중'인 것(공식 종료 확인 필요),
+// endingSoon: 7일 안에 끝나는 것, noEnd: 종료일이 아직 기사에 없는 기간 한정 메뉴. 종료가 기사로 확인되면 data.js에 end를 넣어 같은 URL에서 갱신해요.
+function writeExpiryWatch(all, today) {
+  const dd = (d) => Math.round((Date.parse(today) - Date.parse(d)) / 86400000);
+  const row = (r, extra) => Object.assign({ brand: r.brand, name: r.name, url: menuPath(r), end: r.end || '', endLate: r.endLate || '' }, extra || {});
+  const lim = all.filter((r) => r.kind !== 'new');
+  const w = {
+    generated: today,
+    note: '매일 아침 확인 목록: 종료가 공식/기사로 확인되면 data.js에 end를 넣어 같은 URL에서 판매 종료로 바꿔요. 새 URL은 만들지 않아요.',
+    ended: lim.filter((r) => r.end && dd(r.endLate || r.end) > 0 && dd(r.endLate || r.end) <= 7).map((r) => row(r, { daysAgo: dd(r.endLate || r.end) })),
+    expectedPassed: lim.filter((r) => r.end && r.endLate && dd(r.end) >= 0 && dd(r.endLate) <= 0).map((r) => row(r, { daysSinceEarliest: dd(r.end) })),
+    endingSoon: lim.filter((r) => r.end && dd(r.end) <= 0 && dd(r.end) >= -7).map((r) => row(r, { daysLeft: -dd(r.end) })),
+    noEnd: lim.filter((r) => !r.end && r.kind === 'limited' && status(r, today) === 'on').map((r) => row(r, { startedDaysAgo: r.start ? dd(r.start) : null }))
+  };
+  fs.writeFileSync(path.join(ROOT, 'data', 'expiry-watch.json'), JSON.stringify(w, null, 1) + '\n');
+  console.log(`종료 확인 목록: 끝난 것 ${w.ended.length}, 예상 종료 구간 진행 중 ${w.expectedPassed.length}, 7일 안 종료 ${w.endingSoon.length}, 종료일 미정 ${w.noEnd.length}` + (w.expectedPassed.length ? ' → 확인 필요: ' + w.expectedPassed.map((x) => x.brand + ' ' + x.name).join(', ') : ''));
+}
+
 // ---------- index.html 갱신 ----------
 function replaceBlock(html, name, inner) {
   const re = new RegExp(`(<!-- build:${name} -->)[\\s\\S]*?(<!-- /build:${name} -->)`);
@@ -926,7 +955,7 @@ function main() {
     const list = all.filter((r) => r.brand === b);
     const cat = list.find((r) => r.cat);
     const mkBrand = (robots) => listPage({
-      title: `${b} 신메뉴 (${today.slice(0, 4)}년 ${Number(today.slice(5, 7))}월) | 푸디세이`, h1: `${b} 신메뉴·한정 메뉴`, kicker: cat ? cat.catName : '브랜드',
+      title: `${b} ${Number(today.slice(5, 7))}월 신메뉴·한정 메뉴${b === '성심당' ? '(시루)' : ''} 언제까지? 가격 | 푸디세이`, h1: `${b} 신메뉴·한정 메뉴`, kicker: cat ? cat.catName : '브랜드',
       intro: `${b}에서 최근 새로 나온 메뉴와 기간 한정 메뉴, 이벤트를 모았어요. 매일 아침 기사를 확인해 업데이트해요.`,
       pathName: brandPath(b),
       crumbList: [{ name: '홈', path: '/' }].concat(cat ? [{ name: cat.catName, path: catPath(cat.cat) }] : []).concat([{ name: b, path: brandPath(b) }]),
@@ -1062,6 +1091,7 @@ function main() {
   idx = replaceBlock(idx, 'stamp', `마지막 업데이트 <time datetime="${esc(UPDATED)}">${esc(fmtDate(UPDATED))}</time>${freshBits ? ' · ' + freshBits : ''} · 판매·진행 중 메뉴 ${liveItems.length}개 · <a href="/updates">업데이트 내역</a> · <a href="/rss.xml">RSS 구독</a>`);
   const readsLinks = GUIDES.map((g) => `<li><a href="/guide/${g.slug}">${esc(g.title)}</a></li>`).concat(MONTHLY_LINKS(all, today)).concat([`<li><a href="${href(seasonPath('christmas'))}">크리스마스·연말 메뉴 모음</a></li>`, '<li><a href="/updates">날짜별 업데이트 내역</a></li>']);
   idx = replaceBlock(idx, 'seasons', seasonCardsHtml(all, today));
+  writeExpiryWatch(all, today);
   ensureGuideLd();
   try {
     const gp = path.join(ROOT, 'guide', 'christmas-cake-preorder.html');
