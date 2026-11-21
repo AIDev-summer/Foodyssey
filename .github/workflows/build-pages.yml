@@ -52,7 +52,9 @@ jobs:
       - name: 페이지 만들기(끝에 JSON-LD 린트가 돌고, 진짜 오류면 산출물을 올리지 않아요)
         id: build
         continue-on-error: true
-        run: node scripts/build.js
+        run: |
+          node scripts/check-images.js || echo "이미지 점검 건너뜀(실패해도 빌드는 계속)"
+          node scripts/build.js
       - name: 빌드 오류 알림(메일 대신 로그에 오류로 표시, PULSE 주기 점검이 라이브 날짜 정체로 확인)
         if: steps.build.outcome == 'failure'
         run: echo "::error title=푸디세이 빌드 실패::린트·링크·JSON-LD 같은 진짜 오류로 이번 산출물은 올리지 않았어요. 위 '페이지 만들기' 로그를 확인하세요."
