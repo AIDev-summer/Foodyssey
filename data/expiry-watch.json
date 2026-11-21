@@ -65,6 +65,14 @@
  ],
  "noEnd": [
   {
+   "brand": "롯데리아",
+   "name": "무신사 무진장 버거",
+   "url": "/menu/롯데리아-무신사-무진장-버거",
+   "end": "",
+   "endLate": "",
+   "startedDaysAgo": 1
+  },
+  {
    "brand": "맘스터치",
    "name": "햄치즈휠렛버거",
    "url": "/menu/맘스터치-햄치즈휠렛버거",
