@@ -266,3 +266,4 @@ article > p:not(.kicker):not(.stamp):not(.more):not(.src):not(.ans-src):not(.met
 .facts { grid-template-columns: max-content minmax(0, 1fr); }
 .facts dd { overflow-wrap: anywhere; word-break: keep-all; }
 .rel-list a { display: inline-flex; align-items: center; min-height: 44px; padding: 0; border: 0; border-radius: 0; background: none; }
+.ans-img.tall img { height: clamp(240px, 42vh, 400px); object-fit: contain; }

@@ -8,7 +8,9 @@ const path = require('path');
 const vm = require('vm');
 const ROOT = path.resolve(__dirname, '..');
 // 공식 도메인 목록: 브랜드 공식 홈페이지 또는 그 홈페이지가 쓰는 이미지 서버(해당 홈페이지의 HTML에서 확인된 것만)
-const OFFICIAL = { 'mcdonalds.co.kr': '맥도날드', 'kyochon.com': '교촌치킨', 'ediya.com': '이디야커피', 'mega-mgccoffee.com': '메가MGC커피', 'd2afncas1tel3t.cloudfront.net': '파리바게뜨(paris.co.kr이 쓰는 이미지 서버)' };
+const OFFICIAL = { 'mcdonalds.co.kr': '맥도날드', 'kyochon.com': '교촌치킨', 'ediya.com': '이디야커피', 'mega-mgccoffee.com': '메가MGC커피', 'd2afncas1tel3t.cloudfront.net': '파리바게뜨(paris.co.kr이 쓰는 이미지 서버)',
+  // 브랜드 공식 홈페이지가 막혀 있을 때만: 회사가 직접 낸 보도자료(뉴스와이어 배포)에 실린 공식 사진. 언론사 기자가 찍은 사진·기사 이미지는 쓰지 않아요.
+  'file.newswire.co.kr': '보도자료 공식 사진(뉴스와이어 배포)' };
 const ctx = { window: {} };
 vm.runInNewContext(fs.readFileSync(path.join(ROOT, 'data.js'), 'utf8'), ctx, { filename: 'data.js' });
 const D = ctx.window.FOODYSSEY;
