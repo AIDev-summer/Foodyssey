@@ -1,0 +1,32 @@
+name: 매일 업데이트 확인(워치독)
+# 매일 09:25 KST(00:25 UTC)에 오늘자 auto/daily PR이 있는지 확인해요. 없으면 이슈를 열어 저장소 소유자에게 메일 알림이 가요.
+# 새 메뉴가 없어서 PR이 안 생긴 날도 있을 수 있어서, 이슈 제목에 "변경 없음 또는 실행 누락"이라고 적어 확인을 요청해요.
+on:
+  schedule:
+    - cron: '25 0 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: read
+  issues: write
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 오늘자 PR 확인
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          TODAY=$(TZ=Asia/Seoul date +%F)
+          BR="auto/daily-$TODAY"
+          CNT=$(gh pr list --repo "$REPO" --state all --head "$BR" --json number --jq 'length')
+          echo "오늘($TODAY) $BR PR 수: $CNT"
+          if [ "$CNT" != "0" ]; then echo "정상: 오늘자 PR이 있어요"; exit 0; fi
+          TITLE="[워치독] $TODAY 자동 업데이트 PR 없음 (변경 없음 또는 실행 누락)"
+          EXIST=$(gh issue list --repo "$REPO" --state all --search "$TODAY 자동 업데이트 PR 없음 in:title" --json number --jq 'length')
+          if [ "$EXIST" != "0" ]; then echo "이미 이슈가 있어요"; exit 0; fi
+          BODY="09:25 KST까지 $BR 브랜치 PR이 없어요. 새 메뉴가 없는 날이면 정상이고, 클라우드 Routine(trig_01R68RGLwDB1ZKpkKaJ1kdJv)이 실행되지 않았다면 claude.ai/code/routines에서 확인하고 Run now를 눌러 주세요. 푸디세이 관리자도 이 알림을 보고 수동으로 오늘분을 처리해요."
+          gh issue create --repo "$REPO" --title "$TITLE" --body "$BODY"
