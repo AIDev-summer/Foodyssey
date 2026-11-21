@@ -56,6 +56,15 @@
    "type": "menu",
    "brand": "스타벅스",
    "name": "겨울 e-프리퀀시"
+  },
+  {
+   "id": "winter-trend",
+   "season": "christmas",
+   "label": "겨울 시즌",
+   "title": "겨울 신메뉴 재료별 브랜드 비교",
+   "href": "/guide/winter-menu-trend",
+   "tone": "green",
+   "type": "guide"
   }
  ]
 }

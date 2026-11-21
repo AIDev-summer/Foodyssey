@@ -326,8 +326,15 @@ function menuH1(r, suffix) {
   return (head.length ? `<span class="nw">${esc(head.join(' '))}</span> ` : '') + (mid.length ? esc(mid.join(' ')) + ' ' : '') + `<span class="nw">${esc(tail.trim())}</span>`;
 }
 
+// 기간 문구 단일 출처(2026-11-21): 확정 종료일은 '종료 11월 ○일', 범위로만 나온 것은 '종료 예상 ○~○(확정 아님)'. 홈·카드·목록·상세 답 상자가 모두 이 함수를 써요.
+function periodText(r) {
+  if (r.kind === 'new') return natural(r.when);
+  if (r.end && r.endLate) return `종료 예상 ${mdKo(r.end)} ~ ${mdKo(r.endLate)}(확정 아님)`;
+  if (r.end) return `종료 ${mdKo(r.end)}`;
+  return natural(r.period || r.open || '');
+}
 function card(r, st) {
-  const meta = [r.tag, r.price, natural(r.kind === 'new' ? r.when : r.period)].filter(Boolean).join(' · ');
+  const meta = [r.tag, r.price, periodText(r)].filter(Boolean).join(' · ');
   return `<li><a href="${href(menuPath(r))}"><span class="c-brand">${esc(r.brand)}</span><span class="c-name">${esc(r.name)}</span><span class="c-meta">${esc(meta)}</span>${st !== 'on' ? `<span class="badge off">${esc(statusLabel(r, st))}</span>` : ''}</a></li>`;
 }
 
@@ -653,10 +660,10 @@ function answerCard(r, today) {
   if (r.kind === 'new') {
     if (r.date) rows.push([/발표/.test(r.when) ? '발표일' : '출시일', esc(mdKo(r.date)) + (r.when && /[가-힣]/.test(r.when.replace(/출시|발표/g, '')) ? `<small>${esc(r.when)}</small>` : '')]);
   } else if (r.end && r.endLate) {
-    rows.push(['판매 기간', `${r.start ? esc(mdKo(r.start)) + ' 출시 · ' : ''}<b>종료 예상 ${esc(mdKo(r.end))} ~ ${esc(mdKo(r.endLate))}</b><small>확정이 아니라 기사에 나온 운영 기간으로 계산한 예상이에요</small>`]);
+    rows.push(['판매 기간', `${r.start ? esc(mdKo(r.start)) + ' 출시 · ' : ''}<b>종료 예상 ${esc(mdKo(r.end))} ~ ${esc(mdKo(r.endLate))}(확정 아님)</b><small>근거: 기사에 나온 운영 기간으로 계산한 예상이에요</small>`]);
     rows.push(['남은 기간(예상)', `<span class="dday" data-d="${esc(r.end)}"></span> ~ <span class="dday" data-d="${esc(r.endLate)}"></span>`]);
   } else if (r.end) {
-    rows.push(['판매 기간', r.start ? `${esc(mdKo(r.start))} ~ ${esc(mdKo(r.end))}` : (/발표|출시/.test(r.period || '') ? esc(natural(r.period)) : `${esc(mdKo(r.end))}까지`)]);
+    rows.push(['판매 기간', `${r.start ? esc(mdKo(r.start)) + (r.kind === 'event' ? ' 시작 · ' : ' 출시 · ') : ''}<b>종료 ${esc(mdKo(r.end))}</b>`]);
     rows.push(['남은 기간', `<span class="dday" data-d="${esc(r.end)}"></span>`]);
   } else if (r.open || r.period) {
     rows.push(['판매 기간', `${esc(natural(r.period || r.open))}${r.open && r.period && !r.period.includes(r.open) ? '' : ''}<small>종료일은 기사에 아직 나오지 않았어요</small>`]);
@@ -720,7 +727,7 @@ function menuPage(r, all, today) {
   const lead = (r.desc || r.note || '').replace(/\s+/g, ' ');
   let desc;
   if (hasPeriod && !isEvent && st === 'on') {
-    const ans = r.end && r.endLate ? `종료 예상 ${mdKo(r.end)}~${mdKo(r.endLate)}(확정 아님)` : (r.end ? `${mdKo(r.end)}까지` : '종료일은 기사에 아직 없어요');
+    const ans = r.end || r.endLate ? periodText(r) : '종료일은 기사에 아직 없어요';
     const head = `${r.brand} ${r.name} 언제까지? ${ans}.${r.price ? ' 가격 ' + r.price + '.' : ''}`;
     const room = Math.max(0, 118 - head.length - 1);
     let rest = lead;
@@ -874,6 +881,10 @@ function seasonCardsHtml(all, today) {
       main = `${c.items.length}개 브랜드 · 가장 빠른 마감 <span class="nw">${esc(mdKo(ds[0]).replace('월 ', '/').replace('일', ''))}</span>`;
       dd = dleft(ds[0]) <= 60 ? dtxt(dleft(ds[0])) : '';
       attr = ` data-dl="${esc(c.items.map((x) => x[1]).join(','))}" data-unit="${esc(c.items.length + '개 ' + c.unit)}"`;
+    } else if (c.type === 'guide') {
+      const th = WINTER_THEMES.map(([label, re]) => ({ label, xs: all.filter((r) => re.test(r.name || '')) })).map((x) => Object.assign(x, { brands: new Set(x.xs.map((r) => r.brand)).size })).filter((x) => x.brands >= 2 && !WINTER_BASIC.includes(x.label)).sort((p, q) => q.brands - p.brands);
+      if (!th.length) return;
+      main = `${th.length}개 재료 비교 · ${esc(th[0].label)} ${th[0].brands}개 브랜드`;
     } else {
       const r = all.find((x) => x.brand === c.brand && x.name.includes(c.name));
       if (!r || !r.end || dleft(r.end) < 0) return;
@@ -1117,7 +1128,7 @@ function main() {
   idx = replaceBlock(idx, 'directory', dirHtml);
   const lim = liveItems.filter((r) => r.kind !== 'new').sort((a, c) => (a.end || a.endLate || '9999').localeCompare(c.end || c.endLate || '9999'));
   const limHtml = lim.length
-    ? '      <ul class="dir-lim">\n' + lim.map((r) => `        <li><a href="${href(menuPath(r))}"><b>${esc(r.brand)}</b> ${esc(r.name)}</a> <span>${esc([r.kind === 'event' ? '이벤트' : '한정 메뉴', r.period || r.open].filter(Boolean).join(' · '))}</span></li>`).join('\n') + '\n      </ul>'
+    ? '      <ul class="dir-lim">\n' + lim.map((r) => `        <li><a href="${href(menuPath(r))}"><b>${esc(r.brand)}</b> ${esc(r.name)}</a> <span>${esc([r.kind === 'event' ? '이벤트' : '한정 메뉴', periodText(r)].filter(Boolean).join(' · '))}</span></li>`).join('\n') + '\n      </ul>'
     : '';
   idx = replaceBlock(idx, 'upcoming', limHtml);
   // 홈 상단 '오늘/이번 주 업데이트': archive.json의 등록일(firstSeen) 기준으로 센 사실만 써요.
