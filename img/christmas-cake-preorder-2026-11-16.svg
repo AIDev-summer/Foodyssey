@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 514" width="960" height="514" role="img" aria-labelledby="t d">
-<title id="t">크리스마스 케이크 사전예약·수령 일정(2026-11-16 기준)</title>
+<title id="t">크리스마스 케이크 사전예약·수령 일정(2026-11-21 갱신)</title>
 <desc id="d">배스킨라빈스, 투썸플레이스, 스타벅스, 파스쿠찌, 파리바게뜨, 뚜레쥬르의 사전예약 기간과 수령 기간을 날짜 축에 막대로 그린 표예요.</desc>
 <rect width="960" height="514" fill="#fbfdfc"/>
 <text x="24" y="38" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="22" font-weight="700" fill="#15191a">크리스마스 케이크 사전예약·수령 일정</text>
-<text x="24" y="64" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="14" fill="#4d5755">2026-11-16 기준 · 브랜드 공식 발표와 언론 보도로 확인된 날짜만 표시 · 푸디세이가 직접 정리</text>
+<text x="24" y="64" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="14" fill="#4d5755">2026-11-21 갱신(투썸) · 브랜드 공식 발표와 언론 보도로 확인된 날짜만 표시 · 푸디세이가 직접 정리</text>
 <rect x="24" y="80" width="16" height="12" rx="3" fill="#17745a"/><text x="46" y="91" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="13" fill="#15191a">사전예약(최대 할인 기간)</text>
 <rect x="274" y="80" width="16" height="12" rx="3" fill="#2a7f64"/><text x="296" y="91" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="13" fill="#15191a">일반 사전예약</text>
 <rect x="524" y="80" width="16" height="12" rx="3" fill="#c27a1c"/><text x="546" y="91" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="13" fill="#15191a">수령 기간</text>
@@ -32,10 +32,10 @@
 <rect x="801.5" y="132" width="53.8" height="22" rx="5" fill="#c27a1c"/>
 <text x="861.3" y="148" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="12" fill="#15191a">~12/25</text>
 <text x="238" y="200" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="14" font-weight="600" fill="#15191a" text-anchor="end">투썸플레이스</text>
-<rect x="263.5" y="184" width="94.2" height="22" rx="5" fill="#17745a"/>
-<text x="363.6" y="200" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="12" fill="#15191a">~11/18 앱 쿠폰 20%</text>
-<rect x="532.5" y="184" width="403.5" height="22" rx="5" fill="#c27a1c"/>
-<text x="540.5" y="200" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="12" font-weight="600" fill="#ffffff">수령 · ~12/31</text>
+<rect x="263.5" y="184" width="524.6" height="22" rx="5" fill="#17745a"/>
+<text x="271.5" y="200" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="12" font-weight="600" fill="#ffffff">~11/18 앱 쿠폰 20% → 11/19~12/20 앱 10~15%</text>
+<rect x="761.2" y="184" width="174.8" height="22" rx="5" fill="#c27a1c"/>
+<text x="769.2" y="200" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="12" font-weight="600" fill="#ffffff">수령 · 12/18~12/31</text>
 <text x="238" y="252" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="14" font-weight="600" fill="#15191a" text-anchor="end">스타벅스 조선델리 노엘 트리</text>
 <rect x="263.5" y="236" width="107.6" height="22" rx="5" fill="#17745a"/>
 <text x="377.1" y="252" font-family="'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="12" fill="#15191a">~11/19 한정 수량</text>

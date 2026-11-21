@@ -28,7 +28,7 @@ const BRAND_CAT = {
 // 가이드(/guide) 글: data.js 근거로 손으로 쓴 고정 HTML이라 sitemap에만 메타를 등록해요.
 const GUIDES = [
   { slug: 'starbucks-frequency', updated: '2026-11-19', title: '스타벅스 겨울 e-프리퀀시 2026 정리: 17잔 조건·미션 음료·증정품·예약 요령', desc: '17잔 조건, 미션 음료 8가지, 증정품과 추가 증정품, 예약 취소 대기·적립 주의사항을 기사 근거로 정리했어요.' },
-  { slug: 'christmas-cake-preorder', updated: '2026-11-19', title: '크리스마스 케이크 사전예약 비교 2026: 브랜드별 할인·예약 마감·수령 기간', desc: '파바·뚜레쥬르·투썸·배라·스타벅스·파스쿠찌의 사전예약 할인, 마감일, 수령 기간을 마감 임박 순으로 비교했어요.' },
+  { slug: 'christmas-cake-preorder', updated: '2026-11-21', title: '크리스마스 케이크 사전예약 비교 2026: 브랜드별 할인·예약 마감·수령 기간', desc: '파바·뚜레쥬르·투썸·배라·스타벅스·파스쿠찌의 사전예약 할인, 마감일, 수령 기간을 마감 임박 순으로 비교했어요.' },
   { slug: 'bigarch-duration', updated: '2026-11-19', title: '맥도날드 빅아치 판매기간·가격·크기 정리(종료일 계산)', desc: '빅아치 출시일·가격·무게와 한정 판매 4~6주로 계산한 종료 예상일을 기사 근거로 정리했어요.' },
   { slug: 'limited-menu-duration', updated: '', generated: true, title: '한정 메뉴·이벤트는 며칠 동안 할까: 푸디세이 기록으로 계산한 판매 기간', desc: '시작일과 종료일이 기사에 나온 항목만 골라 기간을 계산하고 브랜드별로 정리했어요.' },
   { slug: 'price-distribution', updated: '', generated: true, title: '프랜차이즈 신메뉴 가격대 분포: 푸디세이 기록 기준', desc: '가격이 기사에 확인된 신메뉴를 가격대별로 나눠 업종별 범위까지 계산했어요.' }
