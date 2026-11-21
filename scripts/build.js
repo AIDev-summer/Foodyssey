@@ -31,6 +31,7 @@ const GUIDES = [
   { slug: 'christmas-cake-preorder', updated: '2026-11-21', title: '크리스마스 케이크 사전예약 비교 2026: 브랜드별 할인·예약 마감·수령 기간', desc: '파바·뚜레쥬르·투썸·배라·스타벅스·파스쿠찌의 사전예약 할인, 마감일, 수령 기간을 마감 임박 순으로 비교했어요.' },
   { slug: 'bigarch-duration', updated: '2026-11-19', title: '맥도날드 빅아치 판매기간·가격·크기 정리(종료일 계산)', desc: '빅아치 출시일·가격·무게와 한정 판매 4~6주로 계산한 종료 예상일을 기사 근거로 정리했어요.' },
   { slug: 'limited-menu-duration', updated: '', generated: true, title: '한정 메뉴·이벤트는 며칠 동안 할까: 푸디세이 기록으로 계산한 판매 기간', desc: '시작일과 종료일이 기사에 나온 항목만 골라 기간을 계산하고 브랜드별로 정리했어요.' },
+  { slug: 'winter-menu-trend', updated: '', generated: true, title: '이번 겨울 신메뉴는 어떤 재료가 많을까: 뱅쇼·고구마·딸기·밤 브랜드별 비교', desc: '뱅쇼, 고구마, 흑임자, 딸기, 밤, 홍시, 티라미수 메뉴를 어느 브랜드가 언제 냈는지 푸디세이 기록으로 모아 비교했어요.' },
   { slug: 'price-distribution', updated: '', generated: true, title: '프랜차이즈 신메뉴 가격대 분포: 푸디세이 기록 기준', desc: '가격이 기사에 확인된 신메뉴를 가격대별로 나눠 업종별 범위까지 계산했어요.' }
 ];
 
@@ -518,6 +519,42 @@ function priceGuide(all, today) {
     + (mRows ? `<h2>출시월별 현황</h2><div class="tbl"><table class="compare"><thead><tr><th>월</th><th>신메뉴</th><th>가격 확인</th><th>가격 중앙값</th></tr></thead><tbody>${mRows}</tbody></table></div>` : '')
     + `<h2>계산 방법과 한계</h2><ul><li>가격대 경계는 4,000·5,000·7,000·10,000원이에요. 구간을 바꾸면 개수가 달라질 수 있어요.</li><li>중앙값은 가격을 싼 순으로 늘어놓았을 때 가운데 값이에요(짝수 개면 가운데 두 값의 평균).</li><li>출시일 기준 월은 기사에 나온 출시·발표일이에요. 날짜가 “10월 출시”처럼 일까지 안 나오면 그달 1일로 적어요.</li><li>가격은 매장·지역·배달 여부에 따라 다를 수 있어요. 주문 전에 브랜드 공식 앱에서 확인해 주세요.</li></ul>`;
   return pageShell({ title: `프랜차이즈 신메뉴 가격대 분포 (${priced.length}개, ${monthLabel(today.slice(0, 7))} 기준) | 푸디세이`, desc: `기사에 가격이 확인된 신메뉴 ${priced.length}개를 가격대별로 나눠 셌어요. ${lead}`.slice(0, 155), canonical: '/guide/price-distribution', crumbList: [{ name: '홈', path: '/' }, { name: '가이드', path: '/guide/' }, { name: '신메뉴 가격대 분포', path: '/guide/price-distribution' }], kicker: '가이드 · 자체 계산', h1: GUIDES.find((g) => g.slug === 'price-distribution').title, body });
+}
+
+// ---------- 재료별 겨울 메뉴 비교(푸디세이 기록으로 계산): 메뉴 이름에 재료가 들어간 항목만 묶어요 ----------
+const WINTER_THEMES = [
+  ['뱅쇼', /뱅쇼/], ['고구마', /고구마/], ['딸기', /딸기|스트로베리/], ['흑임자', /흑임자/], ['밤·마롱', /알밤|군밤|구운밤|마롱|밤 /],
+  ['홍시', /홍시/], ['티라미수', /티라미수/], ['초콜릿·쇼콜라', /초코|쇼콜라|초콜릿/], ['치즈', /치즈/]
+];
+const WINTER_BASIC = ['초콜릿·쇼콜라', '치즈'];
+function winterGuide(all, today) {
+  const dateOf = (r) => r.date || r.start || r.firstSeen || '';
+  const seen = new Set();
+  const themes = WINTER_THEMES.map(([label, re]) => {
+    const xs = all.filter((r) => re.test(r.name || '')).sort((a, c) => dateOf(a).localeCompare(dateOf(c)));
+    return { label, xs, brands: [...new Set(xs.map((r) => r.brand))] };
+  }).filter((th) => th.brands.length >= 2).sort((a, c) => (WINTER_BASIC.includes(a.label) - WINTER_BASIC.includes(c.label)) || c.brands.length - a.brands.length || c.xs.length - a.xs.length);
+  const stLabel = (r) => { const st = status(r, today); return st === 'on' ? '판매 중' : (st === 'ended' ? '종료' : '지난 신메뉴'); };
+  const sumRows = themes.map((th) => { const first = th.xs[0]; return trow([`<a href="#t-${th.label.replace(/[^가-힣a-z0-9]/gi, '')}">${esc(th.label)}</a>`, `${th.brands.length}곳`, `${th.xs.length}개`, esc(`${first.brand} ${first.name} (${fmtDate(dateOf(first))})`)], ['재료', '브랜드', '메뉴', '가장 먼저 나온 메뉴']); }).join('');
+  const secs = themes.map((th) => {
+    const rows = th.xs.map((r) => trow([esc(r.brand), menuA(r), esc(dateOf(r) ? fmtDate(dateOf(r)) : '-'), esc(r.price || '기사에 없음'), esc(stLabel(r)), srcA(r)], ['브랜드', '메뉴', '시작·출시일', '가격', '상태', '출처'])).join('');
+    const priced = th.xs.filter((r) => priceNum(r.price));
+    const on = th.xs.filter((r) => status(r, today) === 'on').length;
+    const lead = `${th.brands.join('·')} ${th.brands.length}곳이 이름에 ‘${th.label.split('·')[0]}’ 계열 재료를 넣은 메뉴 ${th.xs.length}개를 냈고, 오늘 기준 판매·진행 중인 것은 ${on}개예요.` + (priced.length ? ` 가격이 확인된 ${priced.length}개는 ${won(Math.min(...priced.map((r) => priceNum(r.price))))}에서 ${won(Math.max(...priced.map((r) => priceNum(r.price))))} 사이예요.` : ' 가격이 기사에 나온 메뉴는 아직 없어요.');
+    return `<h2 id="t-${th.label.replace(/[^가-힣a-z0-9]/gi, '')}">${esc(th.label)} 메뉴 ${th.xs.length}개</h2><p>${esc(lead)}</p><div class="tbl"><table class="compare"><thead><tr><th>브랜드</th><th>메뉴</th><th>시작·출시일</th><th>가격</th><th>상태</th><th>출처</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+  }).join('');
+  const top = themes[0];
+  const basicNote = themes.some((th) => WINTER_BASIC.includes(th.label)) ? ' 초콜릿·치즈처럼 늘 있는 재료는 맨 아래에 따로 뒀어요.' : '';
+  const lead = top ? `푸디세이에 기록된 메뉴 이름을 재료별로 묶어 보면 ‘${top.label}’가 ${top.brands.length}개 브랜드, ${top.xs.length}개 메뉴로 가장 많이 겹쳐요.${basicNote}` : '재료가 겹치는 메뉴를 찾지 못했어요.';
+  const total = all.length;
+  const body = `<p class="meta">기준일 ${esc(fmtDate(today))} · 푸디세이 기록 ${total}개 메뉴·이벤트 · 매일 자동으로 다시 계산해요</p>`
+    + `<p>${esc(lead)} 이 글은 기사에 나온 메뉴 이름에 같은 재료가 들어간 항목을 브랜드별로 모아, 누가 언제 냈고 지금도 파는지 한 번에 볼 수 있게 정리했어요. 같은 재료를 여러 브랜드가 동시에 내놓는 때가 곧 그 계절의 유행이에요.</p>`
+    + `<h2>재료별 한눈에 보기</h2><div class="tbl"><table class="compare"><thead><tr><th>재료</th><th>브랜드</th><th>메뉴</th><th>가장 먼저 나온 메뉴</th></tr></thead><tbody>${sumRows}</tbody></table></div><p class="table-note">브랜드가 2곳 이상 겹친 재료만 보여줘요. 개수는 메뉴 이름에 재료가 들어간 항목이에요.</p>`
+    + secs
+    + `<h2>계산 방법과 한계</h2><ul><li>메뉴 이름에 재료 글자가 들어간 항목만 셌어요. 설명에만 재료가 나오는 메뉴(예: 이름에 없는 고구마 크림)는 뺐어요.</li><li>시작·출시일은 기사에 나온 출시일이나 발표일이고, 가격은 기사에 숫자로 나온 것만 적었어요. 없으면 ‘기사에 없음’이에요.</li><li>‘초콜릿·쇼콜라’와 ‘치즈’처럼 이름에 흔히 들어가는 재료는 겹침이 많아 유행이라기보다 기본 재료 현황에 가까워요.</li><li>푸디세이가 기록하지 못한 브랜드와 메뉴는 포함되지 않아서 전체 시장의 비율이 아니에요.</li></ul>`
+    + `<h2>더 읽을거리</h2><p><a href="/guide/price-distribution">신메뉴 가격대 분포</a> · <a href="/guide/limited-menu-duration">한정 메뉴 판매 기간 계산</a> · <a href="/guide/christmas-cake-preorder">크리스마스 케이크 사전예약 비교</a></p>`;
+  const desc = `${lead} 뱅쇼·고구마·딸기·밤 메뉴를 브랜드별 출시일과 판매 상태로 비교했어요.`.slice(0, 155);
+  return pageShell({ title: `겨울 신메뉴 재료별 비교: 뱅쇼·고구마·딸기·밤 (${monthLabel(today.slice(0, 7))}) | 푸디세이`, desc, canonical: '/guide/winter-menu-trend', crumbList: [{ name: '홈', path: '/' }, { name: '가이드', path: '/guide/' }, { name: '겨울 재료별 메뉴 비교', path: '/guide/winter-menu-trend' }], kicker: '가이드', h1: '이번 겨울 신메뉴는 어떤 재료가 많을까', body });
 }
 
 function guideIndex(all, today) {
@@ -1022,6 +1059,7 @@ function main() {
   fs.mkdirSync(path.join(ROOT, 'guide'), { recursive: true });
   fs.writeFileSync(path.join(ROOT, 'guide', 'limited-menu-duration.html'), durationGuide(all, today));
   fs.writeFileSync(path.join(ROOT, 'guide', 'price-distribution.html'), priceGuide(all, today));
+  fs.writeFileSync(path.join(ROOT, 'guide', 'winter-menu-trend.html'), winterGuide(all, today));
   fs.writeFileSync(path.join(ROOT, 'guide', 'index.html'), guideIndex(all, today));
   const MONTHS = monthsOf(all, today);
   MONTHS.forEach((m) => {
