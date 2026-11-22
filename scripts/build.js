@@ -275,7 +275,7 @@ function storeFind(brand, pageType) {
   return `<p class="store-find"><a href="https://map.naver.com/p/search/${encodeURIComponent(brand)}" target="_blank" rel="noopener" data-store-find="${esc(brand)}" data-page-type="${esc(pageType)}">${pin}<span>${label}</span></a><small>네이버 지도가 새 창으로 열립니다</small></p>`;
 }
 function foot() {
-  return `<footer><div class="wrap"><p>메뉴와 가격은 매장마다 다를 수 있습니다. 주문 전에 브랜드 공식 앱이나 매장에서 한 번 더 확인해 주십시오. 푸디세이는 각 브랜드와 관계없는 독립 사이트입니다.</p><p class="links"><a href="/">홈</a><a href="/about">소개</a><a href="/guide/">가이드</a><a href="/updates">업데이트 내역</a><a href="/terms">이용약관</a><a href="/privacy">개인정보처리방침</a><a href="/contact">문의</a><a href="/rss.xml">RSS</a></p></div></footer>
+  return `<footer><div class="wrap"><p>메뉴와 가격은 매장마다 다를 수 있습니다. 주문 전에 브랜드 공식 앱이나 매장에서 한 번 더 확인해 주세요. 푸디세이는 각 브랜드와 관계없는 독립 사이트입니다.</p><p class="links"><a href="/">홈</a><a href="/about">소개</a><a href="/guide/">가이드</a><a href="/updates">업데이트 내역</a><a href="/terms">이용약관</a><a href="/privacy">개인정보처리방침</a><a href="/contact">문의</a><a href="/rss.xml">RSS</a></p></div></footer>
 <script>
 document.addEventListener('click', function (e) {
   var a = e.target.closest && e.target.closest('a[data-store-find]');
@@ -524,7 +524,7 @@ function priceGuide(all, today) {
     + `<h2>가격대별 개수</h2><div class="tbl"><table class="compare"><thead><tr><th>가격대</th><th>개수</th><th>비중</th><th>메뉴(싼 순)</th></tr></thead><tbody>${bRows}</tbody></table></div><p class="table-note">비중은 가격이 확인된 ${priced.length}개를 100%로 계산했습니다.</p>`
     + (cRows ? `<h2>업종별 가격 범위</h2><div class="tbl"><table class="compare"><thead><tr><th>업종</th><th>개수</th><th>최저</th><th>중앙값</th><th>최고</th></tr></thead><tbody>${cRows}</tbody></table></div><p class="table-note">업종마다 단품·세트·한 마리 구성이 달라 업종끼리 가격을 직접 견주기는 어렵습니다. 같은 업종 안에서 범위를 보는 용도입니다.</p>` : '')
     + (mRows ? `<h2>출시월별 현황</h2><div class="tbl"><table class="compare"><thead><tr><th>월</th><th>신메뉴</th><th>가격 확인</th><th>가격 중앙값</th></tr></thead><tbody>${mRows}</tbody></table></div>` : '')
-    + `<h2>계산 방법과 한계</h2><ul><li>가격대 경계는 4,000·5,000·7,000·10,000원입니다(근거 자료 없음, 운영자 기준값. 카페 음료 한 잔과 버거 단품이 갈리는 가격대에서 나눴습니다). 구간을 바꾸면 개수가 달라질 수 있습니다.</li><li>중앙값은 가격을 싼 순으로 늘어놓았을 때 가운데 값입니다(짝수 개면 가운데 두 값의 평균).</li><li>출시일 기준 월은 기사에 나온 출시·발표일입니다. 날짜가 “10월 출시”처럼 일까지 안 나오면 그달 1일로 적습니다.</li><li>가격은 매장·지역·배달 여부에 따라 다를 수 있습니다. 주문 전에 브랜드 공식 앱에서 확인해 주십시오.</li></ul>`;
+    + `<h2>계산 방법과 한계</h2><ul><li>가격대 경계는 4,000·5,000·7,000·10,000원입니다(근거 자료 없음, 운영자 기준값. 카페 음료 한 잔과 버거 단품이 갈리는 가격대에서 나눴습니다). 구간을 바꾸면 개수가 달라질 수 있습니다.</li><li>중앙값은 가격을 싼 순으로 늘어놓았을 때 가운데 값입니다(짝수 개면 가운데 두 값의 평균).</li><li>출시일 기준 월은 기사에 나온 출시·발표일입니다. 날짜가 “10월 출시”처럼 일까지 안 나오면 그달 1일로 적습니다.</li><li>가격은 매장·지역·배달 여부에 따라 다를 수 있습니다. 주문 전에 브랜드 공식 앱에서 확인해 주세요.</li></ul>`;
   return pageShell({ title: `프랜차이즈 신메뉴 가격대 분포 (${priced.length}개, ${monthLabel(today.slice(0, 7))} 기준) | 푸디세이`, desc: `기사에 가격이 확인된 신메뉴 ${priced.length}개를 가격대별로 나눠 셌습니다. ${lead}`.slice(0, 155), canonical: '/guide/price-distribution', crumbList: [{ name: '홈', path: '/' }, { name: '가이드', path: '/guide/' }, { name: '신메뉴 가격대 분포', path: '/guide/price-distribution' }], kicker: '가이드 · 자체 계산', h1: GUIDES.find((g) => g.slug === 'price-distribution').title, body });
 }
 
@@ -605,7 +605,7 @@ function monthPage(ym, all, today, months) {
   const idx = months.indexOf(ym);
   const prev = months[idx - 1], next = months[idx + 1];
   const body = `<p class="meta">기준일 ${esc(fmtDate(today))} · ${arch ? '지난 달 보관함' : '이번 달'} · 날짜는 기사에 나온 출시·발표일, 마감일은 기사에 나온 종료일입니다</p>`
-    + (arch ? `<p class="notice">지난 달 기록을 그대로 남긴 보관함입니다. 지금도 파는지는 각 메뉴 페이지의 상태와 브랜드 앱에서 확인해 주십시오.</p>` : '')
+    + (arch ? `<p class="notice">지난 달 기록을 그대로 남긴 보관함입니다. 지금도 파는지는 각 메뉴 페이지의 상태와 브랜드 앱에서 확인해 주세요.</p>` : '')
     + `<h2>${esc(monthLabel(ym))} 요약</h2><p>${esc(sum.join(' '))}</p>`
     + (newRows ? `<h2>새로 나온 메뉴(최근 순)</h2><div class="tbl"><table class="compare"><thead><tr><th>날짜</th><th>브랜드</th><th>메뉴</th><th>구분</th><th>가격</th><th>상태</th><th>출처</th></tr></thead><tbody>${newRows}</tbody></table></div><p class="table-note">날짜가 “-”면 기사에 일까지 안 나온 메뉴입니다. 가격은 기사에 있는 값만 적습니다.</p>` : '')
     + (calRows ? `<h2>${esc(monthLabel(ym))} 마감 달력</h2><p>종료일이 이 달에 있는 한정 메뉴·이벤트를 날짜 순으로 모았습니다(이 달은 ${lastDay}일까지입니다). 마감일이 지난 항목은 ‘판매 종료’·‘이벤트 종료’로 남겨 둡니다.</p><div class="tbl"><table class="compare"><thead><tr><th>마감일</th><th>브랜드</th><th>항목</th><th>구분</th><th>기간</th><th>상태</th><th>출처</th></tr></thead><tbody>${calRows}</tbody></table></div>` : '')
@@ -751,7 +751,7 @@ function menuPage(r, all, today) {
   if (st !== 'on') {
     body += `<p class="notice">${st === 'ended'
       ? (isEvent ? '이 이벤트는 끝났습니다.' : '이 한정 메뉴는 판매가 끝났습니다. 다시 나오면 이 페이지에 다시 표시됩니다.')
-      : '출시한 지 시간이 지나 새 메뉴 목록에서는 내려갔습니다. 지금도 파는지는 매장이나 브랜드 앱에서 확인해 주십시오.'}</p>`;
+      : '출시한 지 시간이 지나 새 메뉴 목록에서는 내려갔습니다. 지금도 파는지는 매장이나 브랜드 앱에서 확인해 주세요.'}</p>`;
   }
   if (facts.length) body += `<dl class="facts">${facts.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>`;
   if (r.desc) body += `<p>${esc(r.desc)}</p>`;

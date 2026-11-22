@@ -11,7 +11,7 @@ function walk(d, o) {
   });
   return o;
 }
-// 합쇼체 통일(2026-11-22): 본문 문장이 해요체(~요)로 끝나면 경고. 제목(h1~h3)·상품명·앱 이름은 제외해요.
+// 말투(2026-11-22 사장님 기준): 설명은 ~입니다, 권유는 ~하세요. ~하십시오·~주십시오·~바랍니다 경고, 한 페이지 해요체 비율 80% 이상이면 경고. 제목·따옴표 검색어·상품명은 제외해요.
 const PROTECT = ['도우와줘요', '도와줘요', '홍고추마요', '고추마요', '마요', '필요', '도요', '세요', '땡겨요', '요기요'];
 const HAEYO = /(?<![가-힣])([가-힣]+요)(?![가-힣])(?!\?)/g;
 function run(root) {
@@ -25,7 +25,10 @@ function run(root) {
     const rel = path.relative(root, f).split(path.sep).join('/');
     const plain = (m ? m[0] : h).replace(/<script[\s\S]*?<\/script>/g, '').replace(/<h[1-3][\s\S]*?<\/h[1-3]>/g, ' ').replace(/“[^”]*”/g, ' ').replace(/<[^>]+>/g, ' ');
     const hy = [...plain.matchAll(HAEYO)].map((x) => x[1]).filter((x) => !PROTECT.includes(x));
-    if (hy.length) haeyo.push(rel + ': 해요체 ' + hy.length + '곳(' + [...new Set(hy)].slice(0, 4).join(', ') + ')');
+    const stiff = [...plain.matchAll(/[가-힣]*(?:십시오|바랍니다)/g)].map((x) => x[0]);
+    if (stiff.length) haeyo.push(rel + ': 딱딱한 권유 표현 ' + stiff.length + '곳(' + [...new Set(stiff)].slice(0, 3).join(', ') + ') → ~하세요·~해 주세요로');
+    const endY = (plain.match(/[가-힣]요[.!?]/g) || []).length, endD = (plain.match(/[가-힣]다[.!?]/g) || []).length;
+    if (endY + endD >= 8 && endY / (endY + endD) >= 0.8) haeyo.push(rel + ': 해요체 문장 비율 ' + Math.round((endY / (endY + endD)) * 100) + '%(설명은 ~입니다, 권유는 ~하세요로 섞기)');
     for (const b of (m ? m[0] : h).replace(/<script[\s\S]*?<\/script>/g, '').matchAll(/<(a|button)[^>]*>([\s\S]*?)<\/>/g)) {
       const tx = b[2].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
       if (tx.length > 3 && /(요|니다)[.!]?$/.test(tx) && !PROTECT.some((p) => tx.endsWith(p))) btn.push(rel + ': 버튼·링크 문구가 서술형 "' + tx.slice(0, 30) + '"(~하기로 끝내기)');
