@@ -4665,6 +4665,31 @@
   "catName": "베이커리",
   "firstSeen": "2026-10-31"
  },
+ "파리바게뜨-베리밤-딥초코": {
+  "kind": "new",
+  "brand": "파리바게뜨",
+  "cat": "bakery",
+  "name": "베리밤 딥초코",
+  "tag": "케이크",
+  "price": "",
+  "img": "",
+  "imgFrom": "",
+  "date": "2026-11-17",
+  "when": "11.17 출시 · 베리밤 신제품",
+  "note": "가격과 판매 기간은 기사에 나오지 않았어요",
+  "season": "christmas",
+  "desc": "스위스산 초콜릿으로 만든 초코무스에 벨기에산 초코칩을 더하고 생딸기를 올린 케이크예요. 딸기 시그니처 케이크 베리밤 시리즈 6종 중 하나예요.",
+  "specs": null,
+  "priceNote": "",
+  "group": null,
+  "src": {
+   "label": "위키트리",
+   "url": "https://www.wikitree.co.kr/articles/1175207"
+  },
+  "slug": "파리바게뜨-베리밤-딥초코",
+  "catName": "베이커리",
+  "firstSeen": "2026-11-22"
+ },
  "파리바게뜨-치즈-소보루빵": {
   "kind": "new",
   "brand": "파리바게뜨",
