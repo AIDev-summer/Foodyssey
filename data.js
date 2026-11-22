@@ -9,8 +9,8 @@
 // - start: 기사에 시작·출시일이 나온 한정 항목의 시작일(YYYY-MM-DD). 판매 기간 계산 가이드(/guide/limited-menu-duration)에 쓰여요. 기사에 없으면 넣지 않아요.
 // - pop: 검색량 배수(최근 3일 / 지난 4주). 한정 탭 인기순 정렬에 써요. 없으면 마감순으로 뒤에 놓여요.
 window.FOODYSSEY = {
-  updated: "2026-11-21",
-  weekLabel: "2026년 11월 셋째 주",
+  updated: "2026-11-22",
+  weekLabel: "2026년 11월 넷째 주",
 
   cats: [
     { id: "burger", name: "버거" },
@@ -119,6 +119,10 @@ window.FOODYSSEY = {
         { name: "모짜렐라 치즈봉", img: "https://d2afncas1tel3t.cloudfront.net/wp-content/uploads/2026/09/%EB%B0%94%EC%82%AD%EB%AA%A8%EC%A7%9C%EB%A0%90%EB%9D%BC%EC%B9%98%EC%A6%88%EB%B4%89.png", tag: "신제품", desc: "모짜렐라 치즈를 넣고 바삭하게 튀긴 간식이에요. 따뜻하게 데우면 겉은 바삭하고 속의 치즈가 길게 늘어나요." }
       ],
       src: { label: "싱글리스트", url: "https://www.slist.kr/news/articleView.html?idxno=773578" } },
+    { cat: "bakery", brand: "파리바게뜨", when: "11.17 출시 · 베리밤 신제품", date: "2026-11-17", season: "christmas",
+      items: [{ name: "베리밤 딥초코", tag: "케이크", desc: "스위스산 초콜릿으로 만든 초코무스에 벨기에산 초코칩을 더하고 생딸기를 올린 케이크예요. 딸기 시그니처 케이크 베리밤 시리즈 6종 중 하나예요." }],
+      src: { label: "위키트리", url: "https://www.wikitree.co.kr/articles/1175207" },
+      note: "가격과 판매 기간은 기사에 나오지 않았어요" },
     { cat: "bakery", brand: "뚜레쥬르", when: "10.15 출시 · 가을 5종", date: "2026-10-15",
       items: [
         { name: "사르르 호박 카스테라 크림빵", tag: "신제품", desc: "인기 간식 '호박 인절미'를 재해석한 한 입 크기 빵이에요. 카스테라 가루를 입히고 속에 호박크림과 호박고지를 넣었어요." },
