@@ -29,7 +29,7 @@ const BRAND_CAT = {
 const GUIDES = [
   { slug: 'starbucks-frequency', updated: '2026-11-19', title: '스타벅스 겨울 e-프리퀀시 2026 정리: 17잔 조건·미션 음료·증정품·예약 요령', desc: '17잔 조건, 미션 음료 8가지, 증정품과 추가 증정품, 예약 취소 대기와 적립 주의사항이 기사 근거와 함께 나와 있습니다.' },
   { slug: 'christmas-cake-preorder', updated: '2026-11-21', title: '크리스마스 케이크 사전예약 비교 2026: 브랜드별 할인·예약 마감·수령 기간', desc: '파바·뚜레쥬르·투썸·배라·스타벅스·파스쿠찌의 사전예약 할인, 마감일, 수령 기간을 마감 임박 순으로 비교했습니다.' },
-  { slug: 'bigarch-duration', updated: '2026-11-19', title: '맥도날드 빅아치 판매기간·가격·크기 정리(종료일 계산)', desc: '빅아치 출시일·가격·무게와 한정 판매 4~6주로 계산한 종료 예상일, 근거 기사를 한 곳에서 볼 수 있습니다.' },
+  { slug: 'bigarch-duration', updated: '2026-11-23', title: '맥도날드 빅아치 판매 종료: 예상 4~6주, 실제 27일(가격·크기 정리)', desc: '맥도날드 빅아치는 11월 18일 판매를 마쳤습니다. 10월 22일 출시 후 27일 만이고, 예상 4~6주와 실제 기간, 가격, 무게를 기사 근거로 비교했습니다.' },
   { slug: 'limited-menu-duration', updated: '', generated: true, title: '한정 메뉴·이벤트는 며칠 동안 할까: 푸디세이 기록으로 계산한 판매 기간', desc: '시작일과 종료일이 기사에 나온 항목만 골라 기간을 계산했습니다. 브랜드별 결과도 있습니다.' },
   { slug: 'winter-menu-trend', updated: '', generated: true, title: '이번 겨울 신메뉴는 어떤 재료가 많을까: 뱅쇼·고구마·딸기·밤 브랜드별 비교', desc: '뱅쇼, 고구마, 흑임자, 딸기, 밤, 홍시, 티라미수 메뉴를 어느 브랜드가 언제 냈는지 푸디세이 기록으로 모아 비교했습니다.' },
   { slug: 'price-distribution', updated: '', generated: true, title: '프랜차이즈 신메뉴 가격대 분포: 푸디세이 기록 기준', desc: '가격이 기사에 확인된 신메뉴를 가격대별로 나눠 업종별 범위까지 계산했습니다.' }
@@ -103,10 +103,10 @@ function collect(D) {
       price: x.price || '', img: x.img || (h && h.img) || '', imgFrom: x.imgFrom || '',
       start: x.start || '', end: x.end || '', endLate: x.endLate || '', open: x.open || '', period: x.period || '',
       desc: x.desc || (h && h.desc) || '', specs: (h && h.specs) || null, priceNote: (h && h.priceNote) || '',
-      lines: x.lines || null, cups: x.cups || null, src: x.src || null, season: x.season || ''
+      lines: x.lines || null, cups: x.cups || null, src: x.src || null, season: x.season || '', slugKey: x.slugKey || ''
     });
   });
-  out.forEach((r) => { r.slug = slug(r.brand + ' ' + r.name); r.catName = catName[r.cat] || ''; });
+  out.forEach((r) => { r.slug = slug(r.brand + ' ' + (r.slugKey || r.name)); r.catName = catName[r.cat] || ''; });
   return { items: out, catName };
 }
 
@@ -492,6 +492,9 @@ function durationGuide(all, today) {
   const rgRows = ranged.map((r) => trow([esc(r.brand), menuA(r), esc(fmtDate(r.start)), `${esc(fmtDate(r.end))} ~ ${esc(fmtDate(r.endLate))}`, `${dayDiff(r.start, r.end) + 1}~${dayDiff(r.start, r.endLate) + 1}일`, srcA(r)], rgHeads)).join('');
   const opRows = openEnded.map((r) => trow([esc(r.brand), menuA(r), esc(fmtDate(r.start)), `${dayDiff(r.start, today) + 1}일째`, esc(r.open || '종료일 미정'), srcA(r)], opHeads)).join('');
   const brRows = brands.map((b) => { const xs = exact.filter((r) => r.brand === b); return trow([esc(b), `${xs.length}건`, xs.length > 1 ? `${f1(mean(xs.map((r) => r.days)))}일` : `${xs[0].days}일(1건이라 평균 아님)`, esc(xs.map((r) => r.name).join(', '))], brHeads); }).join('');
+  // 합계 검사(2026-11-23): 표의 행 수·브랜드별 건수 합계·본문 건수가 모두 같아야 해요.
+  const sumBr = brands.reduce((n, bb) => n + exact.filter((r) => r.brand === bb).length, 0);
+  if (sumBr !== ds.length || exact.length !== ds.length) throw new Error(`판매 기간 가이드 합계 불일치: 표 ${exact.length}, 브랜드별 ${sumBr}, 본문 ${ds.length}`);
   const body = `<p class="meta">기준일 ${esc(fmtDate(today))} · 푸디세이 기록 ${all.length}개 가운데 한정·이벤트 ${lim.length}건 · 매일 자동으로 다시 계산합니다</p>`
     + `<p>한정 메뉴나 이벤트가 “얼마나 오래 하는지”는 사려는 사람에게 가장 중요한 정보인데, 기사마다 표현이 달라 헷갈립니다. 이 글은 푸디세이에 기록된 항목 중 <b>시작일과 종료일이 기사에 모두 나온 것만</b> 골라 기간을 직접 계산합니다. 계산식은 <b>종료일 − 시작일 + 1일</b>(시작일과 종료일을 둘 다 센 기간)입니다. 기사에 없는 날짜는 추측하지 않고 계산에서 뺐습니다.</p>`
     + `<h2>계산 결과 요약</h2><p>${esc(stat)}${kindBits ? ' 나눠 보면 ' + esc(kindBits) + '입니다.' : ''} 표본이 ${ds.length}건뿐이라 “프랜차이즈 한정 메뉴는 보통 이만큼 한다”고 일반화하기는 어렵습니다. 기록이 쌓일수록 숫자가 바뀌고, 그때마다 이 페이지가 같이 바뀝니다.</p>`
@@ -547,7 +550,7 @@ function winterGuide(all, today) {
     const rows = th.xs.map((r) => trow([esc(r.brand), menuA(r), esc(dateOf(r) ? fmtDate(dateOf(r)) : '-'), esc(r.price || '기사에 없음'), esc(stLabel(r)), srcA(r)], ['브랜드', '메뉴', '시작·출시일', '가격', '상태', '출처'])).join('');
     const priced = th.xs.filter((r) => priceNum(r.price));
     const on = th.xs.filter((r) => status(r, today) === 'on').length;
-    const lead = `${th.brands.join('·')} ${th.brands.length}곳이 이름에 ‘${th.label.split('·')[0]}’ 계열 재료를 넣은 메뉴 ${th.xs.length}개를 냈고, 오늘 기준 판매·진행 중인 것은 ${on}개입니다.` + (priced.length ? ` 가격이 확인된 ${priced.length}개는 ${won(Math.min(...priced.map((r) => priceNum(r.price))))}에서 ${won(Math.max(...priced.map((r) => priceNum(r.price))))} 사이입니다.` : ' 가격이 기사에 나온 메뉴는 아직 없습니다.');
+    const lead = `${th.brands.join('·')} ${th.brands.length}곳이 이름에 ‘${th.label.split('·')[0]}’ 계열 재료를 넣은 메뉴 ${th.xs.length}개를 냈고, 오늘 기준 판매·진행 중인 것은 ${on}개입니다.` + (priced.length ? ` 가격이 확인된 ${priced.length}개는 ${(() => { const ns = priced.map((r) => priceNum(r.price)); return Math.min(...ns) === Math.max(...ns) ? '모두 ' + won(ns[0]) : won(Math.min(...ns)) + '에서 ' + won(Math.max(...ns)) + ' 사이'; })()}입니다.` : ' 가격이 기사에 나온 메뉴는 아직 없습니다.');
     return `<h2 id="t-${th.label.replace(/[^가-힣a-z0-9]/gi, '')}">${esc(th.label)} 메뉴 ${th.xs.length}개</h2><p>${esc(lead)}</p><div class="tbl"><table class="compare"><thead><tr><th>브랜드</th><th>메뉴</th><th>시작·출시일</th><th>가격</th><th>상태</th><th>출처</th></tr></thead><tbody>${rows}</tbody></table></div>`;
   }).join('');
   const top = themes[0];
@@ -661,10 +664,10 @@ function answerCard(r, today) {
     if (r.date) rows.push([/발표/.test(r.when) ? '발표일' : '출시일', esc(mdKo(r.date)) + (r.when && /[가-힣]/.test(r.when.replace(/출시|발표/g, '')) ? `<small>${esc(r.when)}</small>` : '')]);
   } else if (r.end && r.endLate) {
     rows.push(['판매 기간', `${r.start ? esc(mdKo(r.start)) + ' 출시 · ' : ''}<b>종료 예상 ${esc(mdKo(r.end))} ~ ${esc(mdKo(r.endLate))}(확정 아님)</b><small>근거: 기사에 나온 운영 기간으로 계산한 예상입니다</small>`]);
-    rows.push(['남은 기간(예상)', `<span class="dday" data-d="${esc(r.end)}"></span> ~ <span class="dday" data-d="${esc(r.endLate)}"></span>`]);
+    if (st === 'on') rows.push(['남은 기간(예상)', `<span class="dday" data-d="${esc(r.end)}"></span> ~ <span class="dday" data-d="${esc(r.endLate)}"></span>`]);
   } else if (r.end) {
     rows.push(['판매 기간', `${r.start ? esc(mdKo(r.start)) + (r.kind === 'event' ? ' 시작 · ' : ' 출시 · ') : ''}<b>종료 ${esc(mdKo(r.end))}</b>`]);
-    rows.push(['남은 기간', `<span class="dday" data-d="${esc(r.end)}"></span>`]);
+    if (st === 'on') rows.push(['남은 기간', `<span class="dday" data-d="${esc(r.end)}"></span>`]);
   } else if (r.open || r.period) {
     rows.push(['판매 기간', `${esc(natural(r.period || r.open))}${r.open && r.period && !r.period.includes(r.open) ? '' : ''}<small>종료일은 기사에 아직 나오지 않았습니다</small>`]);
   }
@@ -676,9 +679,9 @@ function answerCard(r, today) {
   const showImg = !!(meta && meta.bytes <= IMG_MAX_BYTES);
   const imgFrom = r.imgFrom || (meta && meta.official ? meta.official.replace(/\(.*\)/, '') + ' 공식 홈페이지' : r.brand + ' 공식 홈페이지');
   const fig = showImg ? `<figure class="ans-img${meta.h > meta.w * 1.1 ? ' tall' : ''}"><img src="${esc(r.img)}" alt="${esc(r.brand + ' ' + r.name)} 공식 사진" width="${meta.w}" height="${meta.h}" fetchpriority="high" decoding="async" referrerpolicy="no-referrer" onerror="this.closest('figure').remove()"><figcaption>사진: ${esc(imgFrom)} · 확인일 ${esc(fmtDate(UPDATED))}</figcaption></figure>` : '';
-  if (!rows.length && !srcTxt) return `<div class="ans-wrap${showImg ? ' has-img' : ''}">${fig}${storeFind(r.brand, 'menu')}</div>`;
+  if (!rows.length && !srcTxt) return `<div class="ans-wrap${showImg ? ' has-img' : ''}">${fig}${st === 'on' ? storeFind(r.brand, 'menu') : ''}</div>`;
   const grid = rows.map(([k, v]) => `<div class="ans-row${k.startsWith('판매') ? ' wide' : ''}"><span class="ans-k">${k}</span><span class="ans-v">${nwTok(v)}</span></div>`).join('');
-  return `<div class="ans-wrap${showImg ? ' has-img' : ''}">${fig}${r.season && SEASONS[r.season] ? `<p class="season-tag tone-${r.season === 'christmas' ? 'red' : 'green'}">${esc(SEASONS[r.season].name)} 시즌</p>` : ''}<div class="answer-card" aria-label="한눈에 보는 답">${grid}${r.kind !== 'new' && r.end && !/재고/.test((r.desc || '') + (r.note || '')) ? '<p class="ans-note">재고가 떨어지면 마감일보다 일찍 끝날 수 있습니다.</p>' : ''}<p class="ans-src">${srcTxt ? '출처: ' + srcTxt + ' · ' : ''}기준일 <span class="nw">${esc(fmtDate(UPDATED))}</span></p></div>${storeFind(r.brand, 'menu')}</div>`;
+  return `<div class="ans-wrap${showImg ? ' has-img' : ''}">${fig}${r.season && SEASONS[r.season] ? `<p class="season-tag tone-${r.season === 'christmas' ? 'red' : 'green'}">${esc(SEASONS[r.season].name)} 시즌</p>` : ''}<div class="answer-card" aria-label="한눈에 보는 답">${grid}${st === 'on' && r.kind !== 'new' && r.end && !/재고/.test((r.desc || '') + (r.note || '')) ? '<p class="ans-note">재고가 떨어지면 마감일보다 일찍 끝날 수 있습니다.</p>' : ''}<p class="ans-src">${srcTxt ? '출처: ' + srcTxt + ' · ' : ''}기준일 <span class="nw">${esc(fmtDate(UPDATED))}</span></p></div>${st === 'on' ? storeFind(r.brand, 'menu') : ''}</div>`;
 }
 function summaryCard(r, today) {
   const st = status(r, today);
@@ -711,8 +714,8 @@ function menuPage(r, all, today) {
   const title = isEvent
     ? (r.end ? `${r.brand} ${r.name} 언제까지? 기간·참여 방법 | 푸디세이` : `${r.brand} ${r.name} 기간·참여 방법 | 푸디세이`)
     : (r.kind === 'new' ? `${r.brand} ${r.name} 신메뉴 출시일·가격 | 푸디세이`
-      : (hasPeriod ? `${r.brand} ${r.name} 언제까지? 판매 기간${priceTag || '·가격'} | 푸디세이` : `${r.brand} ${r.name} 가격·판매 기간 | 푸디세이`));
-  const h1Text = isEvent ? `${r.brand} ${r.name} ${r.end ? '기간' : '기간·참여 방법'}` : (r.kind === 'new' ? `${r.brand} ${r.name}` : (hasPeriod ? `${r.brand} ${r.name} 판매 기간·가격` : `${r.brand} ${r.name}`));
+      : (hasPeriod && st === 'ended' ? `${r.brand} ${r.name} 판매 종료일·기간${priceTag || '·가격'} | 푸디세이` : hasPeriod ? `${r.brand} ${r.name} 언제까지? 판매 기간${priceTag || '·가격'} | 푸디세이` : `${r.brand} ${r.name} 가격·판매 기간 | 푸디세이`));
+  const h1Text = isEvent ? `${r.brand} ${r.name} ${r.end ? '기간' : '기간·참여 방법'}` : (r.kind === 'new' ? `${r.brand} ${r.name}` : (hasPeriod ? `${r.brand} ${r.name} ${st === 'ended' ? '판매 종료일·기간·가격' : '판매 기간·가격'}` : `${r.brand} ${r.name}`));
   const h1Suffix = isEvent ? (r.end ? '기간' : '기간·참여 방법') : (r.kind === 'new' ? '' : (hasPeriod ? '판매 기간·가격' : ''));
   const priceTxt = r.price ? r.price : (r.lines && r.lines.length ? r.lines.map((l) => l[0] + ' ' + l[1]).join(', ') : '');
   const answerBits = [];
@@ -791,7 +794,7 @@ function ddayScript() {
   var p = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
   var t = new Date(p + 'T00:00:00Z');
   function d(s) { return Math.round((new Date(s + 'T00:00:00Z') - t) / 86400000); }
-  document.querySelectorAll('.dday[data-d]').forEach(function (n) { var x = d(n.dataset.d); n.textContent = x > 0 ? 'D-' + x : (x === 0 ? 'D-DAY' : '마감'); if (x >= 0 && x <= 3) n.classList.add('soon'); });
+  document.querySelectorAll('.dday[data-d]').forEach(function (n) { var x = d(n.dataset.d); n.textContent = x > 0 ? 'D-' + x : (x === 0 ? 'D-DAY' : '종료'); if (x >= 0 && x <= 3) n.classList.add('soon'); if (x < 0) n.classList.add('past'); });
   document.querySelectorAll('.badge.on[data-end]').forEach(function (n) { if (n.dataset.end && d(n.dataset.end) < 0) { n.textContent = '종료'; n.className = 'badge off'; } });
 })();
 </script>
@@ -827,17 +830,47 @@ function storeLink(brand, pageType) {
   const pin = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>';
   return `<a class="store-link" href="https://map.naver.com/p/search/${encodeURIComponent(brand)}" target="_blank" rel="noopener" data-store-find="${esc(brand)}" data-page-type="${esc(pageType)}">${pin}<span>매장 찾기</span></a>`;
 }
-function christmasCompareTable(list) {
+// ---------- 크리스마스 케이크 비교: data/cake-compare.json 한 곳에서 가이드 표·그래프·시즌 표를 만들어요 ----------
+function cakeRows(today) {
+  let d = { rows: [] };
+  try { d = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'cake-compare.json'), 'utf8')); } catch (e) {}
+  const rows = d.rows.map((r) => Object.assign({}, r, { st: r.status === 'ended' || (r.resEnd && r.resEnd < today) ? 'ended' : r.status }));
+  const key = (r) => (r.st === 'open' ? '0' + r.resEnd : (r.st === 'pending' ? '1' : '2' + (r.resEnd || '')));
+  return rows.sort((a, b) => key(a).localeCompare(key(b)));
+}
+function cakeTableHtml(today) {
+  const rows = cakeRows(today);
+  const body = rows.map((r) => {
+    const store = r.st === 'pending' ? '' : '<br>' + storeLink(r.brand, 'guide');
+    const dl = r.st === 'ended' ? `<span class="badge off">종료</span> ${esc(r.deadline.replace(/ 종료/, ''))}` : `<b>${esc(r.deadline)}</b>`;
+    return `<tr${r.st === 'ended' ? ' class="row-ended"' : ''}><td data-label="브랜드">${esc(r.name)}${store}</td><td data-label="예약 마감">${dl}</td><td data-label="할인·혜택">${esc(r.benefit)}${r.how ? `<small>예약: ${esc(r.how)}</small>` : ''}</td><td data-label="수령 기간">${esc(r.pickup)}</td><td data-label="가격(기사 확인분)">${esc(r.price)}</td></tr>`;
+  }).join('\n');
+  return `<div class="tbl"><table class="compare cake-table"><thead><tr><th>브랜드</th><th>예약 마감</th><th>할인·혜택</th><th>수령 기간</th><th>가격(기사 확인분)</th></tr></thead><tbody>\n${body}\n</tbody></table></div>`;
+}
+function cakeChartHtml(today) {
+  const rows = cakeRows(today).filter((r) => r.st === 'open' && r.resEnd);
+  const A = Date.parse('2026-11-09'), B = Date.parse('2027-01-03');
+  const pct = (d) => Math.max(0, Math.min(100, ((Date.parse(d) - A) / (B - A)) * 100));
+  const bar = (cls, s, e) => (s && e ? `<i class="${cls}" style="left:${pct(s).toFixed(1)}%;width:${Math.max(1.2, pct(e) - pct(s)).toFixed(1)}%"></i>` : '');
+  const tod = Date.parse(today) >= A && Date.parse(today) <= B ? `<i class="cc-today" style="left:${pct(today).toFixed(1)}%"></i>` : '';
+  const ticks = [['2026-11-15', '11/15'], ['2026-12-01', '12/1'], ['2026-12-15', '12/15'], ['2027-01-01', '1/1']].map(([d, l]) => `<span style="left:${pct(d).toFixed(1)}%">${l}</span>`).join('');
+  const lines = rows.map((r) => `<div class="cc-row"><b>${esc(r.name)}</b><div class="cc-track">${bar('cc-res', r.resStart, r.resEnd)}${bar('cc-pick', r.pickStart, r.pickEnd)}${tod}</div><small>예약 ~${esc(short(r.resEnd).replace('.', '/'))}${r.pickStart ? ` · 수령 ${esc(short(r.pickStart).replace('.', '/'))}~${esc(short(r.pickEnd).replace('.', '/'))}` : ' · 수령 기간은 기사에 없음'}</small></div>`).join('');
+  return `<figure class="cc" aria-label="크리스마스 케이크 사전예약·수령 일정(${esc(fmtDate(today))} 기준, 예약이 남은 브랜드만)"><div class="cc-legend"><span><i class="cc-res"></i>예약 기간</span><span><i class="cc-pick"></i>수령 기간</span><span><i class="cc-today"></i>오늘</span></div><div class="cc-axis"><span class="cc-spacer"></span><div class="cc-ticks">${ticks}</div></div>${lines}<figcaption>예약이 남은 ${rows.length}곳만 보여 줍니다. 날짜는 브랜드 공식 발표와 언론 보도에서 확인한 값이며 아래 표와 같은 데이터입니다. 예약 시작일을 알 수 없는 곳은 가장 이른 확인일부터 그렸습니다.</figcaption></figure>`;
+}
+function christmasCompareTable(list, today) {
+  const cc = cakeRows(today || new Date().toISOString().slice(0, 10)).filter((r) => r.st === 'open');
   const brands = [...new Set(list.map((r) => r.brand))];
   const rows = brands.map((b) => {
     const cakeItems = list.filter((r) => r.brand === b && r.kind === 'new' && /케이크/.test(r.tag || ''));
     if (!cakeItems.length) return null;
     const prices = [...new Set(cakeItems.filter((r) => r.price).map((r) => r.price))];
     const events = list.filter((r) => r.brand === b && r.kind === 'event' && r.end && /케이크/.test(r.name || '')).sort((a, c) => a.end.localeCompare(c.end));
+    const mine = cc.filter((x) => x.brand === b);
+    const priced = mine.find((x) => x.priceShort);
     return {
       brand: b, count: cakeItems.length,
-      price: prices.length ? prices.join(', ') : '가격 미공개',
-      deadline: events.length ? `${fmtDate(events[0].end)} (${short(events[0].end)})` : '-'
+      price: prices.length ? prices.join(', ') : (priced ? priced.priceShort : '가격 미공개'),
+      deadline: mine.length ? `${fmtDate(mine[0].resEnd)} (${short(mine[0].resEnd)}) · 예약 마감` : (events.length ? `${fmtDate(events[0].end)} (${short(events[0].end)})` : '-')
     };
   }).filter(Boolean);
   if (!rows.length) return '';
@@ -878,9 +911,10 @@ function seasonCardsHtml(all, today) {
     if (c.type === 'deadlines') {
       const ds = c.items.map((x) => x[1]).filter((d) => dleft(d) >= 0).sort();
       if (!ds.length) return;
-      main = `${c.items.length}개 브랜드 · 가장 빠른 마감 <span class="nw">${esc(mdKo(ds[0]).replace('월 ', '/').replace('일', ''))}</span>`;
+      const openBrands = new Set(c.items.filter((x) => dleft(x[1]) >= 0).map((x) => x[0].split(' ')[0])).size;
+      main = `${openBrands}개 브랜드 · 가장 빠른 마감 <span class="nw">${esc(mdKo(ds[0]).replace('월 ', '/').replace('일', ''))}</span>`;
       dd = dleft(ds[0]) <= 60 ? dtxt(dleft(ds[0])) : '';
-      attr = ` data-dl="${esc(c.items.map((x) => x[1]).join(','))}" data-unit="${esc(c.items.length + '개 ' + c.unit)}"`;
+      attr = ` data-dl="${esc(c.items.map((x) => x[1]).join(','))}" data-unit="${esc(openBrands + '개 ' + c.unit)}"`;
     } else if (c.type === 'guide') {
       const th = WINTER_THEMES.map(([label, re]) => ({ label, xs: all.filter((r) => re.test(r.name || '')) })).map((x) => Object.assign(x, { brands: new Set(x.xs.map((r) => r.brand)).size })).filter((x) => x.brands >= 2 && !WINTER_BASIC.includes(x.label)).sort((p, q) => q.brands - p.brands);
       if (!th.length) return;
@@ -1048,7 +1082,7 @@ function main() {
       title: S.title(today.slice(0, 4)), h1: S.h1, kicker: '시즌', intro: S.intro, pathName: seasonPath(sid),
       crumbList: [{ name: '홈', path: '/' }, { name: S.name, path: seasonPath(sid) }],
       groups: groupsFor(list, today),
-      extraHtml: sid === 'christmas' ? '<div class="notice">예약 마감이 가까운 순으로 브랜드별 할인·수령 기간을 비교했습니다: <a href="/guide/christmas-cake-preorder">크리스마스 케이크 사전예약 비교</a> · <a href="/guide/starbucks-frequency">스타벅스 겨울 e-프리퀀시 정리</a></div>' + christmasCompareTable(list) : ''
+      extraHtml: sid === 'christmas' ? '<div class="notice">예약 마감이 가까운 순으로 브랜드별 할인·수령 기간을 비교했습니다: <a href="/guide/christmas-cake-preorder">크리스마스 케이크 사전예약 비교</a> · <a href="/guide/starbucks-frequency">스타벅스 겨울 e-프리퀀시 정리</a></div>' + christmasCompareTable(list, today) : ''
     });
     fs.writeFileSync(path.join(ROOT, 'season', sid + '.html'), page);
     urls.push({ loc: seasonPath(sid), lastmod: UPDATED, pri: '0.7' });
@@ -1144,7 +1178,10 @@ function main() {
   ensureGuideLd();
   try {
     const gp = path.join(ROOT, 'guide', 'christmas-cake-preorder.html');
-    fs.writeFileSync(gp, replaceBlock(fs.readFileSync(gp, 'utf8'), 'cake-urgent', cakeUrgentHtml(today)));
+    let gh = replaceBlock(fs.readFileSync(gp, 'utf8'), 'cake-urgent', cakeUrgentHtml(today));
+    gh = replaceBlock(gh, 'cake-chart', cakeChartHtml(today));
+    gh = replaceBlock(gh, 'cake-table', cakeTableHtml(today));
+    fs.writeFileSync(gp, gh);
   } catch (e) { console.warn('케이크 가이드 답 상자 갱신 건너뜀: ' + e.message); }
   idx = replaceBlock(idx, 'reads', `      <ul class="reads-list">\n        ${readsLinks.join('\n        ')}\n      </ul>`);
   const idxLd = [

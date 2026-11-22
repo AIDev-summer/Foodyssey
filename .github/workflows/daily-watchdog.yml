@@ -15,6 +15,19 @@ jobs:
   watch:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+      - name: 종료 확인 필요 항목(예상 종료 구간이 시작됐는데 아직 판매 중)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          TODAY=$(TZ=Asia/Seoul date +%F)
+          LIST=$(python3 -c "import json;d=json.load(open('data/expiry-watch.json',encoding='utf-8'));print(', '.join(x['brand']+' '+x['name'] for x in d.get('expectedPassed',[])))")
+          echo "종료 확인 필요: ${LIST:-없음}"
+          if [ -n "$LIST" ]; then
+            EXIST=$(gh issue list --repo "$REPO" --state all --search "$TODAY 종료 확인 필요 in:title" --json number --jq 'length')
+            if [ "$EXIST" = "0" ]; then gh issue create --repo "$REPO" --title "[종료 확인 필요] $TODAY 예상 종료 구간이 지났는데 판매 중으로 남은 항목" --body "$LIST. 기사에서 판매 종료를 확인해 data.js의 end를 고치고 같은 주소에서 '판매 종료'로 바꿔 주세요."; fi
+          fi
       - name: 오늘자 PR 확인
         env:
           GH_TOKEN: ${{ github.token }}

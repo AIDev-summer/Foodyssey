@@ -128,7 +128,7 @@ gtag('config', 'G-LN6SS7QZSR');
   var p = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
   var t = new Date(p + 'T00:00:00Z');
   function d(s) { return Math.round((new Date(s + 'T00:00:00Z') - t) / 86400000); }
-  document.querySelectorAll('.dday[data-d]').forEach(function (n) { var x = d(n.dataset.d); n.textContent = x > 0 ? 'D-' + x : (x === 0 ? 'D-DAY' : '지남'); if (x >= 0 && x <= 3) n.classList.add('soon'); });
+  document.querySelectorAll('.dday[data-d]').forEach(function (n) { var x = d(n.dataset.d); n.textContent = x > 0 ? 'D-' + x : (x === 0 ? 'D-DAY' : '종료'); if (x >= 0 && x <= 3) n.classList.add('soon'); if (x < 0) n.classList.add('past'); });
 })();
 document.addEventListener('click', function (e) {
   var a = e.target.closest && e.target.closest('a[data-store-find]');

@@ -82,7 +82,9 @@ async function main() {
   // 가격 근거가 '공식 홈페이지'로 적힌 항목은 기사에서 값을 찾지 않고 표시만 해요(화면에도 그 출처를 밝히고 있어요).
   const officialPrice = (g, it) => /홈페이지|공식/.test((g.note || '') + ' ' + (it.desc || ''));
   D.newItems.forEach((g) => g.items.forEach((it) => add(g.src, { kind: 'new', brand: g.brand, name: it.name, price: officialPrice(g, it) ? '' : (it.price || ''), officialPrice: officialPrice(g, it) && !!it.price, date: g.date || '', end: '' })));
-  D.limited.forEach((x) => add(x.src, { kind: x.kind, brand: x.brand, name: x.title, price: x.price || '', date: '', start: x.start || '', end: x.endLate ? '' : (x.end || ''), lines: x.lines || null }));
+  D.limited.forEach((x) => add(x.src, { kind: x.kind, brand: x.brand, name: x.title, price: x.priceSrc ? '' : (x.price || ''), date: '', start: x.start || '', end: x.endLate ? '' : (x.end || ''), lines: x.lines || null }));
+  // priceSrc: 가격만 다른 기사에 있을 때(예: 판매 종료 기사에는 가격이 없음) 그 기사로 가격을 따로 대조해요.
+  D.limited.forEach((x) => { if (x.priceSrc && x.price) add(x.priceSrc, { kind: x.kind, brand: x.brand, name: x.title, price: x.price, date: '', start: '', end: '', lines: null }); });
   if (D.hotNew && D.hotNew.src) add(D.hotNew.src, { kind: 'hot', brand: '', name: D.hotNew.name, price: D.hotNew.price || '', date: '', end: '' });
   let urls = [...byUrl.keys()];
   if (only) urls = urls.filter((u) => u.includes(only));

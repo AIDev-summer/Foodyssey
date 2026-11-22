@@ -459,7 +459,7 @@ p, li, dd, .row .period, .row .b, .tile p, .dir-cat p { word-break: keep-all; te
   </div>
 </section>
 
-<section aria-label="이번 주 화제">
+<section aria-label="주목할 메뉴">
   <div class="wrap hots">
     <article class="hot" id="hot-new"></article>
     <article class="hot" id="hot-limited"></article>
@@ -752,8 +752,8 @@ p, li, dd, .row .period, .row .b, .tile p, .dir-cat p { word-break: keep-all; te
     box.appendChild(el('p', { text: hd.desc }));
     box.appendChild(src(hd.src));
   }
-  hot(document.getElementById('hot-new'), D.hotNew, '이번 주 화제 신상');
-  hot(document.getElementById('hot-limited'), D.hotLimited, '이번 주 화제 한정');
+  hot(document.getElementById('hot-new'), D.hotNew, '주목할 신상');
+  hot(document.getElementById('hot-limited'), D.hotLimited, '최근 판매 종료 한정');
 
   // 가까운 매장 찾기: 네이버 지도 검색 새 창(위치 권한·API 없음). 클릭은 GA4 store_find(brand, page_type=home)로 세고, 내 방문(fd_me)은 세지 않습니다.
   var PIN = 'M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z';
