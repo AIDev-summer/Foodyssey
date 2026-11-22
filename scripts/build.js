@@ -27,10 +27,10 @@ const BRAND_CAT = {
 
 // 가이드(/guide) 글: data.js 근거로 손으로 쓴 고정 HTML이라 sitemap에만 메타를 등록해요.
 const GUIDES = [
-  { slug: 'starbucks-frequency', updated: '2026-11-19', title: '스타벅스 겨울 e-프리퀀시 2026 정리: 17잔 조건·미션 음료·증정품·예약 요령', desc: '17잔 조건, 미션 음료 8가지, 증정품과 추가 증정품, 예약 취소 대기·적립 주의사항을 기사 근거로 정리했어요.' },
+  { slug: 'starbucks-frequency', updated: '2026-11-19', title: '스타벅스 겨울 e-프리퀀시 2026 정리: 17잔 조건·미션 음료·증정품·예약 요령', desc: '17잔 조건, 미션 음료 8가지, 증정품과 추가 증정품, 예약 취소 대기와 적립 주의사항이 기사 근거와 함께 나와 있어요.' },
   { slug: 'christmas-cake-preorder', updated: '2026-11-21', title: '크리스마스 케이크 사전예약 비교 2026: 브랜드별 할인·예약 마감·수령 기간', desc: '파바·뚜레쥬르·투썸·배라·스타벅스·파스쿠찌의 사전예약 할인, 마감일, 수령 기간을 마감 임박 순으로 비교했어요.' },
-  { slug: 'bigarch-duration', updated: '2026-11-19', title: '맥도날드 빅아치 판매기간·가격·크기 정리(종료일 계산)', desc: '빅아치 출시일·가격·무게와 한정 판매 4~6주로 계산한 종료 예상일을 기사 근거로 정리했어요.' },
-  { slug: 'limited-menu-duration', updated: '', generated: true, title: '한정 메뉴·이벤트는 며칠 동안 할까: 푸디세이 기록으로 계산한 판매 기간', desc: '시작일과 종료일이 기사에 나온 항목만 골라 기간을 계산하고 브랜드별로 정리했어요.' },
+  { slug: 'bigarch-duration', updated: '2026-11-19', title: '맥도날드 빅아치 판매기간·가격·크기 정리(종료일 계산)', desc: '빅아치 출시일·가격·무게와 한정 판매 4~6주로 계산한 종료 예상일, 근거 기사를 한 곳에서 볼 수 있어요.' },
+  { slug: 'limited-menu-duration', updated: '', generated: true, title: '한정 메뉴·이벤트는 며칠 동안 할까: 푸디세이 기록으로 계산한 판매 기간', desc: '시작일과 종료일이 기사에 나온 항목만 골라 기간을 계산했어요. 브랜드별 결과도 있어요.' },
   { slug: 'winter-menu-trend', updated: '', generated: true, title: '이번 겨울 신메뉴는 어떤 재료가 많을까: 뱅쇼·고구마·딸기·밤 브랜드별 비교', desc: '뱅쇼, 고구마, 흑임자, 딸기, 밤, 홍시, 티라미수 메뉴를 어느 브랜드가 언제 냈는지 푸디세이 기록으로 모아 비교했어요.' },
   { slug: 'price-distribution', updated: '', generated: true, title: '프랜차이즈 신메뉴 가격대 분포: 푸디세이 기록 기준', desc: '가격이 기사에 확인된 신메뉴를 가격대별로 나눠 업종별 범위까지 계산했어요.' }
 ];
@@ -371,7 +371,7 @@ function brandSummary(list, today, brand) {
   const open = on.filter((r) => r.kind !== 'new' && !r.end && r.open);
   if (open.length) out.push(`종료일이 아직 나오지 않은 항목은 ${open.map((r) => `‘${r.name}’`).join(', ')}예요. 종료일은 기사에 나오면 반영해요.`);
   const labels = srcLabels(list);
-  if (labels.length) out.push(`정보는 ${labels.slice(0, 5).join(', ')}${labels.length > 5 ? ' 등' : ''} 기사 원문을 보고 정리했어요.`);
+  if (labels.length) out.push(`정보는 ${labels.slice(0, 5).join(', ')}${labels.length > 5 ? ' 등' : ''} 기사 원문에서 확인한 값이에요.`);
   if (past) out.push(`판매가 끝났거나 새 메뉴 목록에서 내려간 ${past}개는 아래 ‘지난 메뉴·끝난 이벤트’에 남겨 뒀어요.`);
   return `<p>${out.join(' ')}</p>`;
 }
@@ -381,7 +381,7 @@ function descList(list, today) {
   const own = (r) => (r.group ? r.desc : (r.desc || r.note));
   const rows = list.filter((r) => status(r, today) === 'on' && own(r));
   if (!rows.length) return '';
-  return `<h2>메뉴별 설명</h2><ul class="dl">${rows.map((r) => `<li><a href="${href(menuPath(r))}"><b>${esc(r.brand)} ${esc(r.name)}</b></a> — ${esc(own(r).replace(/\s+/g, ' '))}</li>`).join('')}</ul>`;
+  return `<h2>메뉴별 설명</h2><ul class="dl">${rows.map((r) => `<li><a href="${href(menuPath(r))}"><b>${esc(r.brand)} ${esc(r.name)}</b></a>: ${esc(own(r).replace(/\s+/g, ' '))}</li>`).join('')}</ul>`;
 }
 
 function catSummary(list, today, catName) {
@@ -524,7 +524,7 @@ function priceGuide(all, today) {
     + `<h2>가격대별 개수</h2><div class="tbl"><table class="compare"><thead><tr><th>가격대</th><th>개수</th><th>비중</th><th>메뉴(싼 순)</th></tr></thead><tbody>${bRows}</tbody></table></div><p class="table-note">비중은 가격이 확인된 ${priced.length}개를 100%로 계산했어요.</p>`
     + (cRows ? `<h2>업종별 가격 범위</h2><div class="tbl"><table class="compare"><thead><tr><th>업종</th><th>개수</th><th>최저</th><th>중앙값</th><th>최고</th></tr></thead><tbody>${cRows}</tbody></table></div><p class="table-note">업종마다 단품·세트·한 마리 구성이 달라 업종끼리 가격을 직접 견주기는 어려워요. 같은 업종 안에서 범위를 보는 용도예요.</p>` : '')
     + (mRows ? `<h2>출시월별 현황</h2><div class="tbl"><table class="compare"><thead><tr><th>월</th><th>신메뉴</th><th>가격 확인</th><th>가격 중앙값</th></tr></thead><tbody>${mRows}</tbody></table></div>` : '')
-    + `<h2>계산 방법과 한계</h2><ul><li>가격대 경계는 4,000·5,000·7,000·10,000원이에요. 구간을 바꾸면 개수가 달라질 수 있어요.</li><li>중앙값은 가격을 싼 순으로 늘어놓았을 때 가운데 값이에요(짝수 개면 가운데 두 값의 평균).</li><li>출시일 기준 월은 기사에 나온 출시·발표일이에요. 날짜가 “10월 출시”처럼 일까지 안 나오면 그달 1일로 적어요.</li><li>가격은 매장·지역·배달 여부에 따라 다를 수 있어요. 주문 전에 브랜드 공식 앱에서 확인해 주세요.</li></ul>`;
+    + `<h2>계산 방법과 한계</h2><ul><li>가격대 경계는 4,000·5,000·7,000·10,000원이에요(근거 자료 없음, 운영자 기준값. 카페 음료 한 잔과 버거 단품이 갈리는 가격대에서 나눴어요). 구간을 바꾸면 개수가 달라질 수 있어요.</li><li>중앙값은 가격을 싼 순으로 늘어놓았을 때 가운데 값이에요(짝수 개면 가운데 두 값의 평균).</li><li>출시일 기준 월은 기사에 나온 출시·발표일이에요. 날짜가 “10월 출시”처럼 일까지 안 나오면 그달 1일로 적어요.</li><li>가격은 매장·지역·배달 여부에 따라 다를 수 있어요. 주문 전에 브랜드 공식 앱에서 확인해 주세요.</li></ul>`;
   return pageShell({ title: `프랜차이즈 신메뉴 가격대 분포 (${priced.length}개, ${monthLabel(today.slice(0, 7))} 기준) | 푸디세이`, desc: `기사에 가격이 확인된 신메뉴 ${priced.length}개를 가격대별로 나눠 셌어요. ${lead}`.slice(0, 155), canonical: '/guide/price-distribution', crumbList: [{ name: '홈', path: '/' }, { name: '가이드', path: '/guide/' }, { name: '신메뉴 가격대 분포', path: '/guide/price-distribution' }], kicker: '가이드 · 자체 계산', h1: GUIDES.find((g) => g.slug === 'price-distribution').title, body });
 }
 
@@ -555,7 +555,7 @@ function winterGuide(all, today) {
   const lead = top ? `푸디세이에 기록된 메뉴 이름을 재료별로 묶어 보면 ‘${top.label}’가 ${top.brands.length}개 브랜드, ${top.xs.length}개 메뉴로 가장 많이 겹쳐요.${basicNote}` : '재료가 겹치는 메뉴를 찾지 못했어요.';
   const total = all.length;
   const body = `<p class="meta">기준일 ${esc(fmtDate(today))} · 푸디세이 기록 ${total}개 메뉴·이벤트 · 매일 자동으로 다시 계산해요</p>`
-    + `<p>${esc(lead)} 이 글은 기사에 나온 메뉴 이름에 같은 재료가 들어간 항목을 브랜드별로 모아, 누가 언제 냈고 지금도 파는지 한 번에 볼 수 있게 정리했어요. 같은 재료를 여러 브랜드가 동시에 내놓는 때가 곧 그 계절의 유행이에요.</p>`
+    + `<p>${esc(lead)} 이 글은 기사에 나온 메뉴 이름에 같은 재료가 들어간 항목을 브랜드별로 모아, 누가 언제 냈고 지금도 파는지 한 번에 볼 수 있어요. 같은 재료를 여러 브랜드가 동시에 내놓는 때가 곧 그 계절의 유행이에요.</p>`
     + `<h2>재료별 한눈에 보기</h2><div class="tbl"><table class="compare"><thead><tr><th>재료</th><th>브랜드</th><th>메뉴</th><th>가장 먼저 나온 메뉴</th></tr></thead><tbody>${sumRows}</tbody></table></div><p class="table-note">브랜드가 2곳 이상 겹친 재료만 보여줘요. 개수는 메뉴 이름에 재료가 들어간 항목이에요.</p>`
     + secs
     + `<h2>계산 방법과 한계</h2><ul><li>메뉴 이름에 재료 글자가 들어간 항목만 셌어요. 설명에만 재료가 나오는 메뉴(예: 이름에 없는 고구마 크림)는 뺐어요.</li><li>시작·출시일은 기사에 나온 출시일이나 발표일이고, 가격은 기사에 숫자로 나온 것만 적었어요. 없으면 ‘기사에 없음’이에요.</li><li>‘초콜릿·쇼콜라’와 ‘치즈’처럼 이름에 흔히 들어가는 재료는 겹침이 많아 유행이라기보다 기본 재료 현황에 가까워요.</li><li>푸디세이가 기록하지 못한 브랜드와 메뉴는 포함되지 않아서 전체 시장의 비율이 아니에요.</li></ul>`
@@ -571,9 +571,9 @@ function guideIndex(all, today) {
   const both = lim.filter((r) => r.start && r.end && !r.endLate).length;
   const brands = new Set(all.map((r) => r.brand)).size;
   const body = `<p>푸디세이 가이드는 기사에 나온 사실과 푸디세이가 직접 모은 데이터로만 쓴 글이에요. 계산하는 글은 날짜와 계산식을 적고, 데이터가 바뀌면 자동으로 다시 계산해요.</p>`
-    + `<ul class="dl">${GUIDES.map((g) => `<li><a href="/guide/${g.slug}"><b>${esc(g.title)}</b></a> — ${esc(g.desc)}</li>`).join('')}</ul>`
+    + `<ul class="dl">${GUIDES.map((g) => `<li><a href="/guide/${g.slug}"><b>${esc(g.title)}</b></a>: ${esc(g.desc)}</li>`).join('')}</ul>`
     + `<h2>이 가이드의 데이터 현황</h2><p>기준일 ${esc(fmtDate(today))} 현재 푸디세이에는 브랜드 ${brands}곳의 신메뉴 ${news.length}개와 한정 메뉴·이벤트 ${lim.length}건이 기록돼 있어요. 신메뉴 가운데 가격이 숫자 하나로 확인된 것은 ${priced}개, 한정 항목 가운데 시작일과 종료일이 모두 확인된 것은 ${both}건이에요. 계산 가이드는 이 확인된 값만 써서 만들기 때문에, 기사에서 값이 확인되지 않은 항목은 계산에 들어가지 않아요.</p>`
-    + `<h2>가이드별 마지막 갱신일</h2><ul class="dl">${GUIDES.map((g) => `<li><a href="/guide/${g.slug}">${esc(g.title)}</a> — ${esc(fmtDate(g.updated || today))} 갱신${g.generated ? '(푸디세이 데이터로 매번 다시 계산해요)' : '(기사 원문을 다시 확인해 손으로 고쳐요)'}</li>`).join('')}</ul>`
+    + `<h2>가이드별 마지막 갱신일</h2><ul class="dl">${GUIDES.map((g) => `<li><a href="/guide/${g.slug}">${esc(g.title)}</a>, ${esc(fmtDate(g.updated || today))} 갱신${g.generated ? '(푸디세이 데이터로 매번 다시 계산해요)' : '(기사 원문을 다시 확인해 손으로 고쳐요)'}</li>`).join('')}</ul>`
     + `<h2>가이드를 쓰는 기준</h2><ul><li>가격·출시일·종료일은 기사 본문이나 브랜드 공식 자료에 있는 값만 써요.</li><li>계산하는 글은 기준일과 계산식을 글 안에 적어요.</li><li>값이 확인되지 않은 부분은 추측하지 않고 “확인 안 됨”이라고 적어요.</li></ul>`
     + `<h2>월별 모음</h2><p>달마다 새로 나온 메뉴와 마감 달력을 모았어요. 지난 달은 보관함으로 남아요. <a href="/new/">월별 모음 전체 보기</a></p>`
     + `<h2>함께 보면 좋은 곳</h2><p>크리스마스·연말 메뉴는 <a href="/season/christmas">시즌 모음</a>에, 날짜별 새 항목은 <a href="/updates">업데이트 내역</a>에, 업종별 정리는 각 업종 페이지에 있어요.</p>`;
@@ -629,14 +629,14 @@ function monthHub(all, today, months) {
       const cnt = {}; ns.forEach((r) => { cnt[r.brand] = (cnt[r.brand] || 0) + 1; });
       const top = Object.keys(cnt).sort((a, c) => cnt[c] - cnt[a] || a.localeCompare(c, 'ko')).slice(0, 5).map((x) => `${x} ${cnt[x]}개`).join(', ');
       const ps = ns.filter((r) => priceNum(r.price)).map((r) => priceNum(r.price));
-      return `<li><a href="/new/${m}"><b>${esc(monthLabel(m))}</b></a> — 새 메뉴 ${ns.length}개${top ? '(많은 브랜드: ' + esc(top) + ')' : ''}${ps.length ? `, 가격이 확인된 ${ps.length}개는 ${esc(won(Math.min(...ps)))}~${esc(won(Math.max(...ps)))}` : ', 가격이 확인된 메뉴는 아직 없어요'}</li>`;
+      return `<li><a href="/new/${m}"><b>${esc(monthLabel(m))}</b></a>: 새 메뉴 ${ns.length}개${top ? '(많은 브랜드: ' + esc(top) + ')' : ''}${ps.length ? `, 가격이 확인된 ${ps.length}개는 ${esc(won(Math.min(...ps)))}~${esc(won(Math.max(...ps)))}` : ', 가격이 확인된 메뉴는 아직 없어요'}</li>`;
     }).join('')}</ul>`
     + `<h2>전체 합계</h2><p>${months.length}개 월 합계로 새 메뉴 ${all.filter((r) => r.kind === 'new').length}개, 마감하는 한정 메뉴·이벤트 ${all.filter((r) => r.kind !== 'new' && r.end).length}건, 종료일이 아직 없는 한정 항목 ${all.filter((r) => r.kind !== 'new' && !r.end).length}건이 기록돼 있어요. 종료일이 아직 없는 항목은 종료일이 기사에 나오면 그달 마감 달력에 들어가요.</p>`
     + (() => {
       const from = new Date(Date.parse(today) - 7 * 86400000).toISOString().slice(0, 10);
       const rec = all.filter((r) => r.firstSeen && r.firstSeen >= from && !noindexReason(r, status(r, today))).sort((a, c) => c.firstSeen.localeCompare(a.firstSeen) || a.brand.localeCompare(c.brand, 'ko')).slice(0, 12);
       if (rec.length < 3) return '';
-      return `<h2>최근 7일 안에 푸디세이에 올라온 메뉴</h2><p>${esc(mdw(from))}부터 ${esc(mdw(today))}까지 등록된 항목 중 검색에 노출되는 ${rec.length}개예요(등록일 순).</p><ul class="dl">${rec.map((r) => `<li><a href="${href(menuPath(r))}"><b>${esc(r.brand)} ${esc(r.name)}</b></a> — ${esc(fmtDate(r.firstSeen))} 등록${r.price ? ', 가격 ' + esc(r.price) : ''}${r.kind === 'new' ? '' : r.period ? ', ' + esc(r.period) : ''}</li>`).join('')}</ul>`;
+      return `<h2>최근 7일 안에 푸디세이에 올라온 메뉴</h2><p>${esc(mdw(from))}부터 ${esc(mdw(today))}까지 등록된 항목 중 검색에 노출되는 ${rec.length}개예요(등록일 순).</p><ul class="dl">${rec.map((r) => `<li><a href="${href(menuPath(r))}"><b>${esc(r.brand)} ${esc(r.name)}</b></a>, ${esc(fmtDate(r.firstSeen))} 등록${r.price ? ', 가격 ' + esc(r.price) : ''}${r.kind === 'new' ? '' : r.period ? ', ' + esc(r.period) : ''}</li>`).join('')}</ul>`;
     })()
     + `<h2>더 읽을거리</h2><p><a href="/guide/limited-menu-duration">한정 메뉴 판매 기간 계산</a> · <a href="/guide/price-distribution">신메뉴 가격대 분포</a> · <a href="/guide/">가이드 전체</a></p>`;
   return pageShell({ title: `월별 신메뉴·한정 메뉴 모음 (${months.length}개 월) | 푸디세이`, desc: '달마다 새로 나온 프랜차이즈 신메뉴와 마감하는 한정 메뉴·이벤트를 모은 월별 보관함이에요.', canonical: '/new/', crumbList: [{ name: '홈', path: '/' }, { name: '월별 모음', path: '/new/' }], kicker: '월별 모음', h1: '월별 신메뉴·한정 메뉴 모음', body });
@@ -719,7 +719,7 @@ function menuPage(r, all, today) {
   if (r.kind !== 'new') { if (r.period) answerBits.push(`판매·진행 기간은 ${r.period}`); }
   else if (r.date) answerBits.push(`${fmtDate(r.date)} ${/발표/.test(r.when) ? '발표' : '출시'}`);
   if (!isEvent || priceTxt) answerBits.push(priceTxt ? `가격은 ${priceTxt}` : '가격은 기사에서 확인되지 않았어요');
-  const answerLine = `<p class="answer"><b>한 줄 답:</b> ${esc(r.brand + ' ' + r.name)} — ${esc(answerBits.join(' · '))}${priceTxt ? '' : ''}. 출처는 아래 기사 링크예요.</p>`;
+  const answerLine = `<p class="answer"><b>한 줄 답:</b> ${esc(r.brand + ' ' + r.name)}: ${esc(answerBits.join(' · '))}${priceTxt ? '' : ''}. 출처는 아래 기사 링크예요.</p>`;
   const descBits = [];
   if (r.price) descBits.push(`가격 ${r.price}`);
   if (r.kind === 'new' && r.date) descBits.push(`${fmtDate(r.date)} ${/발표/.test(r.when) ? '발표' : '출시'}`);
@@ -1096,7 +1096,7 @@ function main() {
     + feed.map((r) => {
       const st = status(r, today);
       const bits = [r.tag, r.price, r.kind === 'new' ? r.when : r.period, st === 'on' ? '' : statusLabel(r, st)].filter(Boolean).join(' · ');
-      const d = [bits, r.desc || r.note].filter(Boolean).join(' — ');
+      const d = [bits, r.desc || r.note].filter(Boolean).join(': ');
       const u = SITE + href(menuPath(r));
       return `<item><title>${esc(r.brand + ' ' + r.name)}</title><link>${esc(u)}</link><guid isPermaLink="true">${esc(u)}</guid>`
         + `<pubDate>${rfc(r.firstSeen > (r.date || '') ? r.firstSeen : r.date)}</pubDate>${r.catName ? `<category>${esc(r.catName)}</category>` : ''}<description>${esc(d)}</description></item>`;
@@ -1172,6 +1172,7 @@ function main() {
     const hardRows = q.rows.filter((r) => r.hard.length && !r.noindex);
     console.log('품질 점검: 페이지 ' + q.rows.length + '개, 미달 ' + q.failCount + '개, 하위 20% ' + q.bottomCount + '개(총점 ≤ ' + q.cut + '), 출처 대조 ' + q.verifiedPages + '개');
     if (q.failCount) q.rows.filter((r) => r.fail).slice(0, 15).forEach((r) => console.warn(' ! 품질 미달 ' + r.total + '점 ' + r.url + ' — ' + r.hard.concat(r.notes).slice(0, 3).join(' / ')));
+    try { const st = require('./lint-style').run(ROOT); console.log('문체 점검: 경고 ' + st.length + '쪽(상투 표현·긴 줄표, 빌드는 멈추지 않아요)'); st.slice(0, 15).forEach((x) => console.warn(' ! ' + x)); } catch (e) { console.warn('문체 점검 건너뜀: ' + e.message); }
     const lk = require('./lint-links').run(ROOT);
     console.log('링크 구조: 색인 대상 ' + lk.indexable + '쪽, 고아 ' + lk.orphans.length + '쪽, 설명 없는 링크 글자 ' + lk.weak.length + '곳');
     if (lk.orphans.length || lk.weak.length) { lk.orphans.slice(0, 20).forEach((x) => console.error(' - 고아 페이지: ' + x)); lk.weak.slice(0, 20).forEach((x) => console.error(' - 설명 없는 링크: ' + x)); console.error('링크 구조 위반'); process.exit(1); }
