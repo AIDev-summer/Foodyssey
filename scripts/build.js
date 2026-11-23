@@ -27,7 +27,7 @@ const BRAND_CAT = {
 
 // 가이드(/guide) 글: data.js 근거로 손으로 쓴 고정 HTML이라 sitemap에만 메타를 등록합니다.
 const GUIDES = [
-  { slug: 'starbucks-frequency', updated: '2026-11-19', title: '스타벅스 겨울 e-프리퀀시 2026 정리: 17잔 조건·미션 음료·증정품·예약 요령', desc: '17잔 조건, 미션 음료 8가지, 증정품과 추가 증정품, 예약 취소 대기와 적립 주의사항이 기사 근거와 함께 나와 있습니다.' },
+  { slug: 'starbucks-frequency', updated: '2026-11-19', title: '스타벅스 겨울 e-프리퀀시 언제까지? 12월 31일, 17잔 조건·증정품', desc: '스타벅스 겨울 e-프리퀀시는 12월 31일까지입니다. 17잔 조건, 미션 음료 8가지, 증정품 8종, 예약 취소 대기와 적립 주의사항을 기사 근거와 함께 확인할 수 있습니다.' },
   { slug: 'christmas-cake-preorder', updated: '2026-11-21', title: '크리스마스 케이크 사전예약 비교 2026: 브랜드별 할인·예약 마감·수령 기간', desc: '파바·뚜레쥬르·투썸·배라·스타벅스·파스쿠찌의 사전예약 할인, 마감일, 수령 기간을 마감 임박 순으로 비교했습니다.' },
   { slug: 'bigarch-duration', updated: '2026-11-23', title: '맥도날드 빅아치 판매 종료: 예상 4~6주, 실제 27일(가격·크기 정리)', desc: '맥도날드 빅아치는 11월 18일 판매를 마쳤습니다. 10월 22일 출시 후 27일 만이고, 예상 4~6주와 실제 기간, 가격, 무게를 기사 근거로 비교했습니다.' },
   { slug: 'limited-menu-duration', updated: '', generated: true, title: '한정 메뉴·이벤트는 며칠 동안 할까: 푸디세이 기록으로 계산한 판매 기간', desc: '시작일과 종료일이 기사에 나온 항목만 골라 기간을 계산했습니다. 브랜드별 결과도 있습니다.' },
@@ -152,6 +152,8 @@ try { CONSOLIDATED = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'consoli
 const MENU_MIN = 650, HUB_MIN = 800;
 // 임시 유예(2026-11-18): 반복 영역을 빼서 짧아진 메뉴 페이지는 until 날짜까지만 색인을 유지하고, 그 안에 고유 정보를 보강합니다.
 let GRACE = { until: '', slugs: [] };
+let PROTECT = { slugs: [] };
+try { PROTECT = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'gsc-protect.json'), 'utf8')); } catch (e) {}
 try { GRACE = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'menu-short-grace.json'), 'utf8')); } catch (e) {}
 // 완성된 페이지의 눈에 보이는 글자 수(머리글·푸터·스크립트 제외)
 function plainLen(h) {
@@ -168,7 +170,7 @@ function hangulLen(h) {
 }
 function noindexReason(r, st) {
   if (FORCED.has(r.slug)) return 'short';
-  if (CONSOLIDATED[r.slug]) return 'consolidated';
+  if (CONSOLIDATED[r.slug] && !PROTECT.slugs.includes(r.slug)) return 'consolidated';
   if (r.kind === 'event' && st !== 'on') return 'ended-event';
   // 같은 묶음(group)의 메뉴는 묶음 공통 note가 아니라 메뉴 자기 설명(desc)만 고유 내용으로 칩니다.
   const own = r.group ? (r.desc || '') : [r.desc, r.note].filter(Boolean).join(' ');
@@ -713,8 +715,8 @@ function menuPage(r, all, today) {
   const priceTag = r.price || (r.lines && r.lines.length) ? '·가격' : '';
   const title = isEvent
     ? (r.end ? `${r.brand} ${r.name} 언제까지? 기간·참여 방법 | 푸디세이` : `${r.brand} ${r.name} 기간·참여 방법 | 푸디세이`)
-    : (r.kind === 'new' ? `${r.brand} ${r.name} 신메뉴 출시일·가격 | 푸디세이`
-      : (hasPeriod && st === 'ended' ? `${r.brand} ${r.name} 판매 종료일·기간${priceTag || '·가격'} | 푸디세이` : hasPeriod ? `${r.brand} ${r.name} 언제까지? 판매 기간${priceTag || '·가격'} | 푸디세이` : `${r.brand} ${r.name} 가격·판매 기간 | 푸디세이`));
+    : (r.kind === 'new' ? `${r.brand} ${r.name} 언제 나왔나? 출시일·가격 | 푸디세이`
+      : (hasPeriod && st === 'ended' ? `${r.brand} ${r.name} 언제까지? 판매 종료일${priceTag || '·가격'} | 푸디세이` : hasPeriod ? `${r.brand} ${r.name} 언제까지? 판매 기간${priceTag || '·가격'} | 푸디세이` : `${r.brand} ${r.name} 가격·판매 기간 | 푸디세이`));
   const h1Text = isEvent ? `${r.brand} ${r.name} ${r.end ? '기간' : '기간·참여 방법'}` : (r.kind === 'new' ? `${r.brand} ${r.name}` : (hasPeriod ? `${r.brand} ${r.name} ${st === 'ended' ? '판매 종료일·기간·가격' : '판매 기간·가격'}` : `${r.brand} ${r.name}`));
   const h1Suffix = isEvent ? (r.end ? '기간' : '기간·참여 방법') : (r.kind === 'new' ? '' : (hasPeriod ? '판매 기간·가격' : ''));
   const priceTxt = r.price ? r.price : (r.lines && r.lines.length ? r.lines.map((l) => l[0] + ' ' + l[1]).join(', ') : '');
@@ -1025,11 +1027,23 @@ function main() {
   let noindexCount = 0;
   all.forEach((r) => {
     let mp = menuPage(r, all, today);
-    if (!noindexReason(r, status(r, today)) && plainLen(mp) < MENU_MIN && !(GRACE.until >= today && GRACE.slugs.includes(r.slug))) { FORCED.add(r.slug); mp = menuPage(r, all, today); }
+    if (!noindexReason(r, status(r, today)) && plainLen(mp) < MENU_MIN && !(GRACE.until >= today && GRACE.slugs.includes(r.slug)) && !PROTECT.slugs.includes(r.slug)) { FORCED.add(r.slug); mp = menuPage(r, all, today); }
+    if (PROTECT.slugs.includes(r.slug) && plainLen(mp) < MENU_MIN) console.log(`보강 필요(서치콘솔 노출 상위, 색인 유지): ${r.slug} ${plainLen(mp)}자`);
     fs.writeFileSync(path.join(ROOT, 'menu', r.slug + '.html'), mp);
     if (noindexReason(r, status(r, today))) { noindexCount++; return; }
     urls.push({ loc: menuPath(r), lastmod: r.firstSeen, pri: status(r, today) === 'on' ? '0.7' : '0.4' });
   });
+  // 옛·줄임 주소 안내 페이지(data/url-aliases.json): 404 대신 실제 페이지로 이동시킵니다.
+  try {
+    const al = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'url-aliases.json'), 'utf8')).menu || {};
+    Object.keys(al).forEach((from) => {
+      const to = 'https://foodyssey.co.kr' + href('/menu/' + al[from]);
+      if (!fs.existsSync(path.join(ROOT, 'menu', al[from] + '.html'))) throw new Error('alias 대상 없음: ' + al[from]);
+      const real = fs.readFileSync(path.join(ROOT, 'menu', al[from] + '.html'), 'utf8');
+      fs.writeFileSync(path.join(ROOT, 'menu', from + '.html'), real.replace('<head>', `<head>
+<meta http-equiv="refresh" content="0; url=${to}">`));
+    });
+  } catch (e) { if (/alias 대상/.test(e.message)) throw e; }
 
   let hubNoindex = 0;
   const brands = [...new Set(all.map((r) => r.brand))].sort((a, b) => a.localeCompare(b, 'ko'));
