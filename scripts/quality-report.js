@@ -20,7 +20,7 @@ function walk(dir, out) {
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
     if (['.git', 'node_modules', 'scripts', 'data'].includes(e.name)) continue;
     const p = path.join(dir, e.name);
-    if (e.isDirectory()) walk(p, out); else if (e.name.endsWith('.html')) out.push(p);
+    if (e.isDirectory()) walk(p, out); else if (e.name.endsWith('.html')) { if (!/http-equiv="refresh"/.test(fs.readFileSync(p, 'utf8').slice(0, 400))) out.push(p); }
   }
   return out;
 }

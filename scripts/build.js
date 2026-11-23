@@ -1033,17 +1033,6 @@ function main() {
     if (noindexReason(r, status(r, today))) { noindexCount++; return; }
     urls.push({ loc: menuPath(r), lastmod: r.firstSeen, pri: status(r, today) === 'on' ? '0.7' : '0.4' });
   });
-  // 옛·줄임 주소 안내 페이지(data/url-aliases.json): 404 대신 실제 페이지로 이동시킵니다.
-  try {
-    const al = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'url-aliases.json'), 'utf8')).menu || {};
-    Object.keys(al).forEach((from) => {
-      const to = 'https://foodyssey.co.kr' + href('/menu/' + al[from]);
-      if (!fs.existsSync(path.join(ROOT, 'menu', al[from] + '.html'))) throw new Error('alias 대상 없음: ' + al[from]);
-      const real = fs.readFileSync(path.join(ROOT, 'menu', al[from] + '.html'), 'utf8');
-      fs.writeFileSync(path.join(ROOT, 'menu', from + '.html'), real.replace('<head>', `<head>
-<meta http-equiv="refresh" content="0; url=${to}">`));
-    });
-  } catch (e) { if (/alias 대상/.test(e.message)) throw e; }
 
   let hubNoindex = 0;
   const brands = [...new Set(all.map((r) => r.brand))].sort((a, b) => a.localeCompare(b, 'ko'));
@@ -1208,6 +1197,17 @@ function main() {
 
   // 구조화 데이터 린트: 금지 패턴이 있으면 빌드를 실패시켜서 잘못된 페이지가 배포되지 않게 합니다.
   autoIsolate(releaseHold(all, today));
+  // 옛·줄임 주소 안내 페이지(data/url-aliases.json): 품질 점검·자동 격리 뒤에 만들어 실제 페이지가 중복으로 잡히지 않게 합니다.
+  try {
+    const al = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'url-aliases.json'), 'utf8')).menu || {};
+    Object.keys(al).forEach((from) => {
+      const to = 'https://foodyssey.co.kr' + href('/menu/' + al[from]);
+      if (!fs.existsSync(path.join(ROOT, 'menu', al[from] + '.html'))) throw new Error('alias 대상 없음: ' + al[from]);
+      const real = fs.readFileSync(path.join(ROOT, 'menu', al[from] + '.html'), 'utf8');
+      fs.writeFileSync(path.join(ROOT, 'menu', from + '.html'), real.replace('<head>', `<head>
+<meta http-equiv="refresh" content="0; url=${to}">`));
+    });
+  } catch (e) { if (/alias 대상/.test(e.message)) throw e; }
   versionAssets();
   const lintRes = require('./lint-jsonld').lint(ROOT, { analytics: true });
   if (lintRes.errs.length) {
