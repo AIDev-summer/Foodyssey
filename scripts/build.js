@@ -115,6 +115,11 @@ function mergeArchive(items, today) {
   const file = path.join(ROOT, 'data', 'archive.json');
   let arc = {};
   try { arc = JSON.parse(fs.readFileSync(file, 'utf8')); } catch (e) { arc = {}; }
+  // 국내 판매 근거가 없어 제외한 항목(data/excluded-items.json): 보관함에서도 지우고 페이지를 만들지 않습니다.
+  let EXC = {};
+  try { EXC = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'excluded-items.json'), 'utf8')).slugs || {}; } catch (e) {}
+  Object.keys(EXC).forEach((k) => { delete arc[k]; });
+  items = items.filter((r) => !EXC[r.slug]);
   const live = new Set();
   items.forEach((r) => {
     live.add(r.slug);
@@ -1097,7 +1102,7 @@ function main() {
     const days = [...new Set(shown.map((r) => r.firstSeen))].sort().reverse();
     const upBody = days.map((d) => `<h2>${esc(fmtDate(d))} 등록</h2><ul class="cards">${shown.filter((r) => r.firstSeen === d).map((r) => card(r, status(r, today))).join('')}</ul>`).join('');
     const upPage = head({ title: `업데이트 내역 (${UPDATED.slice(0, 4)}년 ${Number(UPDATED.slice(5, 7))}월) | 푸디세이`, desc: '푸디세이에 새로 올라온 프랜차이즈 신메뉴·한정 메뉴를 등록 날짜별로 모았습니다. 매일 아침 기사를 확인해 업데이트합니다.', canonical: SITE + '/updates', jsonld: [crumbs([{ name: '홈', path: '/' }, { name: '업데이트 내역', path: '/updates' }]).ld] })
-      + `<main><div class="wrap"><article>${crumbs([{ name: '홈', path: '/' }, { name: '업데이트 내역', path: '/updates' }]).html}<p class="kicker">업데이트</p><h1>업데이트 내역</h1><p>푸디세이에 올라온 새 메뉴와 한정 메뉴를 등록 날짜 순으로 모았습니다. 매일 아침 기사 원문을 확인해서 바뀐 내용만 반영합니다.</p><p>지금까지 푸디세이가 기록한 메뉴·이벤트는 ${all.length}개이고, 이 가운데 오늘 판매·진행 중인 것은 ${all.filter((r) => status(r, today) === 'on').length}개입니다. 아래에는 기사 출처와 가격·기간이 확인되고 설명이 충분한 ${shown.length}개만 올려 두었습니다. 정보가 아직 부족한 메뉴는 보강되면 자동으로 이 목록에 들어옵니다.</p>${stampHtml()}${upBody}${exploreHtml('')}<p class="more"><a href="/">오늘의 새 메뉴·한정 메뉴 전체 보기 →</a></p></article></div></main>\n`
+      + `<main><div class="wrap"><article>${crumbs([{ name: '홈', path: '/' }, { name: '업데이트 내역', path: '/updates' }]).html}<p class="kicker">업데이트</p><h1>업데이트 내역</h1><p>푸디세이에 올라온 새 메뉴와 한정 메뉴를 등록 날짜 순으로 모았습니다. 매일 아침 기사 원문을 확인해서 바뀐 내용만 반영합니다.</p><p>지금까지 푸디세이가 기록한 메뉴·이벤트는 ${all.length}개이고, 이 가운데 오늘 판매·진행 중인 것은 ${all.filter((r) => status(r, today) === 'on').length}개입니다. 아래에는 기사 출처와 가격·기간이 확인되고 설명이 충분한 ${shown.length}개만 올려 두었습니다. 정보가 아직 부족한 메뉴는 보강되면 자동으로 이 목록에 들어옵니다.</p><p>목록에 오른 ${shown.length}개는 ${new Set(shown.map((r) => r.brand)).size}개 브랜드의 메뉴이고, 신메뉴 ${shown.filter((r) => r.kind === 'new').length}개, 한정 메뉴 ${shown.filter((r) => r.kind !== 'new' && r.kind !== 'event').length}개, 이벤트 ${shown.filter((r) => r.kind === 'event').length}개입니다. 이 가운데 가격이 기사에서 확인된 것은 ${shown.filter((r) => r.price || (r.lines && r.lines.length)).length}개이고, 판매나 행사가 이미 끝난 것은 ${shown.filter((r) => status(r, today) === 'ended').length}개입니다. 목록에서 빠진 ${all.length - shown.length}개는 본문이 짧아 검색 대상에서 제외했지만, 브랜드 페이지와 월별 모음에서는 계속 볼 수 있습니다. 가장 먼저 기록한 메뉴는 ${fmtDate(shown.map((r) => r.firstSeen).filter(Boolean).sort()[0] || today)}, 가장 최근 것은 ${fmtDate(shown.map((r) => r.firstSeen).filter(Boolean).sort().slice(-1)[0] || today)}에 올라왔습니다. 기사에 없는 가격과 날짜는 비워 두기 때문에 가격이 없는 메뉴도 목록에 있을 수 있습니다.</p>${stampHtml()}${upBody}${exploreHtml('')}<p class="more"><a href="/">오늘의 새 메뉴·한정 메뉴 전체 보기 →</a></p></article></div></main>\n`
       + foot();
     fs.writeFileSync(path.join(ROOT, 'updates.html'), upPage);
     urls.push({ loc: '/updates', lastmod: UPDATED, pri: '0.6' });
@@ -1201,9 +1206,10 @@ function main() {
   try {
     const al = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'url-aliases.json'), 'utf8')).menu || {};
     Object.keys(al).forEach((from) => {
-      const to = 'https://foodyssey.co.kr' + href('/menu/' + al[from]);
-      if (!fs.existsSync(path.join(ROOT, 'menu', al[from] + '.html'))) throw new Error('alias 대상 없음: ' + al[from]);
-      const real = fs.readFileSync(path.join(ROOT, 'menu', al[from] + '.html'), 'utf8');
+      const tp = al[from].startsWith('/') ? al[from] : '/menu/' + al[from];
+      const to = 'https://foodyssey.co.kr' + href(tp);
+      if (!fs.existsSync(path.join(ROOT, tp.slice(1) + '.html'))) throw new Error('alias 대상 없음: ' + al[from]);
+      const real = fs.readFileSync(path.join(ROOT, tp.slice(1) + '.html'), 'utf8');
       fs.writeFileSync(path.join(ROOT, 'menu', from + '.html'), real.replace('<head>', `<head>
 <meta http-equiv="refresh" content="0; url=${to}">`));
     });

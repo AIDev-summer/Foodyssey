@@ -21,6 +21,15 @@ if (D) {
   if (D.updated > today) errs.push('updated가 오늘(' + today + ')보다 미래예요: ' + D.updated);
   D.newItems.forEach((g, i) => { if (!g.brand || !g.cat || !g.items || !g.items.length) errs.push('newItems[' + i + '] 구조 오류'); if (g.date && g.date > today) errs.push(`newItems ${g.brand}: 날짜가 미래예요 ${g.date}`); if (!g.src || !g.src.url) errs.push(`newItems ${g.brand}: 출처가 없어요`); });
   D.limited.forEach((x, i) => { if (!x.brand || !x.kind || !(x.title || x.name)) errs.push('limited[' + i + '] 구조 오류'); if (!x.src || !x.src.url) errs.push(`limited ${x.brand} ${x.title}: 출처가 없어요`); if (x.start && x.end && x.start > x.end) errs.push(`limited ${x.brand} ${x.title}: 시작일이 종료일보다 늦어요`); });
+  // 국내 출처 필수(2026-11-25): .kr 도메인이거나 아래 국내 언론 목록에 있어야 합니다. 미주·해외 한인 매체와 해외 본사 발표만 있는 항목은 올리지 않습니다.
+  const KR_NON_KR = new Set(['heraldcorp.com', 'nate.com', 'naver.com', 'hankooki.com', 'betanews.net', 'etnews.com', 'fnnews.com', 'ggilbo.com', 'gosiweek.com', 'gpkorea.com', 'hankyung.com', 'segye.com', 'sportsworldi.com']);
+  const OVERSEAS = ['koreadaily.com', 'koreatimes.com', 'koreatimes.net', 'koreatimesus.com', 'vanchosun.com', 'koreatimes.co.nz'];
+  const hostOk = (u) => { let h = ''; try { h = new URL(u).hostname.replace(/^(www|m|n|biz|weekly|news)\./, ''); } catch (e) { return false; } if (OVERSEAS.some((o) => h === o || h.endsWith('.' + o))) return false; return /\.kr$/.test(h) || [...KR_NON_KR].some((o) => h === o || h.endsWith('.' + o)); };
+  const srcs = [];
+  D.newItems.forEach((g) => srcs.push([g.brand + ' 신메뉴', g.src]));
+  D.limited.forEach((x) => { srcs.push([x.brand + ' ' + (x.title || x.name), x.src]); if (x.priceSrc) srcs.push([x.brand + ' ' + (x.title || x.name) + ' 가격', x.priceSrc]); });
+  ['hotNew', 'hotLimited'].forEach((k) => D[k] && D[k].src && srcs.push([k, D[k].src]));
+  srcs.forEach(([n, s]) => { if (s && s.url && !hostOk(s.url)) errs.push('국내 출처가 아니에요(해외·미주 한인 매체이거나 허용 목록에 없어요): ' + n + ' → ' + s.url); });
   const prev = process.argv[2];
   if (prev && fs.existsSync(prev)) {
     try { const c2 = { window: {} }; vm.runInNewContext(fs.readFileSync(prev, 'utf8'), c2, { filename: 'prev' }); const a = count(c2.window.FOODYSSEY), b = count(D); if (b.n < a.n * 0.7 || b.l < a.l * 0.6) errs.push(`항목 수가 갑자기 줄었어요: 신메뉴 ${a.n}→${b.n}, 한정 ${a.l}→${b.l}`); } catch (e) {}
