@@ -9,7 +9,7 @@
 // - start: 기사에 시작·출시일이 나온 한정 항목의 시작일(YYYY-MM-DD). 판매 기간 계산 가이드(/guide/limited-menu-duration)에 쓰입니다. 기사에 없으면 넣지 않습니다.
 // - pop: 검색량 배수(최근 3일 / 지난 4주). 한정 탭 인기순 정렬에 씁니다. 없으면 마감순으로 뒤에 놓입니다.
 window.FOODYSSEY = {
-  updated: "2026-11-24",
+  updated: "2026-11-25",
   weekLabel: "2026년 11월 넷째 주",
 
   cats: [
@@ -82,6 +82,14 @@ window.FOODYSSEY = {
       src: { label: "아시아경제", url: "https://view.asiae.co.kr/article/2026102707342281900" },
       note: "세트 7,900원 · 튀긴 비빔밥 패티와 직화 패티가 들어갑니다" },
 
+    { cat: "chicken", brand: "교촌치킨", when: "11.23 발표", date: "2026-11-23",
+      items: [{ name: "소이파닭편육", tag: "사이드", desc: "닭 연골, 무뼈닭발, 가슴살, 닭껍질 같은 특수부위에 파채와 특제 소이소스를 더했습니다. 매장, 배달, 포장으로 팔고 은하수 막걸리를 취급하는 매장에서도 판매합니다." }],
+      src: { label: "뉴스1", url: "https://www.news1.kr/industry/distribution/6362434" },
+      note: "가격과 정확한 출시일은 기사에 나오지 않았습니다." },
+    { cat: "cafe", brand: "빽다방", when: "11.20 발표 · 씨앗호떡 3종", date: "2026-11-20",
+      items: [{ name: "씨앗호떡 라떼", tag: "음료" }, { name: "씨앗호떡 빽스치노", tag: "음료" }, { name: "씨앗호떡 아이스크림", tag: "디저트" }],
+      src: { label: "뉴스1", url: "https://www.news1.kr/industry/distribution/6360349" },
+      note: "씨앗호떡의 달콤하고 고소한 맛을 살리고 씨앗과 견과류 토핑을 더했습니다. 라떼, 빽스치노, 아이스크림 3종이며 정확한 제품명과 가격은 기사에 나오지 않았습니다." },
     { cat: "chicken", brand: "또봉이통닭", when: "11.9 발표", date: "2026-11-09",
       items: [
         { name: "가리비짜조", tag: "사이드", price: "9,000원" },
@@ -371,9 +379,6 @@ window.FOODYSSEY = {
       desc: "신메뉴를 맛본 뒤 SNS나 블로그에 리뷰를 쓰면 응모됩니다. 추첨으로 20명에게 50만 원씩 현금을 줍니다.",
       src: { label: "서플(머니투데이)", url: "https://supple.kr/news/cmwbwrki7fcnnal9pli3atxh8" } },
 
-    { kind: "이벤트", brand: "파스쿠찌", title: "네이버페이 결제 40% 혜택", start: "2026-11-11", end: "2026-11-15", period: "11.11 ~ 11.15",
-      desc: "크리스마스 시즌 음료 출시를 기념해 전 제품을 네이버페이로 1만 원 이상 결제하면 40% 혜택을 줍니다.",
-      src: { label: "푸드투데이", url: "https://www.foodtoday.or.kr/news/article.html?no=209327" } },
 
     { kind: "이벤트", brand: "파스쿠찌", title: "크리스마스 케이크 사전예약 할인", start: "2026-10-29", season: "christmas", end: "2026-12-17", period: "~ 12.17(목)",
       desc: "해피오더앱에서 사전예약하면 예약 시기에 따라 할인해 줍니다. 11월 8일까지 최대 40%(일반 시즌 케이크 40%, 스와로브스키 협업 크리스탈 스완은 30%), 9일부터 22일까지 30%, 이후 일반 사전예약 기간에는 25%입니다. 11월 9일부터 카카오 예약하기, 23일부터 땡겨요·배달의민족에서도 예약할 수 있습니다.",
