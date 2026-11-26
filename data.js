@@ -9,7 +9,7 @@
 // - start: 기사에 시작·출시일이 나온 한정 항목의 시작일(YYYY-MM-DD). 판매 기간 계산 가이드(/guide/limited-menu-duration)에 쓰입니다. 기사에 없으면 넣지 않습니다.
 // - pop: 검색량 배수(최근 3일 / 지난 4주). 한정 탭 인기순 정렬에 씁니다. 없으면 마감순으로 뒤에 놓입니다.
 window.FOODYSSEY = {
-  updated: "2026-11-25",
+  updated: "2026-11-26",
   weekLabel: "2026년 11월 넷째 주",
 
   cats: [
@@ -369,9 +369,6 @@ window.FOODYSSEY = {
     { kind: "이벤트", brand: "맘스터치", title: "스낵박스 할인 쿠폰", end: "2026-11-25", period: "~ 11.25",
       desc: "맘스터치 앱에서 스낵박스를 사는 고객에게 할인 쿠폰을 줍니다. 11월 25일까지입니다.",
       src: { label: "지피코리아", url: "https://www.gpkorea.com/news/articleView.html?idxno=148071" } },
-    { kind: "이벤트", brand: "투썸플레이스", title: "크림탑 스초생 사전예약 20% 쿠폰", start: "2026-11-11", end: "2026-11-18", period: "11.11 ~ 11.18",
-      desc: "투썸하트 앱에서 사전예약하면 20% 할인 쿠폰을 선착순으로 줍니다. 사전예약한 케이크는 12월 1일부터 31일 사이 원하는 날 받습니다.",
-      src: { label: "뉴스와이어", url: "https://www.newswire.co.kr/newsRead.php?no=1046870" } },
     { kind: "이벤트", brand: "60계치킨", title: "크크크 골드 리뷰 이벤트", start: "2026-11-11", end: "2026-12-31", period: "11.11 ~ 12.31",
       desc: "신메뉴를 맛본 뒤 SNS나 블로그에 리뷰를 쓰면 응모됩니다. 추첨으로 20명에게 50만 원씩 현금을 줍니다.",
       src: { label: "서플(머니투데이)", url: "https://supple.kr/news/cmwbwrki7fcnnal9pli3atxh8" } },
@@ -418,10 +415,6 @@ window.FOODYSSEY = {
       desc: "전국 빨라쪼·지파시 매장에서 한정 판매합니다. 정확한 종료일은 기사에 나오지 않았습니다.",
       src: { label: "세계일보", url: "https://www.segye.com/newsView/20261107502295" } },
 
-    { kind: "메뉴", brand: "맥도날드", title: "빅아치", img: "https://www.mcdonalds.co.kr/upload/2026/10/Corp_PC_VIEW_772x530_%EB%B9%85%EC%95%84%EC%B9%98_EVM.png", imgFrom: "맥도날드 공식 홈페이지 (세트 사진)", start: "2026-10-22", price: "12,400원", pop: 5.2, end: "2026-11-18",
-      period: "10.22 출시 · 11.18 판매 종료(원재료 소진)",
-      desc: "11월 18일을 끝으로 전국 매장에서 판매를 마쳤습니다. 10월 22일 출시 후 27일 만이고, 회사는 준비한 원재료가 예상보다 빨리 소진됐다고 설명했습니다. 출시 2주 만에 누적 100만 개가 팔렸습니다. 재출시나 정규 메뉴 전환은 확정된 사항이 없습니다. 출시 때 예상한 4~6주 기준으로는 종료가 11월 19일~12월 3일이었으므로, 가장 빠른 예상보다도 하루 먼저 끝났습니다(기간 계산은 이 사이트가 직접 했습니다). 예상과 실제를 날짜별로 비교한 표는 '맥도날드 빅아치 판매 기간' 가이드에서 볼 수 있습니다.",
-      src: { label: "디지털데일리", url: "https://www.ddaily.co.kr/page/view/2026112015561438469" }, priceSrc: { label: "재경일보", url: "https://news.jkn.co.kr/post/1039964" } },
     { kind: "이벤트", brand: "스타벅스", title: "겨울 e-프리퀀시", start: "2026-10-22", season: "christmas", pop: 5.8, end: "2026-12-31", period: "10.22(목) ~ 12.31(목)",
       cups: { total: 17, mission: 3 },
       desc: "미션음료 3잔을 포함해 17잔이면 증정품 1개를 예약할 수 있습니다. 렉슨 스피커, 몰스킨 플래너, 코듀로이 백팩, 캔버스 토트 중에서 고릅니다.",
