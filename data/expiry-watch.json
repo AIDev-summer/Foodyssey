@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-26",
+ "generated": "2026-11-27",
  "note": "매일 아침 확인 목록: 종료가 공식/기사로 확인되면 data.js에 end를 넣어 같은 URL에서 판매 종료로 바꿉니다. 새 URL은 만들지 않습니다.",
  "ended": [
   {
@@ -7,6 +7,14 @@
    "name": "스낵박스 할인 쿠폰",
    "url": "/menu/맘스터치-스낵박스-할인-쿠폰",
    "end": "2026-11-25",
+   "endLate": "",
+   "daysAgo": 2
+  },
+  {
+   "brand": "스타벅스",
+   "name": "케이크 예약 10% 할인 쿠폰",
+   "url": "/menu/스타벅스-케이크-예약-10-할인-쿠폰",
+   "end": "2026-11-26",
    "endLate": "",
    "daysAgo": 1
   }
@@ -19,7 +27,7 @@
    "url": "/menu/교촌치킨-앱-블랙프라이데이-쿠폰",
    "end": "2026-12-02",
    "endLate": "",
-   "daysLeft": 6
+   "daysLeft": 5
   },
   {
    "brand": "롯데리아",
@@ -27,7 +35,7 @@
    "url": "/menu/롯데리아-리아-스낵-타임",
    "end": "2026-11-30",
    "endLate": "",
-   "daysLeft": 4
+   "daysLeft": 3
   },
   {
    "brand": "맘스터치",
@@ -35,15 +43,7 @@
    "url": "/menu/맘스터치-주술회전-시부야-사변-협업-세트",
    "end": "2026-11-29",
    "endLate": "",
-   "daysLeft": 3
-  },
-  {
-   "brand": "스타벅스",
-   "name": "케이크 예약 10% 할인 쿠폰",
-   "url": "/menu/스타벅스-케이크-예약-10-할인-쿠폰",
-   "end": "2026-11-26",
-   "endLate": "",
-   "daysLeft": 0
+   "daysLeft": 2
   },
   {
    "brand": "파파존스",
@@ -51,7 +51,7 @@
    "url": "/menu/파파존스-kt-멤버십-방문-포장-50-할인",
    "end": "2026-11-30",
    "endLate": "",
-   "daysLeft": 4
+   "daysLeft": 3
   }
  ],
  "noEnd": [
@@ -61,7 +61,7 @@
    "url": "/menu/롯데리아-무신사-무진장-버거",
    "end": "",
    "endLate": "",
-   "startedDaysAgo": 6
+   "startedDaysAgo": 7
   },
   {
    "brand": "맘스터치",
@@ -85,7 +85,7 @@
    "url": "/menu/버거킹-초콜릿-와퍼",
    "end": "",
    "endLate": "",
-   "startedDaysAgo": 7
+   "startedDaysAgo": 8
   },
   {
    "brand": "버거킹",
@@ -93,7 +93,7 @@
    "url": "/menu/버거킹-트러플-머쉬룸-시즌-5종",
    "end": "",
    "endLate": "",
-   "startedDaysAgo": 71
+   "startedDaysAgo": 72
   },
   {
    "brand": "빨라쪼",
@@ -109,7 +109,7 @@
    "url": "/menu/성심당-사과요거케익",
    "end": "",
    "endLate": "",
-   "startedDaysAgo": 19
+   "startedDaysAgo": 20
   },
   {
    "brand": "성심당",
@@ -117,7 +117,7 @@
    "url": "/menu/성심당-알밤롤",
    "end": "",
    "endLate": "",
-   "startedDaysAgo": 64
+   "startedDaysAgo": 65
   },
   {
    "brand": "성심당",
@@ -125,7 +125,7 @@
    "url": "/menu/성심당-알밤시루",
    "end": "",
    "endLate": "",
-   "startedDaysAgo": 64
+   "startedDaysAgo": 65
   },
   {
    "brand": "성심당",
@@ -133,7 +133,7 @@
    "url": "/menu/성심당-홍시롤",
    "end": "",
    "endLate": "",
-   "startedDaysAgo": 17
+   "startedDaysAgo": 18
   },
   {
    "brand": "성심당",
@@ -141,7 +141,7 @@
    "url": "/menu/성심당-홍시홍시",
    "end": "",
    "endLate": "",
-   "startedDaysAgo": 13
+   "startedDaysAgo": 14
   },
   {
    "brand": "쉐이크쉑",
@@ -149,7 +149,7 @@
    "url": "/menu/쉐이크쉑-쉑하우스-바비큐-4종",
    "end": "",
    "endLate": "",
-   "startedDaysAgo": 56
+   "startedDaysAgo": 57
   },
   {
    "brand": "컴포즈커피",
@@ -157,7 +157,7 @@
    "url": "/menu/컴포즈커피-스노우-민트초코-프라페",
    "end": "",
    "endLate": "",
-   "startedDaysAgo": 9
+   "startedDaysAgo": 10
   }
  ]
 }
