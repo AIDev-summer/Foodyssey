@@ -10,13 +10,16 @@ const ROOT = path.resolve(__dirname, '..');
 // 공식 도메인 목록: 브랜드 공식 홈페이지 또는 그 홈페이지가 쓰는 이미지 서버(해당 홈페이지의 HTML에서 확인된 것만)
 const OFFICIAL = { 'mcdonalds.co.kr': '맥도날드', 'kyochon.com': '교촌치킨', 'ediya.com': '이디야커피', 'mega-mgccoffee.com': '메가MGC커피', 'd2afncas1tel3t.cloudfront.net': '파리바게뜨(paris.co.kr이 쓰는 이미지 서버)',
   // 브랜드 공식 홈페이지가 막혀 있을 때만: 회사가 직접 낸 보도자료(뉴스와이어 배포)에 실린 공식 사진. 언론사 기자가 찍은 사진·기사 이미지는 쓰지 않아요.
-  'file.newswire.co.kr': '보도자료 공식 사진(뉴스와이어 배포)' };
+  'file.newswire.co.kr': '보도자료 공식 사진(뉴스와이어 배포)',
+  'istarbucks.co.kr': '스타벅스', 'hollys.co.kr': '할리스', 'paikdabang.com': '빽다방', 'burgerking.co.kr': '버거킹', 'baskinrobbins.co.kr': '배스킨라빈스', 'bhc.co.kr': 'bhc치킨', 'gong-cha.co.kr': '공차', 'theventi.co.kr': '더벤티', 'kfckorea.com': 'KFC' };
 const ctx = { window: {} };
 vm.runInNewContext(fs.readFileSync(path.join(ROOT, 'data.js'), 'utf8'), ctx, { filename: 'data.js' });
 const D = ctx.window.FOODYSSEY;
 const urls = new Map();
 D.newItems.forEach((g) => g.items.forEach((it) => { if (it.img) urls.set(it.img, g.brand + ' ' + it.name); }));
 D.limited.forEach((x) => { if (x.img) urls.set(x.img, x.brand + ' ' + (x.title || x.name)); });
+// 목록에서 내려가 보관함(archive.json)에만 남은 항목의 사진도 확인합니다(종료된 메뉴 페이지가 사진을 잃지 않게).
+try { const arc = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'archive.json'), 'utf8')); Object.values(arc).forEach((r) => { if (r.img && !urls.has(r.img)) urls.set(r.img, (r.brand || '') + ' ' + (r.name || '')); }); } catch (e) {}
 [D.hotNew, D.hotLimited].forEach((h) => { if (h && h.img) urls.set(h.img, (h.brand || '') + ' ' + (h.name || '')); });
 function dims(buf) {
   if (buf.length > 24 && buf.slice(1, 4).toString() === 'PNG') return { w: buf.readUInt32BE(16), h: buf.readUInt32BE(20) };

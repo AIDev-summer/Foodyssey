@@ -6,12 +6,82 @@
   "host": "file.newswire.co.kr",
   "official": "보도자료 공식 사진(뉴스와이어 배포)"
  },
+ "https://admin.hollys.co.kr/upload/menu/etc/menuEtc_202611040434286050.png": {
+  "w": 447,
+  "h": 380,
+  "bytes": 74791,
+  "host": "admin.hollys.co.kr",
+  "official": "할리스"
+ },
+ "https://admin.hollys.co.kr/upload/menu/etc/menuEtc_202611100813397890.png": {
+  "w": 447,
+  "h": 380,
+  "bytes": 134724,
+  "host": "admin.hollys.co.kr",
+  "official": "할리스"
+ },
+ "https://admin.hollys.co.kr/upload/menu/etc/menuEtc_202611100813222630.png": {
+  "w": 447,
+  "h": 380,
+  "bytes": 106734,
+  "host": "admin.hollys.co.kr",
+  "official": "할리스"
+ },
+ "https://www.theventi.co.kr/new/upload/menu_new/2039262055_tns8al5K_20261110182216.png": {
+  "w": 119,
+  "h": 219,
+  "bytes": 26059,
+  "host": "theventi.co.kr",
+  "official": "더벤티"
+ },
+ "https://www.theventi.co.kr/new/upload/menu_new/2039262055_yZbUa3nK_20261110181921.png": {
+  "w": 119,
+  "h": 219,
+  "bytes": 20274,
+  "host": "theventi.co.kr",
+  "official": "더벤티"
+ },
+ "https://www.theventi.co.kr/new/upload/menu_new/2039262055_K4siJq6k_20261110175729.png": {
+  "w": 119,
+  "h": 219,
+  "bytes": 18241,
+  "host": "theventi.co.kr",
+  "official": "더벤티"
+ },
  "https://www.mcdonalds.co.kr/upload/2026/10/Corp_PC_VIEW_772x530_%EA%B2%8C%EC%82%B4%ED%81%AC%EB%A6%BC%ED%81%AC%EB%A1%9C%EC%BC%93%EB%A8%B8%ED%95%80_EVB.png": {
   "w": 772,
   "h": 530,
   "bytes": 339407,
   "host": "mcdonalds.co.kr",
   "official": "맥도날드"
+ },
+ "https://paikdabang.com/wp-content/uploads/2026/11/%EC%94%A8%EC%95%97%ED%98%B8%EB%96%A1%EB%9D%BC%EB%96%BC-ICED-450x588.png": {
+  "w": 450,
+  "h": 588,
+  "bytes": 151074,
+  "host": "paikdabang.com",
+  "official": "빽다방"
+ },
+ "https://paikdabang.com/wp-content/uploads/2026/11/%EC%94%A8%EC%95%97%ED%98%B8%EB%96%A1%EB%B9%BD%EC%8A%A4%EC%B9%98%EB%85%B8-%EB%B2%A0%EC%9D%B4%EC%A7%81-450x588.png": {
+  "w": 450,
+  "h": 588,
+  "bytes": 158644,
+  "host": "paikdabang.com",
+  "official": "빽다방"
+ },
+ "https://paikdabang.com/wp-content/uploads/2026/11/%EC%94%A8%EC%95%97%ED%98%B8%EB%96%A1-%EC%9A%94%EA%B1%B0%ED%8A%B8%EC%95%84%EC%9D%B4%EC%8A%A4%ED%81%AC%EB%A6%BC-450x588.png": {
+  "w": 450,
+  "h": 588,
+  "bytes": 136310,
+  "host": "paikdabang.com",
+  "official": "빽다방"
+ },
+ "https://home-img.bhc.co.kr/bhc/event/20260921_165637_7e8bb9bf.jpg": {
+  "w": 780,
+  "h": 360,
+  "bytes": 255014,
+  "host": "home-img.bhc.co.kr",
+  "official": "bhc치킨"
  },
  "https://www.kyochon.com/uploadFiles/TB_ITEM/list_Honey%20Wing%20Combo.png": {
   "w": 300,
@@ -40,6 +110,62 @@
   "bytes": 19825,
   "host": "kyochon.com",
   "official": "교촌치킨"
+ },
+ "https://www.mcdonalds.co.kr/upload/2026/11/Corp_PC_VIEW_772x530_26%ED%8A%B8%EB%9F%AC%ED%94%8C%EC%B9%98%EC%A6%88%EB%B2%84%EA%B1%B0_EVM.png": {
+  "w": 772,
+  "h": 530,
+  "bytes": 381639,
+  "host": "mcdonalds.co.kr",
+  "official": "맥도날드"
+ },
+ "https://www.mcdonalds.co.kr/upload/2026/11/Corp_PC_VIEW_772x530_26%ED%95%AB%ED%8A%B8%EB%9F%AC%ED%94%8C%EC%B9%98%EC%A6%88%EB%B2%84%EA%B1%B0_EVM.png": {
+  "w": 772,
+  "h": 530,
+  "bytes": 376802,
+  "host": "mcdonalds.co.kr",
+  "official": "맥도날드"
+ },
+ "https://www.mcdonalds.co.kr/upload/2026/11/Corp_PC_VIEW_772x530_26%ED%8A%B8%EB%9F%AC%ED%94%8C%EC%B9%98%EC%A6%88%EB%A8%B8%ED%95%80_EVB.png": {
+  "w": 772,
+  "h": 530,
+  "bytes": 349899,
+  "host": "mcdonalds.co.kr",
+  "official": "맥도날드"
+ },
+ "https://www.mcdonalds.co.kr/upload/2026/11/Corp_PC_view772x530_%ED%8A%B8%EB%9F%AC%ED%94%8C%EC%8B%9C%EC%A6%88%EB%8B%9D_FFM.png": {
+  "w": 772,
+  "h": 530,
+  "bytes": 273869,
+  "host": "mcdonalds.co.kr",
+  "official": "맥도날드"
+ },
+ "https://www.ediya.com/files/menu/IMG_1795586230646.png": {
+  "w": 328,
+  "h": 328,
+  "bytes": 80395,
+  "host": "ediya.com",
+  "official": "이디야커피"
+ },
+ "https://www.ediya.com/files/menu/IMG_1795586339244.png": {
+  "w": 328,
+  "h": 328,
+  "bytes": 76781,
+  "host": "ediya.com",
+  "official": "이디야커피"
+ },
+ "https://www.ediya.com/files/menu/IMG_1795586463887.png": {
+  "w": 328,
+  "h": 328,
+  "bytes": 73524,
+  "host": "ediya.com",
+  "official": "이디야커피"
+ },
+ "https://www.ediya.com/files/menu/IMG_1795586542479.png": {
+  "w": 328,
+  "h": 328,
+  "bytes": 77518,
+  "host": "ediya.com",
+  "official": "이디야커피"
  },
  "https://www.ediya.com/files/menu/IMG_1792465407166.png": {
   "w": 328,
@@ -117,5 +243,222 @@
   "bytes": 985843,
   "host": "img.mega-mgccoffee.com",
   "official": "메가MGC커피"
+ },
+ "https://image.istarbucks.co.kr/upload/store/skuimg/2026/09/%5B9300000006889%5D_20260909162756087.jpg": {
+  "w": 300,
+  "h": 313,
+  "bytes": 6105,
+  "host": "image.istarbucks.co.kr",
+  "official": "스타벅스"
+ },
+ "https://image.istarbucks.co.kr/upload/store/skuimg/2026/09/%5B9300000006891%5D_20260923141831744.jpg": {
+  "w": 300,
+  "h": 313,
+  "bytes": 9195,
+  "host": "image.istarbucks.co.kr",
+  "official": "스타벅스"
+ },
+ "https://image.istarbucks.co.kr/upload/store/skuimg/2026/09/%5B9300000006890%5D_20260909162044659.jpg": {
+  "w": 300,
+  "h": 313,
+  "bytes": 9627,
+  "host": "image.istarbucks.co.kr",
+  "official": "스타벅스"
+ },
+ "https://image.istarbucks.co.kr/upload/store/skuimg/2026/08/%5B9300000006880%5D_20260818090612678.jpg": {
+  "w": 300,
+  "h": 313,
+  "bytes": 8010,
+  "host": "image.istarbucks.co.kr",
+  "official": "스타벅스"
+ },
+ "https://image.istarbucks.co.kr/upload/store/skuimg/2026/11/%5B128198%5D_20261118090620732.jpg": {
+  "w": 300,
+  "h": 313,
+  "bytes": 5496,
+  "host": "image.istarbucks.co.kr",
+  "official": "스타벅스"
+ },
+ "https://image.istarbucks.co.kr/upload/store/skuimg/2026/11/%5B9200000006514%5D_20261118100737495.jpg": {
+  "w": 300,
+  "h": 313,
+  "bytes": 4843,
+  "host": "image.istarbucks.co.kr",
+  "official": "스타벅스"
+ },
+ "https://image.istarbucks.co.kr/upload/store/skuimg/2026/11/%5B9200000006555%5D_20261118101535282.jpg": {
+  "w": 300,
+  "h": 313,
+  "bytes": 5144,
+  "host": "image.istarbucks.co.kr",
+  "official": "스타벅스"
+ },
+ "https://image.istarbucks.co.kr/upload/store/skuimg/2026/11/%5B9300000006895%5D_20261118084047398.jpg": {
+  "w": 300,
+  "h": 313,
+  "bytes": 12130,
+  "host": "image.istarbucks.co.kr",
+  "official": "스타벅스"
+ },
+ "https://image.istarbucks.co.kr/upload/store/skuimg/2026/11/%5B9300000006893%5D_20261118083845290.jpg": {
+  "w": 300,
+  "h": 313,
+  "bytes": 9552,
+  "host": "image.istarbucks.co.kr",
+  "official": "스타벅스"
+ },
+ "https://image.istarbucks.co.kr/upload/store/skuimg/2026/11/%5B9300000006885%5D_20261118084457001.jpg": {
+  "w": 300,
+  "h": 313,
+  "bytes": 7219,
+  "host": "image.istarbucks.co.kr",
+  "official": "스타벅스"
+ },
+ "https://home-img.bhc.co.kr/bhc/product/20261021_132257_d08db35a.png": {
+  "w": 476,
+  "h": 416,
+  "bytes": 68390,
+  "host": "home-img.bhc.co.kr",
+  "official": "bhc치킨"
+ },
+ "https://www.gong-cha.co.kr/upload/product/083dcb12f5be7aeab2210b4c3fd7df73.png": {
+  "w": 374,
+  "h": 440,
+  "bytes": 161682,
+  "host": "gong-cha.co.kr",
+  "official": "공차"
+ },
+ "https://www.gong-cha.co.kr/upload/product/fcdc5b98bd9d233b0eaed1782280bb8a.png": {
+  "w": 374,
+  "h": 440,
+  "bytes": 161867,
+  "host": "gong-cha.co.kr",
+  "official": "공차"
+ },
+ "https://www.gong-cha.co.kr/upload/product/93071a58f3df8cbeb9e5aa60b7da36c4.png": {
+  "w": 374,
+  "h": 440,
+  "bytes": 162128,
+  "host": "gong-cha.co.kr",
+  "official": "공차"
+ },
+ "https://www.gong-cha.co.kr/upload/product/3e158d762a60f1bec823a5bd203548ae.png": {
+  "w": 374,
+  "h": 440,
+  "bytes": 156045,
+  "host": "gong-cha.co.kr",
+  "official": "공차"
+ },
+ "https://image.istarbucks.co.kr/upload/store/skuimg/2026/10/%5B9300000006951%5D_20261029153318408.jpg": {
+  "w": 300,
+  "h": 313,
+  "bytes": 8431,
+  "host": "image.istarbucks.co.kr",
+  "official": "스타벅스"
+ },
+ "https://image.istarbucks.co.kr/upload/store/skuimg/2026/11/%5B9300000006953%5D_20261104141344112.jpg": {
+  "w": 300,
+  "h": 313,
+  "bytes": 8883,
+  "host": "image.istarbucks.co.kr",
+  "official": "스타벅스"
+ },
+ "https://image.istarbucks.co.kr/upload/store/skuimg/2026/11/%5B9300000006954%5D_20261104141834643.jpg": {
+  "w": 300,
+  "h": 313,
+  "bytes": 9900,
+  "host": "image.istarbucks.co.kr",
+  "official": "스타벅스"
+ },
+ "https://image.istarbucks.co.kr/upload/store/skuimg/2026/11/%5B9300000006952%5D_20261104081103469.jpg": {
+  "w": 300,
+  "h": 313,
+  "bytes": 11490,
+  "host": "image.istarbucks.co.kr",
+  "official": "스타벅스"
+ },
+ "https://image.istarbucks.co.kr/upload/store/skuimg/2026/10/%5B9300000006287%5D_20261029162310671.jpg": {
+  "w": 300,
+  "h": 313,
+  "bytes": 11312,
+  "host": "image.istarbucks.co.kr",
+  "official": "스타벅스"
+ },
+ "https://www.kfckorea.com/nas/event/2026/11/04/FEg1AFCdSdFV.png": {
+  "w": 660,
+  "h": 278,
+  "bytes": 237227,
+  "host": "kfckorea.com",
+  "official": "KFC"
+ },
+ "https://baskinrobbins.co.kr/upload/product/main/809dc44b38892cc9ea8c07202f3045f9.png": {
+  "w": 800,
+  "h": 800,
+  "bytes": 544567,
+  "host": "baskinrobbins.co.kr",
+  "official": "배스킨라빈스"
+ },
+ "https://mob-prd.burgerking.co.kr/images/menu/app/main/2026/10/13/e1a2a77f-d901-4b1e-aa0c-9aaa252663fb.png": {
+  "w": 720,
+  "h": 540,
+  "bytes": 540497,
+  "host": "mob-prd.burgerking.co.kr",
+  "official": "버거킹"
+ },
+ "https://mob-prd.burgerking.co.kr/images/menu/app/main/2026/09/07/a94a00cd-6c5b-42a0-8d1f-7b781cb045cc.png": {
+  "w": 720,
+  "h": 540,
+  "bytes": 625760,
+  "host": "mob-prd.burgerking.co.kr",
+  "official": "버거킹"
+ },
+ "https://www.mcdonalds.co.kr/upload/2026/10/Corp_PC_VIEW_772x530_%EB%B9%85%EC%95%84%EC%B9%98_EVM.png": {
+  "w": 772,
+  "h": 530,
+  "bytes": 387092,
+  "host": "mcdonalds.co.kr",
+  "official": "맥도날드"
+ },
+ "https://d2afncas1tel3t.cloudfront.net/wp-content/uploads/2026/09/%EA%B3%A0%EB%8B%A4%EC%B9%98%EC%A6%88-%EC%98%AC%EB%A6%AC%EB%B8%8C%EC%8B%9D%EB%B9%B5-Whole.png": {
+  "w": 1000,
+  "h": 1000,
+  "bytes": 616752,
+  "host": "d2afncas1tel3t.cloudfront.net",
+  "official": "파리바게뜨(paris.co.kr이 쓰는 이미지 서버)"
+ },
+ "https://d2afncas1tel3t.cloudfront.net/wp-content/uploads/2026/09/5000240-%EB%A9%95%EC%8B%9C%EC%B9%B8%ED%95%AB%EB%8F%84%EA%B7%B8.png": {
+  "w": 1000,
+  "h": 1000,
+  "bytes": 526410,
+  "host": "d2afncas1tel3t.cloudfront.net",
+  "official": "파리바게뜨(paris.co.kr이 쓰는 이미지 서버)"
+ },
+ "https://d2afncas1tel3t.cloudfront.net/wp-content/uploads/2026/09/%EB%B0%94%EC%82%AD%EB%AA%A8%EC%A7%9C%EB%A0%90%EB%9D%BC%EC%B9%98%EC%A6%88%EB%B4%89.png": {
+  "w": 1000,
+  "h": 1000,
+  "bytes": 282116,
+  "host": "d2afncas1tel3t.cloudfront.net",
+  "official": "파리바게뜨(paris.co.kr이 쓰는 이미지 서버)"
+ },
+ "https://d2afncas1tel3t.cloudfront.net/wp-content/uploads/2026/09/%EC%B9%98%EC%A6%88%EC%86%8C%EB%B3%B4%EB%A3%A8%EB%B9%B5.png": {
+  "w": 1000,
+  "h": 1000,
+  "bytes": 510285,
+  "host": "d2afncas1tel3t.cloudfront.net",
+  "official": "파리바게뜨(paris.co.kr이 쓰는 이미지 서버)"
+ },
+ "https://d2afncas1tel3t.cloudfront.net/wp-content/uploads/2026/09/%ED%81%AC%EB%A6%BC%EC%B9%98%EC%A6%88%EB%A7%90%EB%9E%91.png": {
+  "w": 1000,
+  "h": 1000,
+  "bytes": 548028,
+  "host": "d2afncas1tel3t.cloudfront.net",
+  "official": "파리바게뜨(paris.co.kr이 쓰는 이미지 서버)"
+ },
+ "https://home-img.bhc.co.kr/bhc/product/20261021_132850_b9890d9b.png": {
+  "w": 476,
+  "h": 416,
+  "bytes": 69721,
+  "host": "home-img.bhc.co.kr",
+  "official": "bhc치킨"
  }
 }

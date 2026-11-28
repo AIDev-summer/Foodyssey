@@ -24,6 +24,8 @@ window.FOODYSSEY = {
   hotNew: {
     kicker: "10월에 나온 신상 하나",
     name: "알싹킹",
+    img: "https://home-img.bhc.co.kr/bhc/product/20261021_132850_b9890d9b.png",
+    imgFrom: "bhc 공식 홈페이지",
     brandline: "bhc · 10월 출시",
     desc: "고추, 양파, 대파로 맛을 낸 매콤한 치킨입니다. 튀김옷이 얇고, 맵싸소스와 파싹소스가 같이 옵니다.",
     src: { label: "비즈트리뷴", url: "https://www.biztribune.co.kr/news/articleView.html?idxno=361110" }
@@ -57,10 +59,10 @@ window.FOODYSSEY = {
       items: [{ name: "크림탑 스초생(크초생)", tag: "디저트", desc: "대표 케이크 스초생의 새 라인업입니다. 11월 13일부터 전국 매장에서 팝니다." }],
       src: { label: "인더뉴스", url: "https://www.inthenews.co.kr/news/article.html?no=94376" } },
     { cat: "cafe", brand: "할리스", when: "11.11 발표 · 겨울 5종", date: "2026-11-11",
-      items: [{ name: "블랙 티라미수 라떼", tag: "음료" }, { name: "군고구마 크림 라떼", tag: "음료" }, { name: "레드 시나몬 뱅쇼", tag: "음료" }, { name: "시그니처 당근 케이크", tag: "디저트" }, { name: "클래식 쇼콜라 타르트", tag: "디저트" }],
+      items: [{ name: "블랙 티라미수 라떼", img: "https://admin.hollys.co.kr/upload/menu/etc/menuEtc_202611040434286050.png", tag: "음료" }, { name: "군고구마 크림 라떼", tag: "음료" }, { name: "레드 시나몬 뱅쇼", tag: "음료" }, { name: "시그니처 당근 케이크", img: "https://admin.hollys.co.kr/upload/menu/etc/menuEtc_202611100813397890.png", tag: "디저트" }, { name: "클래식 쇼콜라 타르트", img: "https://admin.hollys.co.kr/upload/menu/etc/menuEtc_202611100813222630.png", tag: "디저트" }],
       src: { label: "인더뉴스", url: "https://www.inthenews.co.kr/news/article.html?no=94376" } },
     { cat: "cafe", brand: "더벤티", when: "11.11 발표", date: "2026-11-11",
-      items: [{ name: "미드나잇 퍼플 뱅쇼", tag: "음료" }, { name: "번트 흑임자 크림 라떼", tag: "음료" }, { name: "번트 흑임자 슈페너", tag: "음료" }],
+      items: [{ name: "미드나잇 퍼플 뱅쇼", img: "https://www.theventi.co.kr/new/upload/menu_new/2039262055_tns8al5K_20261110182216.png", tag: "음료" }, { name: "번트 흑임자 크림 라떼", img: "https://www.theventi.co.kr/new/upload/menu_new/2039262055_yZbUa3nK_20261110181921.png", tag: "음료" }, { name: "번트 흑임자 슈페너", img: "https://www.theventi.co.kr/new/upload/menu_new/2039262055_K4siJq6k_20261110175729.png", tag: "음료" }],
       src: { label: "인더뉴스", url: "https://www.inthenews.co.kr/news/article.html?no=94376" } },
     { cat: "cafe", brand: "커피앳웍스", when: "11.11 발표", date: "2026-11-11",
       items: [{ name: "솔티드 크림 카라멜 라떼", tag: "음료" }, { name: "시나몬 플랫화이트", tag: "음료" }, { name: "핑크 레몬 진저티", tag: "음료" }],
@@ -79,7 +81,7 @@ window.FOODYSSEY = {
       src: { label: "뉴스1", url: "https://www.news1.kr/industry/distribution/6362434" },
       note: "가격과 정확한 출시일은 기사에 나오지 않았습니다." },
     { cat: "cafe", brand: "빽다방", when: "11.20 발표 · 씨앗호떡 3종", date: "2026-11-20",
-      items: [{ name: "씨앗호떡 라떼", tag: "음료" }, { name: "씨앗호떡 빽스치노", tag: "음료" }, { name: "씨앗호떡 아이스크림", tag: "디저트" }],
+      items: [{ name: "씨앗호떡 라떼", img: "https://paikdabang.com/wp-content/uploads/2026/11/%EC%94%A8%EC%95%97%ED%98%B8%EB%96%A1%EB%9D%BC%EB%96%BC-ICED-450x588.png", imgFrom: "빽다방 공식 홈페이지", tag: "음료" }, { name: "씨앗호떡 빽스치노", img: "https://paikdabang.com/wp-content/uploads/2026/11/%EC%94%A8%EC%95%97%ED%98%B8%EB%96%A1%EB%B9%BD%EC%8A%A4%EC%B9%98%EB%85%B8-%EB%B2%A0%EC%9D%B4%EC%A7%81-450x588.png", imgFrom: "빽다방 공식 홈페이지 (베이직)", tag: "음료" }, { name: "씨앗호떡 아이스크림", img: "https://paikdabang.com/wp-content/uploads/2026/11/%EC%94%A8%EC%95%97%ED%98%B8%EB%96%A1-%EC%9A%94%EA%B1%B0%ED%8A%B8%EC%95%84%EC%9D%B4%EC%8A%A4%ED%81%AC%EB%A6%BC-450x588.png", imgFrom: "빽다방 공식 홈페이지 (요거트아이스크림)", tag: "디저트" }],
       src: { label: "뉴스1", url: "https://www.news1.kr/industry/distribution/6360349" },
       note: "씨앗호떡의 달콤하고 고소한 맛을 살리고 씨앗과 견과류 토핑을 더했습니다. 라떼, 빽스치노, 아이스크림 3종이며 정확한 제품명과 가격은 기사에 나오지 않았습니다." },
     { cat: "chicken", brand: "또봉이통닭", when: "11.9 발표", date: "2026-11-09",
@@ -93,7 +95,7 @@ window.FOODYSSEY = {
       note: "짜조는 10개 기준이고, 모둠짜조는 가리비짜조와 고구마짜조를 5개씩 담았습니다. 소곱창전골은 우동사리가 들어갑니다" },
 
     { cat: "chicken", brand: "bhc", when: "10.22 매장 판매 확대", date: "2026-10-22",
-      items: [{ name: "콰삭모짜킹", tag: "신메뉴", desc: "이탈리안 요리사 샘킴과 만든 치킨입니다. 크리스피 크럼블 튀김옷 안에 순살치킨과 모짜렐라 치즈를 넣었고, 아라비아따딥과 그린올리브딥 중 소스 2종이 함께 나옵니다. 출시 한 달 만에 25만 개 넘게 팔렸다고 bhc가 밝혔습니다." }],
+      items: [{ name: "콰삭모짜킹", img: "https://home-img.bhc.co.kr/bhc/event/20260921_165637_7e8bb9bf.jpg", imgFrom: "bhc 공식 홈페이지 (이벤트 포스터)", tag: "신메뉴", desc: "이탈리안 요리사 샘킴과 만든 치킨입니다. 크리스피 크럼블 튀김옷 안에 순살치킨과 모짜렐라 치즈를 넣었고, 아라비아따딥과 그린올리브딥 중 소스 2종이 함께 나옵니다. 출시 한 달 만에 25만 개 넘게 팔렸다고 bhc가 밝혔습니다." }],
       src: { label: "비즈트리뷴", url: "https://www.biztribune.co.kr/news/articleView.html?idxno=361661" },
       note: "9월 24일 앱·쿠팡이츠 전용으로 나왔다가 10월 22일부터 전국 매장에서도 팝니다" },
     { cat: "chicken", brand: "푸라닭", when: "10.21 출시", date: "2026-10-21",
@@ -115,13 +117,13 @@ window.FOODYSSEY = {
       src: { label: "위키트리", url: "https://www.wikitree.co.kr/articles/1175207" },
       note: "가격과 판매 기간은 기사에 나오지 않았습니다" },
     { cat: "burger", brand: "맥도날드", when: "11.26 출시", date: "2026-11-26",
-      items: [{ name: "크리스마스 트러플 치즈 버거", tag: "시즌 한정" }, { name: "크리스마스 핫 트러플 치즈 버거", tag: "시즌 한정" }, { name: "크리스마스 트러플 치즈 머핀", tag: "맥모닝" }, { name: "트러플 후라이", tag: "사이드" }],
+      items: [{ name: "크리스마스 트러플 치즈 버거", img: "https://www.mcdonalds.co.kr/upload/2026/11/Corp_PC_VIEW_772x530_26%ED%8A%B8%EB%9F%AC%ED%94%8C%EC%B9%98%EC%A6%88%EB%B2%84%EA%B1%B0_EVM.png", imgFrom: "맥도날드 공식 홈페이지 (세트 사진)", tag: "시즌 한정" }, { name: "크리스마스 핫 트러플 치즈 버거", img: "https://www.mcdonalds.co.kr/upload/2026/11/Corp_PC_VIEW_772x530_26%ED%95%AB%ED%8A%B8%EB%9F%AC%ED%94%8C%EC%B9%98%EC%A6%88%EB%B2%84%EA%B1%B0_EVM.png", imgFrom: "맥도날드 공식 홈페이지 (세트 사진)", tag: "시즌 한정" }, { name: "크리스마스 트러플 치즈 머핀", img: "https://www.mcdonalds.co.kr/upload/2026/11/Corp_PC_VIEW_772x530_26%ED%8A%B8%EB%9F%AC%ED%94%8C%EC%B9%98%EC%A6%88%EB%A8%B8%ED%95%80_EVB.png", imgFrom: "맥도날드 공식 홈페이지 (세트 사진)", tag: "맥모닝" }, { name: "트러플 후라이", img: "https://www.mcdonalds.co.kr/upload/2026/11/Corp_PC_view772x530_%ED%8A%B8%EB%9F%AC%ED%94%8C%EC%8B%9C%EC%A6%88%EB%8B%9D_FFM.png", imgFrom: "맥도날드 공식 홈페이지 (세트 사진)", tag: "사이드" }],
       src: { label: "아시아경제", url: "https://view.asiae.co.kr/article/2026112410414025650" } },
     { cat: "cafe", brand: "엔제리너스", when: "11.24 출시", date: "2026-11-24",
       items: [{ name: "윈터 애플 시나몬 뱅쇼", tag: "음료" }, { name: "크럼블토피넛 라떼", tag: "음료" }, { name: "크리스마스트리 레드벨벳", tag: "베이커리" }, { name: "벨지안 초콜릿 치아바타", tag: "베이커리" }],
       src: { label: "아시아경제", url: "https://view.asiae.co.kr/article/2026112410414025650" } },
     { cat: "cafe", brand: "이디야커피", when: "11.26 판매 시작", date: "2026-11-26",
-      items: [{ name: "과즙담은 감귤한라봉", tag: "병음료", desc: "감귤과 한라봉 과즙에 비타민C를 더한 과즙 음료입니다." }, { name: "과즙담은 딸기", tag: "병음료", desc: "딸기 과즙에 비타민C를 더한 과즙 음료입니다." }, { name: "꿀배 캐모마일티", tag: "병음료" }, { name: "매실 그린티", tag: "병음료" }],
+      items: [{ name: "과즙담은 감귤한라봉", img: "https://www.ediya.com/files/menu/IMG_1795586230646.png", tag: "병음료", desc: "감귤과 한라봉 과즙에 비타민C를 더한 과즙 음료입니다." }, { name: "과즙담은 딸기", img: "https://www.ediya.com/files/menu/IMG_1795586339244.png", tag: "병음료", desc: "딸기 과즙에 비타민C를 더한 과즙 음료입니다." }, { name: "꿀배 캐모마일티", img: "https://www.ediya.com/files/menu/IMG_1795586463887.png", tag: "병음료" }, { name: "매실 그린티", img: "https://www.ediya.com/files/menu/IMG_1795586542479.png", tag: "병음료" }],
       src: { label: "아시아경제", url: "https://view.asiae.co.kr/article/2026112308094382387" } },
 
     { cat: "cafe", brand: "이디야커피", when: "10.22 출시 · 푸드 9종", date: "2026-10-22",
@@ -151,21 +153,21 @@ window.FOODYSSEY = {
       note: "29일부터 18일간 신규 음료 3종을 6일씩 돌아가며 500원 할인합니다" },
     { cat: "cafe", brand: "스타벅스", when: "11.1 발표 · 홀케이크 4종", date: "2026-11-01", season: "christmas",
       items: [
-        { name: "모찌 품은 바스크 치즈 케이크", tag: "홀케이크" },
-        { name: "보늬밤 몽블랑 치즈 케이크", tag: "홀케이크" },
-        { name: "진한 얼 그레이 카라멜 넛츠 케이크", tag: "홀케이크" },
-        { name: "티라미수 크레이프 케이크", tag: "홀케이크" }
+        { name: "모찌 품은 바스크 치즈 케이크", img: "https://image.istarbucks.co.kr/upload/store/skuimg/2026/09/%5B9300000006889%5D_20260909162756087.jpg", tag: "홀케이크" },
+        { name: "보늬밤 몽블랑 치즈 케이크", img: "https://image.istarbucks.co.kr/upload/store/skuimg/2026/09/%5B9300000006891%5D_20260923141831744.jpg", tag: "홀케이크" },
+        { name: "진한 얼 그레이 카라멜 넛츠 케이크", img: "https://image.istarbucks.co.kr/upload/store/skuimg/2026/09/%5B9300000006890%5D_20260909162044659.jpg", tag: "홀케이크" },
+        { name: "티라미수 크레이프 케이크", img: "https://image.istarbucks.co.kr/upload/store/skuimg/2026/08/%5B9300000006880%5D_20260818090612678.jpg", tag: "홀케이크" }
       ],
       src: { label: "연합뉴스", url: "https://www.yna.co.kr/view/AKR20261101021200030" },
       note: "스타벅스 앱에서 예약 주문한 뒤 지정한 날짜에 원하는 매장에서 받습니다" },
     { cat: "cafe", brand: "스타벅스", when: "10.22 출시 · 크리스마스 시즌", date: "2026-10-22", season: "christmas",
       items: [
-        { name: "토피 넛 라떼", tag: "음료", desc: "겨울 스테디셀러 음료로, 크리스마스 시즌 음료로 10월 22일부터 다시 나옵니다." },
-        { name: "윈터 스카치 바닐라 라떼", tag: "음료" },
-        { name: "클래식 뱅쇼 히비스커스 티", tag: "음료", desc: "알코올이 들어가지 않은 논알코올 뱅쇼 음료입니다. 스타벅스 크리스마스 시즌 음료로 10월 22일부터 팝니다." },
-        { name: "누텔라 촉촉 생크림 케이크", tag: "디저트" },
-        { name: "루돌프 쿠키 치즈 케이크", tag: "디저트", desc: "루돌프·산타·트리를 모티브로 한 스타벅스 크리스마스 케이크 중 하나입니다. 10월 22일부터 팝니다." },
-        { name: "비프 멜트 바게트 샌드위치", tag: "식사" }
+        { name: "토피 넛 라떼", img: "https://image.istarbucks.co.kr/upload/store/skuimg/2026/11/%5B128198%5D_20261118090620732.jpg", tag: "음료", desc: "겨울 스테디셀러 음료로, 크리스마스 시즌 음료로 10월 22일부터 다시 나옵니다." },
+        { name: "윈터 스카치 바닐라 라떼", img: "https://image.istarbucks.co.kr/upload/store/skuimg/2026/11/%5B9200000006514%5D_20261118100737495.jpg", tag: "음료" },
+        { name: "클래식 뱅쇼 히비스커스 티", img: "https://image.istarbucks.co.kr/upload/store/skuimg/2026/11/%5B9200000006555%5D_20261118101535282.jpg", tag: "음료", desc: "알코올이 들어가지 않은 논알코올 뱅쇼 음료입니다. 스타벅스 크리스마스 시즌 음료로 10월 22일부터 팝니다." },
+        { name: "누텔라 촉촉 생크림 케이크", img: "https://image.istarbucks.co.kr/upload/store/skuimg/2026/11/%5B9300000006895%5D_20261118084047398.jpg", tag: "디저트" },
+        { name: "루돌프 쿠키 치즈 케이크", img: "https://image.istarbucks.co.kr/upload/store/skuimg/2026/11/%5B9300000006893%5D_20261118083845290.jpg", tag: "디저트", desc: "루돌프·산타·트리를 모티브로 한 스타벅스 크리스마스 케이크 중 하나입니다. 10월 22일부터 팝니다." },
+        { name: "비프 멜트 바게트 샌드위치", img: "https://image.istarbucks.co.kr/upload/store/skuimg/2026/11/%5B9300000006885%5D_20261118084457001.jpg", tag: "식사" }
       ],
       src: { label: "연합뉴스", url: "https://www.yna.co.kr/view/AKR20261021030500030" } },
     { cat: "cafe", brand: "컴포즈커피", when: "10.20 출시 · 가을 8종", date: "2026-10-20",
@@ -245,7 +247,7 @@ window.FOODYSSEY = {
       src: { label: "겟뉴스", url: "https://www.getnews.co.kr/news/articleView.html?idxno=885661" },
       note: "가격과 판매 기간은 기사에 나오지 않았습니다" },
     { cat: "chicken", brand: "bhc", when: "11.5 발표", date: "2026-11-05",
-      items: [{ name: "양념킹", tag: "신메뉴", desc: "조청을 넣은 양념치킨입니다. 달콤하면서 매콤한 양념을 썼고, 반반 메뉴도 있습니다." }],
+      items: [{ name: "양념킹", img: "https://home-img.bhc.co.kr/bhc/product/20261021_132257_d08db35a.png", tag: "신메뉴", desc: "조청을 넣은 양념치킨입니다. 달콤하면서 매콤한 양념을 썼고, 반반 메뉴도 있습니다." }],
       src: { label: "라이센스뉴스", url: "https://www.lcnews.co.kr/news/articleView.html?idxno=210912" },
       note: "가격은 기사에 나오지 않았습니다" },
     { cat: "cafe", brand: "빽다방", when: "11.7 발표", date: "2026-11-07",
@@ -291,10 +293,10 @@ window.FOODYSSEY = {
       note: "옐로우 홀리데이 음료 4종은 11월 30일까지 할인합니다. 매장 계산대·키오스크·컴포즈커피 앱오더 주문에만 적용되고 배달 플랫폼과 패스오더 주문은 제외입니다" },
     { cat: "cafe", brand: "공차", when: "11.17 발표 · 해리포터 4종", date: "2026-11-17",
       items: [
-        { name: "그리핀도르 딸기 밀크티", tag: "음료" },
-        { name: "슬리데린 그린 밀크티", tag: "음료" },
-        { name: "레번클로 캐모마일티", tag: "음료" },
-        { name: "후플푸프 망고&페어티", tag: "음료" }
+        { name: "그리핀도르 딸기 밀크티", img: "https://www.gong-cha.co.kr/upload/product/083dcb12f5be7aeab2210b4c3fd7df73.png", tag: "음료" },
+        { name: "슬리데린 그린 밀크티", img: "https://www.gong-cha.co.kr/upload/product/fcdc5b98bd9d233b0eaed1782280bb8a.png", tag: "음료" },
+        { name: "레번클로 캐모마일티", img: "https://www.gong-cha.co.kr/upload/product/93071a58f3df8cbeb9e5aa60b7da36c4.png", tag: "음료" },
+        { name: "후플푸프 망고&페어티", img: "https://www.gong-cha.co.kr/upload/product/3e158d762a60f1bec823a5bd203548ae.png", tag: "음료" }
       ],
       src: { label: "스마트비즈(네이트)", url: "https://news.nate.com/view/20261117n31032" },
       note: "해리포터 시리즈 협업입니다. 포장 주문 시 기숙사 디자인 컵홀더를 주고, 18일부터 키링 등 굿즈를 선보입니다 · 가격은 기사에 나오지 않았습니다" },
@@ -312,11 +314,11 @@ window.FOODYSSEY = {
       note: "국내산 닭다리살과 허벅지살로 만든 통닭다리 메뉴 '쿼터레그'의 신메뉴입니다. 오븐에 먼저 구운 뒤 튀깁니다 · 가격과 판매 기간은 기사에 나오지 않았습니다" },
     { cat: "cafe", brand: "스타벅스", when: "11.15 발표 · 크리스마스 케이크 예약 5종", date: "2026-11-15", season: "christmas",
       items: [
-        { name: "조선델리 위시 스노우맨 케이크", tag: "홀케이크", desc: "마스카포네 크림과 레드벨벳 시트로 만든 케이크입니다." },
-        { name: "트리 베어리 오너먼트 케이크", tag: "홀케이크", desc: "사면 한정판 트리 베어리스타 오너먼트 키링을 줍니다." },
-        { name: "헬로키티 굴뚝쿠헨", tag: "홀케이크", desc: "산타 모자를 쓴 헬로키티 디자인입니다." },
-        { name: "스노우 딸기 치즈 케이크", tag: "홀케이크", desc: "딸기 콩포트를 곁들인 바스크 치즈 케이크이고, 케이크 서버를 줍니다." },
-        { name: "딸기 촉촉 초콜릿 생크림 케이크", tag: "홀케이크", desc: "시그니처 케이크를 홀케이크로 파는 제품입니다." }
+        { name: "조선델리 위시 스노우맨 케이크", img: "https://image.istarbucks.co.kr/upload/store/skuimg/2026/10/%5B9300000006951%5D_20261029153318408.jpg", tag: "홀케이크", desc: "마스카포네 크림과 레드벨벳 시트로 만든 케이크입니다." },
+        { name: "트리 베어리 오너먼트 케이크", img: "https://image.istarbucks.co.kr/upload/store/skuimg/2026/11/%5B9300000006953%5D_20261104141344112.jpg", tag: "홀케이크", desc: "사면 한정판 트리 베어리스타 오너먼트 키링을 줍니다." },
+        { name: "헬로키티 굴뚝쿠헨", img: "https://image.istarbucks.co.kr/upload/store/skuimg/2026/11/%5B9300000006954%5D_20261104141834643.jpg", tag: "홀케이크", desc: "산타 모자를 쓴 헬로키티 디자인입니다." },
+        { name: "스노우 딸기 치즈 케이크", img: "https://image.istarbucks.co.kr/upload/store/skuimg/2026/11/%5B9300000006952%5D_20261104081103469.jpg", tag: "홀케이크", desc: "딸기 콩포트를 곁들인 바스크 치즈 케이크이고, 케이크 서버를 줍니다." },
+        { name: "딸기 촉촉 초콜릿 생크림 케이크", img: "https://image.istarbucks.co.kr/upload/store/skuimg/2026/10/%5B9300000006287%5D_20261029162310671.jpg", tag: "홀케이크", desc: "시그니처 케이크를 홀케이크로 파는 제품입니다." }
       ],
       src: { label: "서울신문", url: "https://m.seoul.co.kr/news/newsView.php?id=20261115500032" },
       note: "사이렌 오더로 12월 11일까지 예약하고, 12월 19~27일에 지정한 매장에서 받습니다. 리워드 회원은 26일까지 예약하면 10% 할인합니다 · 가격은 기사에 나오지 않았습니다" },
@@ -357,7 +359,7 @@ window.FOODYSSEY = {
       desc: "해피오더앱에서 사전예약하면 예약 시기에 따라 할인해 줍니다. 11월 8일까지 최대 40%(일반 시즌 케이크 40%, 스와로브스키 협업 크리스탈 스완은 30%), 9일부터 22일까지 30%, 이후 일반 사전예약 기간에는 25%입니다. 11월 9일부터 카카오 예약하기, 23일부터 땡겨요·배달의민족에서도 예약할 수 있습니다.",
       src: { label: "전자신문", url: "https://www.etnews.com/20261029000139" } },
 
-    { kind: "메뉴", brand: "KFC", title: "둠 시리즈 5종", start: "2026-11-10", end: "2027-01-04", period: "11.10 출시 · ~ 2027.1.4(월)",
+    { kind: "메뉴", brand: "KFC", title: "둠 시리즈 5종", img: "https://www.kfckorea.com/nas/event/2026/11/04/FEg1AFCdSdFV.png", imgFrom: "KFC 공식 홈페이지 (어벤져스: 둠스데이 콜라보 포스터)", start: "2026-11-10", end: "2027-01-04", period: "11.10 출시 · ~ 2027.1.4(월)",
       desc: "영화 '어벤져스: 둠스데이'와 협업한 한정 메뉴입니다. 버거 2종(둠징거, 둠트리플다운)과 스낵 3종(둠프라이, 둠에그타르트, 둠너겟)이고, 닥터 둠을 떠올리게 하는 초록색과 검은색을 입혔습니다. 둠징거는 검은색 브리오슈 번에 할라피뇨와 청양고추 맛 초록 소스, 레드와인 풍미 바비큐 소스를 넣습니다. 둠트리플다운은 빵 대신 징거 필렛 2장과 다리살 필렛 1장을 겹쳤습니다. 일부 특수 매장을 뺀 전국 매장에서 팔고, 17일부터 서울 건대입구역점이 닥터 둠 테마 매장이 됩니다.",
       src: { label: "프라임경제(네이트)", url: "https://m.news.nate.com/view/20261110n25926" } },
     { kind: "메뉴", brand: "크리스피크림", title: "렛츠 겟 메리 도넛 5종", price: "3,500~3,800원", end: "2026-12-29", period: "~ 12.29 한정 판매",
@@ -383,7 +385,7 @@ window.FOODYSSEY = {
       desc: "오후 2시부터 6시까지 6개 메뉴를 할인해 줍니다. 치킨버거 18%, 아메리카노 38%, 치즈스틱 24%, 토네이도(초코쿠키) 21%, 양념너겟 26%, 포테이토 19%입니다.",
       src: { label: "뷰어스", url: "https://theviewers.co.kr/View.aspx?No=4280225" } },
     
-    { kind: "메뉴", brand: "배스킨라빈스", title: "도우와줘요 호빵맨", price: "싱글레귤러 4,300원", priceSrc: { label: "배스킨라빈스 공식 홈페이지", url: "https://baskinrobbins.co.kr/menu/view.php?seq=1192" }, open: "11월 이달의 맛", period: "10.30 발표 · 종료일 미정",
+    { kind: "메뉴", brand: "배스킨라빈스", title: "도우와줘요 호빵맨", img: "https://baskinrobbins.co.kr/upload/product/main/809dc44b38892cc9ea8c07202f3045f9.png", imgFrom: "배스킨라빈스 공식 홈페이지 (이달의 맛 사진)", price: "싱글레귤러 4,300원", priceSrc: { label: "배스킨라빈스 공식 홈페이지", url: "https://baskinrobbins.co.kr/menu/view.php?seq=1192" }, open: "11월 이달의 맛", period: "10.30 발표 · 종료일 미정",
       desc: "호빵맨과 함께 만든 11월 이달의 맛입니다. 이름은 호빵맨의 대표 대사 ‘도와줘요 호빵맨!’에 쿠키도우의 ‘도우’를 합쳐 지었습니다. 호빵맨과 친구들 캐릭터를 쓴 아이스크림 케이크 2종과, 호빵맨 캐릭터를 입힌 리유저블 컵에 담은 음료(아이스 아메리카노, 납작복숭아 아이스티)도 함께 나옵니다. 종료일은 기사에 나오지 않았습니다. 호빵맨은 어려움에 처한 이들을 돕는 영웅 캐릭터이고, 이번 협업은 호빵맨과 친구들 캐릭터를 활용한 제품을 내는 방식입니다. 공식 홈페이지 기준 맛은 크림치즈와 모카번 아이스크림에 메이플시럽 리본과 쿠키 도우 볼을 더한 구성입니다. 가격은 콘·컵 싱글레귤러(115g) 4,300원, 싱글킹(145g) 5,100원, 더블주니어(150g) 5,600원, 더블레귤러(230g) 7,900원이고 핸드팩은 파인트 10,600원, 쿼터 19,900원, 패밀리 27,900원, 하프갤론 33,900원입니다. 싱글레귤러 1회 제공량 115g은 253kcal, 당류 25g, 단백질 4g이고 알레르기 성분은 우유·계란·대두·밀입니다.",
       src: { label: "주간한국", url: "https://weekly.hankooki.com/news/articleView.html?idxno=7191453" } },
 
@@ -401,7 +403,7 @@ window.FOODYSSEY = {
     { kind: "메뉴", brand: "도미노피자", title: "레몬 버터 더블 살시챠 피자", end: "2026-12-31", period: "연말까지 한정",
       desc: "미슐랭 2스타 레스토랑 스와니예의 이준 셰프와 만든 피자입니다. 로마노 크림치즈에 레몬 버터 소스를 더하고, 이탈리아식 소시지 살시챠를 매콤한 케이준과 허브 두 가지 스타일로 올렸습니다. '이츠 셰프 컬렉션'의 마지막 제품이고, 도미노 앱과 쿠팡이츠에서 연말까지 팝니다.",
       src: { label: "프라임경제", url: "https://www.newsprime.co.kr/news/article/?no=749669" } },
-    { kind: "메뉴", brand: "버거킹", title: "블랙 트러플치즈 버거", start: "2026-10-14", price: "10,700원", end: "2027-01-05", period: "10.14 출시 · 2027.1.5까지",
+    { kind: "메뉴", brand: "버거킹", title: "블랙 트러플치즈 버거", img: "https://mob-prd.burgerking.co.kr/images/menu/app/main/2026/10/13/e1a2a77f-d901-4b1e-aa0c-9aaa252663fb.png", start: "2026-10-14", price: "10,700원", end: "2027-01-05", period: "10.14 출시 · 2027.1.5까지",
       desc: "세트는 12,900원입니다. 트러플 풍미를 더한 치즈 버거입니다.",
       src: { label: "헤럴드경제", url: "https://biz.heraldcorp.com/article/10900655" } },
     { kind: "메뉴", brand: "맘스터치", title: "햄치즈휠렛버거", open: "종료일 미정", period: "10.15 발표 · 전국 한정 판매",
@@ -425,7 +427,7 @@ window.FOODYSSEY = {
     { kind: "메뉴", brand: "성심당", title: "홍시롤", start: "2026-11-09", price: "17,000원", open: "가을 시즌", period: "11.9 출시 · 종료일 미정 · 본점·롯데점·DCC점",
       desc: "카스텔라 시트에 홍시 과육과 우유크림을 채운 롤케이크입니다. 케익부띠끄 본점과 롯데점, DCC점 세 곳에서 팝니다. 종료일은 기사에 나오지 않았습니다.",
       src: { label: "이투데이", url: "https://www.etoday.co.kr/news/view/2645514" } },
-    { kind: "메뉴", brand: "버거킹", title: "트러플 머쉬룸 시즌 5종", start: "2026-09-16", open: "가을 시즌", period: "9.16 출시 · 종료일 미정",
+    { kind: "메뉴", brand: "버거킹", title: "트러플 머쉬룸 시즌 5종", img: "https://mob-prd.burgerking.co.kr/images/menu/app/main/2026/09/07/a94a00cd-6c5b-42a0-8d1f-7b781cb045cc.png", imgFrom: "버거킹 공식 홈페이지 (대표 메뉴 트러플 머쉬룸 와퍼)", start: "2026-09-16", open: "가을 시즌", period: "9.16 출시 · 종료일 미정",
       lines: [["트러플 머쉬룸 와퍼", "9,700원"], ["핫 트러플 머쉬룸 와퍼", "9,700원"], ["메종 트러플 치즈 버거", "10,500원"], ["딥 트러플 프라이", "3,000원"], ["트러플 머쉬룸 파이로얄", "2,700원"]],
       desc: "트러플 머쉬룸 와퍼는 2017년 기간 한정으로 처음 나온 뒤 2023년에 다시 나왔고, 이후 4년 연속 가을마다 돌아온 버거킹의 대표 계절 메뉴입니다. 트러플 크림소스와 4가지 버섯, 직화 패티가 들어갑니다. 핫 트러플 머쉬룸 와퍼는 매콤한 소스를 더해 2년 연속 팔고, 메종 트러플 치즈 버거는 브리오슈 번과 트러플 치즈를 쓴 올해 첫 메뉴입니다. 딥 트러플 프라이와 트러플 머쉬룸 파이로얄(파이로얄에 트러플 소스)도 같이 나왔습니다. 버거 세트는 11,900원(메종은 12,700원)이고, 일부 매장을 뺀 전국 매장에서 팝니다.",
       src: { label: "아시아경제", url: "https://view.asiae.co.kr/article/2026091608122210585" } }
