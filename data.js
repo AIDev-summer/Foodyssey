@@ -9,7 +9,7 @@
 // - start: 기사에 시작·출시일이 나온 한정 항목의 시작일(YYYY-MM-DD). 판매 기간 계산 가이드(/guide/limited-menu-duration)에 쓰입니다. 기사에 없으면 넣지 않습니다.
 // - pop: 검색량 배수(최근 3일 / 지난 4주). 한정 탭 인기순 정렬에 씁니다. 없으면 마감순으로 뒤에 놓입니다.
 window.FOODYSSEY = {
-  updated: "2026-11-27",
+  updated: "2026-11-28",
   weekLabel: "2026년 11월 넷째 주",
 
   cats: [
@@ -114,9 +114,15 @@ window.FOODYSSEY = {
       items: [{ name: "베리밤 딥초코", tag: "케이크", desc: "스위스산 초콜릿으로 만든 초코무스에 벨기에산 초코칩을 더하고 생딸기를 올린 케이크입니다. 딸기 시그니처 케이크 베리밤 시리즈 6종 중 하나입니다." }],
       src: { label: "위키트리", url: "https://www.wikitree.co.kr/articles/1175207" },
       note: "가격과 판매 기간은 기사에 나오지 않았습니다" },
-    { cat: "snack", brand: "삼첩분식", when: "10.16 출시", date: "2026-10-16",
-      items: [{ name: "떠먹는피자떡볶이", tag: "신메뉴", desc: "토마토 베이스 떡볶이에 베이컨, 감자, 치즈 같은 포테이토 피자 느낌의 토핑을 올렸습니다. 갈릭디핑소스를 섞어 먹을 수 있고, 함께 나온 바삭한 또띠아 칩에 얹어 먹는 방법도 있습니다. 세트를 사면 선착순으로 피클과 핫소스를 줍니다(수량 소진 시 종료)." }],
-      src: { label: "더쎈뉴스", url: "https://www.mhns.co.kr/news/articleView.html?idxno=764579" } },
+    { cat: "burger", brand: "맥도날드", when: "11.26 출시", date: "2026-11-26",
+      items: [{ name: "크리스마스 트러플 치즈 버거", tag: "시즌 한정" }, { name: "크리스마스 핫 트러플 치즈 버거", tag: "시즌 한정" }, { name: "크리스마스 트러플 치즈 머핀", tag: "맥모닝" }, { name: "트러플 후라이", tag: "사이드" }],
+      src: { label: "아시아경제", url: "https://view.asiae.co.kr/article/2026112410414025650" } },
+    { cat: "cafe", brand: "엔제리너스", when: "11.24 출시", date: "2026-11-24",
+      items: [{ name: "윈터 애플 시나몬 뱅쇼", tag: "음료" }, { name: "크럼블토피넛 라떼", tag: "음료" }, { name: "크리스마스트리 레드벨벳", tag: "베이커리" }, { name: "벨지안 초콜릿 치아바타", tag: "베이커리" }],
+      src: { label: "아시아경제", url: "https://view.asiae.co.kr/article/2026112410414025650" } },
+    { cat: "cafe", brand: "이디야커피", when: "11.26 판매 시작", date: "2026-11-26",
+      items: [{ name: "과즙담은 감귤한라봉", tag: "병음료", desc: "감귤과 한라봉 과즙에 비타민C를 더한 과즙 음료입니다." }, { name: "과즙담은 딸기", tag: "병음료", desc: "딸기 과즙에 비타민C를 더한 과즙 음료입니다." }, { name: "꿀배 캐모마일티", tag: "병음료" }, { name: "매실 그린티", tag: "병음료" }],
+      src: { label: "아시아경제", url: "https://view.asiae.co.kr/article/2026112308094382387" } },
 
     { cat: "cafe", brand: "이디야커피", when: "10.22 출시 · 푸드 9종", date: "2026-10-22",
       items: [
