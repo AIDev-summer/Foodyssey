@@ -291,3 +291,5 @@ table.cake-table .row-ended td { color: var(--muted); }
 @media (max-width: 600px) { .ans-img img { height: clamp(110px, 21vh, 170px); } .ans-img.tall img { height: clamp(150px, 28vh, 230px); } .ans-img figcaption { margin-top: 4px; font-size: 12px; } }
 /* 모바일: 출처 링크는 줄마다 하나씩 블록으로 두어 터치 영역이 겹치지 않게 합니다 */
 @media (max-width: 600px) { .src a, .ans-src a { display: block; padding-block: 11px; margin: 0; } }
+/* 가로로 아주 긴 공식 포스터는 잘리지 않게 전체를 보여 줍니다 */
+.ans-img.pano img { height: auto; max-height: none; object-fit: contain; }
